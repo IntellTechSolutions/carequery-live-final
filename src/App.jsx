@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Check, Brain, Shield, Users, Globe, Database, Zap, ArrowRight, Mail, MapPin, Award, TrendingUp, Clock } from 'lucide-react';
+import { Menu, X, Check, Brain, Shield, Users, Globe, Database, Zap, ArrowRight, Mail, MapPin, Award, TrendingUp, Clock, Building2 } from 'lucide-react';
 
 const CareQueryWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +38,9 @@ const CareQueryWebsite = () => {
   const handleEmailSubmit = (e) => {
     e.preventDefault();
     if (email) {
-      alert('Thank you for subscribing! We\'ll keep you updated on Care Query developments.');
+      const subject = 'Newsletter Subscription Request';
+      const body = `Hello,%0D%0A%0D%0AI would like to subscribe to the Care Query newsletter.%0D%0A%0D%0AEmail: ${encodeURIComponent(email)}%0D%0A%0D%0APlease add me to your mailing list for updates on Care Query development and healthcare AI innovations.%0D%0A%0D%0AThank you.`;
+      window.open(`mailto:info@intelltechsolutions.co.uk?subject=${encodeURIComponent(subject)}&body=${body}`, '_blank');
       setEmail('');
     }
   };
@@ -126,13 +128,7 @@ const CareQueryWebsite = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button 
-                  onClick={() => scrollToSection('about')}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-                >
-                  Learn More <ArrowRight size={20} />
-                </button>
-                <button 
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => window.open('mailto:info@intelltechsolutions.co.uk?subject=Care Query Inquiry', '_blank')}
                   className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
                 >
                   Get in Touch
@@ -170,6 +166,16 @@ const CareQueryWebsite = () => {
       <section id="about" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
+            <div className="mb-8">
+              <a 
+                href="https://carequery.uk/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Learn More
+              </a>
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               About Care Query
             </h2>
@@ -587,7 +593,13 @@ const CareQueryWebsite = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-700 mb-2">Business:</h4>
-                      <p className="text-gray-600">Registered in England and Wales Companies House Reg. No. 16455045</p>
+                      <div className="flex items-start gap-3">
+                        <Building2 className="text-blue-600 mt-1" size={20} />
+                        <div>
+                          <p className="text-gray-600">Registered in England and Wales</p>
+                          <p className="text-gray-600">Companies House Reg. No. 16455045</p>
+                        </div>
+                      </div>
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-700 mb-2">E-Contact:</h4>
@@ -595,7 +607,7 @@ const CareQueryWebsite = () => {
                         <Mail className="text-blue-600 mt-1" size={20} />
                         <div>
                           <p className="text-gray-600 mb-1">Having questions? Email directly to:</p>
-                          <a href="mailto:info@intelltechsolutions.co.uk" className="font-semibold text-blue-600 hover:text-blue-700">
+                          <a href="mailto:info@intelltechsolutions.co.uk?subject=Care Query Inquiry" className="font-semibold text-blue-600 hover:text-blue-700">
                             info@intelltechsolutions.co.uk
                           </a>
                         </div>
@@ -609,7 +621,7 @@ const CareQueryWebsite = () => {
                     We're actively seeking partnerships with NHS trusts, healthcare providers, and technology companies to expand Care Query's reach and impact.
                   </p>
                   <button 
-                    onClick={() => window.open('mailto:info@intelltechsolutions.co.uk?subject=Partnership%20Inquiry', '_blank')}
+                    onClick={() => window.open('mailto:info@intelltechsolutions.co.uk?subject=Partnership%20Inquiry&body=Hello,%0D%0A%0D%0AI%20am%20interested%20in%20partnership%20opportunities%20with%20Care%20Query.%0D%0A%0D%0APlease%20contact%20me%20to%20discuss%20further.%0D%0A%0D%0AThank%20you.', '_blank')}
                     className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                   >
                     Partner With Us
