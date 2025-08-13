@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Check, Brain, Shield, Users, Globe, Database, Zap, ArrowRight, Mail, Phone, MapPin, Award, TrendingUp, Clock } from 'lucide-react';
+import { Menu, X, Check, Brain, Shield, Users, Globe, Database, Zap, ArrowRight, Mail, MapPin, Award, TrendingUp, Clock } from 'lucide-react';
 
 const CareQueryWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +38,6 @@ const CareQueryWebsite = () => {
   const handleEmailSubmit = (e) => {
     e.preventDefault();
     if (email) {
-      // Here you would typically send the email to your backend
       alert('Thank you for subscribing! We\'ll keep you updated on Care Query developments.');
       setEmail('');
     }
@@ -116,7 +115,7 @@ const CareQueryWebsite = () => {
             <div>
               <div className="mb-6">
                 <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                  AI-Powered Healthcare Navigation
+                  Care Query is an AI-Powered Healthcare Navigation Simplifying Your NHS Journey
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -143,13 +142,22 @@ const CareQueryWebsite = () => {
             <div className="relative">
               <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-8 text-white">
                 <div className="space-y-4">
+                  <div className="text-center mb-4">
+                    <p className="font-semibold text-lg">Use Example</p>
+                  </div>
                   <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
                     <p className="font-semibold mb-2">User Query:</p>
-                    <p className="text-sm">I have been having chest pains. What should I do?</p>
+                    <p className="text-sm">How do I get access to Orthopaedics?</p>
                   </div>
                   <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
                     <p className="font-semibold mb-2">Care Query Response:</p>
-                    <p className="text-sm">Based on NHS guidelines, chest pain requires immediate attention. You should call 111 for urgent advice or 999 if severe. Here are your nearest A&amp;E locations...</p>
+                    <p className="text-sm">Based on NHS guidelines, access to Orthopaedics is usually arranged through a referral from your Primary Care Healthcare Provider or … (more info.)</p>
+                    <p className="font-semibold text-sm mt-3 mb-1">Alternative Access Routes:</p>
+                    <p className="text-sm">…</p>
+                    <p className="font-semibold text-sm mt-3 mb-1">What to Expect:</p>
+                    <p className="text-sm">…</p>
+                    <p className="font-semibold text-sm mt-3 mb-1">Prepare for Your Healthcare Provider Visit</p>
+                    <p className="text-sm">…</p>
                   </div>
                 </div>
               </div>
@@ -166,7 +174,7 @@ const CareQueryWebsite = () => {
               About Care Query
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Developed by Intell Tech Solutions Limited, Care Query is revolutionizing how UK patients interact with the NHS through cutting-edge AI technology.
+              Developed by Intelligent Technology Solutions Limited, Care Query is revolutionising how UK patients interact with the NHS through cutting-edge AI technology.
             </p>
           </div>
 
@@ -177,7 +185,7 @@ const CareQueryWebsite = () => {
               </div>
               <h3 className="text-xl font-semibold mb-3">Our Mission</h3>
               <p className="text-gray-600">
-                To make NHS navigation simple, accessible, and personalized for every patient in the UK, reducing confusion and empowering informed healthcare decisions.
+                To make NHS navigation simple, accessible, and personalised for every patient in the UK, reducing confusion and empowering informed healthcare decisions.
               </p>
             </div>
 
@@ -185,7 +193,7 @@ const CareQueryWebsite = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                 <Users className="text-blue-600" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Patient-Centered</h3>
+              <h3 className="text-xl font-semibold mb-3">Patient-Centred</h3>
               <p className="text-gray-600">
                 Built with patients in mind, combining official NHS data with real-world experiences to provide comprehensive, practical guidance.
               </p>
@@ -195,7 +203,7 @@ const CareQueryWebsite = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                 <Shield className="text-blue-600" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Secure &amp; Compliant</h3>
+              <h3 className="text-xl font-semibold mb-3">Secure & Compliant</h3>
               <p className="text-gray-600">
                 Fully compliant with UK GDPR and Data Protection Act 2018, ensuring patient data privacy and security at every level.
               </p>
@@ -343,19 +351,19 @@ const CareQueryWebsite = () => {
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
             <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-2xl font-semibold mb-6">AI &amp; Machine Learning</h3>
+                <h3 className="text-2xl font-semibold mb-6">AI & Machine Learning</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                     <div>
                       <h4 className="font-semibold mb-1">Retrieval Augmented Generation (RAG)</h4>
-                      <p className="text-gray-600 text-sm">Advanced AI that understands context and provides accurate, personalized responses</p>
+                      <p className="text-gray-600 text-sm">Advanced AI that understands context and provides accurate, personalised responses</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold mb-1">Vertex AI &amp; Gemini Models</h4>
+                      <h4 className="font-semibold mb-1">Vertex AI & Gemini Models</h4>
                       <p className="text-gray-600 text-sm">Google's latest AI models for natural language understanding and generation</p>
                     </div>
                   </div>
@@ -382,7 +390,7 @@ const CareQueryWebsite = () => {
                   <div className="flex items-start gap-4">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold mb-1">BigLake &amp; BigQuery</h4>
+                      <h4 className="font-semibold mb-1">BigLake & BigQuery</h4>
                       <p className="text-gray-600 text-sm">Unified data access and real-time analytics for instant insights</p>
                     </div>
                   </div>
@@ -398,7 +406,7 @@ const CareQueryWebsite = () => {
             </div>
 
             <div className="mt-12 pt-8 border-t">
-              <h3 className="text-xl font-semibold mb-4">Security &amp; Compliance</h3>
+              <h3 className="text-xl font-semibold mb-4">Security & Compliance</h3>
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -466,7 +474,7 @@ const CareQueryWebsite = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <Check className="text-green-500 mt-0.5" size={20} />
-                    <span>Instant access to personalized healthcare guidance</span>
+                    <span>Instant access to personalised healthcare guidance</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="text-green-500 mt-0.5" size={20} />
@@ -508,18 +516,15 @@ const CareQueryWebsite = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Team
+              The Company Behind Care Query
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experts in healthcare technology and AI innovation
-            </p>
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-semibold mb-4">Intell Tech Solutions Limited</h3>
+              <h3 className="text-2xl font-semibold mb-4">Intelligent Technology Solutions Limited</h3>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                A UK-based technology company specializing in AI-driven healthcare solutions. Our team combines expertise in artificial intelligence, healthcare systems, and user experience design to create transformative digital health tools.
+                A UK-based technology company specialising in AI-driven healthcare solutions. Our team combines expertise in artificial intelligence, healthcare systems, and user experience design to create transformative digital health tools.
               </p>
             </div>
 
@@ -528,7 +533,7 @@ const CareQueryWebsite = () => {
                 <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Brain className="text-blue-600" size={32} />
                 </div>
-                <h4 className="font-semibold mb-2">AI &amp; ML Engineers</h4>
+                <h4 className="font-semibold mb-2">AI & ML Engineers</h4>
                 <p className="text-sm text-gray-600">Expert team in RAG systems and NLP</p>
               </div>
               <div className="text-center p-6 bg-gray-50 rounded-xl">
@@ -573,12 +578,16 @@ const CareQueryWebsite = () => {
                       <div className="flex items-start gap-3">
                         <MapPin className="text-blue-600 mt-1" size={20} />
                         <div>
-                          <p className="font-semibold">Intell Tech Solutions Limited</p>
+                          <p className="font-semibold">Intelligent Technology Solutions Limited</p>
                           <p className="text-gray-600">Bartle House, 9 Oxford Court</p>
                           <p className="text-gray-600">Manchester, M2 3WQ</p>
                           <p className="text-gray-600">United Kingdom</p>
                         </div>
                       </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-700 mb-2">Business:</h4>
+                      <p className="text-gray-600">Registered in England and Wales Companies House Reg. No. 16455045</p>
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-700 mb-2">E-Contact:</h4>
@@ -591,10 +600,6 @@ const CareQueryWebsite = () => {
                           </a>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Phone className="text-blue-600" size={20} />
-                      <span>+44 (0) 20 1234 5678</span>
                     </div>
                   </div>
                 </div>
@@ -642,43 +647,8 @@ const CareQueryWebsite = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold text-blue-400 mb-4">Care Query</h3>
-              <p className="text-gray-400">
-                Transforming NHS navigation through intelligent AI technology.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>Features</li>
-                <li>Technology</li>
-                <li>Security</li>
-                <li>Integration</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>About</li>
-                <li>Team</li>
-                <li>Careers</li>
-                <li>Contact</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
-                <li>GDPR Compliance</li>
-                <li>Data Protection</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Intell Tech Solutions Limited. All rights reserved.</p>
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 Intelligent Technology Solutions Limited. All rights reserved.</p>
           </div>
         </div>
       </footer>
