@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Check, Brain, Shield, Users, Globe, Database, Zap, ArrowRight, Mail, MapPin, Award, TrendingUp, Clock } from 'lucide-react';
+import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink } from 'lucide-react';
 
 const CareQueryWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'features', 'technology', 'impact', 'team', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-
+      const sections = ['home', 'what-it-does', 'how-it-works', 'get-involved', 'contact'];
+      const scrollPosition = window.scrollY + 120;
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -22,633 +22,472 @@ const CareQueryWebsite = () => {
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
     if (email) {
-      alert('Thank you for subscribing! We\'ll keep you updated on Care Query developments.');
+      setSubmitted(true);
       setEmail('');
     }
   };
 
   const navItems = [
     { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'features', label: 'Features' },
-    { id: 'technology', label: 'Technology' },
-    { id: 'impact', label: 'Impact' },
-    { id: 'team', label: 'Team' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'what-it-does', label: 'What It Does' },
+    { id: 'how-it-works', label: 'How It Works' },
+    { id: 'get-involved', label: 'Get Involved' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", background: '#f8f7f4', minHeight: '100vh', color: '#1a1a2e' }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #f8f7f4; }
+        .serif { font-family: 'DM Serif Display', Georgia, serif; }
+        .sans { font-family: 'DM Sans', system-ui, sans-serif; }
+        .nav-link { font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
+        .nav-link:hover { color: #006272; }
+        .nav-link.active { color: #006272; border-bottom: 2px solid #006272; padding-bottom: 2px; }
+        .card { background: #fff; border-radius: 2px; border: 1px solid #e8e4dd; }
+        .output-card { border-left: 4px solid #006272; padding: 1.5rem 1.75rem; background: #fff; border-radius: 0 2px 2px 0; border-top: 1px solid #e8e4dd; border-right: 1px solid #e8e4dd; border-bottom: 1px solid #e8e4dd; }
+        .output-card.amber { border-left-color: #b45309; }
+        .output-card.slate { border-left-color: #334155; }
+        .tag { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 2px; }
+        .tag-teal { background: #e0f2f1; color: #006272; }
+        .tag-amber { background: #fef3c7; color: #92400e; }
+        .tag-slate { background: #f1f5f9; color: #334155; }
+        .tag-poc { background: #fef9ec; color: #92400e; border: 1px solid #fcd34d; }
+        .btn-primary { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #006272; color: #fff; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
+        .btn-primary:hover { background: #004f5d; }
+        .btn-outline { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #006272; border: 2px solid #006272; border-radius: 2px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
+        .btn-outline:hover { background: #006272; color: #fff; }
+        .divider { height: 1px; background: linear-gradient(to right, transparent, #d1ccc4, transparent); margin: 0 auto; }
+        .tech-pill { font-family: 'DM Sans', monospace; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.75rem; background: #1a1a2e; color: #a8edea; border-radius: 2px; display: inline-block; margin: 0.2rem; }
+        .step-number { font-family: 'DM Serif Display', serif; font-size: 3rem; color: #e8e4dd; line-height: 1; }
+        .input-field { font-family: 'DM Sans', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1ccc4; border-radius: 2px; font-size: 0.9rem; outline: none; background: #fff; }
+        .input-field:focus { border-color: #006272; box-shadow: 0 0 0 3px rgba(0,98,114,0.1); }
+        @media (max-width: 768px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .three-col { grid-template-columns: 1fr !important; }
+          .two-col { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-blue-600">Care Query</h1>
+      <nav style={{ position: 'fixed', top: 0, width: '100%', background: 'rgba(248,247,244,0.97)', backdropFilter: 'blur(8px)', zIndex: 50, borderBottom: '1px solid #e8e4dd' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+              <span className="serif" style={{ fontSize: '1.4rem', fontWeight: 400, color: '#1a1a2e', letterSpacing: '-0.01em' }}>Care Query</span>
+              <span className="tag tag-poc">PoC</span>
             </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex" style={{ display: 'flex', gap: '2rem' }}>
               {navItems.map(item => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`text-sm font-medium transition-colors ${
-                    activeSection === item.id 
-                      ? 'text-blue-600' 
-                      : 'text-gray-700 hover:text-blue-600'
-                  }`}
-                >
+                <button key={item.id} onClick={() => scrollToSection(item.id)}
+                  className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                  style={{ color: activeSection === item.id ? '#006272' : '#4a4a5e' }}>
                   {item.label}
                 </button>
               ))}
             </div>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-gray-700"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1a1a2e', display: 'none' }}
+              className="mobile-menu-btn">
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map(item => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+          <div style={{ background: '#f8f7f4', borderTop: '1px solid #e8e4dd', padding: '0.75rem 1.5rem' }}>
+            {navItems.map(item => (
+              <button key={item.id} onClick={() => scrollToSection(item.id)}
+                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.6rem 0', color: '#1a1a2e', background: 'none', border: 'none', fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', cursor: 'pointer' }}>
+                {item.label}
+              </button>
+            ))}
           </div>
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Hero */}
+      <section id="home" style={{ paddingTop: '64px', minHeight: '100vh', display: 'flex', alignItems: 'center', background: 'linear-gradient(160deg, #f8f7f4 60%, #e8f4f6 100%)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 1.5rem 4rem' }}>
+          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
             <div>
-              <div className="mb-6">
-                <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                  Care Query is an AI-Powered Healthcare Navigation Simplifying Your NHS Journey
-                </span>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <span className="tag tag-poc" style={{ marginRight: '0.5rem' }}>Proof of Concept — 2026</span>
+                <span className="tag tag-teal">Cheshire & Merseyside ICB</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Transforming NHS Navigation with Intelligent AI
+              <h1 className="serif" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#1a1a2e', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
+                NHS MSK Referrals.<br />
+                <em style={{ color: '#006272' }}>Done right, first time.</em>
+              </h1>
+              <p className="sans" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4a4a5e', marginBottom: '2rem', fontWeight: 300 }}>
+                Care Query is a structured pre-referral tool for GPs and First Contact Practitioners. 
+                It encodes accurate, versioned, locally-specific information about NHS MSK services — 
+                so the right referral goes to the right service, with the right information, on the first attempt.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <button className="btn-primary" onClick={() => scrollToSection('what-it-does')}>
+                  See how it works <ArrowRight size={16} style={{ display: 'inline', marginLeft: '0.3rem', verticalAlign: 'middle' }} />
+                </button>
+                <button className="btn-outline" onClick={() => scrollToSection('get-involved')}>
+                  Get involved
+                </button>
+              </div>
+            </div>
+            <div>
+              <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
+                <div className="sans" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '1rem' }}>
+                  The referral problem — in numbers
+                </div>
+                {[
+                  { stat: '2026', label: 'GP contract: Advice & Guidance mandatory and unpaid', accent: '#006272' },
+                  { stat: '1 JSON', label: 'Single governed data source powering all three outputs', accent: '#006272' },
+                  { stat: '5 services', label: 'MSK services encoded in the current PoC', accent: '#b45309' },
+                  { stat: '88', label: 'Steward verification tasks remaining before first publish', accent: '#334155' },
+                ].map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f0ece6' : 'none' }}>
+                    <span className="serif" style={{ fontSize: '1.6rem', color: item.accent, minWidth: '4rem', lineHeight: 1 }}>{item.stat}</span>
+                    <span className="sans" style={{ fontSize: '0.85rem', color: '#4a4a5e', lineHeight: 1.4, fontWeight: 300 }}>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" style={{ maxWidth: '1100px' }} />
+
+      {/* What It Does */}
+      <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#f8f7f4' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
+            <span className="tag tag-teal" style={{ marginBottom: '1rem', display: 'inline-block' }}>The Three Outputs</span>
+            <h2 className="serif" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#1a1a2e', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+              One governed data source.<br />Three practical formats.
+            </h2>
+            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300 }}>
+              All three outputs are generated from a single versioned JSON record per service. 
+              Update the source once — all outputs reflect the change.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div className="output-card">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <CheckSquare size={20} color="#006272" />
+                  <span className="serif" style={{ fontSize: '1.2rem', color: '#1a1a2e' }}>Gate Card — Pre-Referral Checklist</span>
+                </div>
+                <span className="tag tag-teal">Primary audience: GP / FCP</span>
+              </div>
+              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '0.75rem' }}>
+                A structured checklist confirming that all administrative prerequisites are in place before an Advice and Guidance submission is made. 
+                Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a clipboard-ready administrative summary 
+                using SaMD-neutral language — the clinician decides, the software records.
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {['Hard gates', 'Soft gates', 'Red flag check', 'Clipboard summary'].map(t => (
+                  <span key={t} className="tech-pill">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="output-card amber">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <FileText size={20} color="#b45309" />
+                  <span className="serif" style={{ fontSize: '1.2rem', color: '#1a1a2e' }}>Service Card — Structured Service Record</span>
+                </div>
+                <span className="tag tag-amber">Primary audience: GP / FCP / Commissioner</span>
+              </div>
+              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '0.75rem' }}>
+                Versioned, timestamped record of an NHS MSK service — including official referral criteria, catchment boundaries, 
+                operational contacts, wait times, and governance metadata. Each record carries a review date and steward identity. 
+                Status must be PUBLISHED by a verified steward before it becomes visible.
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {['Versioned JSON', 'Review metadata', 'Steward-governed', 'Stale warning system'].map(t => (
+                  <span key={t} className="tech-pill">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="output-card slate">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <Users size={20} color="#334155" />
+                  <span className="serif" style={{ fontSize: '1.2rem', color: '#1a1a2e' }}>Journey Card — Patient Information Summary</span>
+                </div>
+                <span className="tag tag-slate">Primary audience: Patient</span>
+              </div>
+              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '0.75rem' }}>
+                When a clinician refers a patient on, that patient can be directed to carequery.app for a plain-language 
+                explanation of the service they have been referred to — what to expect, realistic wait times, and what 
+                they can do in the meantime. Designed for SMS delivery via Accurx. No patient data is collected or stored.
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {['Patient-facing', 'Accurx-compatible', 'No data collection', 'Self-management guidance'].map(t => (
+                  <span key={t} className="tech-pill">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+
+      {/* How It Works */}
+      <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#fff' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
+            <span className="tag tag-teal" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
+            <h2 className="serif" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#1a1a2e', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+              Deterministic by design.<br />No AI in the critical path.
+            </h2>
+            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300 }}>
+              The PoC is a dependency-free SPA — vanilla HTML, CSS, and JavaScript. 
+              No framework. No build step. No server. Routing and rendering are purely deterministic, 
+              governed entirely by the JSON data source. This is intentional: clinical routing decisions 
+              must be auditable, not probabilistic.
+            </p>
+          </div>
+
+          <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
+            {[
+              {
+                step: '01',
+                title: 'Governed Data Source',
+                body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are DRAFT until a steward manually verifies and publishes.',
+                pills: ['JSON', 'Kebab-case contract', 'DRAFT / PUBLISHED states'],
+              },
+              {
+                step: '02',
+                title: 'Deterministic Render Engine',
+                body: 'app.js reads the JSON and renders three card types. Every JSON-sourced string passes through escapeHtml(). isValidRecord() guards every render path. No string reaches the DOM without validation.',
+                pills: ['XSS prevention', 'Shape guards', 'Zero dependencies'],
+              },
+              {
+                step: '03',
+                title: 'Immutable Safety Layer',
+                body: 'emergency.js loads synchronously before any app logic. It contains six Universal Red Flags (URF-01–06) hard-coded outside the data layer — they cannot be overridden by JSON content under any circumstance.',
+                pills: ['Sync load order', 'Never editable', 'SaMD boundary'],
+              },
+            ].map((item, i) => (
+              <div key={i} className="card" style={{ padding: '1.75rem' }}>
+                <div className="step-number">{item.step}</div>
+                <h3 className="serif" style={{ fontSize: '1.15rem', color: '#1a1a2e', margin: '0.5rem 0 0.75rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
+                <p className="sans" style={{ fontSize: '0.85rem', lineHeight: 1.65, color: '#4a4a5e', fontWeight: 300, marginBottom: '1rem' }}>{item.body}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }}>
+                  {item.pills.map(p => <span key={p} className="tech-pill">{p}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="card" style={{ padding: '1.75rem', background: '#1a1a2e', border: 'none' }}>
+            <div className="sans" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#a8edea', marginBottom: '1rem' }}>
+              Infrastructure
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              {['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'WCAG 2.1 AA', 'No cookies · No patient data'].map(p => (
+                <span key={p} style={{ fontFamily: "'DM Sans', monospace", fontSize: '0.78rem', fontWeight: 500, padding: '0.3rem 0.75rem', background: 'rgba(168,237,234,0.12)', color: '#a8edea', borderRadius: '2px', border: '1px solid rgba(168,237,234,0.2)' }}>{p}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+
+      {/* Governance */}
+      <section style={{ padding: '5rem 1.5rem', background: '#f8f7f4' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+            <div>
+              <span className="tag tag-teal" style={{ marginBottom: '1rem', display: 'inline-block' }}>Regulatory Position</span>
+              <h2 className="serif" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#1a1a2e', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+                Administrative tool.<br />Not a clinical decision support system.
               </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Care Query simplifies complex NHS pathways, making healthcare accessible to everyone through conversational AI that understands your needs.
+              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300 }}>
+                Care Query does not diagnose, recommend treatment, or determine clinical appropriateness. 
+                All language is governed to avoid MHRA SaMD classification. The clinician decides. 
+                The software records. This distinction is enforced at code level, not just in documentation.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={() => scrollToSection('about')}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-                >
-                  Learn More <ArrowRight size={20} />
-                </button>
-                <button 
-                  onClick={() => scrollToSection('contact')}
-                  className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-                >
-                  Get in Touch
-                </button>
-              </div>
             </div>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-8 text-white">
-                <div className="space-y-4">
-                  <div className="text-center mb-4">
-                    <p className="font-semibold text-lg">Use Example</p>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
-                    <p className="font-semibold mb-2">User Query:</p>
-                    <p className="text-sm">How do I get access to Orthopaedics?</p>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
-                    <p className="font-semibold mb-2">Care Query Response:</p>
-                    <p className="text-sm">Based on NHS guidelines, access to Orthopaedics is usually arranged through a referral from your Primary Care Healthcare Provider or … (more info.)</p>
-                    <p className="font-semibold text-sm mt-3 mb-1">Alternative Access Routes:</p>
-                    <p className="text-sm">…</p>
-                    <p className="font-semibold text-sm mt-3 mb-1">What to Expect:</p>
-                    <p className="text-sm">…</p>
-                    <p className="font-semibold text-sm mt-3 mb-1">Prepare for Your Healthcare Provider Visit</p>
-                    <p className="text-sm">…</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {[
+                { icon: <Shield size={18} color="#006272" />, label: 'DCB0129', desc: 'Clinical Safety Officer formally assigned. Clinical risk management documentation maintained.' },
+                { icon: <GitBranch size={18} color="#006272" />, label: 'NHS Innovation Service', desc: 'Registration creates documented national engagement record with NHS England.' },
+                { icon: <FileText size={18} color="#006272" />, label: 'NICE Evidence Standards Framework', desc: 'PoC evaluation designed to generate evidence meeting NICE requirements for digital health technologies.' },
+                { icon: <ArrowRight size={18} color="#006272" />, label: 'NHS Clinical Entrepreneur Programme', desc: 'Application submitted for Cohort 11 (expected autumn 2026).' },
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', gap: '1rem', padding: '1rem', background: '#fff', border: '1px solid #e8e4dd', borderRadius: '2px' }}>
+                  <div style={{ marginTop: '0.1rem', flexShrink: 0 }}>{item.icon}</div>
+                  <div>
+                    <div className="sans" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#1a1a2e', marginBottom: '0.2rem' }}>{item.label}</div>
+                    <div className="sans" style={{ fontSize: '0.82rem', color: '#4a4a5e', lineHeight: 1.5, fontWeight: 300 }}>{item.desc}</div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              About Care Query
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+
+      {/* Get Involved */}
+      <section id="get-involved" style={{ padding: '6rem 1.5rem', background: '#fff' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '640px', marginBottom: '3rem' }}>
+            <span className="tag tag-teal" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
+            <h2 className="serif" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#1a1a2e', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+              The knowledge is yours.<br />Care Query is just the structure.
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Developed by Intelligent Technology Solutions Limited, Care Query is revolutionising how UK patients interact with the NHS through cutting-edge AI technology.
+            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300 }}>
+              The most valuable thing this project can encode is the operational knowledge that experienced MSK 
+              clinicians carry but rarely write down — the nuance behind the criteria, the things that make 
+              a referral land well. That knowledge belongs to the people doing the work, not to any single developer.
+            </p>
+            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginTop: '0.75rem' }}>
+              If you work in MSK pathways in Cheshire and Merseyside — as an FCP, GP, physio, or service administrator — 
+              and you recognise this problem, a conversation is enough to start. No commitment required.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Globe className="text-blue-600" size={24} />
+          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
+            {[
+              {
+                title: 'Clinical Contributors',
+                desc: 'You know what actually causes referral rejection in your service. We want to encode that knowledge accurately. In return, your service information stays current and you get a direct channel to update it.',
+                tag: 'FCPs · GPs · Physios · Service admins',
+              },
+              {
+                title: 'Pilot Practices',
+                desc: 'We are looking for 5–10 GP practices in Cheshire and Merseyside to use the tool in a real referral workflow. The goal is simple: measure whether it reduces A&G rejection rate.',
+                tag: 'GP Practice Managers · PCN Clinical Directors',
+              },
+            ].map((item, i) => (
+              <div key={i} className="card" style={{ padding: '1.75rem' }}>
+                <h3 className="serif" style={{ fontSize: '1.2rem', color: '#1a1a2e', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
+                <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#4a4a5e', fontWeight: 300, marginBottom: '1rem' }}>{item.desc}</p>
+                <span className="sans" style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#006272' }}>{item.tag}</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Our Mission</h3>
-              <p className="text-gray-600">
-                To make NHS navigation simple, accessible, and personalised for every patient in the UK, reducing confusion and empowering informed healthcare decisions.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Users className="text-blue-600" size={24} />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Patient-Centred</h3>
-              <p className="text-gray-600">
-                Built with patients in mind, combining official NHS data with real-world experiences to provide comprehensive, practical guidance.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Shield className="text-blue-600" size={24} />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Secure & Compliant</h3>
-              <p className="text-gray-600">
-                Fully compliant with UK GDPR and Data Protection Act 2018, ensuring patient data privacy and security at every level.
-              </p>
-            </div>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Key Features
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Powerful capabilities designed to transform healthcare navigation
+          <div className="card" style={{ padding: '1.75rem', maxWidth: '560px' }}>
+            <h3 className="serif" style={{ fontSize: '1.1rem', color: '#1a1a2e', marginBottom: '0.5rem' }}>Stay informed</h3>
+            <p className="sans" style={{ fontSize: '0.85rem', color: '#4a4a5e', fontWeight: 300, marginBottom: '1.25rem' }}>
+              Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="group hover:shadow-xl transition-shadow duration-300 bg-gray-50 rounded-xl p-6">
-              <Brain className="text-blue-600 mb-4" size={32} />
-              <h3 className="text-xl font-semibold mb-3">Natural Language Understanding</h3>
-              <p className="text-gray-600 mb-4">
-                Ask questions in everyday language - our AI understands context and intent, not just keywords.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">Conversational interface</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">Multi-language support</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="group hover:shadow-xl transition-shadow duration-300 bg-gray-50 rounded-xl p-6">
-              <Database className="text-blue-600 mb-4" size={32} />
-              <h3 className="text-xl font-semibold mb-3">Dual Data Sources</h3>
-              <p className="text-gray-600 mb-4">
-                Combines official NHS information with real-time patient experiences for comprehensive guidance.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">Official NHS data</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">Crowdsourced insights</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="group hover:shadow-xl transition-shadow duration-300 bg-gray-50 rounded-xl p-6">
-              <Zap className="text-blue-600 mb-4" size={32} />
-              <h3 className="text-xl font-semibold mb-3">Real-Time Intelligence</h3>
-              <p className="text-gray-600 mb-4">
-                Continuously learns and improves from user interactions and feedback.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">Live updates</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">Adaptive responses</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="group hover:shadow-xl transition-shadow duration-300 bg-gray-50 rounded-xl p-6">
-              <Shield className="text-blue-600 mb-4" size={32} />
-              <h3 className="text-xl font-semibold mb-3">Enterprise Security</h3>
-              <p className="text-gray-600 mb-4">
-                Built on Google Cloud with Model Armor protection and comprehensive audit trails.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">De-identification</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">GDPR compliant</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="group hover:shadow-xl transition-shadow duration-300 bg-gray-50 rounded-xl p-6">
-              <Clock className="text-blue-600 mb-4" size={32} />
-              <h3 className="text-xl font-semibold mb-3">24/7 Availability</h3>
-              <p className="text-gray-600 mb-4">
-                Always available to answer questions and provide guidance when patients need it most.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">Instant responses</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">No waiting times</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="group hover:shadow-xl transition-shadow duration-300 bg-gray-50 rounded-xl p-6">
-              <Award className="text-blue-600 mb-4" size={32} />
-              <h3 className="text-xl font-semibold mb-3">NHS Integration</h3>
-              <p className="text-gray-600 mb-4">
-                Seamlessly integrates with NHS systems through FHIR APIs and NHS login.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">NHS authentication</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="text-green-500 mt-0.5" size={16} />
-                  <span className="text-sm text-gray-600">FHIR standards</span>
-                </li>
-              </ul>
-            </div>
+            {submitted ? (
+              <p className="sans" style={{ color: '#006272', fontWeight: 500, fontSize: '0.9rem' }}>Received — we will be in touch.</p>
+            ) : (
+              <form onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)}
+                  placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '220px' }} />
+                <button type="submit" className="btn-primary">Register interest</button>
+              </form>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Technology Section */}
-      <section id="technology" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Advanced Technology Stack
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Built on Google Cloud Platform with cutting-edge AI and data technologies
-            </p>
-          </div>
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
 
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-2xl font-semibold mb-6">AI & Machine Learning</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Retrieval Augmented Generation (RAG)</h4>
-                      <p className="text-gray-600 text-sm">Advanced AI that understands context and provides accurate, personalised responses</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Vertex AI & Gemini Models</h4>
-                      <p className="text-gray-600 text-sm">Google's latest AI models for natural language understanding and generation</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Agentic AI Components</h4>
-                      <p className="text-gray-600 text-sm">Intelligent agents that can plan tasks and maintain conversational context</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold mb-6">Data Infrastructure</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Apache Iceberg on GCS</h4>
-                      <p className="text-gray-600 text-sm">Open-format data storage preventing vendor lock-in with schema evolution</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                    <div>
-                      <h4 className="font-semibold mb-1">BigLake & BigQuery</h4>
-                      <p className="text-gray-600 text-sm">Unified data access and real-time analytics for instant insights</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Vector Database</h4>
-                      <p className="text-gray-600 text-sm">Semantic search capabilities for understanding meaning beyond keywords</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 pt-8 border-t">
-              <h3 className="text-xl font-semibold mb-4">Security & Compliance</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Shield className="text-blue-600" size={24} />
-                  </div>
-                  <p className="font-semibold">UK GDPR Compliant</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Shield className="text-blue-600" size={24} />
-                  </div>
-                  <p className="font-semibold">Data Protection Act 2018</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Shield className="text-blue-600" size={24} />
-                  </div>
-                  <p className="font-semibold">NHS Data Standards</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Impact Section */}
-      <section id="impact" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Expected Impact
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transforming healthcare access for millions of UK patients
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">68M+</div>
-              <p className="text-gray-600">Potential UK Users</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">24/7</div>
-              <p className="text-gray-600">Availability</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">50%</div>
-              <p className="text-gray-600">Reduction in NHS Calls</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">90%</div>
-              <p className="text-gray-600">User Satisfaction Target</p>
-            </div>
-          </div>
-
-          <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl font-semibold mb-6">Benefits for Stakeholders</h3>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h4 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Users className="text-blue-600" size={24} />
-                  For Patients
-                </h4>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <Check className="text-green-500 mt-0.5" size={20} />
-                    <span>Instant access to personalised healthcare guidance</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="text-green-500 mt-0.5" size={20} />
-                    <span>Reduced anxiety through clear information</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="text-green-500 mt-0.5" size={20} />
-                    <span>Better healthcare decisions and outcomes</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <TrendingUp className="text-blue-600" size={24} />
-                  For NHS
-                </h4>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <Check className="text-green-500 mt-0.5" size={20} />
-                    <span>Reduced burden on 111 and GP services</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="text-green-500 mt-0.5" size={20} />
-                    <span>Improved patient flow and resource allocation</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="text-green-500 mt-0.5" size={20} />
-                    <span>Data insights for service improvement</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section id="team" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              The Company Behind Care Query
-            </h2>
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-semibold mb-4">Intelligent Technology Solutions Limited</h3>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                A UK-based technology company specialising in AI-driven healthcare solutions. Our team combines expertise in artificial intelligence, healthcare systems, and user experience design to create transformative digital health tools.
+      {/* Contact */}
+      <section id="contact" style={{ padding: '6rem 1.5rem', background: '#f8f7f4' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
+            <div>
+              <span className="tag tag-teal" style={{ marginBottom: '1rem', display: 'inline-block' }}>Contact</span>
+              <h2 className="serif" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#1a1a2e', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+                Get in touch
+              </h2>
+              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '2rem' }}>
+                Whether you are a clinician with a question about a specific service, a practice manager interested 
+                in the pilot, or an ICB digital lead exploring the architecture — email is the right place to start.
               </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-gray-50 rounded-xl">
-                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Brain className="text-blue-600" size={32} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <Mail size={18} color="#006272" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
+                  <div>
+                    <div className="sans" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '0.2rem' }}>Email</div>
+                    <a href="mailto:info@intelltechsolutions.co.uk" className="sans" style={{ color: '#006272', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                      info@intelltechsolutions.co.uk
+                    </a>
+                  </div>
                 </div>
-                <h4 className="font-semibold mb-2">AI & ML Engineers</h4>
-                <p className="text-sm text-gray-600">Expert team in RAG systems and NLP</p>
-              </div>
-              <div className="text-center p-6 bg-gray-50 rounded-xl">
-                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Shield className="text-blue-600" size={32} />
-                </div>
-                <h4 className="font-semibold mb-2">Healthcare Specialists</h4>
-                <p className="text-sm text-gray-600">Deep understanding of NHS systems</p>
-              </div>
-              <div className="text-center p-6 bg-gray-50 rounded-xl">
-                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Database className="text-blue-600" size={32} />
-                </div>
-                <h4 className="font-semibold mb-2">Cloud Architects</h4>
-                <p className="text-sm text-gray-600">Google Cloud certified professionals</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Get in Touch
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Interested in partnering with us or learning more about Care Query?
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
-              <div className="grid md:grid-cols-2 gap-8 mb-8">
-                <div>
-                  <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-gray-700 mb-2">Company Address:</h4>
-                      <div className="flex items-start gap-3">
-                        <MapPin className="text-blue-600 mt-1" size={20} />
-                        <div>
-                          <p className="font-semibold">Intelligent Technology Solutions Limited</p>
-                          <p className="text-gray-600">Bartle House, 9 Oxford Court</p>
-                          <p className="text-gray-600">Manchester, M2 3WQ</p>
-                          <p className="text-gray-600">United Kingdom</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-700 mb-2">Business:</h4>
-                      <p className="text-gray-600">Registered in England and Wales Companies House Reg. No. 16455045</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-700 mb-2">E-Contact:</h4>
-                      <div className="flex items-start gap-3">
-                        <Mail className="text-blue-600 mt-1" size={20} />
-                        <div>
-                          <p className="text-gray-600 mb-1">Having questions? Email directly to:</p>
-                          <a href="mailto:info@intelltechsolutions.co.uk" className="font-semibold text-blue-600 hover:text-blue-700">
-                            info@intelltechsolutions.co.uk
-                          </a>
-                        </div>
-                      </div>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <MapPin size={18} color="#006272" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
+                  <div>
+                    <div className="sans" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '0.2rem' }}>Registered Address</div>
+                    <div className="sans" style={{ fontSize: '0.88rem', color: '#4a4a5e', lineHeight: 1.6, fontWeight: 300 }}>
+                      Intelligent Technology Solutions Limited<br />
+                      Bartle House, 9 Oxford Court<br />
+                      Manchester, M2 3WQ<br />
+                      Companies House No. 16455045
                     </div>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-6">Partnership Opportunities</h3>
-                  <p className="text-gray-600 mb-4">
-                    We're actively seeking partnerships with NHS trusts, healthcare providers, and technology companies to expand Care Query's reach and impact.
-                  </p>
-                  <button 
-                    onClick={() => window.open('mailto:info@intelltechsolutions.co.uk?subject=Partnership%20Inquiry', '_blank')}
-                    className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                  >
-                    Partner With Us
-                  </button>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <ExternalLink size={18} color="#006272" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
+                  <div>
+                    <div className="sans" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '0.2rem' }}>The Tool</div>
+                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="sans" style={{ color: '#006272', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                      carequery.app
+                    </a>
+                    <span className="sans" style={{ fontSize: '0.82rem', color: '#9a9aaa', marginLeft: '0.5rem' }}>— the live PoC (DRAFT, not yet public)</span>
+                  </div>
                 </div>
               </div>
-              
-              <div className="border-t pt-8">
-                <h3 className="text-xl font-semibold mb-6">Stay Updated</h3>
-                <p className="text-gray-600 mb-4">
-                  Subscribe to our newsletter for the latest updates on Care Query development and healthcare AI innovations.
-                </p>
-                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
-                  <button 
-                    type="submit"
-                    className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                  >
-                    Subscribe
-                  </button>
-                </form>
+            </div>
+            <div className="card" style={{ padding: '1.75rem', alignSelf: 'start' }}>
+              <div className="sans" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '1.25rem' }}>
+                About this project
               </div>
+              <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '1rem' }}>
+                Care Query is developed by a practising NHS physiotherapist and First Contact Practitioner through 
+                Intelligent Technology Solutions Limited — a sole-director private limited company operating entirely 
+                independently of any NHS employer.
+              </p>
+              <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '1rem' }}>
+                All development is conducted in personal time, on personal infrastructure, using publicly available 
+                service information only. No NHS patient data is collected, stored, or processed at any stage.
+              </p>
+              <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300 }}>
+                Care Query is an independent innovation developed in line with NHS digital standards. 
+                It is not endorsed by, affiliated with, or developed on behalf of any NHS organisation.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Intelligent Technology Solutions Limited. All rights reserved.</p>
+      <footer style={{ background: '#1a1a2e', color: '#a8a8c0', padding: '2.5rem 1.5rem' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+          <div>
+            <span className="serif" style={{ fontSize: '1.1rem', color: '#fff', marginRight: '0.75rem' }}>Care Query</span>
+            <span className="sans" style={{ fontSize: '0.8rem', color: '#6a6a8a' }}>Proof of Concept — Cheshire and Merseyside ICB — 2026</span>
+          </div>
+          <div className="sans" style={{ fontSize: '0.78rem', color: '#6a6a8a' }}>
+            © 2026 Intelligent Technology Solutions Limited · No cookies · No patient data
           </div>
         </div>
       </footer>
