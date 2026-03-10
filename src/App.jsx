@@ -179,72 +179,212 @@ const CareQueryWebsite = () => {
               One governed data source.<br />Three practical formats.
             </h2>
             <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300 }}>
-              All three outputs are generated from a single versioned JSON record per service. 
+              All three outputs are generated from a single versioned JSON record per service.
               Update the source once — all outputs reflect the change.
             </p>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div className="output-card">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <CheckSquare size={20} color="#006272" />
-                  <span className="serif" style={{ fontSize: '1.2rem', color: '#1a1a2e' }}>Gate Card — Pre-Referral Checklist</span>
-                </div>
-                <span className="tag tag-teal">Primary audience: GP / FCP</span>
-              </div>
-              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '0.75rem' }}>
-                A structured checklist confirming that all administrative prerequisites are in place before an Advice and Guidance submission is made. 
-                Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a clipboard-ready administrative summary 
-                using SaMD-neutral language — the clinician decides, the software records.
-              </p>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {['Hard gates', 'Soft gates', 'Red flag check', 'Clipboard summary'].map(t => (
-                  <span key={t} className="tech-pill">{t}</span>
-                ))}
-              </div>
-            </div>
+          {/* Expandable output cards */}
+          {[
+            {
+              icon: <CheckSquare size={20} color="#006272" />,
+              title: 'Gate Card — Pre-Referral Checklist',
+              tagClass: 'tag-teal',
+              tagLabel: 'Primary audience: practice staff',
+              borderColor: '#006272',
+              summary: 'Confirms all administrative prerequisites before an A&G submission is made. The clinician checks each gate — the software records.',
+              detail: (
+                <>
+                  <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '1.25rem' }}>
+                    Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a
+                    clipboard-ready administrative summary using SaMD-neutral language — the clinician
+                    decides, the software records.
+                  </p>
+                  {/* Live example from WINFCP */}
+                  <div style={{ background: '#f8f7f4', border: '1px solid #e8e4dd', borderRadius: '2px', padding: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '0.75rem' }}>
+                      Example — WIN PCN FCP Service (WINFCP)
+                    </div>
+                    {[
+                      'Patient is aged 18 or over',
+                      'Patient is registered with a WIN PCN GP practice',
+                      'Patient has an MSK condition as the primary presenting problem',
+                      'Presentation is appropriate for FCP scope: soft tissue, spinal pain, arthritis, nerve symptoms, or post-surgical MSK review',
+                      'Patient does NOT have a primary diagnosis of persistent chronic pain (&gt;3 months) — if so, consider WIN PCN Pain Service instead',
+                    ].map((gate, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 4 ? '1px solid #f0ece6' : 'none' }}>
+                        <div style={{ width: '16px', height: '16px', border: '2px solid #006272', borderRadius: '2px', flexShrink: 0, marginTop: '0.15rem' }} />
+                        <span className="sans" style={{ fontSize: '0.82rem', color: '#4a4a5e', fontWeight: 300, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: gate }} />
+                      </div>
+                    ))}
+                    <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#e0f2f1', borderRadius: '2px' }}>
+                      <span className="sans" style={{ fontSize: '0.78rem', color: '#006272', fontWeight: 500 }}>
+                        When all prerequisites are confirmed — a clipboard summary is generated for the A&G submission.
+                      </span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {['Hard gates', 'Soft gates', 'Red flag check', 'Clipboard summary'].map(t => (
+                      <span key={t} className="tech-pill">{t}</span>
+                    ))}
+                  </div>
+                </>
+              ),
+            },
+            {
+              icon: <FileText size={20} color="#b45309" />,
+              title: 'Service Card — Structured Service Record',
+              tagClass: 'tag-amber',
+              tagLabel: 'Primary audience: practice staff / Patients / Commissioner',
+              borderColor: '#b45309',
+              summary: 'Versioned, timestamped record of an NHS MSK service. Criteria, catchment, contacts, and wait times — kept current by a named steward.',
+              detail: (
+                <>
+                  <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '1.25rem' }}>
+                    Each record carries a review date and steward identity. Status must be manually set
+                    to PUBLISHED by a verified steward before the record becomes visible in the tool.
+                    An amber warning banner appears automatically if a record is approaching or past its
+                    review date — stale-but-visible is better than hidden.
+                  </p>
 
-            <div className="output-card amber">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <FileText size={20} color="#b45309" />
-                  <span className="serif" style={{ fontSize: '1.2rem', color: '#1a1a2e' }}>Service Card — Structured Service Record</span>
-                </div>
-                <span className="tag tag-amber">Primary audience: GP / FCP / Commissioner</span>
-              </div>
-              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '0.75rem' }}>
-                Versioned, timestamped record of an NHS MSK service — including official referral criteria, catchment boundaries, 
-                operational contacts, wait times, and governance metadata. Each record carries a review date and steward identity. 
-                Status must be PUBLISHED by a verified steward before it becomes visible.
-              </p>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {['Versioned JSON', 'Review metadata', 'Steward-governed', 'Stale warning system'].map(t => (
-                  <span key={t} className="tech-pill">{t}</span>
-                ))}
-              </div>
-            </div>
+                  {/* Demo service card — Warrington Falls Prevention */}
+                  <div style={{ background: '#f8f7f4', border: '1px solid #e8e4dd', borderRadius: '2px', marginBottom: '1.25rem', overflow: 'hidden' }}>
 
-            <div className="output-card slate">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <Users size={20} color="#334155" />
-                  <span className="serif" style={{ fontSize: '1.2rem', color: '#1a1a2e' }}>Journey Card — Patient Information Summary</span>
-                </div>
-                <span className="tag tag-slate">Primary audience: Patient</span>
+                    {/* Demo label */}
+                    <div style={{ background: '#fef3c7', borderBottom: '1px solid #fcd34d', padding: '0.4rem 1rem' }}>
+                      <span className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#92400e' }}>
+                        Illustrative example — not yet verified or published
+                      </span>
+                    </div>
+
+                    {/* Service header */}
+                    <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e8e4dd', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
+                      <div>
+                        <div className="serif" style={{ fontSize: '1rem', color: '#1a1a2e', marginBottom: '0.2rem' }}>
+                          Warrington Community Falls Prevention Service
+                        </div>
+                        <div className="sans" style={{ fontSize: '0.75rem', color: '#9a9aaa', fontWeight: 400 }}>
+                          Code: WINFALLS · Steward: [STEWARD: verify] · Last reviewed: [STEWARD: verify]
+                        </div>
+                      </div>
+                      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.25rem 0.6rem', borderRadius: '2px', background: '#fef9ec', color: '#92400e', border: '1px solid #fcd34d' }}>
+                        DRAFT
+                      </span>
+                    </div>
+
+                    {/* Referral criteria */}
+                    <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e8e4dd' }}>
+                      <div className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '0.6rem' }}>
+                        Referral criteria
+                      </div>
+                      {[
+                        'Aged 65 or over, OR aged 50–64 with a condition increasing falls risk (e.g. Parkinson\'s, osteoporosis, peripheral neuropathy)',
+                        'Two or more falls in the past 12 months, OR one fall with injury, OR fear of falling affecting daily function',
+                        'Registered with a Warrington GP practice',
+                        'Able to participate in group or individual exercise — cognitive capacity to follow instruction',
+                        'No acute fracture or unstable cardiovascular condition (stabilise before referral)',
+                      ].map((criterion, i) => (
+                        <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.35rem 0', borderBottom: i < 4 ? '1px solid #f0ece6' : 'none' }}>
+                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#b45309', flexShrink: 0, marginTop: '0.45rem' }} />
+                          <span className="sans" style={{ fontSize: '0.82rem', color: '#4a4a5e', fontWeight: 300, lineHeight: 1.5 }}>{criterion}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Operational grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0', borderBottom: '1px solid #e8e4dd' }}>
+                      {[
+                        { label: 'Catchment', value: 'Warrington Borough — WIN PCN and surrounding practices' },
+                        { label: 'Typical wait', value: '[STEWARD: verify before publishing]' },
+                        { label: 'Referral route', value: 'A&G via Consultant Connect or direct referral form — [STEWARD: verify]' },
+                      ].map((item, i) => (
+                        <div key={i} style={{ padding: '0.85rem 1.25rem', borderRight: i < 2 ? '1px solid #e8e4dd' : 'none' }}>
+                          <div className="sans" style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '0.3rem' }}>{item.label}</div>
+                          <div className="sans" style={{ fontSize: '0.8rem', color: item.value.includes('STEWARD') ? '#b45309' : '#1a1a2e', fontWeight: 300, lineHeight: 1.4 }}>{item.value}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Stale warning — illustrating the amber banner behaviour */}
+                    <div style={{ padding: '0.65rem 1.25rem', background: '#fffbeb', borderLeft: '3px solid #f59e0b', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                      <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#f59e0b', flexShrink: 0 }} />
+                      <span className="sans" style={{ fontSize: '0.78rem', color: '#92400e', fontWeight: 400 }}>
+                        Review overdue — this record has not been verified by a steward within the required period. Information may not reflect current service provision.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {['Versioned JSON', 'Review metadata', 'Steward-governed', 'Stale warning system'].map(t => (
+                      <span key={t} className="tech-pill">{t}</span>
+                    ))}
+                  </div>
+                </>
+              ),
+            },
+            {
+              icon: <Users size={20} color="#334155" />,
+              title: 'Journey Card — Patient Information Summary',
+              tagClass: 'tag-slate',
+              tagLabel: 'Primary audience: Patient',
+              borderColor: '#334155',
+              summary: 'Sent to the patient after referral via Accurx SMS. Plain-language explanation of the service, what to expect, and what to do while waiting.',
+              detail: (
+                <>
+                  <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '1.25rem' }}>
+                    No patient data is collected or stored. The card opens a static page at carequery.app —
+                    no login, no account, no tracking. The acknowledge statement sets the tone from the first line.
+                  </p>
+                  {/* Live example from WINFCP journey.acknowledge */}
+                  <div style={{ background: '#f8f7f4', border: '1px solid #e8e4dd', borderRadius: '2px', padding: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9a9aaa', marginBottom: '0.6rem' }}>
+                      Example — WIN PCN FCP Service, opening statement
+                    </div>
+                    <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#334155', fontStyle: 'italic', fontWeight: 300 }}>
+                      "We know that waiting to be seen for a joint or muscle problem can be frustrating,
+                      especially when you are in pain. Here is what is happening with your referral."
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {['Patient-facing', 'Accurx-compatible', 'No data collection', 'Self-management guidance'].map(t => (
+                      <span key={t} className="tech-pill">{t}</span>
+                    ))}
+                  </div>
+                </>
+              ),
+            },
+          ].map((card, idx) => {
+            const [open, setOpen] = React.useState(false);
+            return (
+              <div key={idx} style={{ borderLeft: `4px solid ${card.borderColor}`, background: '#fff', borderTop: '1px solid #e8e4dd', borderRight: '1px solid #e8e4dd', borderBottom: '1px solid #e8e4dd', borderRadius: '0 2px 2px 0', marginBottom: '1rem' }}>
+                <button
+                  onClick={() => setOpen(!open)}
+                  style={{ width: '100%', background: 'none', border: 'none', padding: '1.25rem 1.75rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', textAlign: 'left' }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                      {card.icon}
+                      <span className="serif" style={{ fontSize: '1.1rem', color: '#1a1a2e' }}>{card.title}</span>
+                      <span className={`tag ${card.tagClass}`}>{card.tagLabel}</span>
+                    </div>
+                    <p className="sans" style={{ fontSize: '0.85rem', color: '#4a4a5e', fontWeight: 300, lineHeight: 1.5, paddingLeft: '1.75rem' }}>
+                      {card.summary}
+                    </p>
+                  </div>
+                  <span style={{ color: '#006272', fontSize: '1.2rem', fontWeight: 300, flexShrink: 0, marginTop: '0.1rem' }}>
+                    {open ? '−' : '+'}
+                  </span>
+                </button>
+                {open && (
+                  <div style={{ padding: '0 1.75rem 1.5rem', borderTop: '1px solid #f0ece6' }}>
+                    <div style={{ paddingTop: '1.25rem' }}>
+                      {card.detail}
+                    </div>
+                  </div>
+                )}
               </div>
-              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4a4a5e', fontWeight: 300, marginBottom: '0.75rem' }}>
-                When a clinician refers a patient on, that patient can be directed to carequery.app for a plain-language 
-                explanation of the service they have been referred to — what to expect, realistic wait times, and what 
-                they can do in the meantime. Designed for SMS delivery via Accurx. No patient data is collected or stored.
-              </p>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {['Patient-facing', 'Accurx-compatible', 'No data collection', 'Self-management guidance'].map(t => (
-                  <span key={t} className="tech-pill">{t}</span>
-                ))}
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </section>
 
