@@ -49,33 +49,35 @@ const CareQueryWebsite = () => {
   ];
 
   return (
-    <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", background: '#ffffff', minHeight: '100vh', color: '#111827' }}>
+    <div style={{ fontFamily: "'Inter', sans-serif", background: '#ffffff', minHeight: '100vh', color: '#111827' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #ffffff; }
-        .serif { font-family: 'DM Serif Display', Georgia, serif; }
-        .sans { font-family: 'DM Sans', system-ui, sans-serif; }
-        .nav-link { font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
+        body { background: #ffffff; font-family: 'Inter', sans-serif; }
+        .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
+        .subheading { font-family: 'Inter', sans-serif; font-weight: 600; }
+        .body-text { font-family: 'Inter', sans-serif; font-weight: 400; }
+        .ui-text { font-family: 'Inter', sans-serif; font-weight: 500; }
+        .nav-link { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
         .nav-link:hover { color: #2563eb; }
         .nav-link.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
         .card { background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
         .output-card { border-left: 4px solid #2563eb; padding: 1.5rem 1.75rem; background: #fff; border-radius: 0 8px 8px 0; border-top: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
         .output-card.amber { border-left-color: #b45309; }
         .output-card.slate { border-left-color: #374151; }
-        .tag { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
+        .tag { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
         .tag-blue { background: #dbeafe; color: #1e40af; }
         .tag-amber { background: #fef3c7; color: #92400e; }
         .tag-slate { background: #f3f4f6; color: #374151; }
         .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
-        .btn-primary { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
+        .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
         .btn-primary:hover { background: #1d4ed8; }
-        .btn-outline { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #2563eb; border: 2px solid #2563eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
+        .btn-outline { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #2563eb; border: 2px solid #2563eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
         .btn-outline:hover { background: #eff6ff; }
         .divider { height: 1px; background: linear-gradient(to right, transparent, #e5e7eb, transparent); margin: 0 auto; }
-        .tech-pill { font-family: 'DM Sans', monospace; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.75rem; background: #111827; color: #dbeafe; border-radius: 6px; display: inline-block; margin: 0.2rem; }
-        .step-number { font-family: 'DM Serif Display', serif; font-size: 3rem; color: #dbeafe; line-height: 1; }
-        .input-field { font-family: 'DM Sans', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+        .tech-pill { font-family: 'Inter', monospace; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.75rem; background: #111827; color: #dbeafe; border-radius: 6px; display: inline-block; margin: 0.2rem; }
+        .step-number { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 3rem; color: #dbeafe; line-height: 1; }
+        .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
         .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
         @media (max-width: 768px) {
           .hero-grid { grid-template-columns: 1fr !important; }
@@ -89,7 +91,7 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-              <span className="serif" style={{ fontSize: '1.4rem', fontWeight: 400, color: '#111827', letterSpacing: '-0.01em' }}>Care Query</span>
+              <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.01em' }}>Care Query</span>
               <span className="tag tag-poc">PoC</span>
             </div>
             <div className="hidden md:flex" style={{ display: 'flex', gap: '2rem' }}>
@@ -111,7 +113,7 @@ const CareQueryWebsite = () => {
           <div style={{ background: '#ffffff', borderTop: '1px solid #e5e7eb', padding: '0.75rem 1.5rem' }}>
             {navItems.map(item => (
               <button key={item.id} onClick={() => scrollToSection(item.id)}
-                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.6rem 0', color: '#374151', background: 'none', border: 'none', fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', cursor: 'pointer' }}>
+                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.6rem 0', color: '#374151', background: 'none', border: 'none', fontFamily: "'Inter', sans-serif", fontSize: '0.95rem', cursor: 'pointer' }}>
                 {item.label}
               </button>
             ))}
@@ -128,11 +130,11 @@ const CareQueryWebsite = () => {
                 <span className="tag tag-poc" style={{ marginRight: '0.5rem' }}>Proof of Concept — 2026</span>
                 <span className="tag tag-blue">Cheshire & Merseyside ICB</span>
               </div>
-              <h1 className="serif" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
+              <h1 className="heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
                 NHS MSK Referrals.<br />
                 <em style={{ color: '#2563eb' }}>Done right, first time.</em>
               </h1>
-              <p className="sans" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '2rem', fontWeight: 400 }}>
+              <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '2rem', fontWeight: 400 }}>
                 Care Query is a structured pre-referral tool for GPs and First Contact Practitioners.
                 It encodes accurate, versioned, locally-specific information about NHS MSK services —
                 so the right referral goes to the right service, with the right information, on the first attempt.
@@ -148,7 +150,7 @@ const CareQueryWebsite = () => {
             </div>
             <div>
               <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
-                <div className="sans" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
+                <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
                   The referral problem — in numbers
                 </div>
                 {[
@@ -158,8 +160,8 @@ const CareQueryWebsite = () => {
                   { stat: '88', label: 'Steward verification tasks remaining before first publish', accent: '#374151' },
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none' }}>
-                    <span className="serif" style={{ fontSize: '1.6rem', color: item.accent, minWidth: '4rem', lineHeight: 1 }}>{item.stat}</span>
-                    <span className="sans" style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400 }}>{item.label}</span>
+                    <span className="heading" style={{ fontSize: '1.6rem', color: item.accent, minWidth: '4rem', lineHeight: 1 }}>{item.stat}</span>
+                    <span className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400 }}>{item.label}</span>
                   </div>
                 ))}
               </div>
@@ -175,10 +177,10 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>The Three Outputs</span>
-            <h2 className="serif" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
               One governed data source.<br />Three practical formats.
             </h2>
-            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               All three outputs are generated from a single versioned JSON record per service.
               Update the source once — all outputs reflect the change.
             </p>
@@ -195,14 +197,14 @@ const CareQueryWebsite = () => {
               summary: 'Confirms all administrative prerequisites before an A&G submission is made. The clinician checks each gate — the software records.',
               detail: (
                 <>
-                  <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a
                     clipboard-ready administrative summary using SaMD-neutral language — the clinician
                     decides, the software records.
                   </p>
                   {/* Live example from WINFCP */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
                       Example — WIN PCN FCP Service (WINFCP)
                     </div>
                     {[
@@ -214,11 +216,11 @@ const CareQueryWebsite = () => {
                     ].map((gate, i) => (
                       <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
                         <div style={{ width: '16px', height: '16px', border: '2px solid #2563eb', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
-                        <span className="sans" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: gate }} />
+                        <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: gate }} />
                       </div>
                     ))}
                     <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#dbeafe', borderRadius: '6px' }}>
-                      <span className="sans" style={{ fontSize: '0.78rem', color: '#1e40af', fontWeight: 500 }}>
+                      <span className="body-text" style={{ fontSize: '0.78rem', color: '#1e40af', fontWeight: 500 }}>
                         When all prerequisites are confirmed — a clipboard summary is generated for the A&G submission.
                       </span>
                     </div>
@@ -240,7 +242,7 @@ const CareQueryWebsite = () => {
               summary: 'Versioned, timestamped record of an NHS MSK service. Criteria, catchment, contacts, and wait times — kept current by a named steward.',
               detail: (
                 <>
-                  <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     Each record carries a review date and steward identity. Status must be manually set
                     to PUBLISHED by a verified steward before the record becomes visible in the tool.
                     An amber warning banner appears automatically if a record is approaching or past its
@@ -252,7 +254,7 @@ const CareQueryWebsite = () => {
 
                     {/* Demo label */}
                     <div style={{ background: '#fef3c7', borderBottom: '1px solid #fcd34d', padding: '0.4rem 1rem' }}>
-                      <span className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#92400e' }}>
+                      <span className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#92400e' }}>
                         Illustrative example — not yet verified or published
                       </span>
                     </div>
@@ -260,21 +262,21 @@ const CareQueryWebsite = () => {
                     {/* Service header */}
                     <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
                       <div>
-                        <div className="serif" style={{ fontSize: '1rem', color: '#111827', marginBottom: '0.2rem' }}>
+                        <div className="heading" style={{ fontSize: '1rem', color: '#111827', marginBottom: '0.2rem' }}>
                           Warrington Community Falls Prevention Service
                         </div>
-                        <div className="sans" style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 400 }}>
+                        <div className="body-text" style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 400 }}>
                           Code: WINFALLS · Steward: [STEWARD: verify] · Last reviewed: [STEWARD: verify]
                         </div>
                       </div>
-                      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.25rem 0.6rem', borderRadius: '9999px', background: '#fef3c7', color: '#92400e', border: '1px solid #fcd34d' }}>
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.25rem 0.6rem', borderRadius: '9999px', background: '#fef3c7', color: '#92400e', border: '1px solid #fcd34d' }}>
                         DRAFT
                       </span>
                     </div>
 
                     {/* Referral criteria */}
                     <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb' }}>
-                      <div className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
+                      <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
                         Referral criteria
                       </div>
                       {[
@@ -286,7 +288,7 @@ const CareQueryWebsite = () => {
                       ].map((criterion, i) => (
                         <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.35rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
                           <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#b45309', flexShrink: 0, marginTop: '0.45rem' }} />
-                          <span className="sans" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }}>{criterion}</span>
+                          <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }}>{criterion}</span>
                         </div>
                       ))}
                     </div>
@@ -299,8 +301,8 @@ const CareQueryWebsite = () => {
                         { label: 'Referral route', value: 'A&G via Consultant Connect or direct referral form — [STEWARD: verify]' },
                       ].map((item, i) => (
                         <div key={i} style={{ padding: '0.85rem 1.25rem', borderRight: i < 2 ? '1px solid #e5e7eb' : 'none' }}>
-                          <div className="sans" style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.3rem' }}>{item.label}</div>
-                          <div className="sans" style={{ fontSize: '0.8rem', color: item.value.includes('STEWARD') ? '#b45309' : '#111827', fontWeight: 400, lineHeight: 1.4 }}>{item.value}</div>
+                          <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.3rem' }}>{item.label}</div>
+                          <div className="body-text" style={{ fontSize: '0.8rem', color: item.value.includes('STEWARD') ? '#b45309' : '#111827', fontWeight: 400, lineHeight: 1.4 }}>{item.value}</div>
                         </div>
                       ))}
                     </div>
@@ -308,7 +310,7 @@ const CareQueryWebsite = () => {
                     {/* Stale warning — illustrating the amber banner behaviour */}
                     <div style={{ padding: '0.65rem 1.25rem', background: '#fffbeb', borderLeft: '3px solid #f59e0b', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                       <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#f59e0b', flexShrink: 0 }} />
-                      <span className="sans" style={{ fontSize: '0.78rem', color: '#92400e', fontWeight: 400 }}>
+                      <span className="body-text" style={{ fontSize: '0.78rem', color: '#92400e', fontWeight: 400 }}>
                         Review overdue — this record has not been verified by a steward within the required period. Information may not reflect current service provision.
                       </span>
                     </div>
@@ -331,16 +333,16 @@ const CareQueryWebsite = () => {
               summary: 'Sent to the patient after referral via Accurx SMS. Plain-language explanation of the service, what to expect, and what to do while waiting.',
               detail: (
                 <>
-                  <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     No patient data is collected or stored. The card opens a static page at carequery.app —
                     no login, no account, no tracking. The acknowledge statement sets the tone from the first line.
                   </p>
                   {/* Live example from WINFCP journey.acknowledge */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="sans" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
                       Example — WIN PCN FCP Service, opening statement
                     </div>
-                    <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#374151', fontStyle: 'italic', fontWeight: 400 }}>
+                    <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#374151', fontStyle: 'italic', fontWeight: 400 }}>
                       "We know that waiting to be seen for a joint or muscle problem can be frustrating,
                       especially when you are in pain. Here is what is happening with your referral."
                     </p>
@@ -364,10 +366,10 @@ const CareQueryWebsite = () => {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
                       {card.icon}
-                      <span className="serif" style={{ fontSize: '1.1rem', color: '#111827' }}>{card.title}</span>
+                      <span className="heading" style={{ fontSize: '1.1rem', color: '#111827' }}>{card.title}</span>
                       <span className={`tag ${card.tagClass}`}>{card.tagLabel}</span>
                     </div>
-                    <p className="sans" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5, paddingLeft: '1.75rem' }}>
+                    <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5, paddingLeft: '1.75rem' }}>
                       {card.summary}
                     </p>
                   </div>
@@ -395,10 +397,10 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
-            <h2 className="serif" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
               Deterministic by design.<br />No AI in the critical path.
             </h2>
-            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               The PoC is a dependency-free SPA — vanilla HTML, CSS, and JavaScript.
               No framework. No build step. No server. Routing and rendering are purely deterministic,
               governed entirely by the JSON data source. This is intentional: clinical routing decisions
@@ -429,8 +431,8 @@ const CareQueryWebsite = () => {
             ].map((item, i) => (
               <div key={i} className="card" style={{ padding: '1.75rem' }}>
                 <div className="step-number">{item.step}</div>
-                <h3 className="serif" style={{ fontSize: '1.15rem', color: '#111827', margin: '0.5rem 0 0.75rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
-                <p className="sans" style={{ fontSize: '0.85rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>{item.body}</p>
+                <h3 className="heading" style={{ fontSize: '1.15rem', color: '#111827', margin: '0.5rem 0 0.75rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
+                <p className="body-text" style={{ fontSize: '0.85rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>{item.body}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }}>
                   {item.pills.map(p => <span key={p} className="tech-pill">{p}</span>)}
                 </div>
@@ -439,12 +441,12 @@ const CareQueryWebsite = () => {
           </div>
 
           <div className="card" style={{ padding: '1.75rem', background: '#111827', border: 'none' }}>
-            <div className="sans" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#93c5fd', marginBottom: '1rem' }}>
+            <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#93c5fd', marginBottom: '1rem' }}>
               Infrastructure
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
               {['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'WCAG 2.1 AA', 'No cookies · No patient data'].map(p => (
-                <span key={p} style={{ fontFamily: "'DM Sans', monospace", fontSize: '0.78rem', fontWeight: 500, padding: '0.3rem 0.75rem', background: 'rgba(255,255,255,0.08)', color: '#dbeafe', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.12)' }}>{p}</span>
+                <span key={p} style={{ fontFamily: "'Inter', monospace", fontSize: '0.78rem', fontWeight: 500, padding: '0.3rem 0.75rem', background: 'rgba(255,255,255,0.08)', color: '#dbeafe', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.12)' }}>{p}</span>
               ))}
             </div>
           </div>
@@ -459,10 +461,10 @@ const CareQueryWebsite = () => {
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
             <div>
               <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Regulatory Position</span>
-              <h2 className="serif" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+              <h2 className="heading" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
                 Administrative tool.<br />Not a clinical decision support system.
               </h2>
-              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 Care Query does not diagnose, recommend treatment, or determine clinical appropriateness.
                 All language is governed to avoid MHRA SaMD classification. The clinician decides.
                 The software records. This distinction is enforced at code level, not just in documentation.
@@ -478,8 +480,8 @@ const CareQueryWebsite = () => {
                 <div key={i} style={{ display: 'flex', gap: '1rem', padding: '1rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                   <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{item.icon}</div>
                   <div>
-                    <div className="sans" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827', marginBottom: '0.2rem' }}>{item.label}</div>
-                    <div className="sans" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>{item.desc}</div>
+                    <div className="body-text" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827', marginBottom: '0.2rem' }}>{item.label}</div>
+                    <div className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>{item.desc}</div>
                   </div>
                 </div>
               ))}
@@ -495,15 +497,15 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ maxWidth: '640px', marginBottom: '3rem' }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
-            <h2 className="serif" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
               The knowledge is yours.<br />Care Query is just the structure.
             </h2>
-            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               The most valuable thing this project can encode is the operational knowledge that experienced MSK
               clinicians carry but rarely write down — the nuance behind the criteria, the things that make
               a referral land well. That knowledge belongs to the people doing the work, not to any single developer.
             </p>
-            <p className="sans" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
               If you work in MSK pathways in Cheshire and Merseyside — as an FCP, GP, physio, or service administrator —
               and you recognise this problem, a conversation is enough to start. No commitment required.
             </p>
@@ -523,22 +525,22 @@ const CareQueryWebsite = () => {
               },
             ].map((item, i) => (
               <div key={i} className="card" style={{ padding: '1.75rem' }}>
-                <h3 className="serif" style={{ fontSize: '1.2rem', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
-                <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>{item.desc}</p>
-                <span className="sans" style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#2563eb' }}>{item.tag}</span>
+                <h3 className="heading" style={{ fontSize: '1.2rem', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>{item.desc}</p>
+                <span className="body-text" style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#2563eb' }}>{item.tag}</span>
               </div>
             ))}
           </div>
 
           <div className="card" style={{ padding: '1.75rem', maxWidth: '560px' }}>
-            <h3 className="serif" style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '0.5rem' }}>Stay informed</h3>
-            <p className="sans" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+            <h3 className="heading" style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '0.5rem' }}>Stay informed</h3>
+            <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
               Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
             </p>
             {submitted ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Check size={18} color="#22c55e" />
-                <p className="sans" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem' }}>Received — we will be in touch.</p>
+                <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem' }}>Received — we will be in touch.</p>
               </div>
             ) : (
               <form onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -559,10 +561,10 @@ const CareQueryWebsite = () => {
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
             <div>
               <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Contact</span>
-              <h2 className="serif" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+              <h2 className="heading" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
                 Get in touch
               </h2>
-              <p className="sans" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
                 Whether you are a clinician with a question about a specific service, a practice manager interested
                 in the pilot, or an ICB digital lead exploring the architecture — email is the right place to start.
               </p>
@@ -572,8 +574,8 @@ const CareQueryWebsite = () => {
                     <Mail size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="sans" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Email</div>
-                    <a href="mailto:info@intelltechsolutions.co.uk" className="sans" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Email</div>
+                    <a href="mailto:info@intelltechsolutions.co.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
                       info@intelltechsolutions.co.uk
                     </a>
                   </div>
@@ -583,8 +585,8 @@ const CareQueryWebsite = () => {
                     <MapPin size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="sans" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Registered Address</div>
-                    <div className="sans" style={{ fontSize: '0.88rem', color: '#4b5563', lineHeight: 1.6, fontWeight: 400 }}>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Registered Address</div>
+                    <div className="body-text" style={{ fontSize: '0.88rem', color: '#4b5563', lineHeight: 1.6, fontWeight: 400 }}>
                       Intelligent Technology Solutions Limited<br />
                       Bartle House, 9 Oxford Court<br />
                       Manchester, M2 3WQ<br />
@@ -597,29 +599,29 @@ const CareQueryWebsite = () => {
                     <ExternalLink size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="sans" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>The Tool</div>
-                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="sans" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>The Tool</div>
+                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
                       carequery.app
                     </a>
-                    <span className="sans" style={{ fontSize: '0.82rem', color: '#9ca3af', marginLeft: '0.5rem' }}>— the live PoC (DRAFT, not yet public)</span>
+                    <span className="body-text" style={{ fontSize: '0.82rem', color: '#9ca3af', marginLeft: '0.5rem' }}>— the live PoC (DRAFT, not yet public)</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="card" style={{ padding: '1.75rem', alignSelf: 'start' }}>
-              <div className="sans" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1.25rem' }}>
+              <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1.25rem' }}>
                 About this project
               </div>
-              <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
                 Care Query is developed by a practising NHS physiotherapist and First Contact Practitioner through
                 Intelligent Technology Solutions Limited — a sole-director private limited company operating entirely
                 independently of any NHS employer.
               </p>
-              <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
                 All development is conducted in personal time, on personal infrastructure, using publicly available
                 service information only. No NHS patient data is collected, stored, or processed at any stage.
               </p>
-              <p className="sans" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 Care Query is an independent innovation developed in line with NHS digital standards.
                 It is not endorsed by, affiliated with, or developed on behalf of any NHS organisation.
               </p>
@@ -632,10 +634,10 @@ const CareQueryWebsite = () => {
       <footer style={{ background: '#111827', borderTop: '1px solid #1f2937', color: '#9ca3af', padding: '2.5rem 1.5rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <span className="serif" style={{ fontSize: '1.1rem', color: '#fff', marginRight: '0.75rem' }}>Care Query</span>
-            <span className="sans" style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Proof of Concept — Cheshire and Merseyside ICB — 2026</span>
+            <span className="heading" style={{ fontSize: '1.1rem', color: '#fff', marginRight: '0.75rem' }}>Care Query</span>
+            <span className="body-text" style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Proof of Concept — Cheshire and Merseyside ICB — 2026</span>
           </div>
-          <div className="sans" style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
+          <div className="body-text" style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
             © 2026 Intelligent Technology Solutions Limited · No cookies · No patient data
           </div>
         </div>
