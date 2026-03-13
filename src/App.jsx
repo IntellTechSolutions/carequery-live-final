@@ -136,10 +136,13 @@ const CareQueryWebsite = () => {
                 NHS MSK Referrals.<br />
                 <em style={{ color: '#2563eb' }}>Done right, first time.</em>
               </h1>
-              <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '2rem', fontWeight: 400 }}>
+              <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1rem', fontWeight: 400 }}>
                 Care Query brings accurate, up-to-date information about local NHS MSK services into one place — helping clinicians send the right referral to the right service with the right information, the first time.
                 <br /><br />
                 At its core, Care Query turns local service knowledge into structured Service Cards — clear records that describe how a service works, who it is for, and how to refer to it correctly.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#6b7280', marginBottom: '2rem', fontWeight: 400, borderLeft: '3px solid #e5e7eb', paddingLeft: '1rem' }}>
+                Many MSK referrals are rejected for administrative reasons that could have been identified before submission — the wrong catchment, a missing investigation, criteria that changed last quarter. Care Query is a direct attempt to remove that friction for both clinicians and patients.
               </p>
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <button className="btn-primary" onClick={() => scrollToSection('what-it-does')}>
@@ -176,6 +179,26 @@ const CareQueryWebsite = () => {
 
       <div className="divider" style={{ maxWidth: '1100px' }} />
 
+      {/* Current Scope */}
+      <section style={{ padding: '3rem 1.5rem', background: '#f9fafb' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '720px' }}>
+            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Current Scope</span>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+              Care Query is currently a proof of concept focused on musculoskeletal referral pathways within Cheshire and Merseyside Integrated Care Board. Five MSK services are encoded in the prototype. The tool is not yet publicly available. The next milestone is a small pilot with 5–10 GP practices to test whether the approach demonstrably reduces Advice and Guidance rejection rates.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+              Care Query does not require IT integration, procurement approval, or organisational sign-off to be useful. A clinician can open it in a browser between consultations today. The value is immediate and independent. Formal adoption by a practice, PCN, or ICB extends that value — but it is not a prerequisite for it.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+              If the pilot demonstrates value, the model can be extended to additional services and potentially other regions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+
       {/* What It Does */}
       <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -193,51 +216,6 @@ const CareQueryWebsite = () => {
           {/* Expandable output cards */}
           {[
             {
-              icon: <CheckSquare size={20} color="#9b2335" />,
-              title: 'Gate Card — Pre-Referral Checklist',
-              tagClass: 'tag-burgundy',
-              tagLabel: 'Primary audience: practice staff',
-              borderColor: '#9b2335',
-              summary: 'A structured checklist confirming that the key administrative requirements are in place before an Advice and Guidance request is submitted.',
-              detail: (
-                <>
-                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a
-                    clipboard-ready administrative summary using SaMD-neutral language — the clinician
-                    decides, the software records.
-                  </p>
-                  {/* Live example from WINFCP */}
-                  <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                      Example — WIN PCN FCP Service (WINFCP)
-                    </div>
-                    {[
-                      'Patient is aged 18 or over',
-                      'Patient is registered with a WIN PCN GP practice',
-                      'Patient has an MSK condition as the primary presenting problem',
-                      'Presentation is appropriate for FCP scope: soft tissue, spinal pain, arthritis, nerve symptoms, or post-surgical MSK review',
-                      'Patient does NOT have a primary diagnosis of persistent chronic pain (&gt;3 months) — if so, consider WIN PCN Pain Service instead',
-                    ].map((gate, i) => (
-                      <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
-                        <div style={{ width: '16px', height: '16px', border: '2px solid #9b2335', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
-                        <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: gate }} />
-                      </div>
-                    ))}
-                    <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#fce7ef', borderRadius: '6px' }}>
-                      <span className="body-text" style={{ fontSize: '0.78rem', color: '#7f1d1d', fontWeight: 500 }}>
-                        When all prerequisites are confirmed — a clipboard summary is generated for the A&G submission.
-                      </span>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    {['Hard gates', 'Soft gates', 'Red flag check', 'Clipboard summary'].map(t => (
-                      <span key={t} className="tech-pill">{t}</span>
-                    ))}
-                  </div>
-                </>
-              ),
-            },
-            {
               icon: <FileText size={20} color="#ca8a04" />,
               title: 'Service Card — Structured Service Record',
               tagClass: 'tag-amber',
@@ -251,6 +229,9 @@ const CareQueryWebsite = () => {
                     to PUBLISHED by a verified steward before the record becomes visible in the tool.
                     An amber warning banner appears automatically if a record is approaching or past its
                     review date — stale-but-visible is better than hidden.
+                  </p>
+                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+                    The steward model is the answer to the most common failure mode of service registries: data that was accurate once and then quietly drifted. Every Service Card has a named steward — a specific person in the service responsible for verifying its contents on a defined review cycle. The steward's identity is part of the record because accountability and accuracy are the same thing.
                   </p>
 
                   {/* Demo service card — Warrington Falls Prevention */}
@@ -322,6 +303,50 @@ const CareQueryWebsite = () => {
 
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {['Versioned JSON', 'Review metadata', 'Steward-governed', 'Stale warning system'].map(t => (
+                      <span key={t} className="tech-pill">{t}</span>
+                    ))}
+                  </div>
+                </>
+              ),
+            },
+            {
+              icon: <CheckSquare size={20} color="#9b2335" />,
+              title: 'Gate Card — Pre-Referral Checklist',
+              tagClass: 'tag-burgundy',
+              tagLabel: 'Primary audience: practice staff',
+              borderColor: '#9b2335',
+              summary: 'A structured checklist confirming that the key administrative requirements are in place before an Advice and Guidance request is submitted.',
+              detail: (
+                <>
+                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+                    Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a
+                    clipboard-ready administrative summary — the clinician decides, the software records.
+                  </p>
+                  {/* Live example from WINFCP */}
+                  <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
+                      Example — WIN PCN FCP Service (WINFCP)
+                    </div>
+                    {[
+                      'Patient is aged 18 or over',
+                      'Patient is registered with a WIN PCN GP practice',
+                      'Patient has an MSK condition as the primary presenting problem',
+                      'Presentation is appropriate for FCP scope: soft tissue, spinal pain, arthritis, nerve symptoms, or post-surgical MSK review',
+                      'Patient does NOT have a primary diagnosis of persistent chronic pain (&gt;3 months) — if so, consider WIN PCN Pain Service instead',
+                    ].map((gate, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
+                        <div style={{ width: '16px', height: '16px', border: '2px solid #9b2335', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
+                        <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: gate }} />
+                      </div>
+                    ))}
+                    <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#fce7ef', borderRadius: '6px' }}>
+                      <span className="body-text" style={{ fontSize: '0.78rem', color: '#7f1d1d', fontWeight: 500 }}>
+                        When all prerequisites are confirmed — a clipboard summary is generated for the A&G submission.
+                      </span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {['Hard gates', 'Soft gates', 'Red flag check', 'Clipboard summary'].map(t => (
                       <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
@@ -512,7 +537,7 @@ const CareQueryWebsite = () => {
             </p>
           </div>
 
-          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
+          <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
             {[
               {
                 title: 'Clinical Contributors',
@@ -524,6 +549,11 @@ const CareQueryWebsite = () => {
                 desc: 'We are looking for 5–10 GP practices in Cheshire and Merseyside to use the tool in a real referral workflow. The goal is simple: measure whether it reduces A&G rejection rate.',
                 tag: 'GP Practice Managers · PCN Clinical Directors',
               },
+              {
+                title: 'Service Owners and Clinical Leads',
+                desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries, and a description you control — not one that lives in an out-of-date document. You also get a direct channel to update it.',
+                tag: 'Service managers · Clinical leads · MSK service administrators',
+              },
             ].map((item, i) => (
               <div key={i} className="card" style={{ padding: '1.75rem' }}>
                 <h3 className="heading" style={{ fontSize: '1.2rem', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
@@ -532,6 +562,10 @@ const CareQueryWebsite = () => {
               </div>
             ))}
           </div>
+
+          <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '640px', marginBottom: '3rem' }}>
+            Each Service Card added to Care Query increases its value for every clinician who uses it. The growth of the system depends on service owners and clinical teams contributing their operational knowledge — not as a favour to the project, but because accurate representation of their service is in their direct interest.
+          </p>
 
           <div className="card" style={{ padding: '1.75rem', maxWidth: '560px' }}>
             <h3 className="heading" style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '0.5rem' }}>Stay informed</h3>
