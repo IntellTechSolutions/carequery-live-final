@@ -135,9 +135,9 @@ const CareQueryWebsite = () => {
                 <em style={{ color: '#2563eb' }}>Done right, first time.</em>
               </h1>
               <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '2rem', fontWeight: 400 }}>
-                Care Query is a structured pre-referral tool for GPs and First Contact Practitioners.
-                It encodes accurate, versioned, locally-specific information about NHS MSK services —
-                so the right referral goes to the right service, with the right information, on the first attempt.
+                Care Query brings accurate, up-to-date information about local NHS MSK services into one place — helping clinicians send the right referral to the right service with the right information, the first time.
+                <br /><br />
+                At its core, Care Query turns local service knowledge into structured Service Cards — clear records that describe how a service works, who it is for, and how to refer to it correctly.
               </p>
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <button className="btn-primary" onClick={() => scrollToSection('what-it-does')}>
@@ -154,10 +154,10 @@ const CareQueryWebsite = () => {
                   The referral problem — in numbers
                 </div>
                 {[
-                  { stat: '2026', label: 'GP contract: Advice & Guidance mandatory and unpaid', accent: '#2563eb' },
-                  { stat: '1 JSON', label: 'Single governed data source powering all three outputs', accent: '#2563eb' },
-                  { stat: '5 services', label: 'MSK services encoded in the current PoC', accent: '#b45309' },
-                  { stat: '88', label: 'Steward verification tasks remaining before first publish', accent: '#374151' },
+                  { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept', accent: '#2563eb' },
+                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card generated from one data source', accent: '#2563eb' },
+                  { stat: '1 record', label: 'Each service described by a single governed data record', accent: '#b45309' },
+                  { stat: 'Cheshire & Merseyside', label: 'First regional pilot focus', accent: '#374151' },
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none' }}>
                     <span className="heading" style={{ fontSize: '1.6rem', color: item.accent, minWidth: '4rem', lineHeight: 1 }}>{item.stat}</span>
@@ -181,8 +181,8 @@ const CareQueryWebsite = () => {
               One governed data source.<br />Three practical formats.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              All three outputs are generated from a single versioned JSON record per service.
-              Update the source once — all outputs reflect the change.
+              All three outputs come from a single structured record describing each NHS service.
+              Update the record once — and every output stays consistent.
             </p>
           </div>
 
@@ -194,7 +194,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-blue',
               tagLabel: 'Primary audience: practice staff',
               borderColor: '#2563eb',
-              summary: 'Confirms all administrative prerequisites before an A&G submission is made. The clinician checks each gate — the software records.',
+              summary: 'A structured checklist confirming that the key administrative requirements are in place before an Advice and Guidance request is submitted.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
@@ -239,11 +239,11 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-amber',
               tagLabel: 'Primary audience: practice staff / Patients / Commissioner',
               borderColor: '#b45309',
-              summary: 'Versioned, timestamped record of an NHS MSK service. Criteria, catchment, contacts, and wait times — kept current by a named steward.',
+              summary: 'The core record describing an NHS MSK service — referral criteria, catchment, operational contacts, and expected waiting times in one place, maintained by a named steward.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Each record carries a review date and steward identity. Status must be manually set
+                    Each Service Card includes a review date and steward identity so pathway information remains visible, accountable, and current. Status must be manually set
                     to PUBLISHED by a verified steward before the record becomes visible in the tool.
                     An amber warning banner appears automatically if a record is approaching or past its
                     review date — stale-but-visible is better than hidden.
@@ -330,7 +330,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-slate',
               tagLabel: 'Primary audience: Patient',
               borderColor: '#374151',
-              summary: 'Sent to the patient after referral via Accurx SMS. Plain-language explanation of the service, what to expect, and what to do while waiting.',
+              summary: 'Shared with the patient after referral — typically via Accurx SMS — explaining the service, what may happen next, and what they can do while waiting.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
@@ -401,10 +401,7 @@ const CareQueryWebsite = () => {
               Deterministic by design.<br />No AI in the critical path.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The PoC is a dependency-free SPA — vanilla HTML, CSS, and JavaScript.
-              No framework. No build step. No server. Routing and rendering are purely deterministic,
-              governed entirely by the JSON data source. This is intentional: clinical routing decisions
-              must be auditable, not probabilistic.
+              The prototype is intentionally simple. It runs entirely in the browser and uses a structured data file as its source of truth. Routing and rendering follow clear deterministic rules so that pathway logic remains transparent and auditable.
             </p>
           </div>
 
@@ -466,7 +463,7 @@ const CareQueryWebsite = () => {
               </h2>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 Care Query does not diagnose, recommend treatment, or determine clinical appropriateness.
-                All language is governed to avoid MHRA SaMD classification. The clinician decides.
+                All language is carefully governed to ensure the tool remains administrative and does not cross into medical device classification. The clinician decides.
                 The software records. This distinction is enforced at code level, not just in documentation.
               </p>
             </div>
@@ -503,7 +500,7 @@ const CareQueryWebsite = () => {
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               The most valuable thing this project can encode is the operational knowledge that experienced MSK
               clinicians carry but rarely write down — the nuance behind the criteria, the things that make
-              a referral land well. That knowledge belongs to the people doing the work, not to any single developer.
+              a referral land well. That knowledge belongs to the clinicians and services running these pathways every day — not to any single developer.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
               If you work in MSK pathways in Cheshire and Merseyside — as an FCP, GP, physio, or service administrator —
@@ -565,8 +562,7 @@ const CareQueryWebsite = () => {
                 Get in touch
               </h2>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
-                Whether you are a clinician with a question about a specific service, a practice manager interested
-                in the pilot, or an ICB digital lead exploring the architecture — email is the right place to start.
+                Whether you are a clinician with a question about a specific pathway, a practice manager interested in the pilot, or an ICB colleague exploring the approach — email is the best place to start.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
