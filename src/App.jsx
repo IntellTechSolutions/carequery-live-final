@@ -70,6 +70,7 @@ const CareQueryWebsite = () => {
         .tag-amber { background: #fef9c3; color: #854d0e; }
         .tag-slate { background: #f3f4f6; color: #374151; }
         .tag-green { background: #dcfce7; color: #166534; }
+        .tag-burgundy { background: #fce7ef; color: #7f1d1d; }
         .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
         .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
         .btn-primary:hover { background: #1d4ed8; }
@@ -192,11 +193,11 @@ const CareQueryWebsite = () => {
           {/* Expandable output cards */}
           {[
             {
-              icon: <CheckSquare size={20} color="#2563eb" />,
+              icon: <CheckSquare size={20} color="#9b2335" />,
               title: 'Gate Card — Pre-Referral Checklist',
-              tagClass: 'tag-blue',
+              tagClass: 'tag-burgundy',
               tagLabel: 'Primary audience: practice staff',
-              borderColor: '#2563eb',
+              borderColor: '#9b2335',
               summary: 'A structured checklist confirming that the key administrative requirements are in place before an Advice and Guidance request is submitted.',
               detail: (
                 <>
@@ -218,12 +219,12 @@ const CareQueryWebsite = () => {
                       'Patient does NOT have a primary diagnosis of persistent chronic pain (&gt;3 months) — if so, consider WIN PCN Pain Service instead',
                     ].map((gate, i) => (
                       <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
-                        <div style={{ width: '16px', height: '16px', border: '2px solid #2563eb', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
+                        <div style={{ width: '16px', height: '16px', border: '2px solid #9b2335', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
                         <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: gate }} />
                       </div>
                     ))}
-                    <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#dbeafe', borderRadius: '6px' }}>
-                      <span className="body-text" style={{ fontSize: '0.78rem', color: '#1e40af', fontWeight: 500 }}>
+                    <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#fce7ef', borderRadius: '6px' }}>
+                      <span className="body-text" style={{ fontSize: '0.78rem', color: '#7f1d1d', fontWeight: 500 }}>
                         When all prerequisites are confirmed — a clipboard summary is generated for the A&G submission.
                       </span>
                     </div>
