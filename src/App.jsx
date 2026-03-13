@@ -63,12 +63,13 @@ const CareQueryWebsite = () => {
         .nav-link.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
         .card { background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
         .output-card { border-left: 4px solid #2563eb; padding: 1.5rem 1.75rem; background: #fff; border-radius: 0 8px 8px 0; border-top: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
-        .output-card.amber { border-left-color: #b45309; }
-        .output-card.slate { border-left-color: #374151; }
+        .output-card.amber { border-left-color: #ca8a04; }
+        .output-card.slate { border-left-color: #16a34a; }
         .tag { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
         .tag-blue { background: #dbeafe; color: #1e40af; }
-        .tag-amber { background: #fef3c7; color: #92400e; }
+        .tag-amber { background: #fef9c3; color: #854d0e; }
         .tag-slate { background: #f3f4f6; color: #374151; }
+        .tag-green { background: #dcfce7; color: #166534; }
         .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
         .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
         .btn-primary:hover { background: #1d4ed8; }
@@ -153,17 +154,19 @@ const CareQueryWebsite = () => {
                 <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
                   The referral problem — in numbers
                 </div>
-                {[
-                  { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept', accent: '#2563eb' },
-                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card generated from one data source', accent: '#2563eb' },
-                  { stat: '1 record', label: 'Each service described by a single governed data record', accent: '#b45309' },
-                  { stat: 'Cheshire & Merseyside', label: 'First regional pilot focus', accent: '#374151' },
-                ].map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none' }}>
-                    <span className="heading" style={{ fontSize: '1.6rem', color: item.accent, minWidth: '4rem', lineHeight: 1 }}>{item.stat}</span>
-                    <span className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400 }}>{item.label}</span>
-                  </div>
-                ))}
+                <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
+                  {[
+                    { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
+                    { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card generated from one data source' },
+                    { stat: '1 record', label: 'Each service described by a single governed data record' },
+                    { stat: 'Cheshire & Merseyside', label: 'First regional pilot focus' },
+                  ].map((item, i) => (
+                    <React.Fragment key={i}>
+                      <span className="heading" style={{ fontSize: '1.35rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
+                      <span className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
+                    </React.Fragment>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -234,11 +237,11 @@ const CareQueryWebsite = () => {
               ),
             },
             {
-              icon: <FileText size={20} color="#b45309" />,
+              icon: <FileText size={20} color="#ca8a04" />,
               title: 'Service Card — Structured Service Record',
               tagClass: 'tag-amber',
               tagLabel: 'Primary audience: practice staff / Patients / Commissioner',
-              borderColor: '#b45309',
+              borderColor: '#ca8a04',
               summary: 'The core record describing an NHS MSK service — referral criteria, catchment, operational contacts, and expected waiting times in one place, maintained by a named steward.',
               detail: (
                 <>
@@ -287,7 +290,7 @@ const CareQueryWebsite = () => {
                         'No acute fracture or unstable cardiovascular condition (stabilise before referral)',
                       ].map((criterion, i) => (
                         <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.35rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
-                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#b45309', flexShrink: 0, marginTop: '0.45rem' }} />
+                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#ca8a04', flexShrink: 0, marginTop: '0.45rem' }} />
                           <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }}>{criterion}</span>
                         </div>
                       ))}
@@ -302,7 +305,7 @@ const CareQueryWebsite = () => {
                       ].map((item, i) => (
                         <div key={i} style={{ padding: '0.85rem 1.25rem', borderRight: i < 2 ? '1px solid #e5e7eb' : 'none' }}>
                           <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.3rem' }}>{item.label}</div>
-                          <div className="body-text" style={{ fontSize: '0.8rem', color: item.value.includes('STEWARD') ? '#b45309' : '#111827', fontWeight: 400, lineHeight: 1.4 }}>{item.value}</div>
+                          <div className="body-text" style={{ fontSize: '0.8rem', color: item.value.includes('STEWARD') ? '#ca8a04' : '#111827', fontWeight: 400, lineHeight: 1.4 }}>{item.value}</div>
                         </div>
                       ))}
                     </div>
@@ -325,11 +328,11 @@ const CareQueryWebsite = () => {
               ),
             },
             {
-              icon: <Users size={20} color="#374151" />,
+              icon: <Users size={20} color="#16a34a" />,
               title: 'Journey Card — Patient Information Summary',
-              tagClass: 'tag-slate',
+              tagClass: 'tag-green',
               tagLabel: 'Primary audience: Patient',
-              borderColor: '#374151',
+              borderColor: '#16a34a',
               summary: 'Shared with the patient after referral — typically via Accurx SMS — explaining the service, what may happen next, and what they can do while waiting.',
               detail: (
                 <>
