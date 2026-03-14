@@ -6,6 +6,7 @@ const CareQueryWebsite = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [scopeOpen, setScopeOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,15 +135,13 @@ const CareQueryWebsite = () => {
               </div>
               <h1 className="heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
                 NHS MSK Referrals.<br />
-                <em style={{ color: '#2563eb' }}>Done right, first time.</em>
+                <em style={{ color: '#2563eb' }}>A simpler path.</em>
               </h1>
-              <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1rem', fontWeight: 400 }}>
-                Care Query brings accurate, up-to-date MSK pathway knowledge into one place — giving every clinician who initiates a referral the same operational intelligence that currently lives only in the heads of people who've been doing it for years.
-                <br /><br />
-                The primary output is the <strong>Gate Card</strong> — a structured pre-referral checklist that confirms the right things are in place before an Advice and Guidance request leaves the practice.
+              <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.25rem', fontWeight: 400 }}>
+                Accurate, up-to-date MSK pathway information — in one place, for every clinician who needs to refer.
               </p>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#6b7280', marginBottom: '2rem', fontWeight: 400, borderLeft: '3px solid #9b2335', paddingLeft: '1rem' }}>
-                A&G is mandatory from 1 April 2026 — and the £20 per-request payment has been removed. A returned submission now costs time without compensation. The Gate Card is not another task. It is protection: your referral will not come back for reasons that could have been caught before it was sent.
+                A&G is mandatory from 1 April 2026. The £20 per-request payment is gone. A returned submission now costs time without compensation. The <strong>Gate Card</strong> is not another task — it is protection: your referral will not come back for reasons that could have been caught before it was sent.
               </p>
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <button className="btn-primary" onClick={() => scrollToSection('what-it-does')}>
@@ -184,21 +183,38 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ maxWidth: '720px' }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Current Scope</span>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              Care Query is currently a proof of concept focused on musculoskeletal referral pathways within Cheshire and Merseyside Integrated Care Board. Five MSK services are encoded in the prototype. The tool is not yet publicly available. The next milestone is a small pilot with 5–10 GP practices to test whether the approach demonstrably reduces Advice and Guidance rejection rates.
-            </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              Care Query does not require IT integration, procurement approval, or organisational sign-off to be useful. A clinician can open it in a browser between consultations today. The value is immediate and independent. Formal adoption by a practice, PCN, or ICB extends that value — but it is not a prerequisite for it.
-            </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              There is currently no national tool that does what the Gate Card does. NHS England built monitoring infrastructure, the referral pipe, and waiting list analytics. Nobody built the structured pre-submission checklist for the clinician at the point of referral. Strategic research confirmed in March 2026 that no ICB, trust, or commercial product fills this gap.
-            </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              If the pilot demonstrates value, the model can be extended to additional services and potentially other regions.
-            </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, borderLeft: '3px solid #d1d5db', paddingLeft: '1rem' }}>
-              The first regional pilot focus is <strong>Cheshire and Merseyside ICB</strong>. C&M was selected because it is under NHS England performance management, the Health Innovation North West Coast infrastructure is directly accessible, and the A&G mandate creates immediate, measurable pressure on every practice in the footprint.
-            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1rem' }}>
+              {[
+                { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
+                { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
+                { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — measure A&G rejection rate reduction' },
+                { label: 'Access', value: 'Works in any browser today — no IT integration, procurement, or sign-off required' },
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
+                  <span className="body-text" style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: '#9ca3af', flexShrink: 0, minWidth: '90px' }}>{item.label}</span>
+                  <span className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.5 }}>{item.value}</span>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => setScopeOpen(!scopeOpen)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0', marginBottom: scopeOpen ? '1rem' : 0 }}
+            >
+              <span className="body-text" style={{ fontSize: '0.82rem', color: '#2563eb', fontWeight: 500 }}>{scopeOpen ? 'Less detail −' : 'More detail +'}</span>
+            </button>
+            {scopeOpen && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', borderLeft: '3px solid #e5e7eb', paddingLeft: '1rem' }}>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                  No national tool currently does what the Gate Card does. NHS England built the monitoring infrastructure, the referral pipe, and the waiting list analytics. Nobody built the structured pre-submission checklist for the clinician at the point of referral. Strategic research confirmed in March 2026 that no ICB, trust, or commercial product fills this gap.
+                </p>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                  If the pilot demonstrates value, the model can be extended to additional services and other regions.
+                </p>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                  <strong>Why Cheshire and Merseyside first:</strong> C&M ICB is under NHS England performance management, the Health Innovation North West Coast infrastructure is directly accessible, and the A&G mandate creates immediate, measurable pressure on every practice in the footprint.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -515,29 +531,29 @@ const CareQueryWebsite = () => {
             <div>
               <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Regulatory Position</span>
               <h2 className="heading" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-                An information tool.<br />The clinician decides.
+                Your judgment.<br />Our structure.
               </h2>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                Care Query presents structured service information and generates an administrative pre-referral checklist. It records what the clinician has confirmed. The clinical decision — whether to refer, to whom, and on what basis — belongs to the clinician throughout.
+                Clinical judgment comes from you — built over years of training and practice. Care Query does not second-guess it. What it does is make sure the administrative groundwork is solid before the submission leaves, so that your referral decision reaches the service it was meant for.
               </p>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                Every word in the tool is written to describe an administrative step, not a clinical recommendation. This is consistent with how the tool is designed, built, and used.
+                The Gate Card surfaces criteria, catchment, and investigation requirements. You confirm what applies. The software records it. Nothing in the tool interprets symptoms, recommends a course of action, or suggests a diagnosis. It is an information layer — yours to use, on your terms.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
                 { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Clinical risk management documentation in place and maintained throughout development.' },
-                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Registered', desc: 'Registered at PoC stage — free, no evidence required. Creates a documented national engagement record that predates the pilot.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework', status: 'Aligned', desc: 'The PoC evaluation is designed to generate evidence meeting NICE standards for digital health technologies. Building the evidence base now.' },
-                { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Applying', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application being prepared pending re-tender outcome.' },
-                { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Engaging', desc: 'Initial engagement underway. HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools aligned with elective recovery.' },
+                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Planned', desc: 'Free registration at PoC stage — no evidence required. Planned to create a documented national engagement record before the pilot opens.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework', status: 'Planned', desc: 'PoC evaluation will be designed to generate evidence meeting NICE standards for digital health technologies.' },
+                { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
+                { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Planned', desc: 'HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools. Engagement planned as part of the pilot phase.' },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: '1rem', padding: '1rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                   <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{item.icon}</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
                       <div className="body-text" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827' }}>{item.label}</div>
-                      <span style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', padding: '0.15rem 0.5rem', borderRadius: '9999px', background: ['Active', 'Registered'].includes(item.status) ? '#dcfce7' : '#eff6ff', color: ['Active', 'Registered'].includes(item.status) ? '#166534' : '#1e40af' }}>{item.status}</span>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', padding: '0.15rem 0.5rem', borderRadius: '9999px', background: item.status === 'Active' ? '#dcfce7' : '#f3f4f6', color: item.status === 'Active' ? '#166534' : '#6b7280' }}>{item.status}</span>
                     </div>
                     <div className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>{item.desc}</div>
                   </div>
