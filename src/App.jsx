@@ -225,7 +225,7 @@ const CareQueryWebsite = () => {
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Each Service Card includes a review date and steward identity so pathway information remains visible, accountable, and current. Every field belongs to one of two layers: verified public truth (sourced from published documents and direct written confirmation) or tacit operational intelligence (attributed professional opinion from experienced clinical referrers). Status must be manually set
+                    Each Service Card includes a review date and steward identity so pathway information remains visible, accountable, and current. Status must be manually set
                     to PUBLISHED by a verified steward before the record becomes visible in the tool.
                     An amber warning banner appears automatically if a record is approaching or past its
                     review date — stale-but-visible is better than hidden.
@@ -315,7 +315,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-burgundy',
               tagLabel: 'Primary audience: practice staff',
               borderColor: '#9b2335',
-              summary: 'A structured checklist confirming that the key administrative requirements are in place before an Advice and Guidance request is submitted. The 2026 GP contract makes A&G mandatory and removes reimbursement for avoidable rejections — a returned submission now costs time that stretched clinical teams cannot afford. The Gate Card removes that uncertainty at the point of submission, not after rejection.',
+              summary: 'A structured checklist confirming that the key administrative requirements are in place before an Advice and Guidance request is submitted.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
@@ -365,7 +365,6 @@ const CareQueryWebsite = () => {
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     No patient data is collected or stored. The card opens a static page at carequery.app —
                     no login, no account, no tracking. The acknowledge statement sets the tone from the first line.
-                    Because the Journey Card pre-emptively answers the questions patients would otherwise call the practice to ask — wait times, what to expect, what to do in the meantime — it suppresses callback volume for reception staff. This is a direct practice benefit, not just a patient one.
                   </p>
                   {/* Live example from WINFCP journey.acknowledge */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
