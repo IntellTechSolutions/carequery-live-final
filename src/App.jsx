@@ -163,12 +163,11 @@ const CareQueryWebsite = () => {
                     { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
                     { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
                     { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
-                    { stat: 'Cheshire & Merseyside', label: 'First regional pilot focus — C&M ICB' },
                     { stat: '1 Apr 2026', label: 'Mandatory A&G begins under the 2026 GP contract — without the £20 per-request payment' },
                   ].map((item, i) => (
                     <React.Fragment key={i}>
-                      <span className="heading" style={{ fontSize: '1.35rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.75rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
-                      <span className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.75rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
+                      <span className="heading" style={{ fontSize: '1.35rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
+                      <span className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
                     </React.Fragment>
                   ))}
                 </div>
@@ -194,8 +193,11 @@ const CareQueryWebsite = () => {
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
               There is currently no national tool that does what the Gate Card does. NHS England built monitoring infrastructure, the referral pipe, and waiting list analytics. Nobody built the structured pre-submission checklist for the clinician at the point of referral. Strategic research confirmed in March 2026 that no ICB, trust, or commercial product fills this gap.
             </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
               If the pilot demonstrates value, the model can be extended to additional services and potentially other regions.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, borderLeft: '3px solid #d1d5db', paddingLeft: '1rem' }}>
+              The first regional pilot focus is <strong>Cheshire and Merseyside ICB</strong>. C&M was selected because it is under NHS England performance management, the Health Innovation North West Coast infrastructure is directly accessible, and the A&G mandate creates immediate, measurable pressure on every practice in the footprint.
             </p>
           </div>
         </div>
@@ -212,7 +214,7 @@ const CareQueryWebsite = () => {
               The Gate Card is where<br />clinical action happens.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              Each service is described in a single <strong>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The Gate Card is the primary interaction for any clinician at the point of referral. The Service Card is the structured reference view. The Journey Card goes to the patient after referral proceeds.
+              Each service has one governed data record. Every output — checklist, reference view, patient summary — comes from that single source. When the record is updated, all three reflect the change.
             </p>
           </div>
 
@@ -233,21 +235,23 @@ const CareQueryWebsite = () => {
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     The most common reasons MSK A&G is returned — missing imaging, wrong catchment, insufficient clinical information, incomplete conservative management — are all preventable. The Gate Card makes them visible before the submission goes, not three weeks after it bounces back.
                   </p>
-                  {/* Live example from WINFCP */}
+                  {/* Illustrative example — Community MSK Spinal Assessment */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
                     <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                      Example — WIN PCN FCP Service (WINFCP)
+                      Illustrative example — Community MSK Spinal Assessment Service
                     </div>
                     {[
                       'Patient is aged 18 or over',
-                      'Patient is registered with a WIN PCN GP practice',
-                      'Patient has an MSK condition as the primary presenting problem',
-                      'Presentation is appropriate for FCP scope: soft tissue, spinal pain, arthritis, nerve symptoms, or post-surgical MSK review',
-                      'Patient does NOT have a primary diagnosis of persistent chronic pain (&gt;3 months) — if so, consider WIN PCN Pain Service instead',
+                      'Patient is registered with a GP practice within the service catchment area',
+                      'Primary complaint is spinal pain — cervical, thoracic, or lumbar — as the presenting problem',
+                      'Conservative management has been attempted: minimum 6 weeks of physiotherapy, structured exercise, or self-management programme',
+                      'Relevant imaging completed where clinically indicated — spinal X-ray or MRI for suspected nerve root involvement or red flag exclusion',
+                      'Serious spinal pathology screened and excluded: cauda equina symptoms, progressive neurological deficit, unexplained weight loss, history of malignancy, suspected infection or fracture',
+                      'Patient is NOT on an acute surgical pathway — no post-operative review within 12 weeks, no active cauda equina presentation',
                     ].map((gate, i) => (
-                      <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
+                      <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 6 ? '1px solid #f3f4f6' : 'none' }}>
                         <div style={{ width: '16px', height: '16px', border: '2px solid #9b2335', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
-                        <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: gate }} />
+                        <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }}>{gate}</span>
                       </div>
                     ))}
                     <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#fce7ef', borderRadius: '6px' }}>
@@ -357,13 +361,37 @@ const CareQueryWebsite = () => {
                     The Journey Card is the smallest of the three outputs and the simplest: plain language, no clinical jargon, no login, no data collection. It opens a static page at carequery.app. Because it pre-emptively answers wait time, next-steps, and self-management questions, it suppresses the callbacks that follow most MSK referrals. That is a direct benefit to reception staff, not just the patient.
                   </p>
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
-                      Example — WIN PCN FCP Service, opening statement
+                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
+                      Illustrative example — Community Rheumatology Service
                     </div>
-                    <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#374151', fontStyle: 'italic', fontWeight: 400 }}>
-                      "We know that waiting to be seen for a joint or muscle problem can be frustrating,
-                      especially when you are in pain. Here is what is happening with your referral."
-                    </p>
+                    {[
+                      {
+                        heading: 'Your referral',
+                        text: 'Your GP or physiotherapist has referred you to the Community Rheumatology Service. This is a specialist service for joint, muscle, and connective tissue problems that need a more detailed assessment. We know that waiting to be seen can be frustrating, especially when you are in pain. Here is what is happening and what you can do in the meantime.',
+                      },
+                      {
+                        heading: 'What happens next',
+                        text: 'Your referral has been sent to the service. They will review it and write to you with an appointment date. Typical waiting times for an initial assessment are currently around 12–18 weeks, though this can vary. You do not need to contact your GP surgery — your referral is with the service.',
+                      },
+                      {
+                        heading: 'While you are waiting',
+                        text: 'Staying as active as you comfortably can is usually helpful for joint and muscle conditions. If your symptoms change significantly — for example, new swelling in multiple joints, unexplained weight loss, fever alongside joint pain, or symptoms that are rapidly getting worse — contact your GP practice. For pain management while you wait, your GP or pharmacist can advise on suitable options.',
+                      },
+                      {
+                        heading: 'Your first appointment',
+                        text: 'A rheumatologist or specialist nurse will ask about your symptoms, how they affect your daily life, and review any investigations already done. They may request blood tests or imaging as part of the assessment. Please bring a list of your current medications.',
+                      },
+                    ].map((section, i) => (
+                      <div key={i} style={{ marginBottom: i < 3 ? '0.85rem' : 0, paddingBottom: i < 3 ? '0.85rem' : 0, borderBottom: i < 3 ? '1px solid #e5e7eb' : 'none' }}>
+                        <div className="body-text" style={{ fontSize: '0.72rem', fontWeight: 700, color: '#374151', marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{section.heading}</div>
+                        <p className="body-text" style={{ fontSize: '0.82rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400 }}>{section.text}</p>
+                      </div>
+                    ))}
+                    <div style={{ marginTop: '0.75rem', padding: '0.5rem 0.75rem', background: '#dcfce7', borderRadius: '6px' }}>
+                      <span className="body-text" style={{ fontSize: '0.75rem', color: '#166534', fontWeight: 500 }}>
+                        No login · No data collected · Opens in any browser via a link sent by your clinician
+                      </span>
+                    </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {['Patient-facing', 'Accurx-compatible', 'No data collection', 'Callback suppression'].map(t => (
@@ -405,6 +433,13 @@ const CareQueryWebsite = () => {
               </div>
             );
           })}
+
+          {/* Architecture note — below all three cards */}
+          <div style={{ marginTop: '2rem', padding: '1.25rem 1.5rem', background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
+            <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#6b7280', fontWeight: 400 }}>
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The Gate Card is the primary interaction for any clinician at the point of referral. The Service Card is the structured reference view. The Journey Card goes to the patient after referral proceeds.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -416,10 +451,13 @@ const CareQueryWebsite = () => {
           <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-              Deterministic by design.<br />No AI in the critical path.
+              Simple by design.<br />No black box, no AI, no guesswork.
             </h2>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+              <strong>For practice staff:</strong> Care Query runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it.
+            </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The prototype is intentionally simple. It runs entirely in the browser and uses a structured data file as its source of truth. Routing and rendering follow clear deterministic rules so that pathway logic remains transparent and auditable.
+              <strong>For commissioners and clinical leads:</strong> The tool reads a single structured data file and renders outputs from it. What you see is exactly what is in that file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source.
             </p>
           </div>
 
@@ -477,26 +515,30 @@ const CareQueryWebsite = () => {
             <div>
               <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Regulatory Position</span>
               <h2 className="heading" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-                Administrative tool.<br />Not a clinical decision support system.
+                An information tool.<br />The clinician decides.
               </h2>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+                Care Query presents structured service information and generates an administrative pre-referral checklist. It records what the clinician has confirmed. The clinical decision — whether to refer, to whom, and on what basis — belongs to the clinician throughout.
+              </p>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                Care Query does not diagnose, recommend treatment, or determine clinical appropriateness.
-                All language is carefully governed to ensure the tool remains administrative and does not cross into medical device classification. The clinician decides.
-                The software records. This distinction is enforced at code level, not just in documentation.
+                Every word in the tool is written to describe an administrative step, not a clinical recommendation. This is consistent with how the tool is designed, built, and used.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
-                { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129', desc: 'Clinical Safety Officer formally assigned. Clinical risk management documentation maintained.' },
-                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', desc: 'Registered. Free registration at PoC stage — creates a documented national engagement record before the pilot data exists.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework', desc: 'PoC evaluation designed to generate evidence meeting NICE requirements for digital health technologies.' },
-                { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', desc: 'Contract re-tendered for 2026–2031. New delivery from 1 April 2026. FCPs eligible. Application pending re-tender outcome.' },
-                { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', desc: 'Initial engagement underway. Covers the Cheshire and Merseyside ICB footprint — supports PoC-stage clinical tools aligned with elective recovery.' },
+                { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Clinical risk management documentation in place and maintained throughout development.' },
+                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Registered', desc: 'Registered at PoC stage — free, no evidence required. Creates a documented national engagement record that predates the pilot.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework', status: 'Aligned', desc: 'The PoC evaluation is designed to generate evidence meeting NICE standards for digital health technologies. Building the evidence base now.' },
+                { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Applying', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application being prepared pending re-tender outcome.' },
+                { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Engaging', desc: 'Initial engagement underway. HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools aligned with elective recovery.' },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: '1rem', padding: '1rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                   <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{item.icon}</div>
-                  <div>
-                    <div className="body-text" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827', marginBottom: '0.2rem' }}>{item.label}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
+                      <div className="body-text" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827' }}>{item.label}</div>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', padding: '0.15rem 0.5rem', borderRadius: '9999px', background: ['Active', 'Registered'].includes(item.status) ? '#dcfce7' : '#eff6ff', color: ['Active', 'Registered'].includes(item.status) ? '#166534' : '#1e40af' }}>{item.status}</span>
+                    </div>
                     <div className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>{item.desc}</div>
                   </div>
                 </div>
@@ -517,13 +559,10 @@ const CareQueryWebsite = () => {
               The knowledge is yours.<br />Care Query is just the structure.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The most valuable thing this project can encode is the operational knowledge that experienced MSK
-              clinicians carry but rarely write down — the nuance behind the criteria, the things that make
-              a referral land well. That knowledge belongs to the clinicians and services running these pathways every day — not to any single developer.
+              The most valuable thing this project can encode is the operational knowledge that experienced MSK clinicians and administrative staff carry but rarely write down — the nuance behind the criteria, the things that make a referral land well. That knowledge belongs to the clinicians and services running these pathways every day. Every voice helps.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
-              If you work in MSK pathways in Cheshire and Merseyside — as a GP, Physician Associate, Paramedic, ACP, FCP, physio, or service administrator —
-              and you recognise this problem, a conversation is enough to start. No commitment required.
+              If you work in MSK pathways in Cheshire and Merseyside — as a GP, Physician Associate, Paramedic, ACP, FCP, physio, or service administrator — and you recognise this problem, a conversation is enough to start. No commitment required.
             </p>
           </div>
 
@@ -554,7 +593,7 @@ const CareQueryWebsite = () => {
           </div>
 
           <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '640px', marginBottom: '3rem' }}>
-            Each Service Card added to Care Query increases its value for every clinician who uses it. The growth of the system depends on service owners and clinical teams contributing their operational knowledge — not as a favour to the project, but because accurate representation of their service is in their direct interest.
+            Each service added to Care Query increases its value for every clinician who uses it. The system grows through the contributions of service owners and clinical teams — not as a favour to the project, but because an accurate, current description of their service is directly in their interest: fewer inappropriate referrals, fewer phone calls from practices, fewer returns through A&G.
           </p>
 
           <div className="card" style={{ padding: '1.75rem', maxWidth: '560px' }}>
@@ -599,8 +638,8 @@ const CareQueryWebsite = () => {
                   </div>
                   <div>
                     <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Email</div>
-                    <a href="mailto:info@intelltechsolutions.co.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
-                      info@intelltechsolutions.co.uk
+                    <a href="mailto:my@carequery.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                      my@carequery.uk
                     </a>
                   </div>
                 </div>
@@ -624,10 +663,10 @@ const CareQueryWebsite = () => {
                   </div>
                   <div>
                     <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>The Tool</div>
-                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="body-text" style={{ color: '#111827', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
                       carequery.app
                     </a>
-                    <span className="body-text" style={{ fontSize: '0.82rem', color: '#9ca3af', marginLeft: '0.5rem' }}>— the live PoC (DRAFT, not yet public)</span>
+                    <span className="body-text" style={{ fontSize: '0.82rem', color: '#374151', marginLeft: '0.5rem', fontWeight: 500 }}>— the live PoC (DRAFT, not yet public)</span>
                   </div>
                 </div>
               </div>
