@@ -82,6 +82,7 @@ const CareQueryWebsite = () => {
         .step-number { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 3rem; color: #dbeafe; line-height: 1; }
         .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
         .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+        .brand { color: #2563eb; font-weight: 700; }
         @media (max-width: 768px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .three-col { grid-template-columns: 1fr !important; }
@@ -139,12 +140,15 @@ const CareQueryWebsite = () => {
             <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.25rem', fontWeight: 400 }}>
               Accurate, up-to-date MSK pathway information — in one place, for every clinician who needs to refer.
             </p>
-            <div style={{ borderLeft: '3px solid #9b2335', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
                 The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                Care Query generates three pieces of information called cards, each built from the same underlying service record.
+                <span className="brand">Care Query</span> surfaces those requirements before the referral is sent, so clinicians and services are working from the same information.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                <span className="brand">Care Query</span> generates three pieces of information called cards.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 The <strong style={{ color: '#9b2335' }}>Gate Card</strong> brings operational requirements to the surface before the submission goes — a structured pre-referral check so the referring clinician and the receiving service are working from the same picture.
@@ -195,6 +199,9 @@ const CareQueryWebsite = () => {
                 </div>
               ))}
             </div>
+            <p className="body-text" style={{ fontSize: '0.78rem', color: '#6b7280', fontWeight: 400, marginBottom: '1rem', lineHeight: 1.5 }}>
+              Data source: Encoded from publicly available referral guidance and verified with service teams where possible.
+            </p>
             <button
               onClick={() => setScopeOpen(!scopeOpen)}
               style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0', marginBottom: scopeOpen ? '1.25rem' : 0 }}
@@ -228,18 +235,18 @@ const CareQueryWebsite = () => {
             <div>
               <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Three Clinical Outputs</span>
               <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', letterSpacing: '-0.01em' }}>
-                The Gate Card is where<br />clinical action happens.
+                One governed record.<br />Three practical outputs.
               </h2>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The Gate Card is a structured pre-referral checklist for a specific NHS service. It brings together the referral criteria, catchment rules, and required investigations needed for a referral to be accepted — so clinicians and administrative teams can confirm the essential requirements are met before submitting.
+                Referral pathways are rarely clinically complex — but they are operationally complex. The eligibility criteria, catchment rules, required investigations, and administrative expectations vary between services, change over time, and are rarely documented in one place. <span className="brand">Care Query</span> focuses on making those operational requirements visible at the point of referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The aim is straightforward: reduce rejected referrals, avoid unnecessary back-and-forth, and help the referral reach the correct service the first time. This is useful on both sides of the pathway — for the clinician submitting and the service receiving.
+                The Gate Card is a structured pre-referral checklist confirming that the key requirements are in place before an Advice and Guidance request is submitted. The Service Card is the governed reference view — criteria, catchment, contacts, and expected pathway. The Journey Card is the patient-facing summary shared after referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                Each service has one governed data record. Every output — checklist, reference view, and patient summary — is generated from that single source. When the record is updated, all three outputs automatically reflect the change. This allows services and clinicians to contribute improvements while keeping the information consistent across the pathway.
+                Each service has one governed data record. Every output — checklist, reference view, and patient summary — is generated from that single source. When the record is updated, all three outputs automatically reflect the change.
               </p>
             </div>
           </div>
@@ -252,7 +259,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-burgundy',
               tagLabel: 'Primary output — GPs · Physician Associates · Paramedics · ACPs · FCPs',
               borderColor: '#9b2335',
-              summary: 'A&G is mandatory from 1 April 2026. The £20 per-request payment is gone. A returned submission now costs time without compensation. The Gate Card is your pre-flight check — a structured checklist confirming the administrative and pathway requirements are in place before the submission leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
+              summary: 'With A&G mandatory from 1 April 2026, returned submissions create additional work for practices without adding value to patient care. The Gate Card is a structured pre-referral check — confirming the administrative and pathway requirements are in place before the submission leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
@@ -484,7 +491,10 @@ const CareQueryWebsite = () => {
                 Simple by design.<br />No black box, no AI, no guesswork.
               </h2>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                <strong>For practice staff:</strong> Care Query runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it.
+                NHS referral pathways are operationally complex but rarely documented in a structured, machine-readable way. <span className="brand">Care Query</span> encodes that information into a single governed record per service — making it available at the point of referral in a consistent, auditable format.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+                <strong>For practice staff:</strong> <span className="brand">Care Query</span> runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 <strong>For commissioners and clinical leads:</strong> The tool reads a single structured data file and renders outputs from it. What you see is exactly what is in that file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source.
@@ -517,7 +527,7 @@ const CareQueryWebsite = () => {
                 step: '01',
                 title: 'Governed Data Source',
                 body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are DRAFT until a steward manually verifies and publishes.',
-                pills: ['JSON', 'Kebab-case contract', 'DRAFT / PUBLISHED states'],
+                pills: ['JSON', 'Structured JSON schema', 'DRAFT / PUBLISHED states'],
               },
               {
                 step: '02',
@@ -568,13 +578,13 @@ const CareQueryWebsite = () => {
                 Your judgment.<br />Our structure.
               </h2>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                Clinical judgment comes from you — built over years of training and practice. Care Query does not second-guess it. What it does is make sure the administrative groundwork is solid before the submission leaves, so that your referral decision reaches the service it was meant for.
+                Clinical judgment comes from you — built over years of training and practice. <span className="brand">Care Query</span> does not second-guess it. What it does is make sure the administrative groundwork is solid before the submission leaves, so that your referral decision reaches the service it was meant for.
               </p>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                The Gate Card surfaces criteria, catchment, and investigation requirements. You confirm what applies. The software records it. Nothing in the tool interprets symptoms, recommends a course of action, or suggests a diagnosis. It is an information layer — yours to use, on your terms.
+                <span className="brand">Care Query</span> does not provide diagnosis, triage, or clinical decision support. This lies in the hands of clinicians. The Gate Card surfaces criteria, catchment, and investigation requirements. You confirm what applies. The software records it.
               </p>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                Care Query structures referral requirements that already exist across NHS services — making them visible at the point the referral is prepared. The clinical decision remains entirely yours; the platform exists only to support the administrative accuracy around it.
+                <span className="brand">Care Query</span> structures referral requirements that already exist across NHS services — making them visible at the point the referral is prepared. The clinical decision remains entirely yours; the platform exists only to support the administrative accuracy around it.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -607,19 +617,19 @@ const CareQueryWebsite = () => {
       <section id="get-involved" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ maxWidth: '760px', marginBottom: '3rem', display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-            <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
-              <Handshake size={30} color="#16a34a" />
+            <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
+              <Handshake size={30} color="#2563eb" />
             </div>
             <div style={{ flex: 1 }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-              The knowledge is yours.<br />Care Query is just the structure.
+              The knowledge is yours.<br /><span className="brand">Care Query</span> is just the structure.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day. Every voice helps.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
-              If you work anywhere along NHS referral pathways — as a GP, nurse, allied health professional, paramedic, ACP, physician associate, or service administrator — and recognise this problem, a conversation is enough to start. No commitment required.
+              If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
             </p>
             </div>
           </div>
@@ -651,7 +661,7 @@ const CareQueryWebsite = () => {
           </div>
 
           <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '640px', marginBottom: '3rem' }}>
-            Each service added to Care Query increases its value for every clinician who uses it. The system grows through the contributions of service owners and clinical teams — not as a favour to the project, but because an accurate, current description of their service is directly in their interest: fewer inappropriate referrals, fewer phone calls from practices, fewer returns through A&G.
+            Each service added to <span className="brand">Care Query</span> increases its value for every clinician who uses it. The system grows through the contributions of service owners and clinical teams — not as a favour to the project, but because an accurate, current description of their service is directly in their interest: fewer inappropriate referrals, fewer phone calls from practices, fewer returns through A&G.
           </p>
 
           <div className="card" style={{ padding: '1.75rem', maxWidth: '560px' }}>
@@ -721,7 +731,7 @@ const CareQueryWebsite = () => {
                   </div>
                   <div>
                     <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>The Tool</div>
-                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="body-text" style={{ color: '#111827', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
+                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="body-text" style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
                       carequery.app
                     </a>
                     <span className="body-text" style={{ fontSize: '0.82rem', color: '#374151', marginLeft: '0.5rem', fontWeight: 500 }}>— the live PoC (DRAFT, not yet public)</span>
@@ -734,7 +744,7 @@ const CareQueryWebsite = () => {
                 About this project
               </div>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                Care Query is developed by a practising NHS physiotherapist and First Contact Practitioner through
+                <span className="brand">Care Query</span> is developed by a practising NHS physiotherapist and First Contact Practitioner through
                 Intelligent Technology Solutions Limited — a sole-director private limited company operating entirely
                 independently of any NHS employer.
               </p>
@@ -743,7 +753,7 @@ const CareQueryWebsite = () => {
                 service information only. No NHS patient data is collected, stored, or processed at any stage.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                Care Query is an independent innovation developed in line with NHS digital standards.
+                <span className="brand">Care Query</span> is an independent innovation developed in line with NHS digital standards.
                 It is not endorsed by, affiliated with, or developed on behalf of any NHS organisation.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
