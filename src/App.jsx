@@ -127,50 +127,28 @@ const CareQueryWebsite = () => {
       {/* Hero */}
       <section id="home" style={{ paddingTop: '64px', minHeight: '100vh', display: 'flex', alignItems: 'center', background: 'linear-gradient(160deg, #ffffff 40%, #eff6ff 100%)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 1.5rem 4rem' }}>
-          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
-            <div>
-              <div style={{ marginBottom: '1.5rem' }}>
-                <span className="tag tag-poc" style={{ marginRight: '0.5rem' }}>Proof of Concept — 2026</span>
-                <span className="tag tag-blue">Cheshire & Merseyside ICB</span>
-              </div>
-              <h1 className="heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
-                NHS MSK Referrals.<br />
-                <em style={{ color: '#2563eb' }}>A simpler path.</em>
-              </h1>
-              <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.25rem', fontWeight: 400 }}>
-                Accurate, up-to-date MSK pathway information — in one place, for every clinician who needs to refer.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', marginBottom: '2rem', fontWeight: 400, borderLeft: '3px solid #9b2335', paddingLeft: '1rem' }}>
-                A&G is mandatory from 1 April 2026. The £20 per-request payment is gone. A returned submission now costs time without compensation. The <strong>Gate Card</strong> is not another task — it is protection: your referral will not come back for reasons that could have been caught before it was sent.
-              </p>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <button className="btn-primary" onClick={() => scrollToSection('what-it-does')}>
-                  See how it works <ArrowRight size={16} style={{ display: 'inline', marginLeft: '0.3rem', verticalAlign: 'middle' }} />
-                </button>
-                <button className="btn-outline" onClick={() => scrollToSection('get-involved')}>
-                  Get involved
-                </button>
-              </div>
+          <div style={{ maxWidth: '680px' }}>
+            <div style={{ marginBottom: '1.5rem' }}>
+              <span className="tag tag-poc" style={{ marginRight: '0.5rem' }}>Proof of Concept — 2026</span>
+              <span className="tag tag-blue">Cheshire & Merseyside ICB</span>
             </div>
-            <div>
-              <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
-                <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
-                  The referral problem — in numbers
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
-                  {[
-                    { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
-                    { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
-                    { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
-                    { stat: '1 Apr 2026', label: 'Mandatory A&G begins under the 2026 GP contract — without the £20 per-request payment' },
-                  ].map((item, i) => (
-                    <React.Fragment key={i}>
-                      <span className="heading" style={{ fontSize: '1.35rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
-                      <span className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.75rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
+            <h1 className="heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
+              NHS MSK Referrals.<br />
+              <em style={{ color: '#2563eb' }}>A simpler path.</em>
+            </h1>
+            <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.25rem', fontWeight: 400 }}>
+              Accurate, up-to-date MSK pathway information — in one place, for every clinician who needs to refer.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', marginBottom: '2rem', fontWeight: 400, borderLeft: '3px solid #9b2335', paddingLeft: '1rem' }}>
+              The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted. The <strong>Gate Card</strong> brings that operational knowledge to the surface before the submission goes, so the referring clinician and the receiving service are working from the same picture.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <button className="btn-primary" onClick={() => scrollToSection('what-it-does')}>
+                See how it works <ArrowRight size={16} style={{ display: 'inline', marginLeft: '0.3rem', verticalAlign: 'middle' }} />
+              </button>
+              <button className="btn-outline" onClick={() => scrollToSection('get-involved')}>
+                Get involved
+              </button>
             </div>
           </div>
         </div>
@@ -293,8 +271,11 @@ const CareQueryWebsite = () => {
               summary: 'A structured view of an NHS MSK service — referral criteria, catchment, operational contacts, and typical waiting times — generated from the Underlying Service Record and maintained by a named steward. The operational wiki that makes the Gate Card reliable.',
               detail: (
                 <>
+                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
+                    The Service Card is generated from the same Underlying Service Record that powers the Gate Card. Every field belongs to one of two layers: <strong>Layer 1</strong> — verified public truth from published documents and direct written confirmation; or <strong>Layer 2</strong> — tacit operational intelligence sourced from experienced clinical referrers through structured conversations.
+                  </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The Service Card is generated from the same Underlying Service Record that powers the Gate Card. Every field belongs to one of two layers: <strong>Layer 1</strong> — verified public truth sourced from published documents and direct written confirmation; or <strong>Layer 2</strong> — tacit operational intelligence, attributed professional knowledge from experienced clinical referrers that no published pathway document captures. It is the Layer 2 that makes Care Query different from any NHS directory.
+                    Layer 2 is the specific hypothesis this PoC is testing. Published pathway documents systematically omit what experienced referrers know: the non-standard criteria individual triage leads apply when triaging; the imaging views a specific department expects to see before accepting; the precise interpretation of "adequate conservative management" that only becomes clear after a rejection; and the undocumented prerequisites that live in the heads of senior clinicians but never appear in a referral guide. One of the PoC's goals is to demonstrate whether this knowledge can be captured, attributed to a named source, and made accessible at the point of referral — without losing the operational specificity that makes it useful.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     Every Service Card has a named steward — a specific person in the service responsible for verifying its contents on a defined review cycle. Status must be manually set to PUBLISHED by that steward before the record becomes visible. An amber warning banner appears automatically when a record is approaching or past its review date. Honest about its own reliability — always.
@@ -464,17 +445,37 @@ const CareQueryWebsite = () => {
       {/* How It Works */}
       <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ maxWidth: '600px', marginBottom: '3.5rem' }}>
-            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
-            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-              Simple by design.<br />No black box, no AI, no guesswork.
-            </h2>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              <strong>For practice staff:</strong> Care Query runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it.
-            </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              <strong>For commissioners and clinical leads:</strong> The tool reads a single structured data file and renders outputs from it. What you see is exactly what is in that file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source.
-            </p>
+          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start', marginBottom: '3.5rem' }}>
+            <div>
+              <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
+              <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+                Simple by design.<br />No black box, no AI, no guesswork.
+              </h2>
+              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+                <strong>For practice staff:</strong> Care Query runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                <strong>For commissioners and clinical leads:</strong> The tool reads a single structured data file and renders outputs from it. What you see is exactly what is in that file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source.
+              </p>
+            </div>
+            <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
+              <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
+                The referral problem — in numbers
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
+                {[
+                  { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
+                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — generated from a single Underlying Service Record wherever possible' },
+                  { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
+                  { stat: '1 Apr 2026', label: 'A&G mandatory under the 2026 GP contract — operational pathway requirements remain unstandardised across ICBs' },
+                ].map((item, i) => (
+                  <React.Fragment key={i}>
+                    <span className="heading" style={{ fontSize: '1.2rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.65rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
+                    <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.65rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
@@ -536,8 +537,11 @@ const CareQueryWebsite = () => {
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
                 Clinical judgment comes from you — built over years of training and practice. Care Query does not second-guess it. What it does is make sure the administrative groundwork is solid before the submission leaves, so that your referral decision reaches the service it was meant for.
               </p>
-              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
                 The Gate Card surfaces criteria, catchment, and investigation requirements. You confirm what applies. The software records it. Nothing in the tool interprets symptoms, recommends a course of action, or suggests a diagnosis. It is an information layer — yours to use, on your terms.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                Care Query structures referral requirements that already exist across NHS services — making them visible at the point the referral is prepared. The clinical decision remains entirely yours; the platform exists only to support the administrative accuracy around it.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -700,9 +704,12 @@ const CareQueryWebsite = () => {
                 All development is conducted in personal time, on personal infrastructure, using publicly available
                 service information only. No NHS patient data is collected, stored, or processed at any stage.
               </p>
-              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
                 Care Query is an independent innovation developed in line with NHS digital standards.
                 It is not endorsed by, affiliated with, or developed on behalf of any NHS organisation.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                The project exists to explore whether clearer visibility of referral requirements can reduce rejected referrals, administrative friction, and delays in patient pathways. Development is iterative and transparent, with the intention of inviting scrutiny, collaboration, and improvement from clinicians and digital health stakeholders.
               </p>
             </div>
           </div>
