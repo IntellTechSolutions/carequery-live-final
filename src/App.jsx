@@ -172,26 +172,26 @@ const CareQueryWebsite = () => {
             </div>
             <h1 className="heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
               NHS MSK Referrals.<br />
-              <em style={{ color: '#2563eb' }}>A simpler path.</em>
+              <em style={{ color: '#2563eb' }}>Done right, first time.</em>
             </h1>
             <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.25rem', fontWeight: 400 }}>
-              Accurate, up-to-date MSK pathway information — in one place, for every clinician who needs to refer.
+              Stop A&G bounce-backs, protect practice time, and demonstrate ICB pathway compliance.
             </p>
             <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
                 The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted. From 1 April 2026, every A&G submission is mandatory and unpaid — and every return is an unfunded burden that increases the practice's risk of ICB performance scrutiny.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                <span className="brand">Care Query</span> surfaces those requirements before the referral is sent — generating three pieces of information called cards. Whether an FCP prepares the submission or a GP signs it off, the information is the same.
+                <span className="brand">Care Query</span> surfaces those requirements before the referral is sent — turning local service rules into a governed data record that generates three operational tools.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a structured pre-referral checklist — confirming the eligibility, catchment, and investigation requirements are in place before the submission leaves the practice.
+                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a pre-referral compliance checklist — whether an FCP prepares the submission or a GP signs it off, it generates a clipboard summary confirming all local criteria are met before the A&G request leaves the practice.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 The <strong style={{ color: '#ca8a04' }}>Service Card</strong> provides a structured reference view of the service itself — criteria, catchment, operational contacts, and practical pathway information.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the patient-facing summary sent after referral, explaining what happens next and what the patient can expect while waiting.
+                The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the patient-facing summary sent after referral via Accurx — pre-emptively answering wait time and next-steps questions, directly suppressing the callback volume that follows most MSK referrals.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 All three come from a single governed service record, so when information changes, every card reflects the update.
