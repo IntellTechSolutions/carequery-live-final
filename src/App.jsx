@@ -179,10 +179,10 @@ const CareQueryWebsite = () => {
             </p>
             <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted.
+                The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted. From 1 April 2026, every A&G submission is mandatory and unpaid — and every return is an unfunded burden that increases the practice's risk of ICB performance scrutiny.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                <span className="brand">Care Query</span> surfaces those requirements before the referral is sent — generating three pieces of information called cards, so clinicians and services are working from the same picture.
+                <span className="brand">Care Query</span> surfaces those requirements before the referral is sent — generating three pieces of information called cards. Whether an FCP prepares the submission or a GP signs it off, the information is the same.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a structured pre-referral checklist — confirming the eligibility, catchment, and investigation requirements are in place before the submission leaves the practice.
@@ -214,11 +214,8 @@ const CareQueryWebsite = () => {
       {/* Current Scope */}
       <section style={{ padding: '3rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ maxWidth: '820px', display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-            <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
-              <Compass size={30} color="#2563eb" />
-            </div>
-            <div style={{ flex: 1 }}>
+          <div style={{ maxWidth: '820px' }}>
+            <div>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Current Scope</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
               {[
@@ -293,7 +290,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-burgundy',
               tagLabel: 'Primary output — GPs · Physician Associates · Paramedics · ACPs · FCPs',
               borderColor: '#9b2335',
-              summary: 'With A&G mandatory from 1 April 2026, returned submissions create additional work for practices without adding value to patient care. The Gate Card is a structured pre-referral check — confirming the administrative and pathway requirements are in place before the submission leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
+              summary: 'With A&G mandatory from 1 April 2026 and the per-request payment removed, returned submissions are unfunded work — and they contribute to ICB performance risk. Whether an FCP prepares the submission or a GP signs it off, the requirements are the same. The Gate Card confirms they are in place before the submission leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
