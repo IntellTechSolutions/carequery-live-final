@@ -139,9 +139,26 @@ const CareQueryWebsite = () => {
             <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.25rem', fontWeight: 400 }}>
               Accurate, up-to-date MSK pathway information — in one place, for every clinician who needs to refer.
             </p>
-            <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', marginBottom: '2rem', fontWeight: 400, borderLeft: '3px solid #9b2335', paddingLeft: '1rem' }}>
-              The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted. The <strong>Gate Card</strong> brings that operational knowledge to the surface before the submission goes, so the referring clinician and the receiving service are working from the same picture.
-            </p>
+            <div style={{ borderLeft: '3px solid #9b2335', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
+                The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                Care Query generates three pieces of information called cards, each built from the same underlying service record.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> brings operational requirements to the surface before the submission goes — a structured pre-referral check so the referring clinician and the receiving service are working from the same picture.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                The <strong style={{ color: '#ca8a04' }}>Service Card</strong> provides a structured reference view of the service itself — criteria, catchment, operational contacts, and practical pathway information.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the patient-facing summary sent after referral, explaining what happens next and what the patient can expect while waiting.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                All three come from a single governed service record, so when information changes, every card reflects the update.
+              </p>
+            </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <button className="btn-primary" onClick={() => scrollToSection('what-it-does')}>
                 See how it works <ArrowRight size={16} style={{ display: 'inline', marginLeft: '0.3rem', verticalAlign: 'middle' }} />
@@ -159,10 +176,11 @@ const CareQueryWebsite = () => {
       {/* Current Scope */}
       <section style={{ padding: '3rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ maxWidth: '720px' }}>
-            <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-              <Compass size={22} color="#2563eb" />
+          <div style={{ maxWidth: '820px', display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+            <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
+              <Compass size={30} color="#2563eb" />
             </div>
+            <div style={{ flex: 1 }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Current Scope</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
               {[
@@ -196,6 +214,7 @@ const CareQueryWebsite = () => {
                 </p>
               </div>
             )}
+            </div>
           </div>
         </div>
       </section>
@@ -460,9 +479,6 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start', marginBottom: '3.5rem' }}>
             <div>
-              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                <Layers size={22} color="#475569" />
-              </div>
               <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
               <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
                 Simple by design.<br />No black box, no AI, no guesswork.
@@ -483,7 +499,7 @@ const CareQueryWebsite = () => {
                   { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
                   { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — generated from a single Underlying Service Record wherever possible' },
                   { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
-                  { stat: 'C&M ICB', label: 'Trialling MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
+                  { stat: '1 ICB', label: 'Trialling MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
                   { stat: '1 Apr 2026', label: 'A&G mandatory under the 2026 GP contract — operational pathway requirements remain unstandardised across ICBs' },
                 ].map((item, i) => (
                   <React.Fragment key={i}>
@@ -590,10 +606,11 @@ const CareQueryWebsite = () => {
       {/* Get Involved */}
       <section id="get-involved" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ maxWidth: '640px', marginBottom: '3rem' }}>
-            <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-              <Handshake size={22} color="#16a34a" />
+          <div style={{ maxWidth: '760px', marginBottom: '3rem', display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+            <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
+              <Handshake size={30} color="#16a34a" />
             </div>
+            <div style={{ flex: 1 }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
               The knowledge is yours.<br />Care Query is just the structure.
@@ -604,6 +621,7 @@ const CareQueryWebsite = () => {
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
               If you work anywhere along NHS referral pathways — as a GP, nurse, allied health professional, paramedic, ACP, physician associate, or service administrator — and recognise this problem, a conversation is enough to start. No commitment required.
             </p>
+            </div>
           </div>
 
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
