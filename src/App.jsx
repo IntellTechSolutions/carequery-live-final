@@ -1,5 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink, Check, Compass, Layers, Handshake } from 'lucide-react';
+import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink, Check, Compass, Handshake } from 'lucide-react';
+
+const ExpandableCard = ({ card, defaultOpen }) => {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return (
+    <div style={{ borderLeft: `4px solid ${card.borderColor}`, background: '#fff', borderTop: '1px solid #e5e7eb', borderRight: '1px solid #e5e7eb', borderBottom: '1px solid #e5e7eb', borderRadius: '0 8px 8px 0', marginBottom: '1rem' }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{ width: '100%', background: 'none', border: 'none', padding: '1.25rem 1.75rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', textAlign: 'left' }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            {card.icon}
+            <span className="heading" style={{ fontSize: '1.1rem', color: '#111827' }}>{card.title}</span>
+            <span className={`tag ${card.tagClass}`}>{card.tagLabel}</span>
+          </div>
+          <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5, paddingLeft: '1.75rem' }}>
+            {card.summary}
+          </p>
+        </div>
+        <span style={{ color: '#2563eb', fontSize: '1.2rem', fontWeight: 300, flexShrink: 0, marginTop: '0.1rem' }}>
+          {open ? '−' : '+'}
+        </span>
+      </button>
+      {open && (
+        <div style={{ padding: '0 1.75rem 1.5rem', borderTop: '1px solid #f3f4f6' }}>
+          <div style={{ paddingTop: '1.25rem' }}>
+            {card.detail}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const CareQueryWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,8 +69,13 @@ const CareQueryWebsite = () => {
   const handleEmailSubmit = (e) => {
     e.preventDefault();
     if (email) {
-      setSubmitted(true);
-      setEmail('');
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'stay-informed', email }).toString(),
+      })
+        .then(() => { setSubmitted(true); setEmail(''); })
+        .catch(() => { setSubmitted(true); setEmail(''); });
     }
   };
 
@@ -56,16 +94,11 @@ const CareQueryWebsite = () => {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: #ffffff; font-family: 'Inter', sans-serif; }
         .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
-        .subheading { font-family: 'Inter', sans-serif; font-weight: 600; }
         .body-text { font-family: 'Inter', sans-serif; font-weight: 400; }
-        .ui-text { font-family: 'Inter', sans-serif; font-weight: 500; }
         .nav-link { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
         .nav-link:hover { color: #2563eb; }
         .nav-link.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
         .card { background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
-        .output-card { border-left: 4px solid #2563eb; padding: 1.5rem 1.75rem; background: #fff; border-radius: 0 8px 8px 0; border-top: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
-        .output-card.amber { border-left-color: #ca8a04; }
-        .output-card.slate { border-left-color: #16a34a; }
         .tag { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
         .tag-blue { background: #dbeafe; color: #1e40af; }
         .tag-amber { background: #fef9c3; color: #854d0e; }
@@ -83,7 +116,11 @@ const CareQueryWebsite = () => {
         .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
         .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
         .brand { color: #2563eb; font-weight: 700; }
+        .desktop-nav { display: flex; gap: 2rem; }
+        .mobile-menu-btn { display: none; }
         @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .mobile-menu-btn { display: block !important; }
           .hero-grid { grid-template-columns: 1fr !important; }
           .three-col { grid-template-columns: 1fr !important; }
           .two-col { grid-template-columns: 1fr !important; }
@@ -98,7 +135,7 @@ const CareQueryWebsite = () => {
               <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.01em' }}>Care Query</span>
               <span className="tag tag-poc">PoC</span>
             </div>
-            <div className="hidden md:flex" style={{ display: 'flex', gap: '2rem' }}>
+            <div className="desktop-nav">
               {navItems.map(item => (
                 <button key={item.id} onClick={() => scrollToSection(item.id)}
                   className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
@@ -107,7 +144,7 @@ const CareQueryWebsite = () => {
                 </button>
               ))}
             </div>
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#374151', display: 'none' }}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
               className="mobile-menu-btn">
               {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -145,13 +182,10 @@ const CareQueryWebsite = () => {
                 The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                <span className="brand">Care Query</span> surfaces those requirements before the referral is sent, so clinicians and services are working from the same information.
+                <span className="brand">Care Query</span> surfaces those requirements before the referral is sent — generating three pieces of information called cards, so clinicians and services are working from the same picture.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                <span className="brand">Care Query</span> generates three pieces of information called cards.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> brings operational requirements to the surface before the submission goes — a structured pre-referral check so the referring clinician and the receiving service are working from the same picture.
+                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a structured pre-referral checklist — confirming the eligibility, catchment, and investigation requirements are in place before the submission leaves the practice.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 The <strong style={{ color: '#ca8a04' }}>Service Card</strong> provides a structured reference view of the service itself — criteria, catchment, operational contacts, and practical pathway information.
@@ -191,7 +225,7 @@ const CareQueryWebsite = () => {
                 { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
                 { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
                 { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — measure A&G rejection rate reduction' },
-                { label: 'Access', value: 'Works in any browser — no IT integration, procurement, or sign-off required' },
+                { label: 'Access', value: 'Browser-based, no installation — Gate Cards deep-link into EMIS and SystmOne templates via AccuRx' },
               ].map((item, i) => (
                 <div key={i} style={{ padding: '0.9rem 1rem', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                   <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
@@ -229,7 +263,7 @@ const CareQueryWebsite = () => {
       <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
 
       {/* What It Does */}
-      <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#f9fafb' }}>
+      <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '4rem', alignItems: 'start', marginBottom: '3.5rem' }}>
             <div>
@@ -266,7 +300,7 @@ const CareQueryWebsite = () => {
                     Any clinician who initiates an MSK referral — GP, Physician Associate, Paramedic, ACP, or FCP — can use the Gate Card. It confirms eligibility criteria, catchment, required investigations, and conservative management prerequisites before submission. Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a clipboard-ready administrative summary. The clinician decides. The software records.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The most common reasons MSK A&G is returned — missing imaging, wrong catchment, insufficient clinical information, incomplete conservative management — are all preventable. The Gate Card makes them visible before the submission goes, not three weeks after it bounces back.
+                    The most common reasons MSK A&G is returned — missing imaging, wrong catchment, insufficient clinical information, incomplete conservative management — are all preventable. The Gate Card makes them visible before the submission is sent, not three weeks after it bounces back.
                   </p>
                   {/* Illustrative example — Community MSK Spinal Assessment */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -330,10 +364,10 @@ const CareQueryWebsite = () => {
                     <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
                       <div>
                         <div className="heading" style={{ fontSize: '1rem', color: '#111827', marginBottom: '0.2rem' }}>
-                          Warrington Community Falls Prevention Service
+                          Warrington & Halton Hospitals — Rheumatology
                         </div>
                         <div className="body-text" style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 400 }}>
-                          Code: WINFALLS · Steward: [STEWARD: verify] · Last reviewed: [STEWARD: verify]
+                          Code: WHHRHEUM · Steward: [STEWARD: verify] · Last reviewed: [STEWARD: verify]
                         </div>
                       </div>
                       <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.25rem 0.6rem', borderRadius: '9999px', background: '#fef3c7', color: '#92400e', border: '1px solid #fcd34d' }}>
@@ -345,11 +379,11 @@ const CareQueryWebsite = () => {
                         Referral criteria
                       </div>
                       {[
-                        'Aged 65 or over, OR aged 50–64 with a condition increasing falls risk (e.g. Parkinson\'s, osteoporosis, peripheral neuropathy)',
-                        'Two or more falls in the past 12 months, OR one fall with injury, OR fear of falling affecting daily function',
-                        'Registered with a Warrington GP practice',
-                        'Able to participate in group or individual exercise — cognitive capacity to follow instruction',
-                        'No acute fracture or unstable cardiovascular condition (stabilise before referral)',
+                        'Inflammatory arthritis suspected — swollen joints, morning stiffness exceeding 30 minutes, or symmetrical joint involvement',
+                        'Connective tissue disease suspected — systemic symptoms, unexplained rash, Raynaud\'s phenomenon, or sicca symptoms',
+                        'Gout or crystal arthropathy with recurrent attacks requiring disease-modifying treatment consideration',
+                        'Registered with a GP practice within the Warrington and Halton health economy',
+                        'Not currently under active rheumatology follow-up at WHH or another Trust',
                       ].map((criterion, i) => (
                         <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.35rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
                           <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#ca8a04', flexShrink: 0, marginTop: '0.45rem' }} />
@@ -359,9 +393,9 @@ const CareQueryWebsite = () => {
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0', borderBottom: '1px solid #e5e7eb' }}>
                       {[
-                        { label: 'Catchment', value: 'Warrington Borough — WIN PCN and surrounding practices' },
-                        { label: 'Typical wait', value: '[STEWARD: verify before publishing]' },
-                        { label: 'Referral route', value: 'A&G via Consultant Connect or direct referral form — [STEWARD: verify]' },
+                        { label: 'Catchment', value: 'Warrington and Halton — GP practices within the WHH catchment area' },
+                        { label: 'Typical wait', value: '14 weeks to first outpatient appointment (My Planned Care, 2025)' },
+                        { label: 'Referral route', value: 'GP referral to WHH Rheumatology; or via MSKCATS after physiotherapy triage — [STEWARD: verify current pathway]' },
                       ].map((item, i) => (
                         <div key={i} style={{ padding: '0.85rem 1.25rem', borderRight: i < 2 ? '1px solid #e5e7eb' : 'none' }}>
                           <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.3rem' }}>{item.label}</div>
@@ -437,43 +471,14 @@ const CareQueryWebsite = () => {
                 </>
               ),
             },
-          ].map((card, idx) => {
-            const [open, setOpen] = React.useState(idx === 0);
-            return (
-              <div key={idx} style={{ borderLeft: `4px solid ${card.borderColor}`, background: '#fff', borderTop: '1px solid #e5e7eb', borderRight: '1px solid #e5e7eb', borderBottom: '1px solid #e5e7eb', borderRadius: '0 8px 8px 0', marginBottom: '1rem' }}>
-                <button
-                  onClick={() => setOpen(!open)}
-                  style={{ width: '100%', background: 'none', border: 'none', padding: '1.25rem 1.75rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', textAlign: 'left' }}
-                >
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                      {card.icon}
-                      <span className="heading" style={{ fontSize: '1.1rem', color: '#111827' }}>{card.title}</span>
-                      <span className={`tag ${card.tagClass}`}>{card.tagLabel}</span>
-                    </div>
-                    <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5, paddingLeft: '1.75rem' }}>
-                      {card.summary}
-                    </p>
-                  </div>
-                  <span style={{ color: '#2563eb', fontSize: '1.2rem', fontWeight: 300, flexShrink: 0, marginTop: '0.1rem' }}>
-                    {open ? '−' : '+'}
-                  </span>
-                </button>
-                {open && (
-                  <div style={{ padding: '0 1.75rem 1.5rem', borderTop: '1px solid #f3f4f6' }}>
-                    <div style={{ paddingTop: '1.25rem' }}>
-                      {card.detail}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          ].map((card, idx) => (
+            <ExpandableCard key={idx} card={card} defaultOpen={idx === 0} />
+          ))}
 
           {/* Architecture note — below all three cards */}
           <div style={{ marginTop: '2rem', padding: '1.25rem 1.5rem', background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#6b7280', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The Gate Card is the primary interaction for any clinician at the point of referral. The Service Card is the structured reference view. The Journey Card goes to the patient after referral proceeds.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The Gate Card is the primary interaction for any clinician at the point of referral. The Service Card is the structured reference view. The Journey Card goes to the patient after referral.
             </p>
           </div>
         </div>
@@ -507,9 +512,9 @@ const CareQueryWebsite = () => {
               <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
                 {[
                   { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
-                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — generated from a single Underlying Service Record wherever possible' },
+                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
                   { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
-                  { stat: '1 ICB', label: 'Trialling MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
+                  { stat: '1 ICB', label: 'Focused on MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
                   { stat: '1 Apr 2026', label: 'A&G mandatory under the 2026 GP contract — operational pathway requirements remain unstandardised across ICBs' },
                 ].map((item, i) => (
                   <React.Fragment key={i}>
@@ -527,7 +532,7 @@ const CareQueryWebsite = () => {
                 step: '01',
                 title: 'Governed Data Source',
                 body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are DRAFT until a steward manually verifies and publishes.',
-                pills: ['JSON', 'Structured JSON schema', 'DRAFT / PUBLISHED states'],
+                pills: ['Structured JSON schema', 'DRAFT / PUBLISHED states'],
               },
               {
                 step: '02',
@@ -569,7 +574,7 @@ const CareQueryWebsite = () => {
       <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
 
       {/* Governance */}
-      <section style={{ padding: '5rem 1.5rem', background: '#f9fafb' }}>
+      <section style={{ padding: '6rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
             <div>
@@ -626,7 +631,7 @@ const CareQueryWebsite = () => {
               The knowledge is yours.<br /><span className="brand">Care Query</span> is just the structure.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day. Every voice helps.
+              The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
               If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
@@ -638,12 +643,12 @@ const CareQueryWebsite = () => {
             {[
               {
                 title: 'Clinical Contributors',
-                desc: 'You know what actually causes A&G to bounce — the operational nuance that no published pathway document captures. That knowledge is the most valuable thing Care Query can encode. A Service Card verified by you means fewer inappropriate referrals reaching your service and fewer calls from practices asking basic questions.',
+                desc: 'You know what actually causes A&G to bounce — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to capture. A Service Card verified by you means fewer inappropriate referrals reaching your service and fewer calls from practices asking basic questions.',
                 tag: 'GPs · Physician Associates · Paramedics · ACPs · FCPs · Physios · Service admins',
               },
               {
                 title: 'Pilot Practices',
-                desc: 'From 1 April 2026, every A&G submission is mandatory and unpaid. We are looking for 5–10 GP practices in Cheshire and Merseyside to use the Gate Card in a real referral workflow. The measure is direct: does structured pre-referral preparation reduce returned submissions?',
+                desc: 'From 1 April 2026, every A&G submission is mandatory with no per-request payment. We are looking for 5–10 GP practices in Cheshire and Merseyside to use the Gate Card in a real referral workflow. Pilot evaluation will measure the change in returned A&G submissions before and after Gate Card use across participating practices.',
                 tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
               },
               {
@@ -675,8 +680,9 @@ const CareQueryWebsite = () => {
                 <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem' }}>Received — we will be in touch.</p>
               </div>
             ) : (
-              <form onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)}
+              <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <input type="hidden" name="form-name" value="stay-informed" />
+                <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
                   placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '220px' }} />
                 <button type="submit" className="btn-primary">Register interest</button>
               </form>
@@ -705,9 +711,20 @@ const CareQueryWebsite = () => {
                     <Mail size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Email</div>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Collaboration</div>
                     <a href="mailto:my@carequery.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
                       my@carequery.uk
+                    </a>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Mail size={18} color="#2563eb" />
+                  </div>
+                  <div>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Business — Intelligent Technology Solutions Ltd</div>
+                    <a href="mailto:info@intelltechsolutions.co.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                      info@intelltechsolutions.co.uk
                     </a>
                   </div>
                 </div>
@@ -734,7 +751,7 @@ const CareQueryWebsite = () => {
                     <a href="https://carequery.app" target="_blank" rel="noreferrer" className="body-text" style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
                       carequery.app
                     </a>
-                    <span className="body-text" style={{ fontSize: '0.82rem', color: '#374151', marginLeft: '0.5rem', fontWeight: 500 }}>— the live PoC (DRAFT, not yet public)</span>
+                    <span className="body-text" style={{ fontSize: '0.82rem', color: '#374151', marginLeft: '0.5rem', fontWeight: 500 }}>— the PoC (not yet public)</span>
                   </div>
                 </div>
               </div>
