@@ -274,7 +274,7 @@ const CareQueryWebsite = () => {
                 Referral pathways are rarely clinically complex — but they are operationally complex. The eligibility criteria, catchment rules, required investigations, and administrative expectations vary between services, change over time, and are rarely documented in one place. <span className="brand">Care Query</span> focuses on making those operational requirements visible at the point of referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The Gate Card is a structured pre-referral checklist confirming that the key requirements are in place before a referral is submitted — whether that referral is a mandatory A&G request to a secondary care consultant or a direct referral to an intermediate community service. The Service Card is the governed reference view — criteria, catchment, contacts, referral route, and expected pathway. The Journey Card is the patient-facing summary shared after referral.
+                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a structured pre-referral checklist confirming that the key requirements are in place before a referral is submitted — whether that referral is a mandatory A&G request to a secondary care consultant or a direct referral to an intermediate community service. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the governed reference view — criteria, catchment, contacts, referral route, and expected pathway. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the patient-facing summary shared after referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 Each service has one governed data record. Every output — checklist, reference view, and patient summary — is generated from that single source. When the record is updated, all three outputs automatically reflect the change.
@@ -299,19 +299,33 @@ const CareQueryWebsite = () => {
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     For secondary care referrals where A&G is mandatory, the most common return reasons are preventable: missing imaging, wrong catchment, insufficient clinical information, incomplete conservative management. For direct referrals to intermediate services, the failure mode is the same — wrong criteria, wrong catchment, incomplete information — just without the A&G layer. The Gate Card makes these requirements visible before anything leaves the practice, not three weeks after it bounces back.
                   </p>
-                  {/* Illustrative example — Community MSK Spinal Assessment */}
+                  {/* Illustrative example — WHH Rheumatology (WHHRHEUM) */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
                     <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                      Illustrative example — Community MSK Spinal Assessment Service
+                      Illustrative example — WHH Rheumatology (WHHRHEUM) · A&G mandatory
+                    </div>
+                    <div style={{ background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: '6px', padding: '0.75rem', marginBottom: '0.85rem' }}>
+                      <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#be123c', marginBottom: '0.5rem' }}>
+                        Stop and act — do not proceed with A&G referral
+                      </div>
+                      {[
+                        'New onset joint swelling, pain and stiffness with systemic features (fever, weight loss, or fatigue) — consider urgent same-day assessment',
+                        'Suspected septic arthritis (hot, swollen joint with fever) — emergency assessment required, not this pathway',
+                      ].map((flag, i) => (
+                        <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', paddingTop: i > 0 ? '0.3rem' : 0 }}>
+                          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#be123c', flexShrink: 0, marginTop: '0.45rem' }} />
+                          <span className="body-text" style={{ fontSize: '0.8rem', color: '#be123c', fontWeight: 500, lineHeight: 1.5 }}>{flag}</span>
+                        </div>
+                      ))}
                     </div>
                     {[
-                      'Patient is aged 18 or over',
-                      'Patient is registered with a GP practice within the service catchment area',
-                      'Primary complaint is spinal pain — cervical, thoracic, or lumbar — as the presenting problem',
-                      'Conservative management has been attempted: minimum 6 weeks of physiotherapy, structured exercise, or self-management programme',
-                      'Relevant imaging completed where clinically indicated — spinal X-ray or MRI for suspected nerve root involvement or red flag exclusion',
-                      'Serious spinal pathology screened and excluded: cauda equina symptoms, progressive neurological deficit, unexplained weight loss, history of malignancy, suspected infection or fracture',
-                      'Patient is NOT on an acute surgical pathway — no post-operative review within 12 weeks, no active cauda equina presentation',
+                      'ESR (Erythrocyte Sedimentation Rate) result documented in referral',
+                      'CRP (C-Reactive Protein) result documented in referral',
+                      'Rheumatoid Factor (RF) result documented in referral',
+                      'Anti-CCP antibody result documented in referral',
+                      'Symptom duration documented — minimum 6 weeks of joint symptoms',
+                      'Morning stiffness duration documented',
+                      'Clinical reasoning documented in A&G — one sentence distinguishing suspected inflammatory from mechanical pathology',
                     ].map((gate, i) => (
                       <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 6 ? '1px solid #f3f4f6' : 'none' }}>
                         <div style={{ width: '16px', height: '16px', border: '2px solid #9b2335', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
@@ -320,7 +334,7 @@ const CareQueryWebsite = () => {
                     ))}
                     <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#fce7ef', borderRadius: '6px' }}>
                       <span className="body-text" style={{ fontSize: '0.78rem', color: '#7f1d1d', fontWeight: 500 }}>
-                        When all prerequisites are confirmed — a clipboard summary is generated for the referral.
+                        When all prerequisites are confirmed — a clipboard summary is generated for the A&G submission.
                       </span>
                     </div>
                   </div>
@@ -400,6 +414,25 @@ const CareQueryWebsite = () => {
                         </div>
                       ))}
                     </div>
+                    <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb' }}>
+                      <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
+                        Referrer intelligence — Layer 2
+                      </div>
+                      <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '6px', padding: '0.75rem' }}>
+                        <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, color: '#92400e', marginBottom: '0.3rem' }}>
+                          Most common A&G return reason
+                        </div>
+                        <p className="body-text" style={{ fontSize: '0.8rem', color: '#92400e', lineHeight: 1.5, marginBottom: '0.5rem', fontWeight: 400 }}>
+                          Missing clinical reasoning statement — no sentence distinguishing inflammatory from mechanical pathology. Not in published criteria, but the single most common reason for A&G return.
+                        </p>
+                        <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, color: '#166534', marginBottom: '0.25rem' }}>
+                          Avoidance
+                        </div>
+                        <p className="body-text" style={{ fontSize: '0.8rem', color: '#166534', lineHeight: 1.5, fontWeight: 400 }}>
+                          Add one sentence: e.g. "Presentation is inflammatory in pattern given morning stiffness &gt;60 min, small joint symmetry, and elevated CRP."
+                        </p>
+                      </div>
+                    </div>
                     <div style={{ padding: '0.65rem 1.25rem', background: '#fffbeb', borderLeft: '3px solid #f59e0b', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                       <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#f59e0b', flexShrink: 0 }} />
                       <span className="body-text" style={{ fontSize: '0.78rem', color: '#92400e', fontWeight: 400 }}>
@@ -429,31 +462,41 @@ const CareQueryWebsite = () => {
                   </p>
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
                     <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
-                      Illustrative example — Community Rheumatology Service
+                      Illustrative example — WHH Rheumatology (WHHRHEUM)
                     </div>
-                    {[
-                      {
-                        heading: 'Your referral',
-                        text: 'Your GP or physiotherapist has referred you to the Community Rheumatology Service. This is a specialist service for joint, muscle, and connective tissue problems that need a more detailed assessment. We know that waiting to be seen can be frustrating, especially when you are in pain. Here is what is happening and what you can do in the meantime.',
-                      },
-                      {
-                        heading: 'What happens next',
-                        text: 'Your referral has been sent to the service. They will review it and write to you with an appointment date. Typical waiting times for an initial assessment are currently around 12–18 weeks, though this can vary. You do not need to contact your GP surgery — your referral is with the service.',
-                      },
-                      {
-                        heading: 'While you are waiting',
-                        text: 'Staying as active as you comfortably can is usually helpful for joint and muscle conditions. If your symptoms change significantly — for example, new swelling in multiple joints, unexplained weight loss, fever alongside joint pain, or symptoms that are rapidly getting worse — contact your GP practice. For pain management while you wait, your GP or pharmacist can advise on suitable options.',
-                      },
-                      {
-                        heading: 'Your first appointment',
-                        text: 'A rheumatologist or specialist nurse will ask about your symptoms, how they affect your daily life, and review any investigations already done. They may request blood tests or imaging as part of the assessment. Please bring a list of your current medications.',
-                      },
-                    ].map((section, i) => (
-                      <div key={i} style={{ marginBottom: i < 3 ? '0.85rem' : 0, paddingBottom: i < 3 ? '0.85rem' : 0, borderBottom: i < 3 ? '1px solid #e5e7eb' : 'none' }}>
-                        <div className="body-text" style={{ fontSize: '0.72rem', fontWeight: 700, color: '#374151', marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{section.heading}</div>
-                        <p className="body-text" style={{ fontSize: '0.82rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400 }}>{section.text}</p>
-                      </div>
-                    ))}
+                    <div style={{ marginBottom: '0.85rem', paddingBottom: '0.85rem', borderBottom: '1px solid #e5e7eb' }}>
+                      <div className="body-text" style={{ fontSize: '0.72rem', fontWeight: 700, color: '#374151', marginBottom: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Your referral</div>
+                      <p className="body-text" style={{ fontSize: '0.82rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400 }}>
+                        We understand that joint symptoms can be worrying, especially when you are waiting for specialist assessment. Here is what is happening with your referral.
+                      </p>
+                    </div>
+                    <div style={{ marginBottom: '0.85rem', paddingBottom: '0.85rem', borderBottom: '1px solid #e5e7eb' }}>
+                      <div className="body-text" style={{ fontSize: '0.72rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>What happens next</div>
+                      {[
+                        'Your A&G request will be reviewed by the Rheumatology team at Warrington and Halton Teaching Hospitals.',
+                        'If accepted, you will receive an appointment letter from WHH directly.',
+                        'Your GP may be asked to complete blood tests before your appointment if not already done.',
+                        'Continue taking any prescribed medications while you wait.',
+                      ].map((step, i) => (
+                        <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', paddingBottom: '0.3rem' }}>
+                          <span className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#16a34a', flexShrink: 0, minWidth: '1rem' }}>{i + 1}.</span>
+                          <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.55, fontWeight: 400 }}>{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div>
+                      <div className="body-text" style={{ fontSize: '0.72rem', fontWeight: 700, color: '#374151', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>While you are waiting</div>
+                      {[
+                        'Keep a note of which joints are swollen or stiff, and at what time of day — this helps the specialist assess your condition.',
+                        'Note how long your joints are stiff in the morning — this is a key question at your appointment.',
+                        'Bring a list of all your current medications to your first appointment.',
+                      ].map((tip, i) => (
+                        <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', paddingBottom: '0.3rem' }}>
+                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#16a34a', flexShrink: 0, marginTop: '0.45rem' }} />
+                          <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.55, fontWeight: 400 }}>{tip}</span>
+                        </div>
+                      ))}
+                    </div>
                     <div style={{ marginTop: '0.75rem', padding: '0.5rem 0.75rem', background: '#dcfce7', borderRadius: '6px' }}>
                       <span className="body-text" style={{ fontSize: '0.75rem', color: '#166534', fontWeight: 500 }}>
                         No login · No data collected · Opens in any browser via a link sent by your clinician
@@ -475,7 +518,7 @@ const CareQueryWebsite = () => {
           {/* Architecture note — below all three cards */}
           <div style={{ marginTop: '2rem', padding: '1.25rem 1.5rem', background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#6b7280', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The Gate Card is the primary interaction for any clinician at the point of referral. The Service Card is the structured reference view. The Journey Card goes to the patient after referral.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is the primary interaction for any clinician at the point of referral. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the structured reference view. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> goes to the patient after referral.
             </p>
           </div>
         </div>
@@ -509,7 +552,7 @@ const CareQueryWebsite = () => {
               <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
                 {[
                   { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
-                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
+                  { stat: '3 outputs', label: <><strong style={{ color: '#9b2335' }}>Gate Card</strong>, <strong style={{ color: '#ca8a04' }}>Service Card</strong>, and <strong style={{ color: '#16a34a' }}>Journey Card</strong> — all generated from a single Underlying Service Record</> },
                   { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
                   { stat: '1 ICB', label: 'Focused on MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
                   { stat: '1 Apr 2026', label: 'Mandatory A&G for secondary care planned referrals under the 2026 GP contract — intermediate community services retain direct referral routes' },
@@ -640,7 +683,7 @@ const CareQueryWebsite = () => {
             {[
               {
                 title: 'Clinical Contributors',
-                desc: 'You know what actually causes A&G to bounce — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to capture. A Service Card verified by you means fewer inappropriate referrals reaching your service and fewer calls from practices asking basic questions.',
+                desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to capture. A Service Card verified by you means fewer inappropriate referrals reaching your service and fewer calls from practices asking basic questions.',
                 tag: 'GPs · Physician Associates · Paramedics · ACPs · FCPs · Physios · Service admins',
               },
               {
