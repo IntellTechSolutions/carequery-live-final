@@ -131,7 +131,8 @@ const CareQueryWebsite = () => {
       <nav style={{ position: 'fixed', top: 0, width: '100%', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)', zIndex: 50, borderBottom: '1px solid #e5e7eb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+              <img src="/Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
               <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.01em' }}>Care Query</span>
               <span className="tag tag-poc">PoC</span>
             </div>
