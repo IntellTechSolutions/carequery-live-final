@@ -179,13 +179,13 @@ const CareQueryWebsite = () => {
             </p>
             <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted. From 1 April 2026, every A&G submission is mandatory and unpaid — and every return is an unfunded burden that increases the practice's risk of ICB performance scrutiny.
+                The most common reason a well-judged referral fails is not clinical — it is informational. Criteria that changed. An investigation not yet done. A catchment boundary that shifted. From 1 April 2026, mandatory A&G applies to secondary care planned referrals — but intermediate services like CATS and OCATS still accept direct referrals. Knowing which pathway a service sits on, and proving you followed it correctly, is what a returned submission reveals you got wrong.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 <span className="brand">Care Query</span> surfaces those requirements before the referral is sent — turning local service rules into a governed data record that generates three operational tools.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a pre-referral compliance checklist — whether an FCP prepares the submission or a GP signs it off, it generates a clipboard summary confirming all local criteria are met before the A&G request leaves the practice.
+                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a pre-referral compliance checklist — whether a service needs a mandatory A&G submission or accepts a direct referral, it generates a clipboard summary confirming the right route was taken and all local criteria were met before anything leaves the practice.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 The <strong style={{ color: '#ca8a04' }}>Service Card</strong> provides a structured reference view of the service itself — criteria, catchment, operational contacts, and practical pathway information.
@@ -274,7 +274,7 @@ const CareQueryWebsite = () => {
                 Referral pathways are rarely clinically complex — but they are operationally complex. The eligibility criteria, catchment rules, required investigations, and administrative expectations vary between services, change over time, and are rarely documented in one place. <span className="brand">Care Query</span> focuses on making those operational requirements visible at the point of referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The Gate Card is a structured pre-referral checklist confirming that the key requirements are in place before an Advice and Guidance request is submitted. The Service Card is the governed reference view — criteria, catchment, contacts, and expected pathway. The Journey Card is the patient-facing summary shared after referral.
+                The Gate Card is a structured pre-referral checklist confirming that the key requirements are in place before a referral is submitted — whether that referral is a mandatory A&G request to a secondary care consultant or a direct referral to an intermediate community service. The Service Card is the governed reference view — criteria, catchment, contacts, referral route, and expected pathway. The Journey Card is the patient-facing summary shared after referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 Each service has one governed data record. Every output — checklist, reference view, and patient summary — is generated from that single source. When the record is updated, all three outputs automatically reflect the change.
@@ -290,14 +290,14 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-burgundy',
               tagLabel: 'Primary output — GPs · Physician Associates · Paramedics · ACPs · FCPs',
               borderColor: '#9b2335',
-              summary: 'With A&G mandatory from 1 April 2026 and the per-request payment removed, returned submissions are unfunded work — and they contribute to ICB performance risk. Whether an FCP prepares the submission or a GP signs it off, the requirements are the same. The Gate Card confirms they are in place before the submission leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
+              summary: 'Some MSK services require a mandatory A&G submission — secondary care services like Rheumatology and Orthopaedics, where the 2026 contract mandates A&G as a prerequisite for consultant-led planned care. Others accept a direct GP referral — intermediate community services like MSKCATS, OCATS, and FCP services, which exist to assess whether secondary care is needed and sit outside the A&G mandate entirely. A returned submission from either pathway is unfunded work that contributes to ICB performance risk. The Gate Card confirms the right requirements are in place — for whichever route the service uses — before anything leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     Any clinician who initiates an MSK referral — GP, Physician Associate, Paramedic, ACP, or FCP — can use the Gate Card. It confirms eligibility criteria, catchment, required investigations, and conservative management prerequisites before submission. Gates are tri-state: confirmed, not applicable, or flagged. Completion generates a clipboard-ready administrative summary. The clinician decides. The software records.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The most common reasons MSK A&G is returned — missing imaging, wrong catchment, insufficient clinical information, incomplete conservative management — are all preventable. The Gate Card makes them visible before the submission is sent, not three weeks after it bounces back.
+                    For secondary care referrals where A&G is mandatory, the most common return reasons are preventable: missing imaging, wrong catchment, insufficient clinical information, incomplete conservative management. For direct referrals to intermediate services, the failure mode is the same — wrong criteria, wrong catchment, incomplete information — just without the A&G layer. The Gate Card makes these requirements visible before anything leaves the practice, not three weeks after it bounces back.
                   </p>
                   {/* Illustrative example — Community MSK Spinal Assessment */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -320,7 +320,7 @@ const CareQueryWebsite = () => {
                     ))}
                     <div style={{ marginTop: '0.75rem', padding: '0.6rem 0.75rem', background: '#fce7ef', borderRadius: '6px' }}>
                       <span className="body-text" style={{ fontSize: '0.78rem', color: '#7f1d1d', fontWeight: 500 }}>
-                        When all prerequisites are confirmed — a clipboard summary is generated for the A&G submission.
+                        When all prerequisites are confirmed — a clipboard summary is generated for the referral.
                       </span>
                     </div>
                   </div>
@@ -512,7 +512,7 @@ const CareQueryWebsite = () => {
                   { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
                   { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
                   { stat: '1 ICB', label: 'Focused on MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
-                  { stat: '1 Apr 2026', label: 'A&G mandatory under the 2026 GP contract — operational pathway requirements remain unstandardised across ICBs' },
+                  { stat: '1 Apr 2026', label: 'Mandatory A&G for secondary care planned referrals under the 2026 GP contract — intermediate community services retain direct referral routes' },
                 ].map((item, i) => (
                   <React.Fragment key={i}>
                     <span className="heading" style={{ fontSize: '1.2rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.65rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
@@ -645,7 +645,7 @@ const CareQueryWebsite = () => {
               },
               {
                 title: 'Pilot Practices',
-                desc: 'From 1 April 2026, every A&G submission is mandatory with no per-request payment. We are looking for 5–10 GP practices in Cheshire and Merseyside to use the Gate Card in a real referral workflow. Pilot evaluation will measure the change in returned A&G submissions before and after Gate Card use across participating practices.',
+                desc: 'From 1 April 2026, secondary care planned referrals require mandatory A&G with no per-request payment. Intermediate community services like MSKCATS, OCATS, and FCP services accept direct referrals — no A&G required. Navigating these different rules accurately, for every service, is exactly the problem the Gate Card solves. We are looking for 5–10 GP practices in Cheshire and Merseyside to use the Gate Card in a real referral workflow. Pilot evaluation will measure reduction in returned submissions across both mandatory A&G and direct referral pathways.',
                 tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
               },
               {
