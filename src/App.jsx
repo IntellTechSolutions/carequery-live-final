@@ -275,7 +275,7 @@ const CareQueryWebsite = () => {
                 Referral pathways are rarely clinically complex — but they are operationally complex. The eligibility criteria, catchment rules, required investigations, and administrative expectations vary between services, change over time, and are rarely documented in one place. <span className="brand">Care Query</span> focuses on making those operational requirements visible at the point of referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a structured pre-referral checklist confirming that the key requirements are in place before a referral is submitted — whether that referral is a mandatory A&G request to a secondary care consultant or a direct referral to an intermediate community service. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the governed reference view — criteria, catchment, contacts, referral route, and expected pathway. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the patient-facing summary shared after referral.
+                The <strong style={{ color: '#374151' }}>Gate Card</strong> is a structured pre-referral checklist confirming that the key requirements are in place before a referral is submitted — whether that referral is a mandatory A&G request to a secondary care consultant or a direct referral to an intermediate community service. The <strong style={{ color: '#374151' }}>Service Card</strong> is the governed reference view — criteria, catchment, contacts, referral route, and expected pathway. The <strong style={{ color: '#374151' }}>Journey Card</strong> is the patient-facing summary shared after referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 Each service has one governed data record. Every output — checklist, reference view, and patient summary — is generated from that single source. When the record is updated, all three outputs automatically reflect the change.
@@ -398,7 +398,7 @@ const CareQueryWebsite = () => {
                         'Not currently under active rheumatology follow-up at WHH or another Trust',
                       ].map((criterion, i) => (
                         <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.35rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none' }}>
-                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#ca8a04', flexShrink: 0, marginTop: '0.45rem' }} />
+                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#4b5563', flexShrink: 0, marginTop: '0.45rem' }} />
                           <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }}>{criterion}</span>
                         </div>
                       ))}
@@ -519,7 +519,88 @@ const CareQueryWebsite = () => {
           {/* Architecture note — below all three cards */}
           <div style={{ marginTop: '2rem', padding: '1.25rem 1.5rem', background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#6b7280', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is the primary interaction for any clinician at the point of referral. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the structured reference view. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> goes to the patient after referral.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The <strong style={{ color: '#374151' }}>Gate Card</strong> is the primary interaction for any clinician at the point of referral. The <strong style={{ color: '#374151' }}>Service Card</strong> is the structured reference view. The <strong style={{ color: '#374151' }}>Journey Card</strong> goes to the patient after referral.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+
+      {/* Solves MSK Referral Failures */}
+      <section id="solves-failures" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ marginBottom: '3.5rem' }}>
+            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Clinical Evidence</span>
+            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
+              Care Query solves documented MSK referral failures.
+            </h2>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '700px' }}>
+              The most common referral rejections and practice frustrations stem from four core failures in the NHS MSK pathway. Care Query is designed to address each one directly.
+            </p>
+          </div>
+
+          {[
+            {
+              icon: <Shield size={20} color="#4b5563" />,
+              title: 'Hidden Triage Criteria → Made Visible',
+              borderColor: '#4b5563',
+              problem: 'Orthopaedic departments have strict criteria (mechanical symptoms, >3 months rehabilitation, BMI limits, specific imaging views). Clinicians do not see these until referral is rejected, weeks later.',
+              solution: 'The Gate Card makes every triage criterion an explicit checkbox. "Confirmed," "not applicable," or "flagged" before submission. Incomplete workups cannot generate a clipboard summary. No more rejections for missing data.',
+              icon_label: 'Gate Card solves this',
+            },
+            {
+              icon: <FileText size={20} color="#4b5563" />,
+              title: 'Opaque Directories of Service → Structured Detail',
+              borderColor: '#4b5563',
+              problem: 'NHS e-RS lists "Orthopaedic Knee Specialist" without granular detail. It does not specify that a particular site performs ACL reconstruction at Hospital A but not at Hospital B. Referral accepted → bounced weeks later for "this site does not perform that procedure."',
+              solution: 'The Service Card provides clinician-verified detail: what each service accepts, what it explicitly does not, site-specific capabilities, current wait times, and referral routes. Operational truth replaces vague directory entries.',
+              icon_label: 'Service Card solves this',
+            },
+            {
+              icon: <Users size={20} color="#4b5563" />,
+              title: 'Expectation vs. Reality Mismatch → Upfront Communication',
+              borderColor: '#4b5563',
+              problem: 'Patients expect a 2-week scan or 3-month specialist review because no one told them the real wait (often 6–8 weeks for CATS, 14–26 weeks for secondary care). They chase appropriately, burning up practice and hospital admin time.',
+              solution: 'The Journey Card documents current wait times and next steps at the point of referral—sent to the patient via SMS/link immediately. Patient knows the wait is real and documented. Expectation set in writing eliminates mystery-driven chasing.',
+              icon_label: 'Journey Card solves this',
+            },
+            {
+              icon: <CheckSquare size={20} color="#4b5563" />,
+              title: 'Incomplete Clinical Workups → Enforced Completeness',
+              borderColor: '#4b5563',
+              problem: 'Referrals sent without mandatory triage data (e.g., knee referral without documenting mechanical locking, giving way, duration of conservative management). Guarantees rejection or delay as clinicians chase patients weeks later for missing information.',
+              solution: 'The Gate Card enforces mandatory data collection at the point of referral. Gates are checkboxes; they cannot be skipped. Clipboard summary lists all confirmed gates—evidence of complete workup. Referral cannot leave incomplete.',
+              icon_label: 'Gate Card enforces this',
+            },
+          ].map((item, i) => (
+            <div key={i} style={{ borderLeft: `4px solid ${item.borderColor}`, background: '#fff', borderTop: '1px solid #e5e7eb', borderRight: '1px solid #e5e7eb', borderBottom: '1px solid #e5e7eb', borderRadius: '0 8px 8px 0', marginBottom: '1rem' }}>
+              <div style={{ width: '100%', background: 'none', border: 'none', padding: '1.25rem 1.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', textAlign: 'left' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    {item.icon}
+                    <span className="heading" style={{ fontSize: '1.05rem', color: '#111827' }}>{item.title}</span>
+                  </div>
+                  <div>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Problem</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.6, marginBottom: '1rem' }}>
+                      {item.problem}
+                    </p>
+                  </div>
+                  <div>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query Solution</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
+                      {item.solution}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #4b5563' }}>
+            <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
+              <strong>What this means for pilot evaluation:</strong> Success is measured by reduction in returned submissions, reduction in clinician callbacks for missing data, and reduction in patient chasing for status updates. Each failure point above is directly measurable during the 4–8 week pilot.
             </p>
           </div>
         </div>
@@ -553,7 +634,7 @@ const CareQueryWebsite = () => {
               <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
                 {[
                   { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
-                  { stat: '3 outputs', label: <><strong style={{ color: '#4b5563' }}>Gate Card</strong>, <strong style={{ color: '#4b5563' }}>Service Card</strong>, and <strong style={{ color: '#4b5563' }}>Journey Card</strong> — all generated from a single Underlying Service Record</> },
+                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
                   { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
                   { stat: '1 ICB', label: 'Focused on MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
                   { stat: '1 Apr 2026', label: 'Mandatory A&G for secondary care planned referrals under the 2026 GP contract — intermediate community services retain direct referral routes' },
@@ -680,7 +761,7 @@ const CareQueryWebsite = () => {
             </div>
           </div>
 
-          <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
+          <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '1.5rem', alignItems: 'start' }}>
             {[
               {
                 title: 'Clinical Contributors',
@@ -689,18 +770,18 @@ const CareQueryWebsite = () => {
               },
               {
                 title: 'Pilot Practices',
-                desc: 'We are looking for 5–10 GP practices in Cheshire and Merseyside to pilot the Gate Card in real referral workflows. Success is measured by reduction in returned submissions — whether through mandatory A&G or direct referral pathways.',
+                desc: 'We are looking for 5–10 GP practices in Cheshire and Merseyside to pilot the Gate Card in real referral workflows. From April 2026, mandatory A&G and direct referral routes co-exist — navigating both accurately is the problem the Gate Card solves. Success is measured by reduction in returned submissions across both pathways.',
                 tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
               },
               {
                 title: 'Service Owners and Clinical Leads',
-                desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries, and a description you control — not one that lives in an out-of-date document. You also get a direct channel to update it.',
+                desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries from practices, and a description you control — not one buried in an out-of-date document. You get a direct channel to update it, and a named steward role that ensures it stays current.',
                 tag: 'Service managers · Clinical leads · MSK service administrators',
               },
             ].map((item, i) => (
-              <div key={i} className="card" style={{ padding: '1.75rem' }}>
+              <div key={i} className="card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <h3 className="heading" style={{ fontSize: '1.2rem', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
-                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>{item.desc}</p>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400, marginBottom: '1rem', flex: 1 }}>{item.desc}</p>
                 <span className="body-text" style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#2563eb' }}>{item.tag}</span>
               </div>
             ))}
