@@ -611,27 +611,44 @@ const CareQueryWebsite = () => {
       {/* How It Works */}
       <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start', marginBottom: '3.5rem' }}>
-            <div>
-              <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
-              <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-                Simple by design.<br />No black box, no AI, no guesswork.
-              </h2>
-              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                NHS referral pathways are operationally complex but rarely documented in a structured, machine-readable way. <span className="brand">Care Query</span> encodes that information into a single governed record per service — making it available at the point of referral in a consistent, auditable format.
+          <div style={{ marginBottom: '3.5rem' }}>
+            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
+            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+              Simple by design.<br />No black box, no AI, no guesswork.
+            </h2>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+              NHS referral pathways are operationally complex but rarely documented in a structured, machine-readable way. <span className="brand">Care Query</span> encodes that information into a single governed record per service — making it available at the point of referral in a consistent, auditable format.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+              <strong>For practice staff and administrators:</strong> <span className="brand">Care Query</span> runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it. Referral preparation stays inside the consultation — not in a follow-up task that gets lost.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+              <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. No API calls. No clinical system integration. No data leaves the browser. The tool reads a static JSON file hosted on a CDN and renders it client-side. There is nothing to risk-assess beyond a read-only webpage.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+              <strong>For commissioners and clinical leads:</strong> What you see is exactly what is in the governed data file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source. Reduced A&G rejections translate directly to lower unwarranted variation and fewer unfunded re-submissions across your ICB footprint.
+            </p>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
+              <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals reaching your department, fewer phone calls from practices asking basic pathway questions, and a description of your service that you control — not one buried in an out-of-date directory. You verify it. You publish it. You update it when things change.
+            </p>
+            <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #f3f4f6' }}>
+              <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
+              <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
+                Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
               </p>
-              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                <strong>For practice staff and administrators:</strong> <span className="brand">Care Query</span> runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it. Referral preparation stays inside the consultation — not in a follow-up task that gets lost.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. No API calls. No clinical system integration. No data leaves the browser. The tool reads a static JSON file hosted on a CDN and renders it client-side. There is nothing to risk-assess beyond a read-only webpage.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                <strong>For commissioners and clinical leads:</strong> What you see is exactly what is in the governed data file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source. Reduced A&G rejections translate directly to lower unwarranted variation and fewer unfunded re-submissions across your ICB footprint.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals reaching your department, fewer phone calls from practices asking basic pathway questions, and a description of your service that you control — not one buried in an out-of-date directory. You verify it. You publish it. You update it when things change.
-              </p>
+              {submitted ? (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Check size={16} color="#22c55e" />
+                  <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
+                </div>
+              ) : (
+                <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <input type="hidden" name="form-name" value="stay-informed" />
+                  <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
+                    placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
+                  <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
+                </form>
+              )}
             </div>
           </div>
 
@@ -720,25 +737,6 @@ const CareQueryWebsite = () => {
                   </div>
                 </div>
               ))}
-              <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #e5e7eb' }}>
-                <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
-                <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
-                  Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
-                </p>
-                {submitted ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <Check size={16} color="#22c55e" />
-                    <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
-                  </div>
-                ) : (
-                  <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <input type="hidden" name="form-name" value="stay-informed" />
-                    <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
-                      placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
-                    <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
-                  </form>
-                )}
-              </div>
             </div>
           </div>
         </div>
