@@ -216,8 +216,11 @@ const CareQueryWebsite = () => {
       <section style={{ padding: '3rem 1.5rem', background: '#f9fafb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ maxWidth: '820px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <Compass size={20} color="#2563eb" />
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Current Scope</span>
+            </div>
             <div>
-            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Current Scope</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
               {[
                 { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
