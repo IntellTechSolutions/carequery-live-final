@@ -517,8 +517,8 @@ const CareQueryWebsite = () => {
           ))}
 
           {/* Architecture note — below all three cards */}
-          <div style={{ marginTop: '2rem', padding: '1.25rem 1.5rem', background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
-            <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#6b7280', fontWeight: 400 }}>
+          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
+            <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
               Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is the primary interaction for any clinician at the point of referral. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the structured reference view. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> goes to the patient after referral.
             </p>
           </div>
@@ -768,21 +768,42 @@ const CareQueryWebsite = () => {
       {/* Get Involved */}
       <section id="get-involved" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ maxWidth: '760px', marginBottom: '3rem', display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-            <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
-              <Handshake size={30} color="#2563eb" />
+          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start', marginBottom: '3rem' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+              <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
+                <Handshake size={30} color="#2563eb" />
+              </div>
+              <div style={{ flex: 1 }}>
+                <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
+                <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+                  The knowledge is yours.<br /><span className="brand">Care Query</span> is just the structure.
+                </h2>
+                <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                  The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day.
+                </p>
+                <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
+                  If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
+                </p>
+              </div>
             </div>
-            <div style={{ flex: 1 }}>
-            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
-            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-              The knowledge is yours.<br /><span className="brand">Care Query</span> is just the structure.
-            </h2>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day.
-            </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
-              If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
-            </p>
+            <div className="card" style={{ padding: '1.75rem', alignSelf: 'start' }}>
+              <h3 className="heading" style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '0.5rem' }}>Stay informed</h3>
+              <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+                Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
+              </p>
+              {submitted ? (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Check size={18} color="#22c55e" />
+                  <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem' }}>Received — we will be in touch.</p>
+                </div>
+              ) : (
+                <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <input type="hidden" name="form-name" value="stay-informed" />
+                  <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
+                    placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '220px' }} />
+                  <button type="submit" className="btn-primary">Register interest</button>
+                </form>
+              )}
             </div>
           </div>
 
@@ -816,25 +837,6 @@ const CareQueryWebsite = () => {
             Each service added to <span className="brand">Care Query</span> increases its value for every clinician who uses it. The system grows through the contributions of service owners and clinical teams — not as a favour to the project, but because an accurate, current description of their service is directly in their interest: fewer inappropriate referrals, fewer phone calls from practices, and fewer returns through A&G. That incentive is what makes the model sustainable — services maintain their own records because doing so reduces their own burden, not because someone asked them to. A GP practice that uses <span className="brand">Care Query</span> benefits from every service that joins. A service that maintains its record benefits from every practice that uses it. The more participants, the more each one gains — a network effect built on operational accuracy rather than user growth.
           </p>
 
-          <div className="card" style={{ padding: '1.75rem', maxWidth: '560px' }}>
-            <h3 className="heading" style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '0.5rem' }}>Stay informed</h3>
-            <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-              Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
-            </p>
-            {submitted ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Check size={18} color="#22c55e" />
-                <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem' }}>Received — we will be in touch.</p>
-              </div>
-            ) : (
-              <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <input type="hidden" name="form-name" value="stay-informed" />
-                <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
-                  placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '220px' }} />
-                <button type="submit" className="btn-primary">Register interest</button>
-              </form>
-            )}
-          </div>
         </div>
       </section>
 
