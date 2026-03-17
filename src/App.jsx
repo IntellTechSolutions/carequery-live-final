@@ -533,42 +533,42 @@ const CareQueryWebsite = () => {
           <div style={{ marginBottom: '3.5rem' }}>
             <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Clinical Evidence</span>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
-              Care Query solves documented MSK referral failures.
+              <span className="brand">Care Query</span> solves documented MSK referral failures.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '700px' }}>
-              The most common referral rejections and practice frustrations stem from four core failures in the NHS MSK pathway. Care Query is designed to address each one directly.
+              The most common referral rejections and practice frustrations stem from four core failures in the NHS MSK pathway. <span className="brand">Care Query</span> is designed to address each one directly.
             </p>
           </div>
 
           {[
             {
-              icon: <Shield size={20} color="#9b2335" />,
+              icon: <Shield size={20} color="#374151" />,
               title: 'Hidden Triage Criteria → Made Visible',
-              borderColor: '#9b2335',
+              borderColor: '#374151',
               problem: 'Orthopaedic departments have strict criteria (mechanical symptoms, >3 months rehabilitation, BMI limits, specific imaging views). Clinicians do not see these until referral is rejected, weeks later.',
               solution: 'The Gate Card makes every triage criterion an explicit checkbox. "Confirmed," "not applicable," or "flagged" before submission. Incomplete workups cannot generate a clipboard summary. No more rejections for missing data.',
               icon_label: 'Gate Card solves this',
             },
             {
-              icon: <FileText size={20} color="#ca8a04" />,
+              icon: <FileText size={20} color="#374151" />,
               title: 'Opaque Directories of Service → Structured Detail',
-              borderColor: '#ca8a04',
+              borderColor: '#374151',
               problem: 'NHS e-RS lists "Orthopaedic Knee Specialist" without granular detail. It does not specify that a particular site performs ACL reconstruction at Hospital A but not at Hospital B. Referral accepted → bounced weeks later for "this site does not perform that procedure."',
               solution: 'The Service Card provides clinician-verified detail: what each service accepts, what it explicitly does not, site-specific capabilities, current wait times, and referral routes. Operational truth replaces vague directory entries.',
               icon_label: 'Service Card solves this',
             },
             {
-              icon: <Users size={20} color="#16a34a" />,
+              icon: <Users size={20} color="#374151" />,
               title: 'Expectation vs. Reality Mismatch → Upfront Communication',
-              borderColor: '#16a34a',
+              borderColor: '#374151',
               problem: 'Patients expect a 2-week scan or 3-month specialist review because no one told them the real wait (often 6–8 weeks for CATS, 14–26 weeks for secondary care). They chase appropriately, burning up practice and hospital admin time.',
               solution: 'The Journey Card documents current wait times and next steps at the point of referral—sent to the patient via SMS/link immediately. Patient knows the wait is real and documented. Expectation set in writing eliminates mystery-driven chasing.',
               icon_label: 'Journey Card solves this',
             },
             {
-              icon: <CheckSquare size={20} color="#9b2335" />,
+              icon: <CheckSquare size={20} color="#374151" />,
               title: 'Incomplete Clinical Workups → Enforced Completeness',
-              borderColor: '#9b2335',
+              borderColor: '#374151',
               problem: 'Referrals sent without mandatory triage data (e.g., knee referral without documenting mechanical locking, giving way, duration of conservative management). Guarantees rejection or delay as clinicians chase patients weeks later for missing information.',
               solution: 'The Gate Card enforces mandatory data collection at the point of referral. Gates are checkboxes; they cannot be skipped. Clipboard summary lists all confirmed gates—evidence of complete workup. Referral cannot leave incomplete.',
               icon_label: 'Gate Card enforces this',
@@ -588,7 +588,7 @@ const CareQueryWebsite = () => {
                     </p>
                   </div>
                   <div>
-                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query Solution</div>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query Solution</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
                       {item.solution}
                     </p>
@@ -621,10 +621,16 @@ const CareQueryWebsite = () => {
                 NHS referral pathways are operationally complex but rarely documented in a structured, machine-readable way. <span className="brand">Care Query</span> encodes that information into a single governed record per service — making it available at the point of referral in a consistent, auditable format.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                <strong>For practice staff:</strong> <span className="brand">Care Query</span> runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it.
+                <strong>For practice staff and administrators:</strong> <span className="brand">Care Query</span> runs in a browser tab. No installation, no IT request, no login, no integration with your clinical system required. Open it, use it, close it. Referral preparation stays inside the consultation — not in a follow-up task that gets lost.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+                <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. No API calls. No clinical system integration. No data leaves the browser. The tool reads a static JSON file hosted on a CDN and renders it client-side. There is nothing to risk-assess beyond a read-only webpage.
+              </p>
+              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
+                <strong>For commissioners and clinical leads:</strong> What you see is exactly what is in the governed data file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source. Reduced A&G rejections translate directly to lower unwarranted variation and fewer unfunded re-submissions across your ICB footprint.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                <strong>For commissioners and clinical leads:</strong> The tool reads a single structured data file and renders outputs from it. What you see is exactly what is in that file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source.
+                <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals reaching your department, fewer phone calls from practices asking basic pathway questions, and a description of your service that you control — not one buried in an out-of-date directory. You verify it. You publish it. You update it when things change.
               </p>
             </div>
             <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
@@ -788,7 +794,7 @@ const CareQueryWebsite = () => {
           </div>
 
           <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '900px', marginBottom: '3rem' }}>
-            Each service added to <span className="brand">Care Query</span> increases its value for every clinician who uses it. The system grows through the contributions of service owners and clinical teams — not as a favour to the project, but because an accurate, current description of their service is directly in their interest: fewer inappropriate referrals, fewer phone calls from practices, and fewer returns through A&G. That incentive is what makes the model sustainable — services maintain their own records because doing so reduces their own burden, not because someone asked them to.
+            Each service added to <span className="brand">Care Query</span> increases its value for every clinician who uses it. The system grows through the contributions of service owners and clinical teams — not as a favour to the project, but because an accurate, current description of their service is directly in their interest: fewer inappropriate referrals, fewer phone calls from practices, and fewer returns through A&G. That incentive is what makes the model sustainable — services maintain their own records because doing so reduces their own burden, not because someone asked them to. A GP practice that uses <span className="brand">Care Query</span> benefits from every service that joins. A service that maintains its record benefits from every practice that uses it. The more participants, the more each one gains — a network effect built on operational accuracy rather than user growth.
           </p>
 
           <div className="card" style={{ padding: '1.75rem', maxWidth: '560px' }}>
