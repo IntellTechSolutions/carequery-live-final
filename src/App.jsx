@@ -635,7 +635,7 @@ const CareQueryWebsite = () => {
             </div>
             <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
               <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
-                The referral problem — in numbers
+                <span style={{ color: '#2563eb' }}>Care Query</span> — in numbers
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
                 {[
@@ -768,42 +768,21 @@ const CareQueryWebsite = () => {
       {/* Get Involved */}
       <section id="get-involved" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start', marginBottom: '3rem' }}>
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-              <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
-                <Handshake size={30} color="#2563eb" />
-              </div>
-              <div style={{ flex: 1 }}>
-                <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
-                <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-                  The knowledge is yours.<br /><span className="brand">Care Query</span> is just the structure.
-                </h2>
-                <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day.
-                </p>
-                <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
-                  If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
-                </p>
-              </div>
+          <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', marginBottom: '3rem' }}>
+            <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
+              <Handshake size={30} color="#2563eb" />
             </div>
-            <div className="card" style={{ padding: '1.75rem', alignSelf: 'start' }}>
-              <h3 className="heading" style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '0.5rem' }}>Stay informed</h3>
-              <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
+            <div style={{ flex: 1 }}>
+              <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Collaboration</span>
+              <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
+                The knowledge is yours.<br /><span className="brand">Care Query</span> is just the structure.
+              </h2>
+              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day. It is the reason one GP practice in a locality has a near-zero rejection rate while the practice next door has referrals returned every week. The difference is not clinical skill — it is informational access.
               </p>
-              {submitted ? (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Check size={18} color="#22c55e" />
-                  <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem' }}>Received — we will be in touch.</p>
-                </div>
-              ) : (
-                <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                  <input type="hidden" name="form-name" value="stay-informed" />
-                  <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
-                    placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '220px' }} />
-                  <button type="submit" className="btn-primary">Register interest</button>
-                </form>
-              )}
+              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
+                <span className="brand">Care Query</span> gives that knowledge a structured home — maintained by the people who hold it, accessible to every clinician who needs it, and honest about what has been verified and what has not. If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
+              </p>
             </div>
           </div>
 
