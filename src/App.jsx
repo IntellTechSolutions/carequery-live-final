@@ -535,7 +535,7 @@ const CareQueryWebsite = () => {
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
               <span className="brand">Care Query</span> solves documented MSK referral failures.
             </h2>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '700px' }}>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               The most common referral rejections and practice frustrations stem from four core failures in the NHS MSK pathway. <span className="brand">Care Query</span> is designed to address each one directly.
             </p>
           </div>
@@ -650,6 +650,25 @@ const CareQueryWebsite = () => {
                     <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.65rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
                   </React.Fragment>
                 ))}
+              </div>
+              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid #f3f4f6' }}>
+                <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
+                <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
+                  Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
+                </p>
+                {submitted ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Check size={16} color="#22c55e" />
+                    <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
+                  </div>
+                ) : (
+                  <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <input type="hidden" name="form-name" value="stay-informed" />
+                    <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
+                      placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
+                    <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
@@ -793,7 +812,7 @@ const CareQueryWebsite = () => {
             ))}
           </div>
 
-          <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, maxWidth: '900px', marginBottom: '3rem' }}>
+          <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '3rem' }}>
             Each service added to <span className="brand">Care Query</span> increases its value for every clinician who uses it. The system grows through the contributions of service owners and clinical teams — not as a favour to the project, but because an accurate, current description of their service is directly in their interest: fewer inappropriate referrals, fewer phone calls from practices, and fewer returns through A&G. That incentive is what makes the model sustainable — services maintain their own records because doing so reduces their own burden, not because someone asked them to. A GP practice that uses <span className="brand">Care Query</span> benefits from every service that joins. A service that maintains its record benefits from every practice that uses it. The more participants, the more each one gains — a network effect built on operational accuracy rather than user growth.
           </p>
 
