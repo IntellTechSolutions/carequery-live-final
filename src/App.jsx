@@ -628,28 +628,9 @@ const CareQueryWebsite = () => {
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
               <strong>For commissioners and clinical leads:</strong> What you see is exactly what is in the governed data file — no inference, no AI in the routing logic, nothing probabilistic. If a gate appears on a checklist, it is because a named steward put it there. Every output is auditable back to its source. Reduced A&G rejections translate directly to lower unwarranted variation and fewer unfunded re-submissions across your ICB footprint.
             </p>
-            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals reaching your department, fewer phone calls from practices asking basic pathway questions, and a description of your service that you control — not one buried in an out-of-date directory. You verify it. You publish it. You update it when things change.
             </p>
-            <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #f3f4f6' }}>
-              <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
-              <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
-                Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
-              </p>
-              {submitted ? (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Check size={16} color="#22c55e" />
-                  <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
-                </div>
-              ) : (
-                <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  <input type="hidden" name="form-name" value="stay-informed" />
-                  <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
-                    placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
-                  <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
-                </form>
-              )}
-            </div>
           </div>
 
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
@@ -714,9 +695,28 @@ const CareQueryWebsite = () => {
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
                 <span className="brand">Care Query</span> does not provide diagnosis, triage, or clinical decision support. This lies in the hands of clinicians. The Gate Card surfaces criteria, catchment, and investigation requirements. You confirm what applies. The software records it.
               </p>
-              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
                 <span className="brand">Care Query</span> structures referral requirements that already exist across NHS services — making them visible at the point the referral is prepared. The clinical decision remains entirely yours; the platform exists only to support the administrative accuracy around it.
               </p>
+              <div style={{ marginTop: '1rem', paddingTop: '1.5rem', borderTop: '1px solid #e5e7eb' }}>
+                <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
+                <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
+                  Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
+                </p>
+                {submitted ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Check size={16} color="#22c55e" />
+                    <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
+                  </div>
+                ) : (
+                  <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <input type="hidden" name="form-name" value="stay-informed" />
+                    <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
+                      placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
+                    <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
+                  </form>
+                )}
+              </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
