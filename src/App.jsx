@@ -186,13 +186,13 @@ const CareQueryWebsite = () => {
                 <span className="brand">Care Query</span> surfaces those requirements before the referral is sent — turning local service rules into a governed data record that generates three operational tools.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a pre-referral compliance checklist — whether a service needs a mandatory A&G submission or accepts a direct referral, it generates a clipboard summary confirming the right route was taken and all local criteria were met before anything leaves the practice.
+                The <strong style={{ color: '#4b5563' }}>Gate Card</strong> is a pre-referral compliance checklist — whether a service needs a mandatory A&G submission or accepts a direct referral, it generates a clipboard summary confirming the right route was taken and all local criteria were met before anything leaves the practice.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#ca8a04' }}>Service Card</strong> provides a structured reference view of the service itself — criteria, catchment, operational contacts, and practical pathway information.
+                The <strong style={{ color: '#4b5563' }}>Service Card</strong> provides a structured reference view of the service itself — criteria, catchment, operational contacts, and practical pathway information.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the patient-facing summary sent after referral via Accurx — pre-emptively answering wait time and next-steps questions, directly suppressing the callback volume that follows most MSK referrals.
+                The <strong style={{ color: '#4b5563' }}>Journey Card</strong> is the patient-facing summary sent after referral via Accurx — pre-emptively answering wait time and next-steps questions, directly suppressing the callback volume that follows most MSK referrals.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 All three come from a single governed service record, so when information changes, every card reflects the update.
@@ -286,11 +286,11 @@ const CareQueryWebsite = () => {
           {/* Expandable output cards — Gate Card first */}
           {[
             {
-              icon: <CheckSquare size={20} color="#9b2335" />,
+              icon: <CheckSquare size={20} color="#4b5563" />,
               title: 'Gate Card — Pre-Referral Checklist',
               tagClass: 'tag-burgundy',
               tagLabel: 'Primary output — GPs · Physician Associates · Paramedics · ACPs · FCPs',
-              borderColor: '#9b2335',
+              borderColor: '#4b5563',
               summary: 'Some MSK services require a mandatory A&G submission — secondary care services like Rheumatology and Orthopaedics, where the 2026 contract mandates A&G as a prerequisite for consultant-led planned care. Others accept a direct GP referral — intermediate community services like MSKCATS, OCATS, and FCP services, which exist to assess whether secondary care is needed and sit outside the A&G mandate entirely. A returned submission from either pathway is unfunded work that contributes to ICB performance risk. The Gate Card confirms the right requirements are in place — for whichever route the service uses — before anything leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
               detail: (
                 <>
@@ -329,7 +329,7 @@ const CareQueryWebsite = () => {
                       'Clinical reasoning documented in A&G — one sentence distinguishing suspected inflammatory from mechanical pathology',
                     ].map((gate, i) => (
                       <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 6 ? '1px solid #f3f4f6' : 'none' }}>
-                        <div style={{ width: '16px', height: '16px', border: '2px solid #9b2335', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
+                        <div style={{ width: '16px', height: '16px', border: '2px solid #4b5563', borderRadius: '4px', flexShrink: 0, marginTop: '0.15rem' }} />
                         <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5 }}>{gate}</span>
                       </div>
                     ))}
@@ -348,11 +348,11 @@ const CareQueryWebsite = () => {
               ),
             },
             {
-              icon: <FileText size={20} color="#ca8a04" />,
+              icon: <FileText size={20} color="#4b5563" />,
               title: 'Service Card — Structured Service Reference',
               tagClass: 'tag-amber',
               tagLabel: 'Clinicians · Patients · Commissioners',
-              borderColor: '#ca8a04',
+              borderColor: '#4b5563',
               summary: 'A structured view of an NHS MSK service — referral criteria, catchment, operational contacts, and typical waiting times — generated from the Underlying Service Record and maintained by a named steward. The operational wiki that makes the Gate Card reliable.',
               detail: (
                 <>
@@ -450,11 +450,11 @@ const CareQueryWebsite = () => {
               ),
             },
             {
-              icon: <Users size={20} color="#16a34a" />,
+              icon: <Users size={20} color="#4b5563" />,
               title: 'Journey Card — Patient Referral Summary',
               tagClass: 'tag-green',
               tagLabel: 'Primary audience: Patients — sent by the referring clinician',
-              borderColor: '#16a34a',
+              borderColor: '#4b5563',
               summary: 'Sent to the patient after referral — typically via Accurx SMS — explaining the service, what typically happens next, and what they can do while waiting. Pre-emptively answers the questions that would otherwise generate a callback to reception.',
               detail: (
                 <>
@@ -480,7 +480,7 @@ const CareQueryWebsite = () => {
                         'Continue taking any prescribed medications while you wait.',
                       ].map((step, i) => (
                         <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', paddingBottom: '0.3rem' }}>
-                          <span className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#16a34a', flexShrink: 0, minWidth: '1rem' }}>{i + 1}.</span>
+                          <span className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#4b5563', flexShrink: 0, minWidth: '1rem' }}>{i + 1}.</span>
                           <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.55, fontWeight: 400 }}>{step}</span>
                         </div>
                       ))}
@@ -493,7 +493,7 @@ const CareQueryWebsite = () => {
                         'Bring a list of all your current medications to your first appointment.',
                       ].map((tip, i) => (
                         <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', paddingBottom: '0.3rem' }}>
-                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#16a34a', flexShrink: 0, marginTop: '0.45rem' }} />
+                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#4b5563', flexShrink: 0, marginTop: '0.45rem' }} />
                           <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.55, fontWeight: 400 }}>{tip}</span>
                         </div>
                       ))}
@@ -553,7 +553,7 @@ const CareQueryWebsite = () => {
               <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
                 {[
                   { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
-                  { stat: '3 outputs', label: <><strong style={{ color: '#9b2335' }}>Gate Card</strong>, <strong style={{ color: '#ca8a04' }}>Service Card</strong>, and <strong style={{ color: '#16a34a' }}>Journey Card</strong> — all generated from a single Underlying Service Record</> },
+                  { stat: '3 outputs', label: <><strong style={{ color: '#4b5563' }}>Gate Card</strong>, <strong style={{ color: '#4b5563' }}>Service Card</strong>, and <strong style={{ color: '#4b5563' }}>Journey Card</strong> — all generated from a single Underlying Service Record</> },
                   { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
                   { stat: '1 ICB', label: 'Focused on MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
                   { stat: '1 Apr 2026', label: 'Mandatory A&G for secondary care planned referrals under the 2026 GP contract — intermediate community services retain direct referral routes' },
@@ -689,7 +689,7 @@ const CareQueryWebsite = () => {
               },
               {
                 title: 'Pilot Practices',
-                desc: 'From 1 April 2026, secondary care planned referrals require mandatory A&G with no per-request payment. Intermediate community services like MSKCATS, OCATS, and FCP services accept direct referrals — no A&G required. Navigating these different rules accurately, for every service, is exactly the problem the Gate Card solves. We are looking for 5–10 GP practices in Cheshire and Merseyside to use the Gate Card in a real referral workflow. Pilot evaluation will measure reduction in returned submissions across both mandatory A&G and direct referral pathways.',
+                desc: 'We are looking for 5–10 GP practices in Cheshire and Merseyside to pilot the Gate Card in real referral workflows. Success is measured by reduction in returned submissions — whether through mandatory A&G or direct referral pathways.',
                 tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
               },
               {
