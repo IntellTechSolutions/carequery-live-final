@@ -633,44 +633,6 @@ const CareQueryWebsite = () => {
                 <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals reaching your department, fewer phone calls from practices asking basic pathway questions, and a description of your service that you control — not one buried in an out-of-date directory. You verify it. You publish it. You update it when things change.
               </p>
             </div>
-            <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
-              <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
-                <span style={{ color: '#2563eb' }}>Care Query</span> — in numbers
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
-                {[
-                  { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
-                  { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
-                  { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
-                  { stat: '1 ICB', label: 'Focused on MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
-                  { stat: '1 Apr 2026', label: 'Mandatory A&G for secondary care planned referrals under the 2026 GP contract — intermediate community services retain direct referral routes' },
-                ].map((item, i) => (
-                  <React.Fragment key={i}>
-                    <span className="heading" style={{ fontSize: '1.2rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.65rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
-                    <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.65rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
-                  </React.Fragment>
-                ))}
-              </div>
-              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid #f3f4f6' }}>
-                <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
-                <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
-                  Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
-                </p>
-                {submitted ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <Check size={16} color="#22c55e" />
-                    <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
-                  </div>
-                ) : (
-                  <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <input type="hidden" name="form-name" value="stay-informed" />
-                    <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
-                      placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
-                    <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
-                  </form>
-                )}
-              </div>
-            </div>
           </div>
 
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
@@ -757,6 +719,52 @@ const CareQueryWebsite = () => {
                     <div className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>{item.desc}</div>
                   </div>
                 </div>
+              ))}
+              <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #e5e7eb' }}>
+                <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
+                <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
+                  Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
+                </p>
+                {submitted ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Check size={16} color="#22c55e" />
+                    <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
+                  </div>
+                ) : (
+                  <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <input type="hidden" name="form-name" value="stay-informed" />
+                    <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
+                      placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
+                    <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+
+      {/* Stats Card */}
+      <section style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div className="card" style={{ padding: '1.75rem', background: '#fff' }}>
+            <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1rem' }}>
+              <span style={{ color: '#2563eb' }}>Care Query</span> — in numbers
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
+              {[
+                { stat: '5 services', label: 'MSK services currently encoded in the proof-of-concept' },
+                { stat: '3 outputs', label: 'Gate Card, Service Card, and Journey Card — all generated from a single Underlying Service Record' },
+                { stat: '1 record', label: 'Underlying Service Record per service — the single governed source that powers all three outputs' },
+                { stat: '1 ICB', label: 'Focused on MSK referral pathways across Cheshire and Merseyside Integrated Care Board' },
+                { stat: '1 Apr 2026', label: 'Mandatory A&G for secondary care planned referrals under the 2026 GP contract — intermediate community services retain direct referral routes' },
+              ].map((item, i) => (
+                <React.Fragment key={i}>
+                  <span className="heading" style={{ fontSize: '1.2rem', color: '#374151', whiteSpace: 'nowrap', lineHeight: 1, padding: '0.65rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.stat}</span>
+                  <span className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.4, fontWeight: 400, padding: '0.65rem 0', borderBottom: i < 4 ? '1px solid #f3f4f6' : 'none', display: 'flex', alignItems: 'center' }}>{item.label}</span>
+                </React.Fragment>
               ))}
             </div>
           </div>
