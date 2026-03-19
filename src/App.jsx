@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink, Check, Compass, Handshake } from 'lucide-react';
+import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink, Check, Compass, Handshake, Database, Target, Layers } from 'lucide-react';
 
 const ExpandableCard = ({ card, defaultOpen }) => {
   const [open, setOpen] = React.useState(defaultOpen);
@@ -133,7 +133,7 @@ const CareQueryWebsite = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
               <img src="/Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
-              <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.01em' }}>Care Query</span>
+              <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#2563eb', letterSpacing: '-0.01em' }}>Care Query</span>
               <span className="tag tag-poc">PoC</span>
             </div>
             <div className="desktop-nav">
@@ -256,7 +256,10 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '4rem', alignItems: 'start', marginBottom: '3.5rem' }}>
             <div>
-              <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Three Clinical Outputs</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                <Database size={20} color="#2563eb" />
+                <span className="tag tag-blue" style={{ marginBottom: '0' }}>Three Clinical Outputs</span>
+              </div>
               <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', letterSpacing: '-0.01em' }}>
                 One governed record.<br />Three practical outputs.
               </h2>
@@ -521,7 +524,10 @@ const CareQueryWebsite = () => {
       <section id="solves-failures" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ marginBottom: '3.5rem' }}>
-            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Clinical Evidence</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <Target size={20} color="#2563eb" />
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Clinical Evidence</span>
+            </div>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
               <span className="brand">Care Query</span> solves documented MSK referral failures.
             </h2>
@@ -645,7 +651,10 @@ const CareQueryWebsite = () => {
       <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ marginBottom: '3.5rem' }}>
-            <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Technical Architecture</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <Layers size={20} color="#2563eb" />
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Technical Architecture</span>
+            </div>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
               Simple by design.<br />No black box, no AI, no guesswork.
             </h2>
@@ -712,7 +721,10 @@ const CareQueryWebsite = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
             <div>
-              <span className="tag tag-blue" style={{ marginBottom: '1rem', display: 'inline-block' }}>Regulatory Position</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                <Shield size={20} color="#2563eb" />
+                <span className="tag tag-blue" style={{ marginBottom: '0' }}>Regulatory Position</span>
+              </div>
               <h2 className="heading" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
                 Your judgment.<br />Our structure.
               </h2>
