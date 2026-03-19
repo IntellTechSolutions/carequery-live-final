@@ -133,7 +133,7 @@ const CareQueryWebsite = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
               <img src="/Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
-              <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#2563eb', letterSpacing: '-0.01em' }}>Care Query</span>
+              <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#005EB8', letterSpacing: '-0.01em' }}>Care Query</span>
               <span className="tag tag-poc">PoC</span>
             </div>
             <div className="desktop-nav">
