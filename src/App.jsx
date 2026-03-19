@@ -526,71 +526,114 @@ const CareQueryWebsite = () => {
               <span className="brand">Care Query</span> solves documented MSK referral failures.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The most common referral rejections and practice frustrations stem from four core failures in the NHS MSK pathway. <span className="brand">Care Query</span> is designed to address each one directly.
+              The most common referral rejections and practice frustrations trace back to four failure points in the MSK pathway. Each one is addressable — and each one maps to a specific <span className="brand">Care Query</span> output.
             </p>
           </div>
 
           {[
             {
-              icon: <Shield size={20} color="#374151" />,
-              title: 'Hidden Triage Criteria → Made Visible',
-              borderColor: '#374151',
-              problem: 'Orthopaedic departments have strict criteria (mechanical symptoms, >3 months rehabilitation, BMI limits, specific imaging views). Clinicians do not see these until referral is rejected, weeks later.',
-              solution: 'The Gate Card makes every triage criterion an explicit checkbox. "Confirmed," "not applicable," or "flagged" before submission. Incomplete workups cannot generate a clipboard summary. No more rejections for missing data.',
-              icon_label: 'Gate Card solves this',
-            },
-            {
-              icon: <FileText size={20} color="#374151" />,
-              title: 'Opaque Directories of Service → Structured Detail',
-              borderColor: '#374151',
-              problem: 'NHS e-RS lists "Orthopaedic Knee Specialist" without granular detail. It does not specify that a particular site performs ACL reconstruction at Hospital A but not at Hospital B. Referral accepted → bounced weeks later for "this site does not perform that procedure."',
-              solution: 'The Service Card provides clinician-verified detail: what each service accepts, what it explicitly does not, site-specific capabilities, current wait times, and referral routes. Operational truth replaces vague directory entries.',
-              icon_label: 'Service Card solves this',
-            },
-            {
-              icon: <Users size={20} color="#374151" />,
-              title: 'Expectation vs. Reality Mismatch → Upfront Communication',
-              borderColor: '#374151',
-              problem: 'Patients expect a 2-week scan or 3-month specialist review because no one told them the real wait (often 6–8 weeks for CATS, 14–26 weeks for secondary care). They chase appropriately, burning up practice and hospital admin time.',
-              solution: 'The Journey Card is time-aware — it calculates how long the patient has been waiting and renders a phase-appropriate message: reassurance in the early weeks, guidance as the appointment approaches, and a clear action prompt if the wait exceeds the typical window. Sent via SMS immediately after referral, with a confidence signal confirming the clinician verified all prerequisites. Expectation set in writing, updated every time the patient reopens the link.',
-              icon_label: 'Journey Card solves this',
-            },
-            {
-              icon: <CheckSquare size={20} color="#374151" />,
-              title: 'Incomplete Clinical Workups → Enforced Completeness',
-              borderColor: '#374151',
-              problem: 'Referrals sent without mandatory triage data (e.g., knee referral without documenting mechanical locking, giving way, duration of conservative management). Guarantees rejection or delay as clinicians chase patients weeks later for missing information.',
-              solution: 'The Gate Card enforces mandatory data collection at the point of referral. Gates are checkboxes; they cannot be skipped. Clipboard summary lists all confirmed gates—evidence of complete workup. Referral cannot leave incomplete.',
-              icon_label: 'Gate Card enforces this',
-            },
-          ].map((item, i) => (
-            <div key={i} style={{ borderLeft: `4px solid ${item.borderColor}`, background: '#fff', borderTop: '1px solid #e5e7eb', borderRight: '1px solid #e5e7eb', borderBottom: '1px solid #e5e7eb', borderRadius: '0 8px 8px 0', marginBottom: '1rem' }}>
-              <div style={{ width: '100%', background: 'none', border: 'none', padding: '1.25rem 1.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', textAlign: 'left' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    {item.icon}
-                    <span className="heading" style={{ fontSize: '1.05rem', color: '#111827' }}>{item.title}</span>
-                  </div>
-                  <div>
+              icon: <Shield size={20} color="#9b2335" />,
+              title: 'Hidden Criteria & Incomplete Workups → Enforced Before Submission',
+              tagClass: 'tag-burgundy',
+              tagLabel: 'Gate Card',
+              borderColor: '#9b2335',
+              summary: 'Triage criteria and investigation requirements made visible and enforced as checkboxes — before the referral leaves the practice.',
+              detail: (
+                <>
+                  <div style={{ marginBottom: '1.25rem' }}>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Problem</div>
-                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.6, marginBottom: '1rem' }}>
-                      {item.problem}
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.6 }}>
+                      Orthopaedic departments have strict criteria — mechanical symptoms, rehabilitation duration, BMI limits, specific imaging views. Rheumatology requires bloods, symptom duration, clinical reasoning. Clinicians do not see these requirements until the referral is rejected weeks later. Referrals also fail silently when mandatory data is missing entirely: no documented locking, no imaging, no conservative management history. The rejection arrives three weeks later with "insufficient information" — unfunded work for the practice and a delayed pathway for the patient.
                     </p>
                   </div>
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query Solution</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      {item.solution}
+                      The Gate Card makes every triage criterion and investigation requirement an explicit checkbox — "confirmed," "not applicable," or "flagged" — before submission. Gates cannot be skipped. The clipboard summary lists all confirmed prerequisites as evidence of a complete workup. If criteria are not met, the summary is not generated. The problem is caught in the consultation, not three weeks after it.
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
+                </>
+              ),
+            },
+            {
+              icon: <FileText size={20} color="#ca8a04" />,
+              title: 'Opaque Service Directories → Structured, Steward-Governed Detail',
+              tagClass: 'tag-amber',
+              tagLabel: 'Service Card',
+              borderColor: '#ca8a04',
+              summary: 'Clinician-verified service detail replaces vague directory entries — what a service accepts, what it does not, and who to contact.',
+              detail: (
+                <>
+                  <div style={{ marginBottom: '1.25rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Problem</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.6 }}>
+                      NHS e-RS lists "Orthopaedic Knee Specialist" without granular detail. It does not specify that a particular site performs ACL reconstruction at Hospital A but not at Hospital B. Referral accepted — bounced weeks later for "this site does not perform that procedure."
+                    </p>
+                  </div>
+                  <div>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query Solution</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
+                      The Service Card provides clinician-verified detail: what each service accepts, what it explicitly does not, site-specific capabilities, current wait times, and referral routes. Every field is maintained by a named steward on a defined review cycle. Operational truth replaces vague directory entries.
+                    </p>
+                  </div>
+                </>
+              ),
+            },
+            {
+              icon: <Users size={20} color="#16a34a" />,
+              title: 'Patient Anxiety & Callback Burden → Time-Aware Reassurance',
+              tagClass: 'tag-green',
+              tagLabel: 'Journey Card',
+              borderColor: '#16a34a',
+              summary: 'Phase-appropriate messages that evolve over time — reassurance early, guidance later, a clear action prompt if the wait becomes overdue.',
+              detail: (
+                <>
+                  <div style={{ marginBottom: '1.25rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Problem</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.6 }}>
+                      Patients expect a 2-week scan or 3-month specialist review because no one told them the real timeline. When weeks pass with no contact, they call reception — appropriately. Every call consumes practice and hospital admin time. The anxiety is rational; the information gap is the failure.
+                    </p>
+                  </div>
+                  <div>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query Solution</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
+                      The Journey Card is time-aware. The URL carries the referral date — when the patient reopens it, the card calculates elapsed weeks and renders a phase-appropriate message: reassurance in the early period, guidance as the appointment window approaches, and a clear action prompt if the wait exceeds the typical timeline. A confidence signal confirms the clinician verified all prerequisites before submitting. No login, no data collection — the date lives in the URL itself.
+                    </p>
+                  </div>
+                </>
+              ),
+            },
+            {
+              icon: <GitBranch size={20} color="#2563eb" />,
+              title: 'No Feedback Loop → Closed-Loop Outcome Reporting',
+              tagClass: 'tag-blue',
+              tagLabel: 'Closed Loop',
+              borderColor: '#2563eb',
+              summary: 'One-click outcome reports feed referral results back to the service custodian — no backend, no free text, no patient data.',
+              detail: (
+                <>
+                  <div style={{ marginBottom: '1.25rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Problem</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.6 }}>
+                      When a referral is accepted or returned, nobody outside the referring practice knows. The service that set the criteria has no signal about whether those criteria are working, whether they are too strict, or whether common rejections point to a documentation gap. The data record drifts because there is no mechanism to tell the custodian what is actually happening.
+                    </p>
+                  </div>
+                  <div>
+                    <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query Solution</div>
+                    <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
+                      When the clinician completes the Gate Card, a Report Outcome button appears alongside the clipboard summary. One click generates a pre-formatted email to the service custodian with structured accept/reject options — no free text, no patient data, no backend required. Over time, this passive feedback loop tells the custodian which criteria are causing returns and whether the record needs updating. The governed data stays accurate because the people using it are telling the people maintaining it what is happening.
+                    </p>
+                  </div>
+                </>
+              ),
+            },
+          ].map((card, idx) => (
+            <ExpandableCard key={idx} card={card} defaultOpen={false} />
           ))}
 
           <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
-              <strong>What this means for pilot evaluation:</strong> Success is measured by reduction in returned submissions, reduction in clinician callbacks for missing data, and reduction in patient chasing for status updates. Each failure point above is directly measurable during the 4–8 week pilot.
+              <strong>What this means for pilot evaluation:</strong> Success is measured by reduction in returned submissions, reduction in patient callbacks for status updates, and outcome report submission rate. Each failure point above is directly measurable during the 4–8 week pilot.
             </p>
           </div>
         </div>
