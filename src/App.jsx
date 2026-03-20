@@ -124,6 +124,7 @@ const CareQueryWebsite = () => {
           .hero-grid { grid-template-columns: 1fr !important; }
           .three-col { grid-template-columns: 1fr !important; }
           .two-col { grid-template-columns: 1fr !important; }
+          .service-detail-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -200,57 +201,6 @@ const CareQueryWebsite = () => {
 
       <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
 
-      {/* Current Scope */}
-      <section style={{ padding: '3rem 1.5rem', background: '#f9fafb' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ maxWidth: '820px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-              <Compass size={20} color="#2563eb" />
-              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Current Scope</span>
-            </div>
-            <div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
-              {[
-                { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
-                { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
-                { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — measure A&G rejection rate reduction' },
-                { label: 'Access', value: 'Browser-based, no installation — Gate Cards deep-link into EMIS and SystmOne templates via AccuRx' },
-              ].map((item, i) => (
-                <div key={i} style={{ padding: '0.9rem 1rem', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
-                  <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
-                  <div className="body-text" style={{ fontSize: '0.88rem', color: '#374151', fontWeight: 400, lineHeight: 1.5 }}>{item.value}</div>
-                </div>
-              ))}
-            </div>
-            <p className="body-text" style={{ fontSize: '0.78rem', color: '#6b7280', fontWeight: 400, marginBottom: '1rem', lineHeight: 1.5 }}>
-              Data source: Encoded from publicly available referral guidance and verified with service teams where possible.
-            </p>
-            <button
-              onClick={() => setScopeOpen(!scopeOpen)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0', marginBottom: scopeOpen ? '1.25rem' : 0 }}
-            >
-              <span className="body-text" style={{ fontSize: '0.82rem', color: '#2563eb', fontWeight: 500 }}>{scopeOpen ? 'Less detail −' : 'More detail +'}</span>
-            </button>
-            {scopeOpen && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', borderLeft: '3px solid #d1d5db', paddingLeft: '1.25rem' }}>
-                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                  No national tool currently does what the Gate Card does. NHS England built the monitoring infrastructure, the referral pipe, and the waiting list analytics. Nobody built the structured pre-submission checklist for the clinician at the point of referral. Strategic research confirmed in March 2026 that no ICB, trust, or commercial product fills this gap.
-                </p>
-                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                  If the pilot demonstrates value, the model can be extended to additional services and other regions.
-                </p>
-                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                  <strong>Why Cheshire and Merseyside first:</strong> C&M ICB is under NHS England performance management, the Health Innovation North West Coast infrastructure is directly accessible, and the A&G mandate creates immediate, measurable pressure on every practice in the footprint.
-                </p>
-              </div>
-            )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
-
       {/* What It Does */}
       <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -269,10 +219,7 @@ const CareQueryWebsite = () => {
                 Referral pathways are rarely clinically complex — but they are operationally complex. The eligibility criteria, catchment rules, required investigations, and administrative expectations vary between services, change over time, and are rarely documented in one place. <span className="brand">Care Query</span> focuses on making those operational requirements visible at the point of referral.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is a structured pre-referral checklist confirming that the key requirements are in place before a referral is submitted — whether that referral is a mandatory A&G request to a secondary care consultant or a direct referral to an intermediate community service. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the governed reference view — criteria, catchment, contacts, referral route, and expected pathway. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the patient-facing summary shared after referral.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                Each service has one governed data record. Every output — checklist, reference view, and patient summary — is generated from that single source. When the record is updated, all three outputs automatically reflect the change.
+                The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is the pre-referral checklist. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the structured service reference. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> is the time-aware patient summary sent after referral. All three are generated from a single governed record per service.
               </p>
             </div>
           </div>
@@ -285,7 +232,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-burgundy',
               tagLabel: 'Primary output — GPs · Physician Associates · Paramedics · ACPs · FCPs',
               borderColor: '#9b2335',
-              summary: 'Some MSK services require a mandatory A&G submission — secondary care services like Rheumatology and Orthopaedics, where the 2026 contract mandates A&G as a prerequisite for consultant-led planned care. Others accept a direct GP referral — intermediate community services like MSKCATS, OCATS, and FCP services, which exist to assess whether secondary care is needed and sit outside the A&G mandate entirely. A returned submission from either pathway is unfunded work that contributes to ICB performance risk. The Gate Card confirms the right requirements are in place — for whichever route the service uses — before anything leaves the practice. Not another task. Protection from the most preventable failure in the referral process.',
+              summary: 'Confirms eligibility criteria, catchment, investigations, and pathway prerequisites before the referral is submitted — whether via mandatory A&G or direct referral. Prevents the most common rejection reasons: missing data, wrong criteria, wrong service. Not another task — protection from the most preventable failure in the referral process.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
@@ -400,7 +347,7 @@ const CareQueryWebsite = () => {
                         </div>
                       ))}
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0', borderBottom: '1px solid #e5e7eb' }}>
+                    <div className="service-detail-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0', borderBottom: '1px solid #e5e7eb' }}>
                       {[
                         { label: 'Catchment', value: 'Warrington and Halton — GP practices within the WHH catchment area' },
                         { label: 'Typical wait', value: '14 weeks to first outpatient appointment (My Planned Care, 2025)' },
@@ -452,7 +399,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-green',
               tagLabel: 'Primary audience: Patients — sent by the referring clinician',
               borderColor: '#16a34a',
-              summary: 'Sent to the patient after referral via Accurx SMS. Not a static leaflet — it is time-aware. The URL carries the referral date and calculates how long the patient has been waiting, rendering a phase-appropriate message that changes over time: reassurance in the early weeks, guidance as the appointment approaches, and a clear action prompt if the wait becomes overdue. Pre-emptively answers the questions that would otherwise generate a callback to reception.',
+              summary: 'Sent to the patient after referral via SMS. Time-aware — the message changes based on how many weeks the patient has been waiting: reassurance early, guidance later, action prompt if overdue. No login, no data collection — the date lives in the URL itself.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
@@ -512,8 +459,59 @@ const CareQueryWebsite = () => {
           {/* Architecture note — below all three cards */}
           <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is the primary interaction for any clinician at the point of referral. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the structured reference view. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> goes to the patient after referral. Together they form a closed loop: the clinician confirms prerequisites, the patient receives time-aware reassurance, and the outcome report feeds back to the service custodian — all from the same governed record, with no backend and no patient data stored.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, three outputs are generated. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> is the primary interaction for any clinician at the point of referral. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the structured reference view. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> goes to the patient after referral. Together they form a closed loop: the clinician confirms prerequisites, the patient receives time-aware reassurance, and the outcome report feeds back to the service custodian — all from the same governed record, with no backend required.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+
+      {/* Current Scope */}
+      <section style={{ padding: '3rem 1.5rem', background: '#f9fafb' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '820px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <Compass size={20} color="#2563eb" />
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Current Scope</span>
+            </div>
+            <div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
+              {[
+                { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
+                { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
+                { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — measure A&G rejection rate reduction' },
+                { label: 'Access', value: 'Browser-based, no installation — Gate Cards deep-link into EMIS and SystmOne templates via AccuRx' },
+              ].map((item, i) => (
+                <div key={i} style={{ padding: '0.9rem 1rem', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
+                  <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
+                  <div className="body-text" style={{ fontSize: '0.88rem', color: '#374151', fontWeight: 400, lineHeight: 1.5 }}>{item.value}</div>
+                </div>
+              ))}
+            </div>
+            <p className="body-text" style={{ fontSize: '0.78rem', color: '#6b7280', fontWeight: 400, marginBottom: '1rem', lineHeight: 1.5 }}>
+              Data source: Encoded from publicly available referral guidance and verified with service teams where possible.
+            </p>
+            <button
+              onClick={() => setScopeOpen(!scopeOpen)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0', marginBottom: scopeOpen ? '1.25rem' : 0 }}
+            >
+              <span className="body-text" style={{ fontSize: '0.82rem', color: '#2563eb', fontWeight: 500 }}>{scopeOpen ? 'Less detail −' : 'More detail +'}</span>
+            </button>
+            {scopeOpen && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', borderLeft: '3px solid #d1d5db', paddingLeft: '1.25rem' }}>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
+                  No national tool currently does what the Gate Card does. NHS England built the monitoring infrastructure, the referral pipe, and the waiting list analytics. Nobody built the structured pre-submission checklist for the clinician at the point of referral. Strategic research confirmed in March 2026 that no ICB, trust, or commercial product fills this gap.
+                </p>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
+                  If the pilot demonstrates value, the model can be extended to additional services and other regions.
+                </p>
+                <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
+                  <strong>Why Cheshire and Merseyside first:</strong> C&M ICB is under NHS England performance management, the Health Innovation North West Coast infrastructure is directly accessible, and the A&G mandate creates immediate, measurable pressure on every practice in the footprint.
+                </p>
+              </div>
+            )}
+            </div>
           </div>
         </div>
       </section>
@@ -675,19 +673,19 @@ const CareQueryWebsite = () => {
                 step: '01',
                 title: 'Governed Data Source',
                 body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are DRAFT until a steward manually verifies and publishes.',
-                pills: ['Structured JSON schema', 'DRAFT / PUBLISHED states'],
+                pills: ['Structured data schema', 'Steward-verified publishing'],
               },
               {
                 step: '02',
                 title: 'Deterministic Render Engine',
-                body: 'app.js reads the JSON and renders three card types. Every JSON-sourced string passes through escapeHtml(). isValidRecord() guards every render path. No string reaches the DOM without validation.',
-                pills: ['XSS prevention', 'Shape guards', 'Zero dependencies'],
+                body: 'The app reads the governed record and generates three card types. Every field is validated before display — no unchecked data reaches the screen. Zero external dependencies.',
+                pills: ['Input validation', 'Record verification', 'Zero dependencies'],
               },
               {
                 step: '03',
                 title: 'Immutable Safety Layer',
-                body: 'emergency.js loads synchronously before any app logic. It contains six Universal Red Flags (URF-01–06) hard-coded outside the data layer — they cannot be overridden by JSON content under any circumstance.',
-                pills: ['Sync load order', 'Never editable', 'SaMD boundary'],
+                body: 'Six universal red flags are hard-coded outside the data layer and load before any other logic. They cannot be overridden or edited by any service record — a permanent safety layer that sits above all content.',
+                pills: ['Loads before all content', 'Cannot be overridden', 'Clinical safety boundary'],
               },
             ].map((item, i) => (
               <div key={i} className="card" style={{ padding: '1.75rem' }}>
@@ -728,34 +726,9 @@ const CareQueryWebsite = () => {
               <h2 className="heading" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
                 Your judgment.<br />Our structure.
               </h2>
-              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                Clinical judgment comes from you — built over years of training and practice. <span className="brand">Care Query</span> does not second-guess it. What it does is make sure the administrative groundwork is solid before the submission leaves, so that your referral decision reaches the service it was meant for.
+              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0' }}>
+                Clinical judgment comes from you — built over years of training and practice. <span className="brand">Care Query</span> does not provide diagnosis, triage, or clinical decision support. It surfaces referral requirements that already exist — criteria, catchment, investigations — and makes them visible at the point the referral is prepared. You confirm what applies. The software records it. The clinical decision remains entirely yours.
               </p>
-              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-                <span className="brand">Care Query</span> does not provide diagnosis, triage, or clinical decision support. This lies in the hands of clinicians. The Gate Card surfaces criteria, catchment, and investigation requirements. You confirm what applies. The software records it.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
-                <span className="brand">Care Query</span> structures referral requirements that already exist across NHS services — making them visible at the point the referral is prepared. The clinical decision remains entirely yours; the platform exists only to support the administrative accuracy around it.
-              </p>
-              <div style={{ marginTop: '1rem', paddingTop: '1.5rem', borderTop: '1px solid #e5e7eb' }}>
-                <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
-                <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
-                  Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
-                </p>
-                {submitted ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <Check size={16} color="#22c55e" />
-                    <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
-                  </div>
-                ) : (
-                  <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <input type="hidden" name="form-name" value="stay-informed" />
-                    <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
-                      placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
-                    <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
-                  </form>
-                )}
-              </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
@@ -796,10 +769,10 @@ const CareQueryWebsite = () => {
                 The knowledge is yours.<br /><span className="brand">Care Query</span> is just the structure.
               </h2>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The most valuable thing this project can encode is the operational knowledge that experienced clinicians and administrative staff carry but rarely write down — the nuance behind referral criteria, pathway expectations, and the details that make a referral land well. That knowledge belongs to the people running these services every day. It is the reason one GP practice in a locality has a near-zero rejection rate while the practice next door has referrals returned every week. The difference is not clinical skill — it is informational access.
+                The most valuable thing this project can encode is the operational knowledge experienced clinicians carry but rarely write down. The difference between a practice with near-zero rejections and one with weekly returns is not clinical skill — it is informational access. <span className="brand">Care Query</span> gives that knowledge a structured home.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
-                <span className="brand">Care Query</span> gives that knowledge a structured home — maintained by the people who hold it, accessible to every clinician who needs it, and honest about what has been verified and what has not. If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
+                If you recognise this problem in your own referral pathways, a short conversation is enough to start. No commitment required.
               </p>
             </div>
           </div>
@@ -830,9 +803,29 @@ const CareQueryWebsite = () => {
             ))}
           </div>
 
-          <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '3rem' }}>
+          <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.5rem' }}>
             Each service added to <span className="brand">Care Query</span> benefits every clinician who uses it. Services maintain their own records because doing so reduces their own burden — fewer inappropriate referrals, fewer admin calls, fewer A&G returns. A network effect built on operational accuracy rather than user growth.
           </p>
+
+          <div className="card" style={{ padding: '1.75rem', marginBottom: '3rem', borderLeft: '4px solid #2563eb' }}>
+            <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.4rem' }}>Stay informed</h4>
+            <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
+              Leave your email and we will contact you when the pilot opens for practices, or when a new service is published.
+            </p>
+            {submitted ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Check size={16} color="#22c55e" />
+                <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
+              </div>
+            ) : (
+              <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <input type="hidden" name="form-name" value="stay-informed" />
+                <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
+                  placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
+                <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
+              </form>
+            )}
+          </div>
 
         </div>
       </section>
