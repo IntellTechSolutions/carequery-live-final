@@ -399,7 +399,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-green',
               tagLabel: 'Primary audience: Patients — sent by the referring clinician',
               borderColor: '#16a34a',
-              summary: 'Sent to the patient after referral via SMS. Time-aware — the message changes based on how many weeks the patient has been waiting: reassurance early, guidance later, action prompt if overdue. No login, no data collection — the date lives in the URL itself.',
+              summary: 'Sent to the patient after referral via SMS. Time-aware — the message changes based on how many weeks the patient has been waiting: reassurance early, guidance later, action prompt if overdue. Opens in an isolated patient view with no navigation to clinician-facing content. No login, no data collection — the date lives in the URL itself.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
@@ -407,6 +407,9 @@ const CareQueryWebsite = () => {
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     When a clinician completes the Gate Card, the URL also carries a <strong>confidence signal</strong> — telling the patient that their GP confirmed all administrative prerequisites before submitting. This transfers the clinician's diligence into patient reassurance, reducing the anxiety that drives early callbacks.
+                  </p>
+                  <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
+                    <strong>Patient isolation:</strong> The Journey Card opens in a locked-down view. Header navigation, card tabs, and all routes to the clinician-facing tool are disabled. Patients see only their referral information — no administrative criteria, no service governance detail, no escape paths to clinician content. Even if an SMS gateway appends characters to the URL, the isolation remains enforced.
                   </p>
 
                   {/* Phase illustration */}
@@ -445,7 +448,7 @@ const CareQueryWebsite = () => {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    {['Time-aware phases', 'Confidence handoff', 'SMS-safe URLs', 'No data collection', 'Callback suppression'].map(t => (
+                    {['Time-aware phases', 'Confidence handoff', 'SMS-safe URLs', 'Patient isolation', 'No data collection', 'Callback suppression'].map(t => (
                       <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
@@ -660,7 +663,7 @@ const CareQueryWebsite = () => {
               NHS referral pathways are operationally complex but rarely documented in a structured, machine-readable way. <span className="brand">Care Query</span> encodes that information into a single governed record per service — making it available at the point of referral in a consistent, auditable format.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              <strong>For practice staff:</strong> Runs in a browser tab — no installation, no login, no IT request. Open it, use it, close it. <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. Static JSON on a CDN, rendered client-side. Nothing to risk-assess beyond a read-only webpage.
+              <strong>For practice staff:</strong> Runs in a browser tab — no installation, no login, no IT request. Open it, use it, close it. <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. Static JSON on a CDN, rendered client-side. Patient-facing links open in an isolated view with no path to clinician content. Nothing to risk-assess beyond a read-only webpage.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               <strong>For commissioners:</strong> Every output is auditable back to its governed source — no AI, no inference, no guesswork. Reduced A&G rejections translate directly to fewer unfunded re-submissions. <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals and fewer admin calls — a description of your service that you control and update.
