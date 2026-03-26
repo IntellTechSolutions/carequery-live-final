@@ -638,7 +638,7 @@ const CareQueryWebsite = () => {
               Why now matters.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              The 2026/27 GP contract (PRN02353, NHS England, 24 February 2026) marks the most significant change to NHS referral pathways in a decade. From 1 April 2026, Advice and Guidance becomes mandatory for all secondary care planned referrals — with no opt-out and no per-request payment. The operational pressure on referral quality has never been higher.
+              The 2026/27 GP contract (PRN02353, NHS England, 24 February 2026) marks the most significant change to NHS referral pathways in a decade. From 1 April 2026, Advice and Guidance becomes mandatory for secondary care planned referrals, and per-request payment for A&G submissions has been removed. The operational pressure on referral quality has never been higher.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               <span className="brand">Care Query</span> launches on the day the mandate begins — not as another compliance task, but as referral execution support for the clinician who already knows where the patient needs to go.
@@ -648,8 +648,8 @@ const CareQueryWebsite = () => {
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
             {[
               {
-                title: 'A&G Is Now Mandatory',
-                body: 'From 1 April 2026, Advice and Guidance is mandatory for all secondary care planned referrals. No opt-out. Intermediate services like CATS and OCATS still accept direct referrals — but secondary care pathways now require A&G first. A returned submission costs practice time without compensation.',
+                title: 'Advice and Guidance: April 2026',
+                body: 'From 1 April 2026, Advice and Guidance is required for secondary care planned referrals. Intermediate services such as CATS and OCATS continue to accept direct referrals — but secondary care MSK pathways now route through A&G first. Administrative return rates for A&G submissions are measurable and directly affect practice workload.',
                 accent: '#9b2335',
               },
               {
@@ -672,7 +672,7 @@ const CareQueryWebsite = () => {
 
           <div style={{ padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 400, marginBottom: '0.75rem' }}>
-              <strong>What this means for practices:</strong> FCPs are now primary A&G submitters for MSK alongside GPs. Both the RCGP and BMA oppose the mandate. The GP contract referendum ran 4–25 March 2026 and the GPC rejected the contract. Regardless of the political outcome, the operational reality is the same — every practice needs referral submissions to land correctly on the first attempt.
+              <strong>What this means for practices:</strong> FCPs are now primary A&G submitters for MSK alongside GPs. The operational reality is consistent across the primary care system — every practice needs referral submissions to be administratively complete on the first attempt. Returned submissions represent unfunded rework; incomplete submissions delay the patient pathway.
             </p>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
               <span className="brand">Care Query</span> does not add work — it makes the work that already needs doing visible before the referral leaves the practice. The Service Card answers the question. The Gate Card confirms the prerequisites. The patient leaves with something in hand either way.
@@ -970,7 +970,7 @@ const CareQueryWebsite = () => {
             {[
               {
                 title: 'Pilot Practices',
-                desc: '5–10 GP practices in Cheshire and Merseyside to use Care Query for MSK referrals during the 12-week pilot period. With mandatory A&G in effect and the £20 per-request payment removed, every returned submission is unfunded rework. The Service Card answers the question before you refer. The Gate Card confirms the prerequisites before you submit.',
+                desc: '5–10 GP practices in Cheshire and Merseyside to use Care Query for MSK referrals during the 12-week pilot period. In a high-volume referral environment, every administratively complete first-attempt submission reduces practice workload and shortens the patient pathway. The Service Card answers the question before you refer. The Gate Card confirms prerequisites before you submit.',
                 tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
               },
               {
