@@ -3,6 +3,8 @@ import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBra
 
 const ExpandableCard = ({ card, defaultOpen }) => {
   const [open, setOpen] = React.useState(defaultOpen);
+  const hasSummary = Boolean(card.summary);
+  const summaryPaddingLeft = card.icon ? '1.75rem' : 0;
   return (
     <div style={{ borderLeft: `4px solid ${card.borderColor}`, background: '#fff', borderTop: '1px solid #e5e7eb', borderRight: '1px solid #e5e7eb', borderBottom: '1px solid #e5e7eb', borderRadius: '0 8px 8px 0', marginBottom: '1rem' }}>
       <button
@@ -15,9 +17,11 @@ const ExpandableCard = ({ card, defaultOpen }) => {
             <span className="heading" style={{ fontSize: '1.1rem', color: '#111827' }}>{card.title}</span>
             <span className={`tag ${card.tagClass}`}>{card.tagLabel}</span>
           </div>
-          <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5, paddingLeft: '1.75rem' }}>
-            {card.summary}
-          </p>
+          {hasSummary && (
+            <p className="body-text" style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 400, lineHeight: 1.5, paddingLeft: summaryPaddingLeft }}>
+              {card.summary}
+            </p>
+          )}
         </div>
         <span style={{ color: '#2563eb', fontSize: '1.2rem', fontWeight: 300, flexShrink: 0, marginTop: '0.1rem' }}>
           {open ? '−' : '+'}
@@ -39,6 +43,8 @@ const CareQueryWebsite = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [scopeOpen, setScopeOpen] = useState(false);
 
   useEffect(() => {
@@ -68,15 +74,31 @@ const CareQueryWebsite = () => {
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
-    if (email) {
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ 'form-name': 'stay-informed', email }).toString(),
-      })
-        .then(() => { setSubmitted(true); setEmail(''); })
-        .catch(() => { setSubmitted(true); setEmail(''); });
+    if (!email || isSubmitting) {
+      return;
     }
+
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'stay-informed', email, 'bot-field': '' }).toString(),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Form submission failed with status ${response.status}`);
+        }
+        setSubmitted(true);
+        setEmail('');
+      })
+      .catch(() => {
+        setSubmitError('Could not submit right now. Please email hello@carequery.uk instead.');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   const navItems = [
@@ -88,53 +110,57 @@ const CareQueryWebsite = () => {
   ];
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", background: '#ffffff', minHeight: '100vh', color: '#111827' }}>
+    <div className="care-query-site" style={{ fontFamily: "'Inter', sans-serif", background: '#ffffff', minHeight: '100vh', color: '#111827' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #ffffff; font-family: 'Inter', sans-serif; }
-        .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
-        .body-text { font-family: 'Inter', sans-serif; font-weight: 400; }
-        .nav-link { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
-        .nav-link:hover { color: #2563eb; }
-        .nav-link.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
-        .card { background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
-        .tag { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
-        .tag-blue { background: #dbeafe; color: #1e40af; }
-        .tag-amber { background: #fef9c3; color: #854d0e; }
-        .tag-slate { background: #f3f4f6; color: #374151; }
-        .tag-green { background: #dcfce7; color: #166534; }
-        .tag-burgundy { background: #fce7ef; color: #7f1d1d; }
-        .tag-indigo { background: #ede9fe; color: #3730a3; }
-        .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
-        .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
-        .btn-primary:hover { background: #1d4ed8; }
-        .btn-outline { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #2563eb; border: 2px solid #2563eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
-        .btn-outline:hover { background: #eff6ff; }
-        .divider { height: 1px; background: linear-gradient(to right, transparent, #e5e7eb, transparent); margin: 0 auto; }
-        .tech-pill { font-family: 'Inter', monospace; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.75rem; background: #111827; color: #dbeafe; border-radius: 6px; display: inline-block; margin: 0.2rem; }
-        .step-number { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 3rem; color: #dbeafe; line-height: 1; }
-        .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
-        .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-        .brand { color: #2563eb; font-weight: 700; }
-        .desktop-nav { display: flex; gap: 2rem; }
-        .mobile-menu-btn { display: none; }
+        .care-query-site, .care-query-site * { box-sizing: border-box; margin: 0; padding: 0; }
+        .care-query-site { background: #ffffff; font-family: 'Inter', sans-serif; }
+        .care-query-site .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
+        .care-query-site .body-text { font-family: 'Inter', sans-serif; font-weight: 400; }
+        .care-query-site .nav-link { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
+        .care-query-site .nav-link:hover { color: #2563eb; }
+        .care-query-site .nav-link.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
+        .care-query-site .card { background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
+        .care-query-site .tag { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
+        .care-query-site .tag-blue { background: #dbeafe; color: #1e40af; }
+        .care-query-site .tag-amber { background: #fef9c3; color: #854d0e; }
+        .care-query-site .tag-slate { background: #f3f4f6; color: #374151; }
+        .care-query-site .tag-green { background: #dcfce7; color: #166534; }
+        .care-query-site .tag-burgundy { background: #fce7ef; color: #7f1d1d; }
+        .care-query-site .tag-indigo { background: #ede9fe; color: #3730a3; }
+        .care-query-site .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+        .care-query-site .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
+        .care-query-site .btn-primary:hover { background: #1d4ed8; }
+        .care-query-site .btn-outline { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #2563eb; border: 2px solid #2563eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
+        .care-query-site .btn-outline:hover { background: #eff6ff; }
+        .care-query-site .divider { height: 1px; background: linear-gradient(to right, transparent, #e5e7eb, transparent); margin: 0 auto; }
+        .care-query-site .tech-pill { font-family: 'Inter', monospace; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.75rem; background: #111827; color: #dbeafe; border-radius: 6px; display: inline-block; margin: 0.2rem; }
+        .care-query-site .step-number { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 3rem; color: #dbeafe; line-height: 1; }
+        .care-query-site .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+        .care-query-site .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+        .care-query-site .brand { color: #2563eb; font-weight: 700; }
+        .care-query-site .desktop-nav { display: flex; gap: 2rem; }
+        .care-query-site .mobile-menu-btn { display: none; }
         @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: block !important; }
-          .hero-grid { grid-template-columns: 1fr !important; }
-          .three-col { grid-template-columns: 1fr !important; }
-          .two-col { grid-template-columns: 1fr !important; }
-          .service-detail-grid { grid-template-columns: 1fr !important; }
+          .care-query-site .desktop-nav { display: none !important; }
+          .care-query-site .mobile-menu-btn { display: block !important; }
+          .care-query-site .three-col { grid-template-columns: 1fr !important; }
+          .care-query-site .two-col { grid-template-columns: 1fr !important; }
+          .care-query-site .service-detail-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
+
+      <form name="stay-informed" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
+        <input type="email" name="email" />
+        <input type="text" name="bot-field" />
+      </form>
 
       {/* Navigation */}
       <nav style={{ position: 'fixed', top: 0, width: '100%', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)', zIndex: 50, borderBottom: '1px solid #e5e7eb' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-              <img src="/Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
+              <img src="./Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
               <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#2563eb', letterSpacing: '-0.01em' }}>Care Query</span>
               <span className="tag tag-poc">PoC</span>
             </div>
@@ -1025,11 +1051,27 @@ const CareQueryWebsite = () => {
                   <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
                 </div>
               ) : (
-                <form name="stay-informed" data-netlify="true" onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <form
+                  name="stay-informed"
+                  method="POST"
+                  action="/"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                  onSubmit={handleEmailSubmit}
+                  style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
+                >
                   <input type="hidden" name="form-name" value="stay-informed" />
+                  <input type="hidden" name="bot-field" value="" />
                   <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
                     placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
-                  <button type="submit" className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem' }}>Register interest</button>
+                  <button type="submit" disabled={isSubmitting} className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem', opacity: isSubmitting ? 0.8 : 1 }}>
+                    {isSubmitting ? 'Submitting...' : 'Register interest'}
+                  </button>
+                  {submitError && (
+                    <p className="body-text" style={{ width: '100%', color: '#b91c1c', fontWeight: 500, fontSize: '0.82rem', lineHeight: 1.5 }}>
+                      {submitError}
+                    </p>
+                  )}
                 </form>
               )}
               <p className="body-text" style={{ fontSize: '0.82rem', color: '#6b7280', fontWeight: 400, marginTop: '1rem', lineHeight: 1.5 }}>
