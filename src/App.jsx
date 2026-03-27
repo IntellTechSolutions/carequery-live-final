@@ -325,11 +325,11 @@ const CareQueryWebsite = () => {
                     Every field belongs to one of two layers: <strong>Layer 1</strong> — verified public truth from published documents and direct written confirmation; or <strong>Layer 2</strong> — tacit operational knowledge sourced from experienced clinical referrers through structured conversations. Layer 2 is the specific hypothesis this PoC is testing: whether the operational nuance that lives in the heads of experienced FCPs can be encoded, attributed to a named source, and made accessible at the point of referral. Every Service Card has a named steward — a specific person in the service responsible for verifying its contents on a defined review cycle.
                   </p>
 
-                  {/* Demo service card */}
+                  {/* Illustrative service card — clean example, no draft markers */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', marginBottom: '1.25rem', overflow: 'hidden' }}>
-                    <div style={{ background: '#fef3c7', borderBottom: '1px solid #fcd34d', padding: '0.4rem 1rem' }}>
-                      <span className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#92400e' }}>
-                        Illustrative example — not yet verified or published
+                    <div style={{ background: '#dbeafe', borderBottom: '1px solid #93c5fd', padding: '0.4rem 1rem' }}>
+                      <span className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1e40af' }}>
+                        Illustrative example — service record content is subject to steward verification before pilot access
                       </span>
                     </div>
                     <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -338,12 +338,9 @@ const CareQueryWebsite = () => {
                           Warrington &amp; Halton Hospitals — Rheumatology
                         </div>
                         <div className="body-text" style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 400 }}>
-                          Code: WHHRHEUM · Steward: [STEWARD: verify] · Last reviewed: [STEWARD: verify]
+                          Code: WHHRHEUM · Steward: Named clinical contact · Review cycle: 90 days
                         </div>
                       </div>
-                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.25rem 0.6rem', borderRadius: '9999px', background: '#fef3c7', color: '#92400e', border: '1px solid #fcd34d' }}>
-                        DRAFT
-                      </span>
                     </div>
                     <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb' }}>
                       <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
@@ -366,11 +363,11 @@ const CareQueryWebsite = () => {
                       {[
                         { label: 'Catchment', value: 'Warrington and Halton — GP practices within the WHH catchment area' },
                         { label: 'Typical wait', value: '14 weeks to first outpatient appointment (My Planned Care, 2025)' },
-                        { label: 'Referral route', value: 'GP referral to WHH Rheumatology; or via MSKCATS after physiotherapy triage — [STEWARD: verify current pathway]' },
+                        { label: 'Referral route', value: 'GP referral to WHH Rheumatology; or via MSKCATS after physiotherapy triage' },
                       ].map((item, i) => (
                         <div key={i} style={{ padding: '0.85rem 1.25rem', borderRight: i < 2 ? '1px solid #e5e7eb' : 'none' }}>
                           <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.3rem' }}>{item.label}</div>
-                          <div className="body-text" style={{ fontSize: '0.8rem', color: item.value.includes('STEWARD') ? '#ca8a04' : '#111827', fontWeight: 400, lineHeight: 1.4 }}>{item.value}</div>
+                          <div className="body-text" style={{ fontSize: '0.8rem', color: '#111827', fontWeight: 400, lineHeight: 1.4 }}>{item.value}</div>
                         </div>
                       ))}
                     </div>
@@ -392,12 +389,6 @@ const CareQueryWebsite = () => {
                           Add one sentence: e.g. "Presentation is inflammatory in pattern given morning stiffness &gt;60 min, small joint symmetry, and elevated CRP."
                         </p>
                       </div>
-                    </div>
-                    <div style={{ padding: '0.65rem 1.25rem', background: '#fffbeb', borderLeft: '3px solid #f59e0b', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                      <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#f59e0b', flexShrink: 0 }} />
-                      <span className="body-text" style={{ fontSize: '0.78rem', color: '#92400e', fontWeight: 400 }}>
-                        Review overdue — this record has not been verified by a steward within the required period. Information may not reflect current service provision.
-                      </span>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -617,7 +608,6 @@ const CareQueryWebsite = () => {
                   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — measure A&G rejection rate reduction' },
                   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into EMIS or SystmOne A&G, patient URL ready to send via Accurx' },
                   { label: 'Cost to NHS', value: 'Free at point of use during the pilot phase. Future model: annual ICB block licence, no per-clinician charge, no capital cost.' },
-                  { label: 'Eligible population', value: 'More than 500,000 MSK referral presentations per year in England. Current scope: Cheshire and Merseyside ICB.' },
                 ].map((item, i) => (
                   <div key={i} style={{ padding: '0.9rem 1rem', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                     <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
@@ -654,22 +644,22 @@ const CareQueryWebsite = () => {
 
       <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
 
-      {/* Why Now — April 2026 */}
+      {/* Why This Matters — Clinical Value + Contract Context */}
       <section style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ marginBottom: '3rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
               <Clock size={20} color="#2563eb" />
-              <span className="tag tag-blue" style={{ marginBottom: '0' }}>April 2026</span>
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Context</span>
             </div>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-              Why now matters.
+              Making referral information visible at the point of care.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              The 2026/27 GP contract (PRN02353, NHS England, 24 February 2026) marks the most significant change to NHS referral pathways in a decade. From 1 April 2026, Advice and Guidance becomes mandatory for secondary care planned referrals, and per-request payment for A&G submissions has been removed. The operational pressure on referral quality has never been higher.
+              The most common reasons for returned MSK referrals — missing investigations, unclear pathway requirements, wrong service selection — are informational, not clinical. The referring clinician is competent. The information about what each service needs was not available at the point of submission. <span className="brand">Care Query</span> makes that information visible before the referral leaves the practice.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              <span className="brand">Care Query</span> launches on the day the mandate begins — not as another compliance task, but as referral execution support for the clinician who already knows where the patient needs to go.
+              This gap has become more operationally significant under the 2026/27 GP contract (PRN02353), which makes Advice and Guidance mandatory for secondary care planned referrals from 1 April 2026 and removes the per-request payment. The volume of A&G submissions will increase; the administrative cost of returned submissions falls entirely on the practice.
             </p>
           </div>
 
@@ -826,11 +816,11 @@ const CareQueryWebsite = () => {
             },
             {
               icon: <GitBranch size={20} color="#2563eb" />,
-              title: 'No Feedback Loop → Closed-Loop Outcome Reporting',
+              title: 'No Feedback Loop → Pilot Evaluation: Closed-Loop Outcome Logging',
               tagClass: 'tag-blue',
-              tagLabel: 'Closed Loop',
+              tagLabel: 'Pilot Evaluation',
               borderColor: '#2563eb',
-              summary: 'One-click outcome reports feed referral results back to the service custodian — no backend, no free text, no patient data.',
+              summary: 'Structured outcome reporting feeds referral results back to the service steward — designed as a pilot evaluation mechanism to test whether governed records stay accurate when the people using them can signal what is happening.',
               detail: (
                 <>
                   <div style={{ marginBottom: '1.25rem' }}>
@@ -854,7 +844,7 @@ const CareQueryWebsite = () => {
 
           <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
-              <strong>What this means for pilot evaluation:</strong> Success is measured by reduction in returned submissions, Preparation Card generation rate (clinicians using the Not Yet path rather than submitting incomplete referrals), Journey Card delivery rate via Plausible Analytics, and outcome report submission rate. Each gap above is directly measurable during the 12-week pilot.
+              <strong>What this means for pilot evaluation:</strong> Success is measured by reduction in returned submissions, Preparation Card generation rate (clinicians using the Not Yet path rather than submitting incomplete referrals), Journey Card delivery rate via Plausible Analytics, and qualitative clinician feedback on consultation impact. Per-gate attestation states are logged and correlated with submission outcomes — enabling the pilot to distinguish between information-driven rejections (where the Service Card changes behaviour) and capacity-driven rejections (where the data generated is commissioning intelligence, not a tool failure). Each gap above is directly measurable during the 12-week pilot.
             </p>
           </div>
         </div>
@@ -951,8 +941,8 @@ const CareQueryWebsite = () => {
               {[
                 { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Clinical risk management documentation in place and maintained throughout development.' },
                 { icon: <Shield size={18} color="#2563eb" />, label: 'MHRA — Medical Devices', status: 'Confirmed', desc: 'Confirmed not a medical device. Deterministic display of static, clinician-verified information. No AI, no patient data input, no clinical recommendation output. No MHRA registration required.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned at the post-pilot adoption stage.' },
-                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'In progress', desc: 'Registration in progress. Tier A classification, DCB0129 status, and pilot evidence pathway documented as part of the submission.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
+                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'In progress', desc: 'Registration in progress (March 2026). Tier A classification, DCB0129 status, and pilot evidence pathway documented as part of the submission. Target: complete before pilot opens.' },
                 { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Confirmed', desc: 'Classified as Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only.' },
                 { icon: <Database size={18} color="#2563eb" />, label: 'QOF "Service Unavailable" Governance Precedent', status: 'Confirmed', desc: 'NHS England already permits GP practices to use SNOMED exception codes to protect QOF compliance metrics when a commissioned service does not exist locally. The "Cannot Meet" attestation extends this established governance principle to pre-referral A&G workflows — structured exception logic applied to a context where no equivalent currently exists.' },
                 { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
