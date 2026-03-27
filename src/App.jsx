@@ -238,7 +238,7 @@ const CareQueryWebsite = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
                 <Database size={20} color="#2563eb" />
-                <span className="tag tag-blue" style={{ marginBottom: '0' }}>Five Clinical Outputs</span>
+                <span className="tag tag-blue" style={{ marginBottom: '0' }}>Five Outputs</span>
               </div>
               <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', letterSpacing: '-0.01em' }}>
                 One governed record.<br />Five deterministic outputs.
@@ -616,6 +616,8 @@ const CareQueryWebsite = () => {
                   { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
                   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — measure A&G rejection rate reduction' },
                   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into EMIS or SystmOne A&G, patient URL ready to send via Accurx' },
+                  { label: 'Cost to NHS', value: 'Free at point of use during the pilot phase. Future model: annual ICB block licence, no per-clinician charge, no capital cost.' },
+                  { label: 'Eligible population', value: 'More than 500,000 MSK referral presentations per year in England. Current scope: Cheshire and Merseyside ICB.' },
                 ].map((item, i) => (
                   <div key={i} style={{ padding: '0.9rem 1rem', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                     <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
@@ -919,7 +921,7 @@ const CareQueryWebsite = () => {
               Infrastructure
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-              {['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'NICE ESF Tier A', 'WCAG 2.1 AA', 'No cookies · No patient data'].map(p => (
+              {['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'DTAC: in progress', 'QOF exception code precedent', 'WCAG 2.1 AA', 'No cookies · No patient data'].map(p => (
                 <span key={p} style={{ fontFamily: "'Inter', monospace", fontSize: '0.78rem', fontWeight: 500, padding: '0.3rem 0.75rem', background: 'rgba(255,255,255,0.08)', color: '#dbeafe', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.12)' }}>{p}</span>
               ))}
             </div>
@@ -948,8 +950,11 @@ const CareQueryWebsite = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
                 { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Clinical risk management documentation in place and maintained throughout development.' },
-                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Planned', desc: 'Free registration at PoC stage — no evidence required. Planned to create a documented national engagement record before the pilot opens.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Confirmed', desc: 'Classified as Tier A system service — administrative information display, not clinical decision support. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only.' },
+                { icon: <Shield size={18} color="#2563eb" />, label: 'MHRA — Medical Devices', status: 'Confirmed', desc: 'Confirmed not a medical device. Deterministic display of static, clinician-verified information. No AI, no patient data input, no clinical recommendation output. No MHRA registration required.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned at the post-pilot adoption stage.' },
+                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'In progress', desc: 'Registration in progress. Tier A classification, DCB0129 status, and pilot evidence pathway documented as part of the submission.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Confirmed', desc: 'Classified as Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only.' },
+                { icon: <Database size={18} color="#2563eb" />, label: 'QOF "Service Unavailable" Governance Precedent', status: 'Confirmed', desc: 'NHS England already permits GP practices to use SNOMED exception codes to protect QOF compliance metrics when a commissioned service does not exist locally. The "Cannot Meet" attestation extends this established governance principle to pre-referral A&G workflows — structured exception logic applied to a context where no equivalent currently exists.' },
                 { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
                 { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Planned', desc: 'HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools. Engagement planned as part of the pilot phase.' },
               ].map((item, i) => (
@@ -1105,10 +1110,10 @@ const CareQueryWebsite = () => {
               ),
             },
             {
-              title: 'Is this a clinical decision support tool — does it require MHRA registration?',
+              title: 'Does this require MHRA registration as a medical device?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  No. <span className="brand">Care Query</span> is classified as an administrative tool, not clinical decision support. It does not process patient data, make clinical recommendations, or determine appropriateness for any individual. It displays governed administrative information — the same kind of information that currently lives in PDFs and commissioning documents. NICE ESF classification: Tier A system service DHT. Standard 14 (effectiveness evidence/RCT) does not apply. This classification is documented in the DCB0129 hazard log and will be confirmed before pilot launch.
+                  No. <span className="brand">Care Query</span> is an administrative tool. It does not process patient data, make clinical recommendations, or determine appropriateness for any individual. It displays governed administrative information — the same kind of information that currently lives in PDFs and commissioning documents. NICE ESF classification: Tier A system service DHT. Standard 14 (effectiveness evidence/RCT) does not apply. This classification is documented in the DCB0129 hazard log and will be confirmed before pilot launch.
                 </p>
               ),
             },
