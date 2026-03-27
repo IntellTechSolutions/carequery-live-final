@@ -1,6 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink, Check, Compass, Handshake, Database, Target, Layers, Clock, Map, ClipboardCheck } from 'lucide-react';
 
+const SECTION_IDS = ['home', 'what-it-does', 'how-it-works', 'join-the-pilot', 'contact'];
+const NAV_ITEMS = [
+  { id: 'home', label: 'Home' },
+  { id: 'what-it-does', label: 'What It Does' },
+  { id: 'how-it-works', label: 'How It Works' },
+  { id: 'join-the-pilot', label: 'Join the Pilot' },
+  { id: 'contact', label: 'Contact' },
+];
+const STAY_INFORMED_FORM_NAME = 'stay-informed';
+const STAY_INFORMED_HONEYPOT_FIELD = 'bot-field';
+
+const CURRENT_SCOPE_ITEMS = [
+  { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
+  { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
+  { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality and capture per-gate attestation data' },
+  { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into EMIS or SystmOne A&G, patient URL ready to send via Accurx' },
+  { label: 'Cost to NHS', value: 'Free at point of use during the pilot phase. Future model: annual ICB block licence, no per-clinician charge, no capital cost.' },
+  { label: 'Build status', value: 'Pathway Overview, per-gate attestation, and Preparation Card are in active development for pilot launch. Service Card, Gate Card, and Journey Card are operational in the current build.' },
+];
+
+const CONTEXT_CARDS = [
+  {
+    title: 'Advice and Guidance: April 2026',
+    body: 'From 1 April 2026, Advice and Guidance is required for secondary care planned referrals. Intermediate services such as CATS and OCATS continue to accept direct referrals — but secondary care MSK pathways now route through A&G first. Each returned A&G submission generates unfunded administrative rework at the practice.',
+    accent: '#9b2335',
+  },
+  {
+    title: 'Payment Removed',
+    body: 'The £20 per-request Item of Service payment for A&G is removed. Practices that previously earned up to £20,000 annually from A&G now absorb the same volume with no funding. Every returned submission is unfunded administrative rework — the case for getting it right first time has never been stronger.',
+    accent: '#ca8a04',
+  },
+  {
+    title: 'Workforce Pressure on MSK Knowledge',
+    body: 'Workforce changes increase the risk that MSK pathway knowledge is less available at practice level. When the clinician who knew the local pathway criteria moves on, that knowledge leaves with them. Care Query encodes the administrative pre-referral discipline of an experienced First Contact Practitioner and makes it available as a deterministic administrative tool.',
+    accent: '#2563eb',
+  },
+];
+
+const TECH_ARCHITECTURE_STEPS = [
+  {
+    step: '01',
+    title: 'Governed Data Source',
+    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are DRAFT until a steward manually verifies and publishes.',
+    pills: ['Structured data schema', 'Steward-verified publishing'],
+  },
+  {
+    step: '02',
+    title: 'Deterministic Render Engine',
+    body: 'The administrative tool reads the governed record and generates five output types. Every field is validated before display — no unchecked data reaches the screen. Zero external dependencies.',
+    pills: ['Input validation', 'Record verification', 'Zero dependencies'],
+  },
+  {
+    step: '03',
+    title: 'Immutable Safety Layer',
+    body: 'Six universal red flags are hard-coded outside the data layer and load before any other logic. They cannot be overridden or edited by any service record — a permanent safety layer that sits above all content.',
+    pills: ['Loads before all content', 'Cannot be overridden', 'Clinical safety boundary'],
+  },
+];
+
+const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'DTAC: in progress', 'QOF exception code precedent', 'WCAG 2.1 AA', 'No cookies · No patient data'];
+
+const PILOT_AUDIENCE_ITEMS = [
+  {
+    title: 'Pilot Practices',
+    desc: '5–10 GP practices in Cheshire and Merseyside to use Care Query for MSK referrals during the 12-week pilot period. In a high-volume referral environment, every administratively complete first-attempt submission reduces practice workload and shortens the patient pathway. The Service Card answers the question before you refer. The Gate Card confirms prerequisites before you submit.',
+    tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
+  },
+  {
+    title: 'Clinical Contributors',
+    desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to encode. A Service Card verified by you means fewer inappropriate referrals reaching your service and fewer calls from practices asking basic questions.',
+    tag: 'GPs · FCPs · Physios · Service admins · Clinical leads',
+  },
+  {
+    title: 'Service Owners and MSK Leads',
+    desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries from practices, and a service description you control — not one buried in an out-of-date document. You get a direct channel to update it, and a named steward role that ensures it stays current.',
+    tag: 'Service managers · Clinical leads · MSK service administrators',
+  },
+];
+
+const PILOT_INVOLVES_ITEMS = [
+  'Use Care Query for MSK A&G submissions and referrals during the 12-week pilot window',
+  'Share practice-level A&G data if available — to support comparison of return rates before and after the pilot. Not a mandatory requirement.',
+  'Complete a short 5-question post-pilot feedback form',
+  'No IT integration, no installation, no patient data collection required',
+];
+
 const ExpandableCard = ({ card, defaultOpen }) => {
   const [open, setOpen] = React.useState(defaultOpen);
   const hasSummary = Boolean(card.summary);
@@ -38,6 +124,129 @@ const ExpandableCard = ({ card, defaultOpen }) => {
   );
 };
 
+const SectionDivider = () => <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />;
+
+const SiteStyles = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    .care-query-site, .care-query-site * { box-sizing: border-box; margin: 0; padding: 0; }
+    .care-query-site { background: #ffffff; font-family: 'Inter', sans-serif; }
+    .care-query-site .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
+    .care-query-site .body-text { font-family: 'Inter', sans-serif; font-weight: 400; }
+    .care-query-site .nav-link { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
+    .care-query-site .nav-link:hover { color: #2563eb; }
+    .care-query-site .nav-link.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
+    .care-query-site .card { background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
+    .care-query-site .tag { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
+    .care-query-site .tag-blue { background: #dbeafe; color: #1e40af; }
+    .care-query-site .tag-amber { background: #fef9c3; color: #854d0e; }
+    .care-query-site .tag-slate { background: #f3f4f6; color: #374151; }
+    .care-query-site .tag-green { background: #dcfce7; color: #166534; }
+    .care-query-site .tag-burgundy { background: #fce7ef; color: #7f1d1d; }
+    .care-query-site .tag-indigo { background: #ede9fe; color: #3730a3; }
+    .care-query-site .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+    .care-query-site .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
+    .care-query-site .btn-primary:hover { background: #1d4ed8; }
+    .care-query-site .btn-outline { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #2563eb; border: 2px solid #2563eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
+    .care-query-site .btn-outline:hover { background: #eff6ff; }
+    .care-query-site .divider { height: 1px; background: linear-gradient(to right, transparent, #e5e7eb, transparent); margin: 0 auto; }
+    .care-query-site .tech-pill { font-family: 'Inter', monospace; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.75rem; background: #111827; color: #dbeafe; border-radius: 6px; display: inline-block; margin: 0.2rem; }
+    .care-query-site .step-number { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 3rem; color: #dbeafe; line-height: 1; }
+    .care-query-site .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+    .care-query-site .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+    .care-query-site .brand { color: #2563eb; font-weight: 700; }
+    .care-query-site .desktop-nav { display: flex; gap: 2rem; }
+    .care-query-site .mobile-menu-btn { display: none; }
+    @media (max-width: 768px) {
+      .care-query-site .desktop-nav { display: none !important; }
+      .care-query-site .mobile-menu-btn { display: block !important; }
+      .care-query-site .three-col { grid-template-columns: 1fr !important; }
+      .care-query-site .two-col { grid-template-columns: 1fr !important; }
+      .care-query-site .service-detail-grid { grid-template-columns: 1fr !important; }
+    }
+  `}</style>
+);
+
+const HiddenStayInformedForm = () => (
+  <form name={STAY_INFORMED_FORM_NAME} data-netlify="true" netlify-honeypot={STAY_INFORMED_HONEYPOT_FIELD} hidden aria-hidden="true">
+    <input type="email" name="email" />
+    <input type="text" name={STAY_INFORMED_HONEYPOT_FIELD} />
+  </form>
+);
+
+const SiteNavigation = ({ isMenuOpen, activeSection, onToggleMenu, onNavigate }) => (
+  <nav style={{ position: 'fixed', top: 0, width: '100%', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)', zIndex: 50, borderBottom: '1px solid #e5e7eb' }}>
+    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+          <img src="./Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
+          <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#2563eb', letterSpacing: '-0.01em' }}>Care Query</span>
+          <span className="tag tag-poc">PoC</span>
+        </div>
+        <div className="desktop-nav">
+          {NAV_ITEMS.map(item => (
+            <button key={item.id} onClick={() => onNavigate(item.id)}
+              className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+              style={{ color: activeSection === item.id ? '#2563eb' : '#374151' }}>
+              {item.label}
+            </button>
+          ))}
+        </div>
+        <button onClick={onToggleMenu} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
+          className="mobile-menu-btn">
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+    </div>
+    {isMenuOpen && (
+      <div style={{ background: '#ffffff', borderTop: '1px solid #e5e7eb', padding: '0.75rem 1.5rem' }}>
+        {NAV_ITEMS.map(item => (
+          <button key={item.id} onClick={() => onNavigate(item.id)}
+            style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.6rem 0', color: '#374151', background: 'none', border: 'none', fontFamily: "'Inter', sans-serif", fontSize: '0.95rem', cursor: 'pointer' }}>
+            {item.label}
+          </button>
+        ))}
+      </div>
+    )}
+  </nav>
+);
+
+const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onEmailChange, onSubmit }) => {
+  if (submitted) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <Check size={16} color="#22c55e" />
+        <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      name={STAY_INFORMED_FORM_NAME}
+      method="POST"
+      action="/"
+      data-netlify="true"
+      netlify-honeypot={STAY_INFORMED_HONEYPOT_FIELD}
+      onSubmit={onSubmit}
+      style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
+    >
+      <input type="hidden" name="form-name" value={STAY_INFORMED_FORM_NAME} />
+      <input type="hidden" name={STAY_INFORMED_HONEYPOT_FIELD} value="" />
+      <input type="email" name="email" value={email} onChange={onEmailChange}
+        placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
+      <button type="submit" disabled={isSubmitting} className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem', opacity: isSubmitting ? 0.8 : 1 }}>
+        {isSubmitting ? 'Submitting...' : 'Register interest'}
+      </button>
+      {submitError && (
+        <p className="body-text" style={{ width: '100%', color: '#b91c1c', fontWeight: 500, fontSize: '0.82rem', lineHeight: 1.5 }}>
+          {submitError}
+        </p>
+      )}
+    </form>
+  );
+};
+
 const CareQueryWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -49,7 +258,7 @@ const CareQueryWebsite = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'what-it-does', 'how-it-works', 'join-the-pilot', 'contact'];
+      const sections = SECTION_IDS;
       const scrollPosition = window.scrollY + 120;
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -84,7 +293,7 @@ const CareQueryWebsite = () => {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'stay-informed', email, 'bot-field': '' }).toString(),
+      body: new URLSearchParams({ 'form-name': STAY_INFORMED_FORM_NAME, email, [STAY_INFORMED_HONEYPOT_FIELD]: '' }).toString(),
     })
       .then((response) => {
         if (!response.ok) {
@@ -101,95 +310,19 @@ const CareQueryWebsite = () => {
       });
   };
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'what-it-does', label: 'What It Does' },
-    { id: 'how-it-works', label: 'How It Works' },
-    { id: 'join-the-pilot', label: 'Join the Pilot' },
-    { id: 'contact', label: 'Contact' },
-  ];
-
   return (
     <div className="care-query-site" style={{ fontFamily: "'Inter', sans-serif", background: '#ffffff', minHeight: '100vh', color: '#111827' }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        .care-query-site, .care-query-site * { box-sizing: border-box; margin: 0; padding: 0; }
-        .care-query-site { background: #ffffff; font-family: 'Inter', sans-serif; }
-        .care-query-site .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
-        .care-query-site .body-text { font-family: 'Inter', sans-serif; font-weight: 400; }
-        .care-query-site .nav-link { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: none; background: none; transition: color 0.2s; letter-spacing: 0.01em; }
-        .care-query-site .nav-link:hover { color: #2563eb; }
-        .care-query-site .nav-link.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
-        .care-query-site .card { background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
-        .care-query-site .tag { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 9999px; }
-        .care-query-site .tag-blue { background: #dbeafe; color: #1e40af; }
-        .care-query-site .tag-amber { background: #fef9c3; color: #854d0e; }
-        .care-query-site .tag-slate { background: #f3f4f6; color: #374151; }
-        .care-query-site .tag-green { background: #dcfce7; color: #166534; }
-        .care-query-site .tag-burgundy { background: #fce7ef; color: #7f1d1d; }
-        .care-query-site .tag-indigo { background: #ede9fe; color: #3730a3; }
-        .care-query-site .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
-        .care-query-site .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
-        .care-query-site .btn-primary:hover { background: #1d4ed8; }
-        .care-query-site .btn-outline { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #2563eb; border: 2px solid #2563eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
-        .care-query-site .btn-outline:hover { background: #eff6ff; }
-        .care-query-site .divider { height: 1px; background: linear-gradient(to right, transparent, #e5e7eb, transparent); margin: 0 auto; }
-        .care-query-site .tech-pill { font-family: 'Inter', monospace; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.75rem; background: #111827; color: #dbeafe; border-radius: 6px; display: inline-block; margin: 0.2rem; }
-        .care-query-site .step-number { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 3rem; color: #dbeafe; line-height: 1; }
-        .care-query-site .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
-        .care-query-site .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-        .care-query-site .brand { color: #2563eb; font-weight: 700; }
-        .care-query-site .desktop-nav { display: flex; gap: 2rem; }
-        .care-query-site .mobile-menu-btn { display: none; }
-        @media (max-width: 768px) {
-          .care-query-site .desktop-nav { display: none !important; }
-          .care-query-site .mobile-menu-btn { display: block !important; }
-          .care-query-site .three-col { grid-template-columns: 1fr !important; }
-          .care-query-site .two-col { grid-template-columns: 1fr !important; }
-          .care-query-site .service-detail-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
+      <SiteStyles />
 
-      <form name="stay-informed" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
-        <input type="email" name="email" />
-        <input type="text" name="bot-field" />
-      </form>
+      <HiddenStayInformedForm />
 
       {/* Navigation */}
-      <nav style={{ position: 'fixed', top: 0, width: '100%', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)', zIndex: 50, borderBottom: '1px solid #e5e7eb' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-              <img src="./Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
-              <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#2563eb', letterSpacing: '-0.01em' }}>Care Query</span>
-              <span className="tag tag-poc">PoC</span>
-            </div>
-            <div className="desktop-nav">
-              {navItems.map(item => (
-                <button key={item.id} onClick={() => scrollToSection(item.id)}
-                  className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-                  style={{ color: activeSection === item.id ? '#2563eb' : '#374151' }}>
-                  {item.label}
-                </button>
-              ))}
-            </div>
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
-              className="mobile-menu-btn">
-              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-          </div>
-        </div>
-        {isMenuOpen && (
-          <div style={{ background: '#ffffff', borderTop: '1px solid #e5e7eb', padding: '0.75rem 1.5rem' }}>
-            {navItems.map(item => (
-              <button key={item.id} onClick={() => scrollToSection(item.id)}
-                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.6rem 0', color: '#374151', background: 'none', border: 'none', fontFamily: "'Inter', sans-serif", fontSize: '0.95rem', cursor: 'pointer' }}>
-                {item.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
+      <SiteNavigation
+        isMenuOpen={isMenuOpen}
+        activeSection={activeSection}
+        onToggleMenu={() => setIsMenuOpen(!isMenuOpen)}
+        onNavigate={scrollToSection}
+      />
 
       {/* Hero */}
       <section id="home" style={{ paddingTop: '64px', minHeight: '100vh', display: 'flex', alignItems: 'center', background: 'linear-gradient(160deg, #ffffff 40%, #eff6ff 100%)' }}>
@@ -229,7 +362,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* What It Does */}
       <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
@@ -371,28 +504,19 @@ const CareQueryWebsite = () => {
                         </div>
                       ))}
                     </div>
-                    <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb' }}>
-                      <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
-                        Referrer intelligence — Layer 2
-                      </div>
-                      <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '6px', padding: '0.75rem' }}>
-                        <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, color: '#92400e', marginBottom: '0.3rem' }}>
-                          Most common A&amp;G return reason
+                    <div style={{ padding: '0.85rem 1.25rem', borderBottom: '1px solid #e5e7eb' }}>
+                      <div style={{ background: '#f3f4f6', border: '1px solid #e5e7eb', borderRadius: '6px', padding: '0.65rem 0.85rem' }}>
+                        <div className="body-text" style={{ fontSize: '0.72rem', fontWeight: 600, color: '#6b7280', marginBottom: '0.2rem' }}>
+                          Layer 2 — Referrer intelligence (Phase 2)
                         </div>
-                        <p className="body-text" style={{ fontSize: '0.8rem', color: '#92400e', lineHeight: 1.5, marginBottom: '0.5rem', fontWeight: 400 }}>
-                          Missing clinical reasoning statement — no sentence distinguishing inflammatory from mechanical pathology. Not in published criteria, but the single most common reason for A&G return.
-                        </p>
-                        <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, color: '#166534', marginBottom: '0.25rem' }}>
-                          Avoidance
-                        </div>
-                        <p className="body-text" style={{ fontSize: '0.8rem', color: '#166534', lineHeight: 1.5, fontWeight: 400 }}>
-                          Add one sentence: e.g. "Presentation is inflammatory in pattern given morning stiffness &gt;60 min, small joint symmetry, and elevated CRP."
+                        <p className="body-text" style={{ fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.5, fontWeight: 400 }}>
+                          In a later phase, named service stewards will contribute tacit referral intelligence to a Layer 2 section — operational nuance not captured in published criteria. This is not available at PoC and will only appear once formally verified by a named steward.
                         </p>
                       </div>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    {['Underlying Service Record', 'Layer 1 + Layer 2', 'Steward-governed', 'Stale warning system', 'Primary exploration surface'].map(t => (
+                    {['Underlying Service Record', 'Layer 1 (PoC) · Layer 2 (Phase 2)', 'Steward-governed', 'Stale warning system', 'Primary exploration surface'].map(t => (
                       <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
@@ -590,7 +714,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* Current Scope */}
       <section style={{ padding: '3rem 1.5rem', background: '#f9fafb' }}>
@@ -602,13 +726,7 @@ const CareQueryWebsite = () => {
             </div>
             <div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                {[
-                  { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
-                  { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
-                  { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — measure A&G rejection rate reduction' },
-                  { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into EMIS or SystmOne A&G, patient URL ready to send via Accurx' },
-                  { label: 'Cost to NHS', value: 'Free at point of use during the pilot phase. Future model: annual ICB block licence, no per-clinician charge, no capital cost.' },
-                ].map((item, i) => (
+                {CURRENT_SCOPE_ITEMS.map((item, i) => (
                   <div key={i} style={{ padding: '0.9rem 1rem', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                     <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
                     <div className="body-text" style={{ fontSize: '0.88rem', color: '#374151', fontWeight: 400, lineHeight: 1.5 }}>{item.value}</div>
@@ -642,7 +760,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* Why This Matters — Clinical Value + Contract Context */}
       <section style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
@@ -664,23 +782,7 @@ const CareQueryWebsite = () => {
           </div>
 
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
-            {[
-              {
-                title: 'Advice and Guidance: April 2026',
-                body: 'From 1 April 2026, Advice and Guidance is required for secondary care planned referrals. Intermediate services such as CATS and OCATS continue to accept direct referrals — but secondary care MSK pathways now route through A&G first. Administrative return rates for A&G submissions are measurable and directly affect practice workload.',
-                accent: '#9b2335',
-              },
-              {
-                title: 'Payment Removed',
-                body: 'The £20 per-request Item of Service payment for A&G is removed. Practices that previously earned up to £20,000 annually from A&G now absorb the same volume with no funding. Every returned submission is unfunded administrative rework — the case for getting it right first time has never been stronger.',
-                accent: '#ca8a04',
-              },
-              {
-                title: 'Workforce Pressure on MSK Knowledge',
-                body: 'Workforce changes increase the risk that MSK pathway knowledge is less available at practice level. When the clinician who knew the local pathway criteria moves on, that knowledge leaves with them. Care Query encodes the administrative pre-referral discipline of an experienced First Contact Practitioner and makes it available as a deterministic administrative tool.',
-                accent: '#2563eb',
-              },
-            ].map((item, i) => (
+            {CONTEXT_CARDS.map((item, i) => (
               <div key={i} className="card" style={{ padding: '1.75rem', borderTop: `3px solid ${item.accent}` }}>
                 <h3 className="heading" style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
                 <p className="body-text" style={{ fontSize: '0.85rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400 }}>{item.body}</p>
@@ -699,7 +801,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* What Each Output Is Built For */}
       <section id="solves-failures" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
@@ -713,7 +815,7 @@ const CareQueryWebsite = () => {
               What it does — and how it stays accurate.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              Experienced clinicians already understand these pathways. The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that wasn't visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these documented gaps — and each is directly measurable in the pilot.
+              Experienced clinicians already understand these pathways. The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that wasn't visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these documented gaps. Each is designed to generate evidence during the pilot — through per-gate attestation data captured directly by the tool, patient card access rates via privacy-respecting analytics, and qualitative GP feedback. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
             </p>
           </div>
 
@@ -832,7 +934,7 @@ const CareQueryWebsite = () => {
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      When the clinician completes the Gate Card, a Report Outcome button appears alongside the clipboard summary. One click generates a pre-formatted email to the service custodian with structured accept/reject options — no free text, no patient data, no backend required. Over time, this passive feedback loop tells the custodian which criteria are causing returns and whether the record needs updating. The governed data stays accurate because the people using it are telling the people maintaining it what is happening.
+                      When the clinician completes the Gate Card, a Report Outcome button appears alongside the clipboard summary. One click opens a pre-formatted email to the service steward with structured accept/reject options — no free text, no patient data, no backend. This is a lightweight feedback channel, not a data pipeline: the email may or may not be sent, and the tool has no visibility into whether it was. Over time, if stewards receive these emails, they gain a signal about which criteria are causing returns. The mechanism is designed to be tested during the pilot — not assumed to work at scale.
                     </p>
                   </div>
                 </>
@@ -844,13 +946,13 @@ const CareQueryWebsite = () => {
 
           <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
-              <strong>What this means for pilot evaluation:</strong> Success is measured by reduction in returned submissions, Preparation Card generation rate (clinicians using the Not Yet path rather than submitting incomplete referrals), Journey Card delivery rate via Plausible Analytics, and qualitative clinician feedback on consultation impact. Per-gate attestation states are logged and correlated with submission outcomes — enabling the pilot to distinguish between information-driven rejections (where the Service Card changes behaviour) and capacity-driven rejections (where the data generated is commissioning intelligence, not a tool failure). Each gap above is directly measurable during the 12-week pilot.
+              <strong>What this means for pilot evaluation:</strong> The tool directly captures per-gate attestation patterns via Plausible Analytics — including <code>cannot_meet</code> declaration rates by service, Preparation Card generation rate (clinicians using the Not Yet path), and patient card access rate (Journey and Preparation Card page views). Qualitative clinician feedback is collected via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed. Per-gate attestation data enables the pilot to distinguish information-driven gaps (where the Service Card changes behaviour) from capacity-driven gaps (where the data generated is commissioning intelligence). Each gap above maps to a specific, collectible metric during the 12-week pilot.
             </p>
           </div>
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* How It Works — Technical Architecture */}
       <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
@@ -875,26 +977,7 @@ const CareQueryWebsite = () => {
           </div>
 
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
-            {[
-              {
-                step: '01',
-                title: 'Governed Data Source',
-                body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are DRAFT until a steward manually verifies and publishes.',
-                pills: ['Structured data schema', 'Steward-verified publishing'],
-              },
-              {
-                step: '02',
-                title: 'Deterministic Render Engine',
-                body: 'The administrative tool reads the governed record and generates five output types. Every field is validated before display — no unchecked data reaches the screen. Zero external dependencies.',
-                pills: ['Input validation', 'Record verification', 'Zero dependencies'],
-              },
-              {
-                step: '03',
-                title: 'Immutable Safety Layer',
-                body: 'Six universal red flags are hard-coded outside the data layer and load before any other logic. They cannot be overridden or edited by any service record — a permanent safety layer that sits above all content.',
-                pills: ['Loads before all content', 'Cannot be overridden', 'Clinical safety boundary'],
-              },
-            ].map((item, i) => (
+            {TECH_ARCHITECTURE_STEPS.map((item, i) => (
               <div key={i} className="card" style={{ padding: '1.75rem' }}>
                 <div className="step-number">{item.step}</div>
                 <h3 className="heading" style={{ fontSize: '1.15rem', color: '#111827', margin: '0.5rem 0 0.75rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
@@ -911,7 +994,7 @@ const CareQueryWebsite = () => {
               Infrastructure
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-              {['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'DTAC: in progress', 'QOF exception code precedent', 'WCAG 2.1 AA', 'No cookies · No patient data'].map(p => (
+              {INFRASTRUCTURE_PILLS.map(p => (
                 <span key={p} style={{ fontFamily: "'Inter', monospace", fontSize: '0.78rem', fontWeight: 500, padding: '0.3rem 0.75rem', background: 'rgba(255,255,255,0.08)', color: '#dbeafe', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.12)' }}>{p}</span>
               ))}
             </div>
@@ -919,7 +1002,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* Governance */}
       <section style={{ padding: '6rem 1.5rem', background: '#f9fafb' }}>
@@ -943,7 +1026,7 @@ const CareQueryWebsite = () => {
                 { icon: <Shield size={18} color="#2563eb" />, label: 'MHRA — Medical Devices', status: 'Confirmed', desc: 'Confirmed not a medical device. Deterministic display of static, clinician-verified information. No AI, no patient data input, no clinical recommendation output. No MHRA registration required.' },
                 { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
                 { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'In progress', desc: 'Registration in progress (March 2026). Tier A classification, DCB0129 status, and pilot evidence pathway documented as part of the submission. Target: complete before pilot opens.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Confirmed', desc: 'Classified as Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification is formally recorded in the DCB0129 hazard log and will be confirmed through the NHS Innovation Service registration (in progress).' },
                 { icon: <Database size={18} color="#2563eb" />, label: 'QOF "Service Unavailable" Governance Precedent', status: 'Confirmed', desc: 'NHS England already permits GP practices to use SNOMED exception codes to protect QOF compliance metrics when a commissioned service does not exist locally. The "Cannot Meet" attestation extends this established governance principle to pre-referral A&G workflows — structured exception logic applied to a context where no equivalent currently exists.' },
                 { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
                 { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Planned', desc: 'HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools. Engagement planned as part of the pilot phase.' },
@@ -964,7 +1047,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* Join the Pilot */}
       <section id="join-the-pilot" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
@@ -988,23 +1071,7 @@ const CareQueryWebsite = () => {
           </div>
 
           <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '1.5rem', alignItems: 'start' }}>
-            {[
-              {
-                title: 'Pilot Practices',
-                desc: '5–10 GP practices in Cheshire and Merseyside to use Care Query for MSK referrals during the 12-week pilot period. In a high-volume referral environment, every administratively complete first-attempt submission reduces practice workload and shortens the patient pathway. The Service Card answers the question before you refer. The Gate Card confirms prerequisites before you submit.',
-                tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
-              },
-              {
-                title: 'Clinical Contributors',
-                desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to encode. A Service Card verified by you means fewer inappropriate referrals reaching your service and fewer calls from practices asking basic questions.',
-                tag: 'GPs · FCPs · Physios · Service admins · Clinical leads',
-              },
-              {
-                title: 'Service Owners and MSK Leads',
-                desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries from practices, and a service description you control — not one buried in an out-of-date document. You get a direct channel to update it, and a named steward role that ensures it stays current.',
-                tag: 'Service managers · Clinical leads · MSK service administrators',
-              },
-            ].map((item, i) => (
+            {PILOT_AUDIENCE_ITEMS.map((item, i) => (
               <div key={i} className="card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <h3 className="heading" style={{ fontSize: '1.2rem', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
                 <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400, marginBottom: '1rem', flex: 1 }}>{item.desc}</p>
@@ -1020,12 +1087,7 @@ const CareQueryWebsite = () => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'start' }} className="two-col">
             <div className="card" style={{ padding: '1.75rem' }}>
               <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '1rem' }}>What the pilot involves</h4>
-              {[
-                'Use Care Query for MSK A&G submissions and referrals during the 12-week pilot window',
-                'Allow measurement of whether administrative return rates change',
-                'Complete a short 5-question post-pilot feedback form',
-                'No IT integration, no installation, no patient data collection required',
-              ].map((item, i) => (
+              {PILOT_INVOLVES_ITEMS.map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', padding: '0.4rem 0', borderBottom: i < 3 ? '1px solid #f3f4f6' : 'none' }}>
                   <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.1rem' }}>
                     <Check size={11} color="#2563eb" />
@@ -1040,35 +1102,14 @@ const CareQueryWebsite = () => {
               <p className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', fontWeight: 400, marginBottom: '0.85rem', lineHeight: 1.5 }}>
                 Leave your email and we will be in touch when the pilot opens.
               </p>
-              {submitted ? (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Check size={16} color="#22c55e" />
-                  <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
-                </div>
-              ) : (
-                <form
-                  name="stay-informed"
-                  method="POST"
-                  action="/"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
-                  onSubmit={handleEmailSubmit}
-                  style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
-                >
-                  <input type="hidden" name="form-name" value="stay-informed" />
-                  <input type="hidden" name="bot-field" value="" />
-                  <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}
-                    placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
-                  <button type="submit" disabled={isSubmitting} className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem', opacity: isSubmitting ? 0.8 : 1 }}>
-                    {isSubmitting ? 'Submitting...' : 'Register interest'}
-                  </button>
-                  {submitError && (
-                    <p className="body-text" style={{ width: '100%', color: '#b91c1c', fontWeight: 500, fontSize: '0.82rem', lineHeight: 1.5 }}>
-                      {submitError}
-                    </p>
-                  )}
-                </form>
-              )}
+              <RegisterInterestForm
+                submitted={submitted}
+                email={email}
+                isSubmitting={isSubmitting}
+                submitError={submitError}
+                onEmailChange={e => setEmail(e.target.value)}
+                onSubmit={handleEmailSubmit}
+              />
               <p className="body-text" style={{ fontSize: '0.82rem', color: '#6b7280', fontWeight: 400, marginTop: '1rem', lineHeight: 1.5 }}>
                 Or contact us directly:{' '}
                 <a href="mailto:hello@carequery.uk" style={{ color: '#2563eb', fontWeight: 500, textDecoration: 'none' }}>hello@carequery.uk</a>
@@ -1078,7 +1119,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* FAQ */}
       <section style={{ padding: '6rem 1.5rem', background: '#f9fafb' }}>
@@ -1135,7 +1176,7 @@ const CareQueryWebsite = () => {
               title: 'What are the pilot success metrics?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Five measurable outcomes: (1) Standard 15 pilot site statement — integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) Journey/Preparation Card delivery rate via Plausible Analytics; (3) qualitative GP feedback on consultation impact; (4) <code>cannot_meet</code> declaration rate by service — a novel NHS dataset on structural barrier prevalence; (5) qualitative patient feedback on card usefulness. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
+                  Five measurable outcomes: (1) Standard 15 pilot site statement — integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) patient card access rate via Plausible Analytics (Journey and Preparation Card page views — a proxy for patient reach, not a confirmed delivery measure); (3) qualitative GP feedback on consultation impact (post-pilot survey); (4) <code>cannot_meet</code> declaration rate by service — a novel NHS dataset on structural barrier prevalence, directly captured by the tool; (5) qualitative patient feedback on card usefulness. A&G return rate comparison is the strongest outcome evidence if obtainable from the ICB, but is external to the tool. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
                 </p>
               ),
             },
@@ -1145,7 +1186,7 @@ const CareQueryWebsite = () => {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: '1100px', margin: '0 auto' }} />
+      <SectionDivider />
 
       {/* Contact */}
       <section id="contact" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
