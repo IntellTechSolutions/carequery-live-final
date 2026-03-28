@@ -43,8 +43,8 @@ const TECH_ARCHITECTURE_STEPS = [
   {
     step: '01',
     title: 'Governed Data Source',
-    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are DRAFT until a steward manually verifies and publishes.',
-    pills: ['Structured data schema', 'Steward-verified publishing'],
+    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are marked DRAFT until verified by a service steward — recruiting stewards from receiving services is part of the pilot.',
+    pills: ['Structured data schema', 'Steward verification model'],
   },
   {
     step: '02',
@@ -60,7 +60,7 @@ const TECH_ARCHITECTURE_STEPS = [
   },
 ];
 
-const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'DTAC: in progress', 'QOF exception code precedent', 'WCAG 2.1 AA', 'No cookies · No patient data'];
+const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'DTAC: in progress', 'QOF exception code precedent', 'WCAG 2.1 AA (target)', 'No cookies · No patient data'];
 
 const PILOT_AUDIENCE_ITEMS = [
   {
@@ -337,11 +337,11 @@ const CareQueryWebsite = () => {
               <em style={{ color: '#2563eb' }}>Before the referral is submitted.</em>
             </h1>
             <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.75rem', fontWeight: 400 }}>
-              <span className="brand">Care Query</span> encodes NHS MSK service requirements into a single governed record per service — generating five deterministic outputs for clinicians, practice teams, and patients. No AI. No integration. No patient data.
+              <span className="brand">Care Query</span> encodes NHS MSK service requirements into a single governed record per service — designed to generate five deterministic outputs for clinicians, practice teams, and patients. Service Card, Gate Card, and Journey Card are operational; Pathway Overview and Preparation Card are in active development for pilot launch. No AI. No integration. No patient data.
             </p>
             <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each NHS MSK service actually does — the criteria, the catchment, the investigations it expects. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms all administrative prerequisites for this patient before submission — with per-gate attestation and a formally documented basis for each confirmation. In either outcome, the patient leaves the consultation with a URL they can open.
+                The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each NHS MSK service actually does — the criteria, the catchment, the investigations it expects. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> lets the clinician confirm administrative prerequisites for this patient before submission. Per-gate attestation — individual gate-by-gate confirmation with a documented basis — is in active development. In either outcome, the patient leaves the consultation with a URL they can open.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 A single governed record per service generates five outputs: a <strong>Pathway Overview</strong> (all services at a glance), a <strong style={{ color: '#ca8a04' }}>Service Card</strong> (what the service does and who it sees), a <strong style={{ color: '#9b2335' }}>Gate Card</strong> (per-patient administrative checklist with attestation model), a <strong style={{ color: '#16a34a' }}>Journey Card</strong> (patient summary when the referral is ready), and a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> (patient plan when prerequisites are outstanding). All five from one governed record. Update the record once — every output reflects the change.
@@ -379,10 +379,10 @@ const CareQueryWebsite = () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The gap GPs fill by sending trial referrals and reading the rejection is: "What does this service actually accept?" <span className="brand">Care Query</span> answers it before anything is submitted. A single governed record per service generates five outputs — one for every stage of the referral conversation, from pathway orientation to patient handoff.
+                The gap GPs fill by sending trial referrals and reading the rejection is: "What does this service actually accept?" <span className="brand">Care Query</span> answers it before anything is submitted. A single governed record per service is designed to generate five outputs — one for every stage of the referral conversation, from pathway orientation to patient handoff. Service Card, Gate Card, and Journey Card are operational in the current build. Pathway Overview and Preparation Card are in active development for pilot launch.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong>Pathway Overview</strong> gives the landscape. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient with a documented attestation basis. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> reaches the patient when the referral is ready. The <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> reaches the patient when prerequisites are outstanding — turning "not yet" into a structured next step. All five from the same governed record. Update the record once; every output reflects the change.
+                The <strong>Pathway Overview</strong> gives the landscape. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> lets the clinician confirm administrative prerequisites per patient. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> reaches the patient when the referral is ready. The <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> reaches the patient when prerequisites are outstanding — turning "not yet" into a structured next step. All five from the same governed record. Update the record once; every output reflects the change.
               </p>
             </div>
           </div>
@@ -400,7 +400,7 @@ const CareQueryWebsite = () => {
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                    The Pathway Overview is the first thing a clinician sees when they open <span className="brand">Care Query</span>. Every encoded NHS MSK service appears as a scannable card — service name, what it covers, whether it operates via mandatory A&G or direct referral, and the current record status (published, draft, or overdue for review). Stale records are flagged. Published records are clearly marked.
+                    The Pathway Overview will be the first thing a clinician sees when they open <span className="brand">Care Query</span> (in active development for pilot launch). Every encoded NHS MSK service appears as a scannable card — service name, what it covers, whether it operates via mandatory A&G or direct referral, and the current record status (published, draft, or overdue for review). Stale records are flagged. Published records are clearly marked.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     The Pathway Overview is not a directory — it is the entry point to a governed set of records. Selecting a service opens the Service Card: the full record of what that service actually does. The overview is designed to be scanned in seconds, not studied.
@@ -455,7 +455,7 @@ const CareQueryWebsite = () => {
                     The Service Card is the governed record of what each NHS MSK service actually does — referral criteria, catchment, required investigations, typical waiting times, operational contacts, and what the service explicitly does not accept. It is the starting point for any referral decision: before a clinician checks gate prerequisites, they need to know whether this service is the right destination.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Every field belongs to one of two layers: <strong>Layer 1</strong> — verified public truth from published documents and direct written confirmation; or <strong>Layer 2</strong> — tacit operational knowledge sourced from experienced clinical referrers through structured conversations. Layer 2 is the specific hypothesis this PoC is testing: whether the operational nuance that lives in the heads of experienced FCPs can be encoded, attributed to a named source, and made accessible at the point of referral. Every Service Card has a named steward — a specific person in the service responsible for verifying its contents on a defined review cycle.
+                    Every field belongs to one of two layers: <strong>Layer 1</strong> — verified public truth from published documents and direct written confirmation; or <strong>Layer 2</strong> — tacit operational knowledge sourced from experienced clinical referrers through structured conversations. Layer 2 is the specific hypothesis this PoC is testing: whether the operational nuance that lives in the heads of experienced FCPs can be encoded, attributed to a named source, and made accessible at the point of referral. Every Service Card is designed to have a named steward — a specific person in the receiving service verifying its contents on a defined review cycle. At PoC stage, records are verified by the developer; steward recruitment from receiving services is part of the pilot process.
                   </p>
 
                   {/* Illustrative service card — clean example, no draft markers */}
@@ -542,7 +542,7 @@ const CareQueryWebsite = () => {
                     Knowing what a service accepts (Service Card) and confirming this patient meets those requirements right now (Gate Card) are different steps. A common reason for a returned submission is not that the clinician didn't know the criteria — it is that a required investigation wasn't completed yet, or the conservative management history wasn't documented in a way the receiving service can verify. The Gate Card catches these in the consultation, not three weeks later.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Each gate is confirmed individually with a documented basis: confirmed from the clinical record, confirmed from the patient, not yet met, or cannot be met. Per-gate attestation — not a single bulk checkbox. When all hard gates are confirmed, a clipboard-ready administrative summary is generated for the A&G submission or direct referral. If any gate is not yet met, the outcome is a Preparation Card — not a dead end.
+                    In the attestation model (in active development), each gate is confirmed individually with a documented basis: confirmed from the clinical record, confirmed from the patient, not yet met, or cannot be met. Per-gate attestation — not a single bulk checkbox. When all hard gates are confirmed, a clipboard-ready administrative summary is generated for the A&G submission or direct referral. If any gate is not yet met, the outcome is a Preparation Card — not a dead end.
                   </p>
                   {/* Gate Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -657,7 +657,7 @@ const CareQueryWebsite = () => {
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                    Not every referral is ready to be submitted today. An imaging result not yet back, a course of conservative management still in progress, a catchment question needing clarification. When any gate is marked "not yet met," the Gate Card generates a Preparation Card rather than a submission summary. The clinician gets a structured view of what is outstanding. The patient gets a URL they can open.
+                    Not every referral is ready to be submitted today. An imaging result not yet back, a course of conservative management still in progress, a catchment question needing clarification. When any gate is marked "not yet met," the Gate Card generates a Preparation Card rather than a submission summary (in active development for pilot launch). The clinician gets a structured view of what is outstanding. The patient gets a URL they can open.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     This is likely the majority outcome. Most patients presenting for MSK assessment for the first time have something outstanding before a specialist referral is appropriate — an investigation to complete, a period of treatment to work through, information to gather. The Preparation Card positions this as an informed next step, not a refusal. The patient sees what their clinician is working through, what they can do in the meantime, and when to expect to hear more. They leave the consultation with something in hand.
@@ -708,7 +708,7 @@ const CareQueryWebsite = () => {
           {/* Architecture note */}
           <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file maintained by a named steward. From it, five outputs are generated. The <strong>Pathway Overview</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the patient leaves the consultation with something in hand: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The governed record changes once; every output reflects the update.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file designed to be maintained by a named steward. From it, five outputs are generated. The <strong>Pathway Overview</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the patient leaves the consultation with something in hand: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The governed record changes once; every output reflects the update.
             </p>
           </div>
         </div>
@@ -838,7 +838,7 @@ const CareQueryWebsite = () => {
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      The Service Card encodes what each service actually does — referral criteria, catchment, what it explicitly does not accept, operational contacts, and expected waiting times. Maintained by a named steward on a review cycle. A clinician can open the Service Card, read the governed record, and understand the service before making a referral decision. The question "what does this service take?" is answered before anything is submitted.
+                      The Service Card encodes what each service actually does — referral criteria, catchment, what it explicitly does not accept, operational contacts, and expected waiting times. Designed to be maintained by a named steward on a review cycle; at PoC stage, records are developer-verified and flagged as DRAFT pending service team review. A clinician can open the Service Card, read the governed record, and understand the service before making a referral decision. The question "what does this service take?" is answered before anything is submitted.
                     </p>
                   </div>
                 </>
@@ -918,11 +918,11 @@ const CareQueryWebsite = () => {
             },
             {
               icon: <GitBranch size={20} color="#2563eb" />,
-              title: 'No Feedback Loop → Pilot Evaluation: Closed-Loop Outcome Logging',
+              title: 'No Feedback Loop → Lightweight Outcome Reporting',
               tagClass: 'tag-blue',
               tagLabel: 'Pilot Evaluation',
               borderColor: '#2563eb',
-              summary: 'Structured outcome reporting feeds referral results back to the service steward — designed as a pilot evaluation mechanism to test whether governed records stay accurate when the people using them can signal what is happening.',
+              summary: 'A voluntary mailto channel: after completing the Gate Card, the clinician can report whether the submission was accepted or rejected. No infrastructure, no backend — a signal that accumulates if people use it.',
               detail: (
                 <>
                   <div style={{ marginBottom: '1.25rem' }}>
@@ -946,7 +946,7 @@ const CareQueryWebsite = () => {
 
           <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
-              <strong>What this means for pilot evaluation:</strong> The tool directly captures per-gate attestation patterns via Plausible Analytics — including <code>cannot_meet</code> declaration rates by service, Preparation Card generation rate (clinicians using the Not Yet path), and patient card access rate (Journey and Preparation Card page views). Qualitative clinician feedback is collected via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed. Per-gate attestation data enables the pilot to distinguish information-driven gaps (where the Service Card changes behaviour) from capacity-driven gaps (where the data generated is commissioning intelligence). Each gap above maps to a specific, collectible metric during the 12-week pilot.
+              <strong>What this means for pilot evaluation:</strong> The tool is designed to capture per-gate attestation patterns via Plausible Analytics — including <code>cannot_meet</code> declaration rates by service, Preparation Card generation rate (clinicians using the Not Yet path), and patient card access rate (Journey and Preparation Card page views). Qualitative clinician feedback is collected via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed. If validated, per-gate attestation data would enable the pilot to distinguish information-driven gaps (where the Service Card changes behaviour) from capacity-driven gaps (where the data generated is commissioning intelligence). Each gap above maps to a specific, collectible metric during the 12-week pilot.
             </p>
           </div>
         </div>
@@ -969,7 +969,7 @@ const CareQueryWebsite = () => {
               NHS referral pathways are operationally complex but rarely documented in a structured, machine-readable way. <span className="brand">Care Query</span> encodes that information into a single governed record per service — making it available at the point of referral in a consistent, auditable format.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              <strong>For practice staff:</strong> Runs in a browser tab — no installation, no login, no IT request. Open it, use it, close it. <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. Static JSON on a CDN, rendered client-side. Patient-facing links open in an isolated view with no path to clinician content. Nothing to risk-assess beyond a read-only webpage.
+              <strong>For practice staff:</strong> Runs in a browser tab — no installation, no login, no IT request. Open it, use it, close it. <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. Static JSON on a CDN, rendered client-side. Patient-facing links open in an isolated view with no path to clinician content. The footprint for IG review is minimal — a read-only webpage with no data flows to assess.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               <strong>For commissioners:</strong> Every output is auditable back to its governed source — no AI, no inference, no guesswork. Reduced A&G rejections translate directly to fewer unfunded re-submissions. <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals and fewer admin calls — a description of your service that you control and update.
@@ -1022,11 +1022,11 @@ const CareQueryWebsite = () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
-                { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Clinical risk management documentation in place and maintained throughout development.' },
+                { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Adverse event monitoring protocol and hazard log are being finalised before pilot launch.' },
                 { icon: <Shield size={18} color="#2563eb" />, label: 'MHRA — Medical Devices', status: 'Confirmed', desc: 'Confirmed not a medical device. Deterministic display of static, clinician-verified information. No AI, no patient data input, no clinical recommendation output. No MHRA registration required.' },
                 { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
                 { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'In progress', desc: 'Registration in progress (March 2026). Tier A classification, DCB0129 status, and pilot evidence pathway documented as part of the submission. Target: complete before pilot opens.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification is formally recorded in the DCB0129 hazard log and will be confirmed through the NHS Innovation Service registration (in progress).' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification will be formally recorded in the DCB0129 hazard log before pilot launch and confirmed through the NHS Innovation Service registration (in progress).' },
                 { icon: <Database size={18} color="#2563eb" />, label: 'QOF "Service Unavailable" Governance Precedent', status: 'Confirmed', desc: 'NHS England already permits GP practices to use SNOMED exception codes to protect QOF compliance metrics when a commissioned service does not exist locally. The "Cannot Meet" attestation extends this established governance principle to pre-referral A&G workflows — structured exception logic applied to a context where no equivalent currently exists.' },
                 { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
                 { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Planned', desc: 'HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools. Engagement planned as part of the pilot phase.' },
@@ -1136,7 +1136,7 @@ const CareQueryWebsite = () => {
               title: 'Does this require EMIS or SystmOne integration?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  No. <span className="brand">Care Query</span> runs in a browser tab alongside any clinical system. No API, no installation, no IG approval process. Static JSON served from a CDN, rendered entirely client-side. Nothing is installed on practice infrastructure. For IT and IG leads: there is nothing to risk-assess beyond a read-only webpage — no patient data is collected, processed, or transmitted at any point.
+                  No. <span className="brand">Care Query</span> runs in a browser tab alongside any clinical system. No API, no installation. Static JSON served from a CDN, rendered entirely client-side. Nothing is installed on practice infrastructure. For IT and IG leads: no patient data is collected, processed, or transmitted at any point — the footprint for IG review is minimal.
                 </p>
               ),
             },
@@ -1144,7 +1144,7 @@ const CareQueryWebsite = () => {
               title: 'Does this require MHRA registration as a medical device?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  No. <span className="brand">Care Query</span> is an administrative tool. It does not process patient data, make clinical recommendations, or determine appropriateness for any individual. It displays governed administrative information — the same kind of information that currently lives in PDFs and commissioning documents. NICE ESF classification: Tier A system service DHT. Standard 14 (effectiveness evidence/RCT) does not apply. This classification is documented in the DCB0129 hazard log and will be confirmed before pilot launch.
+                  No. <span className="brand">Care Query</span> is an administrative tool. It does not process patient data, make clinical recommendations, or determine appropriateness for any individual. It displays governed administrative information — the same kind of information that currently lives in PDFs and commissioning documents. NICE ESF classification: Tier A system service DHT (developer-assessed). Standard 14 (effectiveness evidence/RCT) does not apply. This classification will be formally documented in the DCB0129 hazard log before pilot launch.
                 </p>
               ),
             },
@@ -1152,7 +1152,7 @@ const CareQueryWebsite = () => {
               title: 'How is the data governed and kept accurate?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Each service has a named steward — a specific person in the receiving service responsible for verifying the record on a defined review cycle. Records are versioned in GitHub and published only after steward verification. If a record is overdue for review, an amber warning is shown to users — the information remains accessible but is flagged as potentially stale. Stale-but-visible is always preferable to hidden. Accountability and accuracy are the same thing: the steward's identity is part of the record.
+                  Each service is designed to have a named steward — a specific person in the receiving service responsible for verifying the record on a defined review cycle. Records are versioned in GitHub. At PoC stage, records are developer-verified and marked DRAFT pending receiving service review. If a record is overdue for review, an amber warning is shown to users — the information remains accessible but is flagged as potentially stale. Stale-but-visible is always preferable to hidden. The steward model is the target architecture; recruiting service stewards is part of the pilot process.
                 </p>
               ),
             },
