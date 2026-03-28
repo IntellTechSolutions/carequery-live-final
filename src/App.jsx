@@ -65,26 +65,26 @@ const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse va
 const PILOT_AUDIENCE_ITEMS = [
   {
     title: 'Pilot Practices',
-    desc: '5–10 GP practices in Cheshire and Merseyside to use Care Query for MSK referrals during the 12-week pilot period. In a high-volume referral environment, every administratively complete first-attempt submission reduces practice workload and shortens the patient pathway. The Service Card answers the question before you refer. The Gate Card confirms prerequisites before you submit.',
+    desc: '5–10 GP practices in Cheshire and Merseyside. Open the tool in a browser tab when preparing an MSK referral — no installation, no login, no IT request. The Service Card shows what each service needs. The Gate Card confirms prerequisites before you submit. The patient leaves with a link explaining what happens next. 12 weeks, zero IT burden, and the pilot counts as a practice-level quality improvement initiative.',
     tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
   },
   {
     title: 'Clinical Contributors',
-    desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to encode. A Service Card verified by you means fewer inappropriate referrals reaching your service and fewer calls from practices asking basic questions.',
-    tag: 'GPs · FCPs · Physios · Service admins · Clinical leads',
+    desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to encode. Contributing takes a single conversation. Your expertise, encoded once, helps every clinician in the area refer more accurately — and counts as quality improvement activity for your appraisal portfolio.',
+    tag: 'GPs · FCPs · ACPs · Advanced Practitioners · Physios · Service leads',
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries from practices, and a service description you control — not one buried in an out-of-date document. You get a direct channel to update it, and a named steward role that ensures it stays current.',
-    tag: 'Service managers · Clinical leads · MSK service administrators',
+    desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries, and referral criteria you control — not buried in an out-of-date document. During the pilot, the tool captures when referring clinicians mark a prerequisite as "cannot meet" due to a structural barrier — novel data on where your referral requirements create problems that are not about GP competence. Steward verification takes about 30 minutes and counts as service evaluation activity.',
+    tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
   },
 ];
 
 const PILOT_INVOLVES_ITEMS = [
-  'Use Care Query for MSK A&G submissions and referrals during the 12-week pilot window',
-  'Share practice-level A&G data if available — to support comparison of return rates before and after the pilot. Not a mandatory requirement.',
-  'Complete a short 5-question post-pilot feedback form',
+  'Use Care Query for MSK referral preparation during the 12-week pilot window — open in a browser tab alongside your clinical system',
+  'Complete a short 6-question post-pilot feedback survey (3 minutes, anonymous)',
   'No IT integration, no installation, no patient data collection required',
+  'Participation counts as quality improvement / service evaluation activity for appraisal portfolios — not classified as research',
 ];
 
 const ExpandableCard = ({ card, defaultOpen }) => {
@@ -1177,6 +1177,14 @@ const CareQueryWebsite = () => {
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                   Five measurable outcomes: (1) Standard 15 pilot site statement — integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) patient card access rate via Plausible Analytics (Journey and Preparation Card page views — a proxy for patient reach, not a confirmed delivery measure); (3) qualitative GP feedback on consultation impact (post-pilot survey); (4) <code>cannot_meet</code> declaration rate by service — a novel NHS dataset on structural barrier prevalence, directly captured by the tool; (5) qualitative patient feedback on card usefulness. A&G return rate comparison is the strongest outcome evidence if obtainable from the ICB, but is external to the tool. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
+                </p>
+              ),
+            },
+            {
+              title: 'Can participation in the pilot count as service evaluation?',
+              detail: (
+                <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                  Yes. The pilot is a service evaluation, not research — no patient data is collected, no clinical decisions are altered, no randomisation occurs. For GPs and FCPs, participation counts as quality improvement activity for appraisal and revalidation. For practice managers, it documents a practice-level QI initiative. For MSK service leads, verifying a service record and reviewing the resulting referral data is a service evaluation activity that generates genuinely novel data on structural referral barriers. The HRA decision tool will formally confirm the service evaluation classification before the pilot opens.
                 </p>
               ),
             },
