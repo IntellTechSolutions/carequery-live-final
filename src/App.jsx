@@ -774,7 +774,7 @@ const CareQueryWebsite = () => {
               Making referral information visible at the point of care.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              The most common reasons for returned MSK referrals — missing investigations, unclear pathway requirements, wrong service selection — are informational, not clinical. The referring clinician is competent. The information about what each service needs was not available at the point of submission. <span className="brand">Care Query</span> makes that information visible before the referral leaves the practice.
+              Returned MSK referrals have multiple causes — clinical judgment, time pressure, risk management, and informational gaps. <span className="brand">Care Query</span> addresses the informational component specifically: whether the referring clinician had access to what each service needs before submission. Missing investigations, unclear pathway requirements, wrong service selection — these are the gaps where better information visibility at the point of referral can make a measurable difference. The pilot is designed to test that hypothesis.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               This gap has become more operationally significant under the 2026/27 GP contract (PRN02353), which makes Advice and Guidance mandatory for secondary care planned referrals from 1 April 2026 and removes the per-request payment. The volume of A&G submissions will increase; the administrative cost of returned submissions falls entirely on the practice.
