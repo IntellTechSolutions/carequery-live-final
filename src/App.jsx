@@ -148,6 +148,7 @@ const SiteStyles = () => (
     .care-query-site .tag-green { background: #dcfce7; color: #166534; }
     .care-query-site .tag-burgundy { background: #fce7ef; color: #7f1d1d; }
     .care-query-site .tag-indigo { background: #ede9fe; color: #3730a3; }
+    .care-query-site .tag-overview { background: #E2E8F0; color: #334155; }
     .care-query-site .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
     .care-query-site .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
     .care-query-site .btn-primary:hover { background: #1d4ed8; }
@@ -474,11 +475,11 @@ const CareQueryWebsite = () => {
           {/* Five expandable output cards — Service Card leads */}
           {[
             {
-              icon: <Map size={20} color="#2563eb" />,
-              title: 'Pathway Overview — All Services at a Glance',
-              tagClass: 'tag-blue',
+              icon: <Map size={20} color="#475569" />,
+              title: 'Overview Card — All Services at a Glance',
+              tagClass: 'tag-overview',
               tagLabel: 'Entry point — GPs · FCPs · Practice staff',
-              borderColor: '#2563eb',
+              borderColor: '#475569',
               defaultOpen: false,
               summary: 'All local MSK services on one screen in under 30 seconds. The starting point before any referral decision.',
               detail: (
@@ -790,7 +791,7 @@ const CareQueryWebsite = () => {
           ))}
 
           {/* Architecture note */}
-          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
+          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #374151' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
               Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file designed to be maintained by a named steward. From it, five outputs are generated. The <strong>Pathway Overview</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the patient leaves the consultation with something in hand: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The governed record changes once; every output reflects the update.
             </p>
@@ -827,7 +828,7 @@ const CareQueryWebsite = () => {
                 <span className="body-text" style={{ fontSize: '0.82rem', color: '#2563eb', fontWeight: 500 }}>{scopeOpen ? 'Less detail −' : 'More detail +'}</span>
               </button>
               {scopeOpen && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', borderLeft: '3px solid #d1d5db', paddingLeft: '1.25rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', borderLeft: '3px solid #4B5563', paddingLeft: '1.25rem' }}>
                   <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
                     NHS England built the monitoring infrastructure (Model Health System), the referral pipe (e-RS), and the waiting list analytics. The SPoA Technical Guidance requires referral criteria to be visible to referrers. Care Query is the mechanism that makes service-level criteria accessible at the point of submission — with a per-patient administrative checklist and a patient output regardless of the outcome.
                   </p>
@@ -874,7 +875,7 @@ const CareQueryWebsite = () => {
             ))}
           </div>
 
-          <div style={{ padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
+          <div style={{ padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #374151' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 400, marginBottom: '0.75rem' }}>
               <strong>What this means for everyone involved:</strong> GPs and FCPs see what each service requires before they submit. Practice teams get a consistent workflow regardless of which clinician is preparing the referral. Services get submissions that match their criteria. Patients leave the consultation with a structured plan — whether the referral goes today or not.
             </p>
@@ -1028,7 +1029,7 @@ const CareQueryWebsite = () => {
             <ExpandableCard key={idx} card={card} defaultOpen={false} />
           ))}
 
-          <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
+          <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #374151' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
               <strong>What this means for pilot evaluation:</strong> The pilot captures three evidence streams directly: per-gate attestation patterns via privacy-respecting analytics (Plausible), patient card access rates (Journey and Preparation Card page views), and qualitative clinician feedback via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed.
             </p>
@@ -1125,36 +1126,22 @@ const CareQueryWebsite = () => {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <SectionDivider />
-
-      {/* Governance */}
-      <section style={{ padding: '6rem 1.5rem', background: '#f9fafb' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-                <Shield size={20} color="#2563eb" />
-                <span className="tag tag-blue" style={{ marginBottom: '0' }}>Regulatory Position</span>
-              </div>
-              <h2 className="heading" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-                Your judgment.<br />Our structure.
-              </h2>
-              <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0' }}>
-                Clinical judgment comes from you — built over years of training and practice. <span className="brand">Care Query</span> does not provide diagnosis, triage, or any recommendation on clinical management. It surfaces referral requirements that already exist — criteria, catchment, investigations — and makes them visible at the point the referral is prepared. You confirm what applies. The administrative tool records it. The clinical decision remains entirely yours.
-              </p>
+          {/* Safety and Regulatory Status */}
+          <div style={{ marginTop: '3.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <Shield size={20} color="#2563eb" />
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Safety and Regulatory Status</span>
             </div>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.5rem' }}>
+              Administrative tool. Deterministic render. No clinical recommendation output.
+            </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
                 { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Adverse event monitoring protocol and hazard log are being finalised before pilot launch.' },
                 { icon: <Shield size={18} color="#2563eb" />, label: 'MHRA — Medical Devices', status: 'Confirmed', desc: 'Confirmed not a medical device. Deterministic display of static, clinician-verified information. No AI, no patient data input, no clinical recommendation output. No MHRA registration required.' },
                 { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification will be formally recorded in the DCB0129 hazard log before pilot launch.' },
                 { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Registered', desc: 'Registered March 2026 (INN-2603-0087-6). Tier A classification, DCB0129 status, and pilot evidence pathway documented. Support requested: HIN NW Coast, Tier A confirmation, Standard 15 design, commissioning pathway.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification will be formally recorded in the DCB0129 hazard log before pilot launch. Documented in the NHS Innovation Service registration (INN-2603-0087-6).' },
-                { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
-                { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Planned', desc: 'HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools. Engagement planned as part of the pilot phase.' },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: '1rem', padding: '1rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
                   <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{item.icon}</div>
