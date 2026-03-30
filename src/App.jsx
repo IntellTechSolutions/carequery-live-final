@@ -16,8 +16,8 @@ const STAY_INFORMED_RECAPTCHA_FIELD = 'g-recaptcha-response';
 const MAX_EMAIL_LENGTH = 254;
 const MIN_FORM_DWELL_MS = 3000;
 const BRAND_COLOR = '#2563eb';
-const OVERVIEW_ACCENT_COLOR = '#334155';
-const OVERVIEW_TAG_BACKGROUND = '#E2E8F0';
+const OVERVIEW_ACCENT_COLOR = '#5B7C99';
+const OVERVIEW_TAG_BACKGROUND = '#E7EFF5';
 
 const CURRENT_SCOPE_ITEMS = [
   { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
@@ -1177,7 +1177,8 @@ const CareQueryWebsite = () => {
                 Criteria are held in commissioning documents and institutional memory — not in a format usable during a 10-minute consultation. <span className="brand">Care Query</span> puts that information where you need it. The pilot tests whether verified clarity produces steadier consultations, more complete submissions, and patients who leave with a plan.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
-                If you recognise this problem in your own referral pathways — or in the systems you commission or evaluate — a short conversation is enough to start.
+                If you recognise this problem in your own referral pathways — or in the systems you commission or evaluate — a short conversation is enough to start. Contact us directly:{' '}
+                <a href="mailto:hello@carequery.uk" style={{ color: BRAND_COLOR, fontWeight: 500, textDecoration: 'none' }}>hello@carequery.uk</a>
               </p>
             </div>
           </div>
