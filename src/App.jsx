@@ -16,25 +16,25 @@ const CURRENT_SCOPE_ITEMS = [
   { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
   { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality and capture per-gate attestation data' },
-  { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into EMIS or SystmOne A&G, patient URL ready to send via Accurx' },
+  { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into your A&G submission, patient URL ready to share' },
   { label: 'Cost to NHS', value: 'Free at point of use during the pilot phase. Future model: annual ICB block licence, no per-clinician charge, no capital cost.' },
   { label: 'Build status', value: 'Pathway Overview, per-gate attestation, and Preparation Card are in active development for pilot launch. Service Card, Gate Card, and Journey Card are operational in the current build.' },
 ];
 
 const CONTEXT_CARDS = [
   {
-    title: 'Advice and Guidance: April 2026',
-    body: 'From 1 April 2026, Advice and Guidance is required for secondary care planned referrals. Intermediate services such as CATS and OCATS continue to accept direct referrals — but secondary care MSK pathways now route through A&G first. Each returned A&G submission generates unfunded administrative rework at the practice.',
+    title: 'The Information Is Not Where Clinicians Need It',
+    body: 'Pathway criteria are held in commissioning documents, institutional memory, and the heads of experienced clinicians — not in a format usable during a 10-minute consultation. When the clinician who knew the local pathway moves on, that knowledge leaves with them. 52% of MSK referrals are administratively incomplete at triage — not because clinicians lack competence, but because the information is not accessible at the point of care.',
     accent: '#9b2335',
   },
   {
-    title: 'Payment Removed',
-    body: 'The £20 per-request Item of Service payment for A&G is removed. Practices that previously earned up to £20,000 annually from A&G now absorb the same volume with no funding. Every returned submission is unfunded administrative rework — the case for getting it right first time has never been stronger.',
+    title: 'The NHS Mandates Visibility — But Provides No Tool',
+    body: 'NHS England\'s SPoA Technical Guidance requires referral criteria to be "visible to referrers." The 2026/27 GP contract makes Advice and Guidance mandatory for secondary care planned referrals. But no national tool makes service-level criteria accessible at the point of submission. Care Query fills that gap — the same governed record, every clinician, every consultation.',
     accent: '#ca8a04',
   },
   {
-    title: 'Workforce Pressure on MSK Knowledge',
-    body: 'Workforce changes increase the risk that MSK pathway knowledge is less available at practice level. When the clinician who knew the local pathway criteria moves on, that knowledge leaves with them. Care Query encodes the administrative pre-referral discipline of an experienced First Contact Practitioner and makes it available as a deterministic administrative tool.',
+    title: 'Every Patient Leaves With a Plan',
+    body: 'When a referral is ready, the patient receives a plain-English pathway summary. When prerequisites are outstanding, the patient receives a preparation plan showing what remains and what to do next. Either way, the consultation ends with something in the patient\'s hand — not a vague instruction to "come back when you\'ve had the scan."',
     accent: '#2563eb',
   },
 ];
@@ -60,7 +60,7 @@ const TECH_ARCHITECTURE_STEPS = [
   },
 ];
 
-const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'DTAC: in progress', 'QOF exception code precedent', 'WCAG 2.1 AA (target)', 'No cookies · No patient data'];
+const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'NHS Innovation Service registered', 'QOF exception code precedent', 'WCAG 2.1 AA (target)', 'No cookies · No patient data'];
 
 const PILOT_AUDIENCE_ITEMS = [
   {
@@ -75,7 +75,7 @@ const PILOT_AUDIENCE_ITEMS = [
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'An accurate Service Card means fewer inappropriate referrals reaching your service, fewer admin queries, and referral criteria you control — not buried in an out-of-date document. During the pilot, the tool captures when referring clinicians mark a prerequisite as "cannot meet" due to a structural barrier — novel data on where your referral requirements create problems that are not about GP competence. Steward verification takes about 30 minutes and counts as service evaluation activity.',
+    desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. During the pilot, the tool captures when a prerequisite is marked "cannot meet" due to a structural barrier — novel data on where your referral requirements create problems that are not about GP competence. Steward verification takes about 30 minutes and counts as service evaluation activity.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
   },
 ];
@@ -333,18 +333,21 @@ const CareQueryWebsite = () => {
               <span className="tag tag-blue">Cheshire &amp; Merseyside ICB</span>
             </div>
             <h1 className="heading" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.15, color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
-              Know what the service needs.<br />
-              <em style={{ color: '#2563eb' }}>Before the referral is submitted.</em>
+              See what MSK services require<br />
+              <em style={{ color: '#2563eb' }}>before you submit.</em>
             </h1>
+            <p className="body-text" style={{ fontSize: '1.1rem', lineHeight: 1.7, color: '#374151', marginBottom: '1rem', fontWeight: 500 }}>
+              Every patient leaves the consultation with a plan.
+            </p>
             <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.75rem', fontWeight: 400 }}>
-              <span className="brand">Care Query</span> encodes NHS MSK service requirements into a single governed record per service — designed to generate five deterministic outputs for clinicians, practice teams, and patients. Service Card, Gate Card, and Journey Card are operational; Pathway Overview and Preparation Card are in active development for pilot launch. No AI. No integration. No patient data.
+              <span className="brand">Care Query</span> is a structured pre-referral administrative tool for GPs, FCPs, and Advanced Practitioners. Five outputs per MSK service — from pathway orientation to patient handoff. Browser-based. No installation. No login. No patient data. Not a medical device. Not clinical decision support. Not AI.
             </p>
             <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each NHS MSK service actually does — the criteria, the catchment, the investigations it expects. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> lets the clinician confirm administrative prerequisites for this patient before submission. Per-gate attestation — individual gate-by-gate confirmation with a documented basis — is in active development. In either outcome, the patient leaves the consultation with a URL they can open.
+                Shows you what each MSK service requires — before you submit. Each prerequisite is individually confirmed against a clear basis. If all prerequisites are met, a formatted summary is ready for your A&G submission and the patient receives a plain-English pathway summary. If prerequisites are not yet met, the patient receives a preparation plan showing what remains and what to do next.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                A single governed record per service generates five outputs: a <strong>Pathway Overview</strong> (all services at a glance), a <strong style={{ color: '#ca8a04' }}>Service Card</strong> (what the service does and who it sees), a <strong style={{ color: '#9b2335' }}>Gate Card</strong> (per-patient administrative checklist with attestation model), a <strong style={{ color: '#16a34a' }}>Journey Card</strong> (patient summary when the referral is ready), and a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> (patient plan when prerequisites are outstanding). All five from one governed record. Update the record once — every output reflects the change.
+                One governed record per service generates five outputs: <strong>Pathway Overview</strong> (all services at a glance), <strong style={{ color: '#ca8a04' }}>Service Card</strong> (what the service does and who it sees), <strong style={{ color: '#9b2335' }}>Gate Card</strong> (per-patient administrative checklist), <strong style={{ color: '#16a34a' }}>Journey Card</strong> (patient summary when referred), and <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> (patient plan when not yet ready). Update the record once — every output reflects the change.
               </p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
@@ -356,7 +359,7 @@ const CareQueryWebsite = () => {
               </button>
             </div>
             <p className="body-text" style={{ fontSize: '0.82rem', color: '#6b7280', fontWeight: 400, lineHeight: 1.6 }}>
-              Clinician-led social enterprise. DCB0129 clinical safety active. NICE ESF Tier A. No integration required. Runs in any browser.
+              Built by a practising NHS clinician. DCB0129 clinical safety active. NICE ESF Tier A. Free during proof of concept. Runs in any browser.
             </p>
           </div>
         </div>
@@ -379,10 +382,10 @@ const CareQueryWebsite = () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The gap GPs fill by sending trial referrals and reading the rejection is: "What does this service actually accept?" <span className="brand">Care Query</span> answers it before anything is submitted. A single governed record per service is designed to generate five outputs — one for every stage of the referral conversation, from pathway orientation to patient handoff. Service Card, Gate Card, and Journey Card are operational in the current build. Pathway Overview and Preparation Card are in active development for pilot launch.
+                Clinicians currently discover what a service requires by sending a referral and reading the return. Pathway criteria are held in commissioning documents and institutional memory — not in a format usable during a consultation. <span className="brand">Care Query</span> answers the question before anything is submitted. One governed record per service generates five outputs — one for every stage of the referral conversation, from pathway orientation to patient handoff.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong>Pathway Overview</strong> gives the landscape. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> lets the clinician confirm administrative prerequisites per patient. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> reaches the patient when the referral is ready. The <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> reaches the patient when prerequisites are outstanding — turning "not yet" into a structured next step. All five from the same governed record. Update the record once; every output reflects the change.
+                The <strong>Pathway Overview</strong> gives the landscape. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> gives the patient a pathway summary when the referral is ready. The <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> gives the patient a plan when prerequisites are outstanding. Verified information. The same record, every clinician, every consultation.
               </p>
             </div>
           </div>
@@ -400,7 +403,7 @@ const CareQueryWebsite = () => {
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                    The Pathway Overview will be the first thing a clinician sees when they open <span className="brand">Care Query</span> (in active development for pilot launch). Every encoded NHS MSK service appears as a scannable card — service name, what it covers, whether it operates via mandatory A&G or direct referral, and the current record status (published, draft, or overdue for review). Stale records are flagged. Published records are clearly marked.
+                    The Pathway Overview is the first thing a clinician sees when they open <span className="brand">Care Query</span>. Every encoded NHS MSK service appears as a scannable card — service name, what it covers, whether it operates via mandatory A&G or direct referral, and the current record status (published, draft, or overdue for review). Stale records are flagged. Published records are clearly marked.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     The Pathway Overview is not a directory — it is the entry point to a governed set of records. Selecting a service opens the Service Card: the full record of what that service actually does. The overview is designed to be scanned in seconds, not studied.
@@ -542,7 +545,7 @@ const CareQueryWebsite = () => {
                     Knowing what a service accepts (Service Card) and confirming this patient meets those requirements right now (Gate Card) are different steps. A common reason for a returned submission is not that the clinician didn't know the criteria — it is that a required investigation wasn't completed yet, or the conservative management history wasn't documented in a way the receiving service can verify. The Gate Card catches these in the consultation, not three weeks later.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    In the attestation model (in active development), each gate is confirmed individually with a documented basis: confirmed from the clinical record, confirmed from the patient, not yet met, or cannot be met. Per-gate attestation — not a single bulk checkbox. When all hard gates are confirmed, a clipboard-ready administrative summary is generated for the A&G submission or direct referral. If any gate is not yet met, the outcome is a Preparation Card — not a dead end.
+                    Each gate is confirmed individually with a documented basis: confirmed from the clinical record, confirmed from the patient, not yet met, or cannot be met. Per-gate attestation — not a single bulk checkbox. When all hard gates are confirmed, a clipboard-ready administrative summary is generated for the A&G submission or direct referral. If any gate is not yet met, the outcome is a Preparation Card — not a dead end.
                   </p>
                   {/* Gate Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -595,17 +598,17 @@ const CareQueryWebsite = () => {
               icon: <Users size={20} color="#16a34a" />,
               title: 'Journey Card — Patient Summary After Referral',
               tagClass: 'tag-green',
-              tagLabel: 'Ready path — patient-facing · sent by the referring clinician',
+              tagLabel: 'Ready path — patient-facing · shared by the referring clinician',
               borderColor: '#16a34a',
               defaultOpen: false,
-              summary: 'Time-aware patient summary delivered via SMS after referral. Phase-appropriate messages that update as weeks pass — reassurance early, guidance later, a clear action prompt when the wait becomes overdue.',
+              summary: 'Time-aware patient summary — a link the clinician can share. Phase-appropriate messages that update as weeks pass — reassurance early, guidance later, a clear action prompt when the wait becomes overdue.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                    When all Gate Card prerequisites are confirmed, two things happen: a clipboard summary is generated for the A&G submission or direct referral, and a Journey Card URL is produced — ready to send to the patient via Accurx SMS. The URL carries the referral date. When the patient opens it, the card calculates how many weeks have passed and renders a phase-appropriate message. No login, no data collection — the date lives in the URL itself.
+                    When all Gate Card prerequisites are confirmed, two things happen: a clipboard summary is generated for the A&G submission or direct referral, and a Journey Card URL is produced — a link the clinician can share with the patient. The URL carries the referral date. When the patient opens it, the card calculates how many weeks have passed and renders a phase-appropriate message. No login, no data collection — the date lives in the URL itself.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The URL also carries a <strong>confidence signal</strong> — confirming that the clinician verified all administrative prerequisites before submitting. This transfers the clinician's diligence into patient reassurance. The patient sees not just where they're going but that their referral was prepared correctly. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths.
+                    The URL also carries a <strong>confidence signal</strong> — confirming that the clinician verified all administrative prerequisites before submitting. The patient sees not just where they are going but that their referral was prepared correctly. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths.
                   </p>
                   {/* Phase illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -639,7 +642,7 @@ const CareQueryWebsite = () => {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    {['Time-aware phases', 'Confidence signal', 'SMS-safe URLs', 'Patient isolation', 'No data collection', 'Ready path outcome'].map(t => (
+                    {['Time-aware phases', 'Confidence signal', 'Shareable URL', 'Patient isolation', 'No data collection', 'Ready path outcome'].map(t => (
                       <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
@@ -657,7 +660,7 @@ const CareQueryWebsite = () => {
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                    Not every referral is ready to be submitted today. An imaging result not yet back, a course of conservative management still in progress, a catchment question needing clarification. When any gate is marked "not yet met," the Gate Card generates a Preparation Card rather than a submission summary (in active development for pilot launch). The clinician gets a structured view of what is outstanding. The patient gets a URL they can open.
+                    Not every referral is ready to be submitted today. An imaging result not yet back, a course of conservative management still in progress, a catchment question needing clarification. When any gate is marked "not yet met," the Gate Card generates a Preparation Card rather than a submission summary. The clinician gets a structured view of what is outstanding. The patient gets a URL they can open.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     This is likely the majority outcome. Most patients presenting for MSK assessment for the first time have something outstanding before a specialist referral is appropriate — an investigation to complete, a period of treatment to work through, information to gather. The Preparation Card positions this as an informed next step, not a refusal. The patient sees what their clinician is working through, what they can do in the meantime, and when to expect to hear more. They leave the consultation with something in hand.
@@ -683,7 +686,7 @@ const CareQueryWebsite = () => {
                     </div>
                     <div style={{ padding: '0.75rem 0.85rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
                       <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: '0.3rem' }}>
-                        Patient preparation link — sent via Accurx
+                        Patient preparation link — shared by the clinician
                       </div>
                       <div className="body-text" style={{ fontSize: '0.8rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>
                         Patient opens the URL and sees: what their clinician is working through, what they can do now, and when to expect to hear more from the practice. A preparation phase view — not a waiting view.
@@ -745,13 +748,13 @@ const CareQueryWebsite = () => {
               {scopeOpen && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', borderLeft: '3px solid #d1d5db', paddingLeft: '1.25rem' }}>
                   <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                    No national tool currently does what the Service Card and Gate Card do together. NHS England built the monitoring infrastructure, the referral pipe, and the waiting list analytics. Nobody built the pre-referral service information layer and per-patient administrative checklist for the clinician at the point of referral. Strategic research confirmed in March 2026 that no ICB, trust, or commercial product fills this gap.
+                    NHS England built the monitoring infrastructure (Model Health System), the referral pipe (e-RS), and the waiting list analytics. The SPoA Technical Guidance requires referral criteria to be visible to referrers. Care Query is the mechanism that makes service-level criteria accessible at the point of submission — with a per-patient administrative checklist and a patient output regardless of the outcome.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                    If the pilot demonstrates value, the model can be extended to additional services and other regions.
+                    If the pilot demonstrates value, the model can be extended to additional services and other ICBs. The information architecture problem is national, not regional.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                    <strong>Why Cheshire and Merseyside first:</strong> C&amp;M ICB is under NHS England performance management, the Health Innovation North West Coast infrastructure is directly accessible, and the A&G mandate creates immediate, measurable pressure on every practice in the footprint.
+                    <strong>Why Cheshire and Merseyside first:</strong> C&amp;M ICB is the developer's local footprint, the Health Innovation North West Coast infrastructure is directly accessible, and the MSK pathway data can be verified against primary sources the developer works with daily.
                   </p>
                 </div>
               )}
@@ -771,13 +774,13 @@ const CareQueryWebsite = () => {
               <span className="tag tag-blue" style={{ marginBottom: '0' }}>Context</span>
             </div>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
-              Making referral information visible at the point of care.
+              Verified information where clinicians need it.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              Returned MSK referrals have multiple causes — clinical judgment, time pressure, risk management, and informational gaps. <span className="brand">Care Query</span> addresses the informational component specifically: whether the referring clinician had access to what each service needs before submission. Missing investigations, unclear pathway requirements, wrong service selection — these are the gaps where better information visibility at the point of referral can make a measurable difference. The pilot is designed to test that hypothesis.
+              Clinicians currently discover what a service requires by sending a referral and reading the return. 52% of MSK referrals are administratively incomplete at triage — not because clinicians lack competence, but because pathway criteria are held in commissioning documents and institutional memory, not in a format usable during a consultation. When a referral is not yet ready, patients leave without a structured plan. <span className="brand">Care Query</span> addresses this directly: verified, service-level information at the point of referral, and a patient output regardless of the outcome.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              This gap has become more operationally significant under the 2026/27 GP contract (PRN02353), which makes Advice and Guidance mandatory for secondary care planned referrals from 1 April 2026 and removes the per-request payment. The volume of A&G submissions will increase; the administrative cost of returned submissions falls entirely on the practice.
+              This is not a new problem. The 2026/27 GP contract (PRN02353) makes it more operationally significant — Advice and Guidance is now mandatory for secondary care planned referrals, the per-request payment is removed, and the administrative cost of returned submissions falls entirely on the practice. But the underlying gap exists regardless of the contract: referral criteria are not visible to referring clinicians at the point of care. The NHS SPoA Technical Guidance mandates that they should be. Care Query provides the mechanism.
             </p>
           </div>
 
@@ -792,10 +795,10 @@ const CareQueryWebsite = () => {
 
           <div style={{ padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 400, marginBottom: '0.75rem' }}>
-              <strong>What this means for practices:</strong> FCPs are now primary A&G submitters for MSK alongside GPs. The operational reality is consistent across the primary care system — every practice needs referral submissions to be administratively complete on the first attempt. Returned submissions represent unfunded rework; incomplete submissions delay the patient pathway.
+              <strong>What this means for everyone involved:</strong> GPs and FCPs see what each service requires before they submit. Practice teams get a consistent workflow regardless of which clinician is preparing the referral. Services get submissions that match their criteria. Patients leave the consultation with a structured plan — whether the referral goes today or not.
             </p>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
-              <span className="brand">Care Query</span> does not add work — it makes the work that already needs doing visible before the referral leaves the practice. The Service Card answers the question. The Gate Card confirms the prerequisites. The patient leaves with something in hand either way.
+              <span className="brand">Care Query</span> does not add work — it makes the work that already needs doing visible before the referral leaves the practice. The Service Card answers the question. The Gate Card confirms the prerequisites. The patient leaves with something in hand either way. The value does not depend on any particular contract, mandate, or policy — it depends on whether verified clarity produces steadier consultations.
             </p>
           </div>
         </div>
@@ -815,7 +818,7 @@ const CareQueryWebsite = () => {
               What it does — and how it stays accurate.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              Experienced clinicians already understand these pathways. The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that wasn't visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these documented gaps. Each is designed to generate evidence during the pilot — through per-gate attestation data captured directly by the tool, patient card access rates via privacy-respecting analytics, and qualitative GP feedback. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
+              The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that was not visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these gaps. Each is designed to generate evidence during the 12-week pilot — through per-gate attestation data captured directly by the tool, patient card access rates via privacy-respecting analytics, and qualitative GP feedback. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
             </p>
           </div>
 
@@ -874,7 +877,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-green',
               tagLabel: 'Journey Card',
               borderColor: '#16a34a',
-              summary: 'Phase-appropriate messages that update as weeks pass — reassurance early, guidance later, a clear action prompt when the wait becomes overdue. Delivered via Accurx SMS. No login, no data collection.',
+              summary: 'Phase-appropriate messages that update as weeks pass — reassurance early, guidance later, a clear action prompt when the wait becomes overdue. A link the clinician shares with the patient. No login, no data collection.',
               detail: (
                 <>
                   <div style={{ marginBottom: '1.25rem' }}>
@@ -886,7 +889,7 @@ const CareQueryWebsite = () => {
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      The Journey Card is time-aware. The URL sent via Accurx SMS carries the referral date — when the patient opens it, the card calculates elapsed weeks and renders a phase-appropriate message: reassurance in the early period, guidance as the appointment window approaches, a clear action prompt if the wait exceeds the typical timeline. A confidence signal confirms the clinician verified all prerequisites before submitting. The patient sees that their referral was prepared correctly — which is itself reassuring.
+                      The Journey Card is time-aware. The URL carries the referral date — when the patient opens it, the card calculates elapsed weeks and renders a phase-appropriate message: reassurance in the early period, guidance as the appointment window approaches, a clear action prompt if the wait exceeds the typical timeline. A confidence signal confirms the clinician verified all prerequisites before submitting. The patient sees that their referral was prepared correctly — which is itself reassuring.
                     </p>
                   </div>
                 </>
@@ -972,7 +975,7 @@ const CareQueryWebsite = () => {
               <strong>For practice staff:</strong> Runs in a browser tab — no installation, no login, no IT request. Open it, use it, close it. <strong>For IT and IG teams:</strong> No patient data is collected, stored, or processed. Static JSON on a CDN, rendered client-side. Patient-facing links open in an isolated view with no path to clinician content. The footprint for IG review is minimal — a read-only webpage with no data flows to assess.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              <strong>For commissioners:</strong> Every output is auditable back to its governed source — no AI, no inference, no guesswork. Reduced A&G rejections translate directly to fewer unfunded re-submissions. <strong>For service managers:</strong> An accurate Service Card means fewer inappropriate referrals and fewer admin calls — a description of your service that you control and update.
+              <strong>For commissioners:</strong> Every output is auditable back to its governed source — no AI, no inference, no guesswork. Designed to support more complete submissions at the point of care. <strong>For service managers:</strong> An accurate Service Card means referral criteria you control — a description of your service that you maintain and update, not buried in an out-of-date document.
             </p>
           </div>
 
@@ -1025,8 +1028,8 @@ const CareQueryWebsite = () => {
                 { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Adverse event monitoring protocol and hazard log are being finalised before pilot launch.' },
                 { icon: <Shield size={18} color="#2563eb" />, label: 'MHRA — Medical Devices', status: 'Confirmed', desc: 'Confirmed not a medical device. Deterministic display of static, clinician-verified information. No AI, no patient data input, no clinical recommendation output. No MHRA registration required.' },
                 { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
-                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'In progress', desc: 'Registration in progress (March 2026). Tier A classification, DCB0129 status, and pilot evidence pathway documented as part of the submission. Target: complete before pilot opens.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification will be formally recorded in the DCB0129 hazard log before pilot launch and confirmed through the NHS Innovation Service registration (in progress).' },
+                { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Registered', desc: 'Registered March 2026 (INN-2603-0087-6). Tier A classification, DCB0129 status, and pilot evidence pathway documented. Support requested: HIN NW Coast, Tier A confirmation, Standard 15 design, commissioning pathway.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification will be formally recorded in the DCB0129 hazard log before pilot launch. Documented in the NHS Innovation Service registration (INN-2603-0087-6).' },
                 { icon: <Database size={18} color="#2563eb" />, label: 'QOF "Service Unavailable" Governance Precedent', status: 'Confirmed', desc: 'NHS England already permits GP practices to use SNOMED exception codes to protect QOF compliance metrics when a commissioned service does not exist locally. The "Cannot Meet" attestation extends this established governance principle to pre-referral A&G workflows — structured exception logic applied to a context where no equivalent currently exists.' },
                 { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
                 { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Planned', desc: 'HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools. Engagement planned as part of the pilot phase.' },
@@ -1036,7 +1039,7 @@ const CareQueryWebsite = () => {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
                       <div className="body-text" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827' }}>{item.label}</div>
-                      <span style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', padding: '0.15rem 0.5rem', borderRadius: '9999px', background: item.status === 'Active' || item.status === 'Confirmed' ? '#dcfce7' : '#f3f4f6', color: item.status === 'Active' || item.status === 'Confirmed' ? '#166534' : '#6b7280' }}>{item.status}</span>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', padding: '0.15rem 0.5rem', borderRadius: '9999px', background: item.status === 'Active' || item.status === 'Confirmed' || item.status === 'Registered' ? '#dcfce7' : '#f3f4f6', color: item.status === 'Active' || item.status === 'Confirmed' || item.status === 'Registered' ? '#166534' : '#6b7280' }}>{item.status}</span>
                     </div>
                     <div className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>{item.desc}</div>
                   </div>
@@ -1062,7 +1065,7 @@ const CareQueryWebsite = () => {
                 Join the Cheshire &amp; Merseyside PoC pilot.
               </h2>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The most valuable thing this project can encode is the operational knowledge experienced clinicians carry but rarely write down. The difference between a practice with near-zero rejections and one with weekly returns is not clinical skill — it is informational access. <span className="brand">Care Query</span> gives that knowledge a structured, governed home.
+                Criteria are held in commissioning documents and institutional memory — not in a format usable during a 10-minute consultation. <span className="brand">Care Query</span> puts that information where you need it. The pilot tests whether verified clarity produces steadier consultations, more complete submissions, and patients who leave with a plan.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
                 If you recognise this problem in your own referral pathways — or in the systems you commission or evaluate — a short conversation is enough to start.
@@ -1081,7 +1084,7 @@ const CareQueryWebsite = () => {
           </div>
 
           <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.5rem' }}>
-            Each service added to <span className="brand">Care Query</span> benefits every clinician who uses it. Services maintain their own records because doing so reduces their own burden — fewer inappropriate referrals, fewer admin calls, fewer A&G returns. A network effect built on operational accuracy rather than user growth.
+            Each service added to <span className="brand">Care Query</span> benefits every clinician who uses it. Services maintain their own records because doing so makes their criteria visible to every referring clinician in the area — submissions that match what they actually need. A network effect built on operational accuracy rather than user growth.
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'start' }} className="two-col">
@@ -1136,7 +1139,7 @@ const CareQueryWebsite = () => {
               title: 'Does this require EMIS or SystmOne integration?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  No. <span className="brand">Care Query</span> runs in a browser tab alongside any clinical system. No API, no installation. Static JSON served from a CDN, rendered entirely client-side. Nothing is installed on practice infrastructure. For IT and IG leads: no patient data is collected, processed, or transmitted at any point — the footprint for IG review is minimal.
+                  No. <span className="brand">Care Query</span> runs in a browser tab alongside any clinical system. No API, no installation, no login. Static JSON served from a CDN, rendered entirely client-side. Nothing is installed on practice infrastructure. For IT and IG leads: no patient data is collected, processed, or transmitted at any point — the footprint for IG review is minimal.
                 </p>
               ),
             },
@@ -1168,7 +1171,7 @@ const CareQueryWebsite = () => {
               title: 'Why does no existing NHS tool already do this?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  NHS England built the monitoring infrastructure (Model Health System), the referral pipe (e-RS), and the waiting list analytics (Federated Data Platform). Nobody built the pre-referral service information layer and per-patient administrative checklist for the clinician at the point of referral. e-RS templates are specialty-level, not service-level. The Directory of Services answers where — not what the service needs. Neither has an attestation mechanism. Neither generates a patient-facing output. Strategic research confirmed in March 2026 that no ICB, trust, or commercial product fills this gap.
+                  NHS England built the monitoring infrastructure (Model Health System), the referral pipe (e-RS), and the waiting list analytics (Federated Data Platform). The SPoA Technical Guidance requires referral criteria to be visible to referrers — but no tool makes service-level criteria accessible at the point of submission. e-RS templates are specialty-level, not service-level. The Directory of Services answers where — not what the service needs. Neither has an attestation mechanism. Neither generates a patient-facing output. <span className="brand">Care Query</span> provides what the guidance describes but the infrastructure does not yet deliver.
                 </p>
               ),
             },
@@ -1264,16 +1267,16 @@ const CareQueryWebsite = () => {
                 About this project
               </div>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                <span className="brand">Care Query</span> is developed by a practising NHS physiotherapist and First Contact Practitioner through Intelligent Technology Solutions Limited — a clinician-led social enterprise operating entirely independently of any NHS employer.
+                <span className="brand">Care Query</span> is built by a practising NHS physiotherapist and First Contact Practitioner — someone who works in this pathway every day and built the tool because they needed it. Developed through Intelligent Technology Solutions Limited, a clinician-led social enterprise operating entirely independently of any NHS employer.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                All development is conducted in personal time, on personal infrastructure, using publicly available service information only. No NHS patient data is collected, stored, or processed at any stage. DCB0129 clinical safety standard is active, with Clinical Safety Officer formally assigned.
+                All development is conducted in personal time, on personal infrastructure, using publicly available service information only. No NHS patient data is collected, stored, or processed at any stage. DCB0129 clinical safety standard is active, with Clinical Safety Officer formally assigned. Registered with the NHS Innovation Service (INN-2603-0087-6, March 2026).
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
                 <span className="brand">Care Query</span> is an independent innovation developed in line with NHS digital standards. It is not endorsed by, affiliated with, or developed on behalf of any NHS organisation.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The project exists to explore whether clearer visibility of referral requirements can reduce returned submissions and ensure patients leave every consultation with a clear next step — whether their referral is ready today or not.
+                The project exists to test whether verified clarity — the same governed record, every clinician, every consultation — produces steadier consultations and ensures patients leave with a plan, whether their referral is ready today or not.
               </p>
             </div>
           </div>
@@ -1288,7 +1291,7 @@ const CareQueryWebsite = () => {
             <span className="body-text" style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Proof of Concept — Cheshire and Merseyside ICB — 2026</span>
           </div>
           <div className="body-text" style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
-            © 2026 Intelligent Technology Solutions Limited · No cookies · No patient data
+            © 2026 Intelligent Technology Solutions Limited · Not a medical device · No patient data · DCB0129 · NICE ESF Tier A
           </div>
         </div>
       </footer>
