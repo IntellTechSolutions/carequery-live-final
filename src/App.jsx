@@ -15,6 +15,9 @@ const STAY_INFORMED_SECOND_HONEYPOT_FIELD = 'company-name';
 const STAY_INFORMED_RECAPTCHA_FIELD = 'g-recaptcha-response';
 const MAX_EMAIL_LENGTH = 254;
 const MIN_FORM_DWELL_MS = 3000;
+const BRAND_COLOR = '#2563eb';
+const OVERVIEW_ACCENT_COLOR = '#334155';
+const OVERVIEW_TAG_BACKGROUND = '#E2E8F0';
 
 const CURRENT_SCOPE_ITEMS = [
   { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
@@ -22,7 +25,7 @@ const CURRENT_SCOPE_ITEMS = [
   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality and capture per-gate attestation data' },
   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into your A&G submission, patient URL ready to share' },
   { label: 'Cost to NHS', value: 'Free at point of use during the proof of concept. No capital cost, no IT integration cost, no per-clinician charge.' },
-  { label: 'Build status', value: 'All five outputs are operational in the current build — Pathway Overview, Service Card, Gate Card, Journey Card, and Preparation Card. Service records are DRAFT pending steward verification before pilot access is opened.' },
+  { label: 'Build status', value: 'All five outputs are operational in the current build — Overview Card, Service Card, Gate Card, Journey Card, and Preparation Card. Service records are DRAFT pending steward verification before pilot access is opened.' },
 ];
 
 const CONTEXT_CARDS = [
@@ -148,8 +151,8 @@ const SiteStyles = () => (
     .care-query-site .tag-green { background: #dcfce7; color: #166534; }
     .care-query-site .tag-burgundy { background: #fce7ef; color: #7f1d1d; }
     .care-query-site .tag-indigo { background: #ede9fe; color: #3730a3; }
-    .care-query-site .tag-overview { background: #E2E8F0; color: #334155; }
-    .care-query-site .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+	    .care-query-site .tag-overview { background: ${OVERVIEW_TAG_BACKGROUND}; color: ${OVERVIEW_ACCENT_COLOR}; }
+	    .care-query-site .tag-poc { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
     .care-query-site .btn-primary { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.01em; }
     .care-query-site .btn-primary:hover { background: #1d4ed8; }
     .care-query-site .btn-outline { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; padding: 0.75rem 1.75rem; background: transparent; color: #2563eb; border: 2px solid #2563eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
@@ -159,7 +162,7 @@ const SiteStyles = () => (
     .care-query-site .step-number { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 3rem; color: #dbeafe; line-height: 1; }
     .care-query-site .input-field { font-family: 'Inter', sans-serif; width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.9rem; outline: none; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
     .care-query-site .input-field:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-    .care-query-site .brand { color: #2563eb; font-weight: 700; }
+	    .care-query-site .brand { color: ${BRAND_COLOR}; font-weight: 700; }
     .care-query-site .desktop-nav { display: flex; gap: 2rem; }
     .care-query-site .mobile-menu-btn { display: none; }
     @media (max-width: 768px) {
@@ -194,7 +197,7 @@ const SiteNavigation = ({ isMenuOpen, activeSection, onToggleMenu, onNavigate })
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
           <img src="./Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
-          <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#2563eb', letterSpacing: '-0.01em' }}>Care Query</span>
+          <span style={{ fontSize: '1.4rem', fontWeight: 700, color: BRAND_COLOR, letterSpacing: '-0.01em' }}>Care Query</span>
           <span className="tag tag-poc">PoC</span>
         </div>
         <div className="desktop-nav">
@@ -429,7 +432,7 @@ const CareQueryWebsite = () => {
                 Shows you what each MSK service requires — before you submit. Each prerequisite is individually confirmed against a clear basis. If all prerequisites are met, a formatted summary is ready for your A&G submission and the patient receives a plain-English pathway summary. If prerequisites are not yet met, the patient receives a preparation plan showing what remains and what to do next.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                One governed record per service generates five outputs: <strong>Pathway Overview</strong> (all services at a glance), <strong style={{ color: '#ca8a04' }}>Service Card</strong> (what the service does and who it sees), <strong style={{ color: '#9b2335' }}>Gate Card</strong> (per-patient administrative checklist), <strong style={{ color: '#16a34a' }}>Journey Card</strong> (patient summary when referred), and <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> (patient plan when not yet ready). Update the record once — every output reflects the change.
+                One governed record per service generates five outputs: <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> (all services at a glance), <strong style={{ color: '#ca8a04' }}>Service Card</strong> (what the service does and who it sees), <strong style={{ color: '#9b2335' }}>Gate Card</strong> (per-patient administrative checklist), <strong style={{ color: '#16a34a' }}>Journey Card</strong> (patient summary when referred), and <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> (patient plan when not yet ready). Update the record once — every output reflects the change.
               </p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
@@ -467,7 +470,7 @@ const CareQueryWebsite = () => {
                 Clinicians currently discover what a service requires by sending a referral and reading the return. Pathway criteria are held in commissioning documents and institutional memory — not in a format usable during a consultation. <span className="brand">Care Query</span> answers the question before anything is submitted. One governed record per service generates five outputs — one for every stage of the referral conversation, from pathway orientation to patient handoff.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The <strong>Pathway Overview</strong> gives the landscape. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> gives the patient a pathway summary when the referral is ready. The <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> gives the patient a plan when prerequisites are outstanding. Verified information. The same record, every clinician, every consultation.
+                The <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> gives the landscape. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> gives the patient a pathway summary when the referral is ready. The <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> gives the patient a plan when prerequisites are outstanding. Verified information. The same record, every clinician, every consultation.
               </p>
             </div>
           </div>
@@ -475,22 +478,22 @@ const CareQueryWebsite = () => {
           {/* Five expandable output cards — Service Card leads */}
           {[
             {
-              icon: <Map size={20} color="#475569" />,
+              icon: <Map size={20} color={OVERVIEW_ACCENT_COLOR} />,
               title: 'Overview Card — All Services at a Glance',
               tagClass: 'tag-overview',
               tagLabel: 'Entry point — GPs · FCPs · Practice staff',
-              borderColor: '#475569',
+              borderColor: OVERVIEW_ACCENT_COLOR,
               defaultOpen: false,
               summary: 'All local MSK services on one screen in under 30 seconds. The starting point before any referral decision.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                    The Pathway Overview is the first thing a clinician sees when they open <span className="brand">Care Query</span>. Every encoded NHS MSK service appears as a scannable card — service name, what it covers, whether it operates via mandatory A&G or direct referral, and the current record status (published, draft, or overdue for review). Stale records are flagged. Published records are clearly marked.
+                    The Overview Card is the first thing a clinician sees when they open <span className="brand">Care Query</span>. Every encoded NHS MSK service appears as a scannable card — service name, what it covers, whether it operates via mandatory A&G or direct referral, and the current record status (published, draft, or overdue for review). Stale records are flagged. Published records are clearly marked.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The Pathway Overview is not a directory — it is the entry point to a governed set of records. Selecting a service opens the Service Card: the full record of what that service actually does. The overview is designed to be scanned in seconds, not studied.
+                    The Overview Card is not a directory — it is the entry point to a governed set of records. Selecting a service opens the Service Card: the full record of what that service actually does. The overview is designed to be scanned in seconds, not studied.
                   </p>
-                  {/* Pathway Overview illustration */}
+                  {/* Overview Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
                     <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
                       Illustrative example — Cheshire &amp; Merseyside MSK services
@@ -508,7 +511,7 @@ const CareQueryWebsite = () => {
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.35rem' }}>
                           <span style={{ fontSize: '0.65rem', fontWeight: 600, background: svc.typeColor, color: svc.typeText, padding: '0.15rem 0.5rem', borderRadius: '9999px' }}>{svc.type}</span>
-                          <span className="body-text" style={{ fontSize: '0.72rem', color: '#2563eb', fontWeight: 500 }}>Explore →</span>
+                          <span className="body-text" style={{ fontSize: '0.72rem', color: OVERVIEW_ACCENT_COLOR, fontWeight: 500 }}>Explore →</span>
                         </div>
                       </div>
                     ))}
@@ -793,7 +796,7 @@ const CareQueryWebsite = () => {
           {/* Architecture note */}
           <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #374151' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file designed to be maintained by a named steward. From it, five outputs are generated. The <strong>Pathway Overview</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the patient leaves the consultation with something in hand: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The governed record changes once; every output reflects the update.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file designed to be maintained by a named steward. From it, five outputs are generated. The <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the patient leaves the consultation with something in hand: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The governed record changes once; every output reflects the update.
             </p>
           </div>
         </div>
@@ -1396,7 +1399,7 @@ const CareQueryWebsite = () => {
       <footer style={{ background: '#111827', borderTop: '1px solid #1f2937', color: '#9ca3af', padding: '2.5rem 1.5rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <span className="heading" style={{ fontSize: '1.1rem', color: '#fff', marginRight: '0.75rem' }}>Care Query</span>
+            <span className="heading" style={{ fontSize: '1.1rem', color: BRAND_COLOR, marginRight: '0.75rem' }}>Care Query</span>
             <span className="body-text" style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Proof of Concept — Cheshire and Merseyside ICB — 2026</span>
           </div>
           <div className="body-text" style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
