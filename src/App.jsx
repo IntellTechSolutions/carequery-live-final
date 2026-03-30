@@ -425,14 +425,11 @@ const CareQueryWebsite = () => {
               Every patient leaves the consultation with a plan.
             </p>
             <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.75rem', fontWeight: 400 }}>
-              <span className="brand">Care Query</span> is a structured pre-referral administrative tool for GPs, FCPs, and Advanced Practitioners. Five outputs per MSK service — from pathway orientation to patient handoff. Browser-based. No installation. No login. No patient data. Not a medical device. Not clinical decision support. Not AI.
+              <span className="brand">Care Query</span> shows you what each local MSK service actually needs — referral criteria, prerequisites, and entry requirements — in a format you can use during a consultation. Each prerequisite is confirmed individually. When the referral is ready, a formatted summary goes into your A&G submission and the patient gets a plain-English pathway summary. When it's not ready yet, the patient gets a preparation plan showing what remains and what to do next.
             </p>
-            <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                Shows you what each MSK service requires — before you submit. Each prerequisite is individually confirmed against a clear basis. If all prerequisites are met, a formatted summary is ready for your A&G submission and the patient receives a plain-English pathway summary. If prerequisites are not yet met, the patient receives a preparation plan showing what remains and what to do next.
-              </p>
-              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                One governed record per service generates five outputs: <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> (all services at a glance), <strong style={{ color: '#ca8a04' }}>Service Card</strong> (what the service does and who it sees), <strong style={{ color: '#9b2335' }}>Gate Card</strong> (per-patient administrative checklist), <strong style={{ color: '#16a34a' }}>Journey Card</strong> (patient summary when referred), and <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> (patient plan when not yet ready). Update the record once — every output reflects the change.
+                One governed record per service. Five outputs — from pathway overview to patient handoff. Update the record once, every output reflects the change.
               </p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
@@ -444,8 +441,8 @@ const CareQueryWebsite = () => {
               </button>
             </div>
             <p className="body-text" style={{ fontSize: '0.82rem', color: '#6b7280', fontWeight: 400, lineHeight: 1.6 }}>
-              Built by a practising NHS clinician. DCB0129 clinical safety active. NICE ESF Tier A. Free during proof of concept. Runs in any browser.
-            </p>
+              Built by a practising NHS clinician. Browser-based. No installation, no login, no patient data. Free during proof of concept.
+</p>
           </div>
         </div>
       </section>
@@ -467,7 +464,7 @@ const CareQueryWebsite = () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                Clinicians currently discover what a service requires by sending a referral and reading the return. Pathway criteria are held in commissioning documents and institutional memory — not in a format usable during a consultation. <span className="brand">Care Query</span> answers the question before anything is submitted. One governed record per service generates five outputs — one for every stage of the referral conversation, from pathway orientation to patient handoff.
+                Clinicians currently discover what a service requires by sending a referral and reading the return. Pathway criteria are held in commissioning documents and institutional memory — not in a format usable during a consultation. <span className="brand">Care Query</span> is a structured pre-referral administrative tool that answers the question before anything is submitted. One governed record per service generates five outputs — one for every stage of the referral conversation, from pathway orientation to patient handoff.
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                 The <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> gives the landscape. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> shows what each service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. The <strong style={{ color: '#16a34a' }}>Journey Card</strong> gives the patient a pathway summary when the referral is ready. The <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> gives the patient a plan when prerequisites are outstanding. Verified information. The same record, every clinician, every consultation.
