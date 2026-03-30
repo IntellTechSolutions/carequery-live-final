@@ -22,7 +22,7 @@ const OVERVIEW_TAG_BACKGROUND = '#E2E8F0';
 const CURRENT_SCOPE_ITEMS = [
   { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
   { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
-  { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality and capture per-gate attestation data' },
+  { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality' },
   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into your A&G submission, patient URL ready to share' },
   { label: 'Cost to NHS', value: 'Free at point of use during the proof of concept. No capital cost, no IT integration cost, no per-clinician charge.' },
   { label: 'Build status', value: 'All five outputs are operational in the current build — Overview Card, Service Card, Gate Card, Journey Card, and Preparation Card. Service records are DRAFT pending steward verification before pilot access is opened.' },
@@ -89,7 +89,7 @@ const PILOT_AUDIENCE_ITEMS = [
 
 const PILOT_INVOLVES_ITEMS = [
   'Use Care Query for MSK referral preparation during the 12-week pilot window — open in a browser tab alongside your clinical system',
-  'Complete a short 6-question post-pilot feedback survey (3 minutes, anonymous)',
+  'Complete a short post-pilot feedback survey (3 minutes, anonymous)',
   'No IT integration, no installation, no patient data collection required',
   'Participation is designed as quality improvement / service evaluation activity for appraisal portfolios — service evaluation classification to be confirmed via HRA decision tool before the pilot opens',
 ];
@@ -1299,7 +1299,7 @@ const CareQueryWebsite = () => {
               title: 'Can participation in the pilot count as service evaluation?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  The pilot is designed as service evaluation — not research — pending formal HRA decision tool confirmation before it opens. No patient data is collected, no clinical decisions are altered, no randomisation occurs. For GPs and FCPs, participation is designed as quality improvement activity for appraisal and revalidation. For practice managers, it documents a practice-level QI initiative. For MSK service leads, verifying a service record and reviewing the resulting referral data is a service evaluation activity that generates genuinely novel data on structural referral barriers. The HRA decision tool will formally confirm the service evaluation classification before the pilot opens.
+                  The pilot is designed as service evaluation — not research — pending formal HRA decision tool confirmation before it opens. No patient data is collected, no clinical decisions are altered, no randomisation occurs. For GPs and FCPs, participation is designed as quality improvement activity for appraisal and revalidation. For practice managers, it documents a practice-level QI initiative. For MSK service leads, verifying a service record is a service evaluation activity — confirming that published referral criteria are accurately encoded. The HRA decision tool will formally confirm the service evaluation classification before the pilot opens.
                 </p>
               ),
             },
