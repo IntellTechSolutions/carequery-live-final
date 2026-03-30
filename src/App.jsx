@@ -12,6 +12,8 @@ const NAV_ITEMS = [
 const STAY_INFORMED_FORM_NAME = 'stay-informed';
 const STAY_INFORMED_HONEYPOT_FIELD = 'bot-field';
 const STAY_INFORMED_SECOND_HONEYPOT_FIELD = 'company-name';
+const STAY_INFORMED_RECAPTCHA_FIELD = 'g-recaptcha-response';
+const MAX_EMAIL_LENGTH = 254;
 const MIN_FORM_DWELL_MS = 3000;
 
 const CURRENT_SCOPE_ITEMS = [
@@ -170,10 +172,18 @@ const SiteStyles = () => (
 );
 
 const HiddenStayInformedForm = () => (
-  <form name={STAY_INFORMED_FORM_NAME} data-netlify="true" netlify-honeypot={STAY_INFORMED_HONEYPOT_FIELD} hidden aria-hidden="true">
+  <form
+    name={STAY_INFORMED_FORM_NAME}
+    data-netlify="true"
+    data-netlify-recaptcha="true"
+    netlify-honeypot={STAY_INFORMED_HONEYPOT_FIELD}
+    hidden
+    aria-hidden="true"
+  >
     <input type="email" name="email" />
     <input type="text" name={STAY_INFORMED_HONEYPOT_FIELD} />
     <input type="text" name={STAY_INFORMED_SECOND_HONEYPOT_FIELD} />
+    <div data-netlify-recaptcha="true" />
   </form>
 );
 
@@ -230,6 +240,7 @@ const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onE
       method="POST"
       action="/"
       data-netlify="true"
+      data-netlify-recaptcha="true"
       netlify-honeypot={STAY_INFORMED_HONEYPOT_FIELD}
       onSubmit={onSubmit}
       style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
@@ -250,8 +261,23 @@ const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onE
           defaultValue=""
         />
       </div>
-      <input type="email" name="email" value={email} onChange={onEmailChange}
-        placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
+      <input
+        type="email"
+        name="email"
+        value={email}
+        onChange={onEmailChange}
+        placeholder="your@email.com"
+        required
+        autoComplete="email"
+        inputMode="email"
+        maxLength={MAX_EMAIL_LENGTH}
+        spellCheck="false"
+        className="input-field"
+        style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
+      />
+      <div style={{ width: '100%' }}>
+        <div data-netlify-recaptcha="true" />
+      </div>
       <button type="submit" disabled={isSubmitting} className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem', opacity: isSubmitting ? 0.8 : 1 }}>
         {isSubmitting ? 'Submitting...' : 'Register interest'}
       </button>
@@ -302,9 +328,15 @@ const CareQueryWebsite = () => {
   const handleEmailSubmit = (e) => {
     e.preventDefault();
 
+    if (!e.currentTarget.reportValidity()) {
+      return;
+    }
+
     const formData = new FormData(e.currentTarget);
+    const trimmedEmail = String(formData.get('email') || '').trim();
     const primaryTrapValue = String(formData.get(STAY_INFORMED_HONEYPOT_FIELD) || '').trim();
     const secondaryTrapValue = String(formData.get(STAY_INFORMED_SECOND_HONEYPOT_FIELD) || '').trim();
+    const recaptchaResponse = String(formData.get(STAY_INFORMED_RECAPTCHA_FIELD) || '').trim();
 
     // Quietly ignore likely bot submissions rather than returning a useful signal.
     if (primaryTrapValue || secondaryTrapValue) {
@@ -316,7 +348,17 @@ const CareQueryWebsite = () => {
       return;
     }
 
-    if (!email || isSubmitting) {
+    if (!trimmedEmail || isSubmitting) {
+      return;
+    }
+
+    if (trimmedEmail.length > MAX_EMAIL_LENGTH) {
+      setSubmitError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!recaptchaResponse) {
+      setSubmitError('Please complete the security check and try again.');
       return;
     }
 
@@ -328,9 +370,10 @@ const CareQueryWebsite = () => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
         'form-name': STAY_INFORMED_FORM_NAME,
-        email,
+        email: trimmedEmail,
         [STAY_INFORMED_HONEYPOT_FIELD]: '',
         [STAY_INFORMED_SECOND_HONEYPOT_FIELD]: '',
+        [STAY_INFORMED_RECAPTCHA_FIELD]: recaptchaResponse,
       }).toString(),
     })
       .then((response) => {
