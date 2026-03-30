@@ -47,7 +47,7 @@ const TECH_ARCHITECTURE_STEPS = [
   {
     step: '01',
     title: 'Governed Data Source',
-    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, operational signals, and governance metadata. Records are marked DRAFT until verified by a service steward — recruiting stewards from receiving services is part of the pilot.',
+    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, service criteria, and governance metadata. Records are marked DRAFT until verified by a service steward — recruiting stewards from receiving services is part of the pilot.',
     pills: ['Structured data schema', 'Steward verification model'],
   },
   {
@@ -540,7 +540,7 @@ const CareQueryWebsite = () => {
                     The Service Card is the governed record of what each NHS MSK service actually does — referral criteria, catchment, required investigations, typical waiting times, operational contacts, and what the service explicitly does not accept. It is the starting point for any referral decision: before a clinician checks gate prerequisites, they need to know whether this service is the right destination.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Every field in a Service Card is <strong>Layer 1</strong>: verified from publicly available sources — NHS commissioning documents, ICB policies, and published clinical guidelines — and signed off by the Clinical Safety Officer. <strong>Layer 2</strong> (tacit referral intelligence contributed by named service stewards) is planned for Phase 2 and is not available at PoC stage. Every Service Card at PoC is developer-verified and marked DRAFT pending receiving service review. The steward model — where a named person in each receiving service verifies contents on a defined review cycle — is the target architecture for subsequent phases.
+                    Every field in a Service Card is <strong>Layer 1</strong>: sourced from publicly available documents — NHS commissioning policies, ICB referral guidance, and published clinical criteria. Records are encoded by the developer and governed under active DCB0129 clinical safety oversight. <strong>Layer 2</strong> (tacit referral intelligence contributed by named service stewards) is planned for Phase 2 and is not available at PoC stage. At PoC, all records carry DRAFT status — content is developer-verified against public sources and awaits formal sign-off from a named steward in each receiving service. That steward verification is distinct from clinical safety governance: the steward confirms service-content accuracy; the CSO governs the clinical safety framework. Recruiting stewards from receiving services is part of the pilot process.
                   </p>
 
                   {/* Illustrative service card — clean example, no draft markers */}
@@ -687,7 +687,7 @@ const CareQueryWebsite = () => {
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                    When all Gate Card prerequisites are confirmed, two things happen: a clipboard summary is generated for the A&G submission or direct referral, and a Journey Card URL is produced — a link the clinician can share with the patient. The URL carries the referral date. When the patient opens it, the card calculates how many weeks have passed and renders a phase-appropriate message. No login, no data collection — the date lives in the URL itself.
+                    When all Gate Card prerequisites are confirmed, two things happen: a clipboard summary is generated for the A&G submission or direct referral, and a Journey Card URL is produced — a link the clinician can share with the patient. The URL carries the referral date. When the patient opens it, the card calculates how many weeks have passed and renders a phase-appropriate message. No login, no patient data — the date lives in the URL itself, generated entirely client-side with no server submission.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
                     The URL also carries a <strong>confidence signal</strong> — confirming that the clinician verified all administrative prerequisites before submitting. The patient sees not just where they are going but that their referral was prepared correctly. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths.
@@ -724,7 +724,7 @@ const CareQueryWebsite = () => {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    {['Time-aware phases', 'Confidence signal', 'Shareable URL', 'Patient isolation', 'No data collection', 'Ready path outcome'].map(t => (
+                    {['Time-aware phases', 'Confidence signal', 'Shareable URL', 'Patient isolation', 'No patient data', 'Ready path outcome'].map(t => (
                       <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
@@ -959,7 +959,7 @@ const CareQueryWebsite = () => {
               tagClass: 'tag-green',
               tagLabel: 'Journey Card',
               borderColor: '#16a34a',
-              summary: 'Phase-appropriate messages that update as weeks pass — reassurance early, guidance later, a clear action prompt when the wait becomes overdue. A link the clinician shares with the patient. No login, no data collection.',
+              summary: 'Phase-appropriate messages that update as weeks pass — reassurance early, guidance later, a clear action prompt when the wait becomes overdue. A link the clinician shares with the patient. No login, no patient data.',
               detail: (
                 <>
                   <div style={{ marginBottom: '1.25rem' }}>
@@ -1296,7 +1296,7 @@ const CareQueryWebsite = () => {
               title: 'Can participation in the pilot count as service evaluation?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Yes. The pilot is a service evaluation, not research — no patient data is collected, no clinical decisions are altered, no randomisation occurs. For GPs and FCPs, participation is designed as quality improvement activity for appraisal and revalidation. For practice managers, it documents a practice-level QI initiative. For MSK service leads, verifying a service record and reviewing the resulting referral data is a service evaluation activity that generates genuinely novel data on structural referral barriers. The HRA decision tool will formally confirm the service evaluation classification before the pilot opens.
+                  The pilot is designed as service evaluation — not research — pending formal HRA decision tool confirmation before it opens. No patient data is collected, no clinical decisions are altered, no randomisation occurs. For GPs and FCPs, participation is designed as quality improvement activity for appraisal and revalidation. For practice managers, it documents a practice-level QI initiative. For MSK service leads, verifying a service record and reviewing the resulting referral data is a service evaluation activity that generates genuinely novel data on structural referral barriers. The HRA decision tool will formally confirm the service evaluation classification before the pilot opens.
                 </p>
               ),
             },
