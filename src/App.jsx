@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink, Check, Compass, Handshake, Database, Target, Layers, Clock, Map, ClipboardCheck } from 'lucide-react';
 
-const SECTION_IDS = ['home', 'what-it-does', 'how-it-works', 'join-the-pilot', 'contact'];
+const SECTION_IDS = ['home', 'what-it-does', 'solves-failures', 'how-it-works', 'join-the-pilot', 'contact'];
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
   { id: 'what-it-does', label: 'What It Does' },
@@ -20,7 +20,7 @@ const CURRENT_SCOPE_ITEMS = [
   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality and capture per-gate attestation data' },
   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into your A&G submission, patient URL ready to share' },
   { label: 'Cost to NHS', value: 'Free at point of use during the proof of concept. No capital cost, no IT integration cost, no per-clinician charge.' },
-  { label: 'Build status', value: 'Pathway Overview, per-gate attestation, and Preparation Card are in active development for pilot launch. Service Card, Gate Card, and Journey Card are operational in the current build.' },
+  { label: 'Build status', value: 'All five outputs are operational in the current build — Pathway Overview, Service Card, Gate Card, Journey Card, and Preparation Card. Service records are DRAFT pending steward verification before pilot access is opened.' },
 ];
 
 const CONTEXT_CARDS = [
@@ -67,17 +67,17 @@ const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse va
 const PILOT_AUDIENCE_ITEMS = [
   {
     title: 'Pilot Practices',
-    desc: '5–10 GP practices in Cheshire and Merseyside. Open the tool in a browser tab when preparing an MSK referral — no installation, no login, no IT request. The Service Card shows what each service needs. The Gate Card confirms prerequisites before you submit. The patient leaves with a link explaining what happens next. 12 weeks, zero IT burden, and the pilot counts as a practice-level quality improvement initiative.',
+    desc: '5–10 GP practices in Cheshire and Merseyside. Open the tool in a browser tab when preparing an MSK referral — no installation, no login, no IT request. The Service Card shows what each service needs. The Gate Card confirms prerequisites before you submit. The patient leaves with a link explaining what happens next. 12 weeks, zero IT burden, and the pilot is designed as a quality improvement initiative — service evaluation classification pending HRA decision tool confirmation before the pilot opens.',
     tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
   },
   {
     title: 'Clinical Contributors',
-    desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to encode. Contributing takes a single conversation. Your expertise, encoded once, helps every clinician in the area refer more accurately — and counts as quality improvement activity for your appraisal portfolio.',
+    desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to encode. Contributing takes a single conversation. Your expertise, encoded once, helps every clinician in the area refer more accurately — and is designed as quality improvement activity for your appraisal portfolio — service evaluation classification pending HRA decision tool confirmation.',
     tag: 'GPs · FCPs · ACPs · Advanced Practitioners · Physios · Service leads',
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. Steward verification takes about 30 minutes and counts as service evaluation activity.',
+    desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. Steward verification takes about 30 minutes and is designed as service evaluation activity.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
   },
 ];
@@ -86,7 +86,7 @@ const PILOT_INVOLVES_ITEMS = [
   'Use Care Query for MSK referral preparation during the 12-week pilot window — open in a browser tab alongside your clinical system',
   'Complete a short 6-question post-pilot feedback survey (3 minutes, anonymous)',
   'No IT integration, no installation, no patient data collection required',
-  'Participation counts as quality improvement / service evaluation activity for appraisal portfolios — not classified as research',
+  'Participation is designed as quality improvement / service evaluation activity for appraisal portfolios — service evaluation classification to be confirmed via HRA decision tool before the pilot opens',
 ];
 
 const ExpandableCard = ({ card, defaultOpen }) => {
@@ -453,8 +453,8 @@ const CareQueryWebsite = () => {
                     </div>
                     {[
                       { code: 'WHHRHEUM', name: 'WHH Rheumatology', catchment: 'Warrington and Halton', type: 'A&G mandatory', typeColor: '#fce7ef', typeText: '#7f1d1d' },
-                      { code: 'MSKCATS', name: 'MSK CATS — Community Triage', catchment: 'Cheshire and Merseyside', type: 'Direct referral', typeColor: '#dcfce7', typeText: '#166534' },
-                      { code: 'CMPHYSIO', name: 'Community Physiotherapy', catchment: 'Various — check record', type: 'Direct referral', typeColor: '#dcfce7', typeText: '#166534' },
+                      { code: 'WINFCP', name: 'Warrington Integrated FCP', catchment: 'Warrington', type: 'Direct referral', typeColor: '#dcfce7', typeText: '#166534' },
+                      { code: 'WHHORTHO', name: 'WHH Orthopaedics', catchment: 'Warrington and Halton', type: 'A&G mandatory', typeColor: '#fce7ef', typeText: '#7f1d1d' },
                     ].map((svc, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.65rem 0.85rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '6px', marginBottom: i < 2 ? '0.4rem' : 0 }}>
                         <div>
@@ -496,7 +496,7 @@ const CareQueryWebsite = () => {
                     The Service Card is the governed record of what each NHS MSK service actually does — referral criteria, catchment, required investigations, typical waiting times, operational contacts, and what the service explicitly does not accept. It is the starting point for any referral decision: before a clinician checks gate prerequisites, they need to know whether this service is the right destination.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Every field belongs to one of two layers: <strong>Layer 1</strong> — verified public truth from published documents and direct written confirmation; or <strong>Layer 2</strong> — tacit operational knowledge sourced from experienced clinical referrers through structured conversations. Layer 2 is the specific hypothesis this PoC is testing: whether the operational nuance that lives in the heads of experienced FCPs can be encoded, attributed to a named source, and made accessible at the point of referral. Every Service Card is designed to have a named steward — a specific person in the receiving service verifying its contents on a defined review cycle. At PoC stage, records are verified by the developer; steward recruitment from receiving services is part of the pilot process.
+                    Every field in a Service Card is <strong>Layer 1</strong>: verified from publicly available sources — NHS commissioning documents, ICB policies, and published clinical guidelines — and signed off by the Clinical Safety Officer. <strong>Layer 2</strong> (tacit referral intelligence contributed by named service stewards) is planned for Phase 2 and is not available at PoC stage. Every Service Card at PoC is developer-verified and marked DRAFT pending receiving service review. The steward model — where a named person in each receiving service verifies contents on a defined review cycle — is the target architecture for subsequent phases.
                   </p>
 
                   {/* Illustrative service card — clean example, no draft markers */}
@@ -536,7 +536,7 @@ const CareQueryWebsite = () => {
                     <div className="service-detail-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0', borderBottom: '1px solid #e5e7eb' }}>
                       {[
                         { label: 'Catchment', value: 'Warrington and Halton — GP practices within the WHH catchment area' },
-                        { label: 'Typical wait', value: '14 weeks to first outpatient appointment (My Planned Care, 2025)' },
+                        { label: 'Typical wait', value: '14 weeks to first outpatient appointment (My Planned Care, 2026)' },
                         { label: 'Referral route', value: 'GP referral to WHH Rheumatology; or via MSKCATS after physiotherapy triage' },
                       ].map((item, i) => (
                         <div key={i} style={{ padding: '0.85rem 1.25rem', borderRight: i < 2 ? '1px solid #e5e7eb' : 'none' }}>
@@ -987,7 +987,7 @@ const CareQueryWebsite = () => {
 
           <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
-              <strong>What this means for pilot evaluation:</strong> The pilot captures three types of evidence: per-gate attestation patterns via privacy-respecting analytics (Plausible), patient card access rates (Journey and Preparation Card page views), and qualitative clinician feedback via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed.
+              <strong>What this means for pilot evaluation:</strong> The pilot captures three evidence streams directly: per-gate attestation patterns via privacy-respecting analytics (Plausible), patient card access rates (Journey and Preparation Card page views), and qualitative clinician feedback via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed.
             </p>
           </div>
         </div>
@@ -1242,7 +1242,7 @@ const CareQueryWebsite = () => {
               title: 'What evidence standard applies to this tool?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  NICE Evidence Standards Framework Tier A — Standard 15. Pilot evaluation requires a site statement covering: integration into workflow, acceptability to users, no harm identified, and system-level benefit. No minimum sample size is specified. No comparative effectiveness data (Standard 14) is required. Section D early deployment registration via NHS Innovation Service removes even Standard 15 obligations. The PoC pilot is designed to generate this evidence.
+                  NICE Evidence Standards Framework Tier A — Standard 15. Pilot evaluation requires a site statement covering: integration into workflow, acceptability to users, no harm identified, and system-level benefit. No minimum sample size is specified. No comparative effectiveness data (Standard 14) is required. Section D early deployment registration via the NHS Innovation Service is an option being explored — if confirmed, it could remove the Standard 15 obligation. The PoC pilot is designed to generate this evidence.
                 </p>
               ),
             },
@@ -1258,7 +1258,7 @@ const CareQueryWebsite = () => {
               title: 'What are the pilot success metrics?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Four measurable outcomes: (1) Standard 15 pilot site statement — integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) patient card access rate via Plausible Analytics (Journey and Preparation Card page views — a proxy for patient reach, not a confirmed delivery measure); (3) qualitative GP feedback on consultation impact (post-pilot survey); (4) qualitative patient feedback on card usefulness. A&G return rate comparison is the strongest outcome evidence if obtainable from the ICB, but is external to the tool. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
+                  Four pilot evaluation deliverables: (1) Standard 15 pilot site statement — synthesising the evidence streams above: integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) patient card access rate via Plausible Analytics (Journey and Preparation Card page views — a proxy for patient reach, not a confirmed delivery measure); (3) qualitative GP feedback on consultation impact (post-pilot survey); (4) qualitative patient feedback on card usefulness. A&G return rate comparison is the strongest outcome evidence if obtainable from the ICB, but is external to the tool. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
                 </p>
               ),
             },
@@ -1266,7 +1266,7 @@ const CareQueryWebsite = () => {
               title: 'Can participation in the pilot count as service evaluation?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Yes. The pilot is a service evaluation, not research — no patient data is collected, no clinical decisions are altered, no randomisation occurs. For GPs and FCPs, participation counts as quality improvement activity for appraisal and revalidation. For practice managers, it documents a practice-level QI initiative. For MSK service leads, verifying a service record and reviewing the resulting referral data is a service evaluation activity that generates genuinely novel data on structural referral barriers. The HRA decision tool will formally confirm the service evaluation classification before the pilot opens.
+                  Yes. The pilot is a service evaluation, not research — no patient data is collected, no clinical decisions are altered, no randomisation occurs. For GPs and FCPs, participation is designed as quality improvement activity for appraisal and revalidation. For practice managers, it documents a practice-level QI initiative. For MSK service leads, verifying a service record and reviewing the resulting referral data is a service evaluation activity that generates genuinely novel data on structural referral barriers. The HRA decision tool will formally confirm the service evaluation classification before the pilot opens.
                 </p>
               ),
             },
