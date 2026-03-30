@@ -62,7 +62,7 @@ const TECH_ARCHITECTURE_STEPS = [
   },
 ];
 
-const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'NHS Innovation Service registered', 'QOF exception code precedent', 'WCAG 2.1 AA (target)', 'No cookies · No patient data'];
+const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse validation on push', 'carequery.app (tool)', 'carequery.uk (project)', 'Plausible Analytics (privacy-first)', 'DCB0129 clinical risk framework', 'MHRA: not a medical device', 'NICE ESF Tier A', 'NHS Innovation Service registered', 'WCAG 2.1 AA (target)', 'No cookies · No patient data'];
 
 const PILOT_AUDIENCE_ITEMS = [
   {
@@ -77,7 +77,7 @@ const PILOT_AUDIENCE_ITEMS = [
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. During the pilot, the tool captures when a prerequisite is marked "cannot meet" due to a structural barrier — novel data on where your referral requirements create problems that are not about GP competence. Steward verification takes about 30 minutes and counts as service evaluation activity.',
+    desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. Steward verification takes about 30 minutes and counts as service evaluation activity.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
   },
 ];
@@ -571,7 +571,7 @@ const CareQueryWebsite = () => {
               tagLabel: 'GPs · Physician Associates · Paramedics · ACPs · FCPs',
               borderColor: '#9b2335',
               defaultOpen: false,
-              summary: 'Each prerequisite confirmed individually with a documented basis. If a criterion cannot be met due to a system-level barrier, the Cannot Meet option formally records the structural constraint — not a gap in the notes.',
+              summary: 'Each prerequisite confirmed individually with a documented basis: confirmed from the clinical record, confirmed by the patient, or not yet met.',
               detail: (
                 <>
                   <div style={{ background: '#fef9c3', border: '1px solid #fde68a', borderRadius: '6px', padding: '0.65rem 1rem', marginBottom: '1.25rem' }}>
@@ -583,7 +583,7 @@ const CareQueryWebsite = () => {
                     Knowing what a service accepts (Service Card) and confirming this patient meets those requirements right now (Gate Card) are different steps. A common reason for a returned submission is not that the clinician didn't know the criteria — it is that a required investigation wasn't completed yet, or the conservative management history wasn't documented in a way the receiving service can verify. The Gate Card catches these in the consultation, not three weeks later.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Each gate is confirmed individually with a documented basis: confirmed from the clinical record, confirmed from the patient, not yet met, or cannot be met. Per-gate attestation — not a single bulk checkbox. When all hard gates are confirmed, a clipboard-ready administrative summary is generated for the A&G submission or direct referral. If any gate is not yet met, the outcome is a Preparation Card — not a dead end.
+                    Each gate is confirmed individually with a documented basis: confirmed from the clinical record, confirmed from the patient, or not yet met. Per-gate attestation — not a single bulk checkbox. When all hard gates are confirmed, a clipboard-ready administrative summary is generated for the A&G submission or direct referral. If any gate is not yet met, the outcome is a Preparation Card — not a dead end.
                   </p>
                   {/* Gate Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -625,7 +625,7 @@ const CareQueryWebsite = () => {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    {['Hard gates', 'Soft gates', 'Per-gate attestation', 'Basis selector', 'Cannot Meet — structured barrier', 'Clipboard summary', 'Triggers patient outcome'].map(t => (
+                    {['Hard gates', 'Soft gates', 'Per-gate attestation', 'Basis selector', 'Clipboard summary', 'Triggers patient outcome'].map(t => (
                       <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
@@ -856,7 +856,7 @@ const CareQueryWebsite = () => {
               What it does — and how it stays accurate.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that was not visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these gaps. Each is designed to generate evidence during the 12-week pilot — through per-gate attestation data captured directly by the tool, patient card access rates via privacy-respecting analytics, and qualitative GP feedback. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
+              The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that was not visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these gaps. Each is designed to generate evidence during the 12-week pilot — through usage patterns via privacy-respecting analytics, patient card access rates, and qualitative GP feedback. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
             </p>
           </div>
 
@@ -903,7 +903,7 @@ const CareQueryWebsite = () => {
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      The Gate Card makes every prerequisite an explicit per-gate confirmation — "confirmed from record," "confirmed from patient," "not yet met," or "cannot meet." Gates cannot be skipped. When all hard gates are confirmed, a clipboard summary is generated for the submission. If any gate is not met, the outcome is a Preparation Card — the patient gets a plan rather than leaving without one.
+                      The Gate Card makes every prerequisite an explicit per-gate confirmation — "confirmed from record," "confirmed from patient," or "not yet met." Gates cannot be skipped. When all hard gates are confirmed, a clipboard summary is generated for the submission. If any gate is not yet met, the outcome is a Preparation Card — the patient gets a plan rather than leaving without one.
                     </p>
                   </div>
                 </>
@@ -987,7 +987,7 @@ const CareQueryWebsite = () => {
 
           <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
             <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#374151', fontWeight: 500 }}>
-              <strong>What this means for pilot evaluation:</strong> The tool is designed to capture per-gate attestation patterns via Plausible Analytics — including <code>cannot_meet</code> declaration rates by service, Preparation Card generation rate (clinicians using the Not Yet path), and patient card access rate (Journey and Preparation Card page views). Qualitative clinician feedback is collected via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed. If validated, per-gate attestation data would enable the pilot to distinguish information-driven gaps (where the Service Card changes behaviour) from capacity-driven gaps (where the data generated is commissioning intelligence). Each gap above maps to a specific, collectible metric during the 12-week pilot.
+              <strong>What this means for pilot evaluation:</strong> The pilot captures three types of evidence: per-gate attestation patterns via privacy-respecting analytics (Plausible), patient card access rates (Journey and Preparation Card page views), and qualitative clinician feedback via post-pilot survey. A&G return rate data, if obtainable from the ICB or pilot practices, would provide the strongest outcome evidence — but is external to the tool and not guaranteed.
             </p>
           </div>
         </div>
@@ -1017,7 +1017,7 @@ const CareQueryWebsite = () => {
                 {
                   step: '02',
                   title: 'Select service and confirm prerequisites',
-                  body: 'The Service Card shows what the service actually does and who it accepts. The Gate Card confirms each prerequisite individually for this patient — confirmed from the record, confirmed by the patient, not yet met, or cannot be met.',
+                  body: 'The Service Card shows what the service actually does and who it accepts. The Gate Card confirms each prerequisite individually for this patient — confirmed from the record, confirmed by the patient, or not yet met.',
                 },
                 {
                   step: '03',
@@ -1110,7 +1110,6 @@ const CareQueryWebsite = () => {
                 { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
                 { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Registered', desc: 'Registered March 2026 (INN-2603-0087-6). Tier A classification, DCB0129 status, and pilot evidence pathway documented. Support requested: HIN NW Coast, Tier A confirmation, Standard 15 design, commissioning pathway.' },
                 { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification will be formally recorded in the DCB0129 hazard log before pilot launch. Documented in the NHS Innovation Service registration (INN-2603-0087-6).' },
-                { icon: <Database size={18} color="#2563eb" />, label: 'QOF "Service Unavailable" Governance Precedent', status: 'Confirmed', desc: 'NHS England already permits GP practices to use SNOMED exception codes to protect QOF compliance metrics when a commissioned service does not exist locally. The "Cannot Meet" attestation extends this established governance principle to pre-referral A&G workflows — structured exception logic applied to a context where no equivalent currently exists.' },
                 { icon: <ArrowRight size={18} color="#2563eb" />, label: 'NHS Clinical Entrepreneur Programme', status: 'Planned', desc: 'Contract re-tendered for 2026–2031, new delivery from 1 April 2026. FCPs are eligible. Application planned pending re-tender outcome.' },
                 { icon: <ExternalLink size={18} color="#2563eb" />, label: 'Health Innovation North West Coast', status: 'Planned', desc: 'HIN NW Coast covers the C&M ICB footprint and supports PoC-stage clinical tools. Engagement planned as part of the pilot phase.' },
               ].map((item, i) => (
@@ -1259,7 +1258,7 @@ const CareQueryWebsite = () => {
               title: 'What are the pilot success metrics?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Five measurable outcomes: (1) Standard 15 pilot site statement — integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) patient card access rate via Plausible Analytics (Journey and Preparation Card page views — a proxy for patient reach, not a confirmed delivery measure); (3) qualitative GP feedback on consultation impact (post-pilot survey); (4) <code>cannot_meet</code> declaration rate by service — a novel NHS dataset on structural barrier prevalence, directly captured by the tool; (5) qualitative patient feedback on card usefulness. A&G return rate comparison is the strongest outcome evidence if obtainable from the ICB, but is external to the tool. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
+                  Four measurable outcomes: (1) Standard 15 pilot site statement — integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) patient card access rate via Plausible Analytics (Journey and Preparation Card page views — a proxy for patient reach, not a confirmed delivery measure); (3) qualitative GP feedback on consultation impact (post-pilot survey); (4) qualitative patient feedback on card usefulness. A&G return rate comparison is the strongest outcome evidence if obtainable from the ICB, but is external to the tool. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
                 </p>
               ),
             },
