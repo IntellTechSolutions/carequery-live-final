@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, Mail, MapPin, FileText, CheckSquare, Users, GitBranch, Shield, ExternalLink, Check, Compass, Handshake, Database, Target, Layers, Clock, Map, ClipboardCheck } from 'lucide-react';
 
 const SECTION_IDS = ['home', 'what-it-does', 'how-it-works', 'join-the-pilot', 'contact'];
@@ -11,13 +11,15 @@ const NAV_ITEMS = [
 ];
 const STAY_INFORMED_FORM_NAME = 'stay-informed';
 const STAY_INFORMED_HONEYPOT_FIELD = 'bot-field';
+const STAY_INFORMED_SECOND_HONEYPOT_FIELD = 'company-name';
+const MIN_FORM_DWELL_MS = 3000;
 
 const CURRENT_SCOPE_ITEMS = [
   { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
   { label: 'Services', value: '5 MSK services encoded in Cheshire and Merseyside ICB' },
   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality and capture per-gate attestation data' },
   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into your A&G submission, patient URL ready to share' },
-  { label: 'Cost to NHS', value: 'Free at point of use during the pilot phase. Future model: annual ICB block licence, no per-clinician charge, no capital cost.' },
+  { label: 'Cost to NHS', value: 'Free at point of use during the proof of concept. No capital cost, no IT integration cost, no per-clinician charge.' },
   { label: 'Build status', value: 'Pathway Overview, per-gate attestation, and Preparation Card are in active development for pilot launch. Service Card, Gate Card, and Journey Card are operational in the current build.' },
 ];
 
@@ -171,6 +173,7 @@ const HiddenStayInformedForm = () => (
   <form name={STAY_INFORMED_FORM_NAME} data-netlify="true" netlify-honeypot={STAY_INFORMED_HONEYPOT_FIELD} hidden aria-hidden="true">
     <input type="email" name="email" />
     <input type="text" name={STAY_INFORMED_HONEYPOT_FIELD} />
+    <input type="text" name={STAY_INFORMED_SECOND_HONEYPOT_FIELD} />
   </form>
 );
 
@@ -232,7 +235,21 @@ const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onE
       style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
     >
       <input type="hidden" name="form-name" value={STAY_INFORMED_FORM_NAME} />
-      <input type="hidden" name={STAY_INFORMED_HONEYPOT_FIELD} value="" />
+      <input type="hidden" name={STAY_INFORMED_HONEYPOT_FIELD} defaultValue="" />
+      <div
+        aria-hidden="true"
+        style={{ position: 'absolute', left: '-5000px', width: '1px', height: '1px', overflow: 'hidden' }}
+      >
+        <label htmlFor="stay-informed-company-name">Company</label>
+        <input
+          id="stay-informed-company-name"
+          type="text"
+          name={STAY_INFORMED_SECOND_HONEYPOT_FIELD}
+          tabIndex="-1"
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
       <input type="email" name="email" value={email} onChange={onEmailChange}
         placeholder="your@email.com" required className="input-field" style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }} />
       <button type="submit" disabled={isSubmitting} className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem', opacity: isSubmitting ? 0.8 : 1 }}>
@@ -255,6 +272,7 @@ const CareQueryWebsite = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [scopeOpen, setScopeOpen] = useState(false);
+  const formStartedAtRef = useRef(Date.now());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -283,6 +301,21 @@ const CareQueryWebsite = () => {
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const primaryTrapValue = String(formData.get(STAY_INFORMED_HONEYPOT_FIELD) || '').trim();
+    const secondaryTrapValue = String(formData.get(STAY_INFORMED_SECOND_HONEYPOT_FIELD) || '').trim();
+
+    // Quietly ignore likely bot submissions rather than returning a useful signal.
+    if (primaryTrapValue || secondaryTrapValue) {
+      return;
+    }
+
+    if (Date.now() - formStartedAtRef.current < MIN_FORM_DWELL_MS) {
+      setSubmitError('Please wait a moment and try again.');
+      return;
+    }
+
     if (!email || isSubmitting) {
       return;
     }
@@ -293,7 +326,12 @@ const CareQueryWebsite = () => {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': STAY_INFORMED_FORM_NAME, email, [STAY_INFORMED_HONEYPOT_FIELD]: '' }).toString(),
+      body: new URLSearchParams({
+        'form-name': STAY_INFORMED_FORM_NAME,
+        email,
+        [STAY_INFORMED_HONEYPOT_FIELD]: '',
+        [STAY_INFORMED_SECOND_HONEYPOT_FIELD]: '',
+      }).toString(),
     })
       .then((response) => {
         if (!response.ok) {
@@ -777,7 +815,7 @@ const CareQueryWebsite = () => {
               Verified information where clinicians need it.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              Clinicians currently discover what a service requires by sending a referral and reading the return. 52% of MSK referrals are administratively incomplete at triage — not because clinicians lack competence, but because pathway criteria are held in commissioning documents and institutional memory, not in a format usable during a consultation. When a referral is not yet ready, patients leave without a structured plan. <span className="brand">Care Query</span> addresses this directly: verified, service-level information at the point of referral, and a patient output regardless of the outcome.
+              Clinicians currently discover what a service requires by sending a referral and reading the return. 52% of MSK referrals are administratively incomplete at triage (Fylde Coast MSK RMC audit) — not because clinicians lack competence, but because pathway criteria are held in commissioning documents and institutional memory, not in a format usable during a consultation. 33% of first orthopaedic outpatient appointments end in single-visit discharge (NHS England, 2019/20) — referrals that reached secondary care without meeting entry criteria. When a referral is not yet ready, patients leave without a structured plan. <span className="brand">Care Query</span> addresses this directly: verified, service-level information at the point of referral, and a patient output regardless of the outcome.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               This is not a new problem. The 2026/27 GP contract (PRN02353) makes it more operationally significant — Advice and Guidance is now mandatory for secondary care planned referrals, the per-request payment is removed, and the administrative cost of returned submissions falls entirely on the practice. But the underlying gap exists regardless of the contract: referral criteria are not visible to referring clinicians at the point of care. The NHS SPoA Technical Guidance mandates that they should be. Care Query provides the mechanism.
@@ -960,6 +998,48 @@ const CareQueryWebsite = () => {
       {/* How It Works — Technical Architecture */}
       <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          {/* User workflow — 3 steps, mirrors Innovation Record 2.1.2 */}
+          <div style={{ marginBottom: '4rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <Layers size={20} color="#2563eb" />
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>How It Works</span>
+            </div>
+            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
+              Open it. Use it. Close it.
+            </h2>
+            <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
+              {[
+                {
+                  step: '01',
+                  title: 'Open in a browser tab',
+                  body: 'A GP, FCP, or Advanced Practitioner opens Care Query during or before a consultation. No installation, no login, no IT request — just a browser tab alongside your clinical system.',
+                },
+                {
+                  step: '02',
+                  title: 'Select service and confirm prerequisites',
+                  body: 'The Service Card shows what the service actually does and who it accepts. The Gate Card confirms each prerequisite individually for this patient — confirmed from the record, confirmed by the patient, not yet met, or cannot be met.',
+                },
+                {
+                  step: '03',
+                  title: 'Clipboard summary or preparation plan',
+                  body: 'All prerequisites confirmed — a formatted summary is ready to paste into your A&G submission and a patient pathway URL is ready to share. Any prerequisites outstanding — a preparation plan is generated for the patient instead. Either way, the patient leaves with something.',
+                },
+              ].map((item, i) => (
+                <div key={i} className="card" style={{ padding: '1.75rem' }}>
+                  <div className="step-number">{item.step}</div>
+                  <h3 className="heading" style={{ fontSize: '1.1rem', color: '#111827', margin: '0.5rem 0 0.75rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
+                  <p className="body-text" style={{ fontSize: '0.85rem', lineHeight: 1.65, color: '#4b5563', fontWeight: 400 }}>{item.body}</p>
+                </div>
+              ))}
+            </div>
+            <div style={{ padding: '1rem 1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #374151' }}>
+              <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.6, color: '#374151', fontWeight: 400 }}>
+                <strong>Care Query does not make decisions.</strong> It shows what is needed. The clinician decides. UK GDPR compliant — no patient data is collected, stored, or processed at any point.
+              </p>
+            </div>
+          </div>
+
+          {/* Technical architecture */}
           <div style={{ marginBottom: '3.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
               <Layers size={20} color="#2563eb" />
@@ -1254,7 +1334,7 @@ const CareQueryWebsite = () => {
                   </div>
                   <div>
                     <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>The Tool</div>
-                    <a href="https://carequery.app" target="_blank" rel="noreferrer" className="body-text" style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
+                    <a href="https://carequery.app" target="_blank" rel="noopener noreferrer" className="body-text" style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
                       carequery.app
                     </a>
                     <span className="body-text" style={{ fontSize: '0.82rem', color: '#374151', marginLeft: '0.5rem', fontWeight: 500 }}>— the PoC (not yet public)</span>
