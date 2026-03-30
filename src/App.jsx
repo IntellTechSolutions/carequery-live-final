@@ -16,8 +16,8 @@ const STAY_INFORMED_RECAPTCHA_FIELD = 'g-recaptcha-response';
 const MAX_EMAIL_LENGTH = 254;
 const MIN_FORM_DWELL_MS = 3000;
 const BRAND_COLOR = '#2563eb';
-const OVERVIEW_ACCENT_COLOR = '#5B7C99';
-const OVERVIEW_TAG_BACKGROUND = '#E7EFF5';
+const OVERVIEW_ACCENT_COLOR = '#35526B';
+const OVERVIEW_TAG_BACKGROUND = '#E3ECF3';
 
 const CURRENT_SCOPE_ITEMS = [
   { label: 'Stage', value: 'Proof of concept — not yet publicly available' },
