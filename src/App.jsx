@@ -25,7 +25,7 @@ const CURRENT_SCOPE_ITEMS = [
   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate impact on referral workflow quality' },
   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into your A&G submission, patient URL ready to share' },
   { label: 'Cost to NHS', value: 'Free at point of use during the proof of concept. No capital cost, no IT integration cost, no per-clinician charge.' },
-  { label: 'Build status', value: 'All five outputs are operational in the current build — Overview Card, Service Card, Gate Card, Journey Card, and Preparation Card. Service records are DRAFT pending steward verification before pilot access is opened.' },
+  { label: 'Build status', value: 'All five outputs are operational in the current build — Overview Card, Service Card, Gate Card, Journey Card, and Preparation Card. Service records are DRAFT — compiled from publicly available sources and undergoing Clinical Safety Officer sign-off before pilot access is opened.' },
 ];
 
 const CONTEXT_CARDS = [
@@ -50,8 +50,8 @@ const TECH_ARCHITECTURE_STEPS = [
   {
     step: '01',
     title: 'Governed Data Source',
-    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, service criteria, and governance metadata. Records are marked DRAFT until verified by a service steward — recruiting stewards from receiving services is part of the pilot.',
-    pills: ['Structured data schema', 'Steward verification model'],
+    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, service criteria, and governance metadata. Records are compiled from publicly available sources, marked DRAFT until signed off by the Clinical Safety Officer, and designed to be maintained by a named steward in each receiving service as the model scales beyond the pilot.',
+    pills: ['Structured data schema', 'CSO sign-off', 'Steward verification (scaling)'],
   },
   {
     step: '02',
@@ -540,7 +540,7 @@ const CareQueryWebsite = () => {
                     The Service Card is the governed record of what each NHS MSK service actually does — referral criteria, catchment, required investigations, typical waiting times, operational contacts, and what the service explicitly does not accept. It is the starting point for any referral decision: before a clinician checks gate prerequisites, they need to know whether this service is the right destination.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Every field in a Service Card is <strong>Layer 1</strong>: sourced from publicly available documents — NHS commissioning policies, ICB referral guidance, and published clinical criteria. Records are encoded by the developer and governed under active DCB0129 clinical safety oversight. <strong>Layer 2</strong> (tacit referral intelligence contributed by named service stewards) is planned for Phase 2 and is not available at PoC stage. At PoC, all records carry DRAFT status — content is developer-verified against public sources and awaits formal sign-off from a named steward in each receiving service. That steward verification is distinct from clinical safety governance: the steward confirms service-content accuracy; the CSO governs the clinical safety framework. Recruiting stewards from receiving services is part of the pilot process.
+                    Every field in a Service Card is <strong>Layer 1</strong>: sourced from publicly available documents — NHS commissioning policies, ICB referral guidance, and published clinical criteria. Records are compiled by the developer and signed off by the Clinical Safety Officer under active DCB0129 governance before any clinician accesses the tool in a pilot context. <strong>Layer 2</strong> (tacit referral intelligence contributed by named service stewards) is planned for Phase 2 and is not available at PoC stage. The named steward model — where a specific person within each receiving service takes responsibility for ongoing content verification on a defined review cycle — is the target architecture for scaling beyond the pilot.
                   </p>
 
                   {/* Illustrative service card — clean example, no draft markers */}
@@ -793,7 +793,7 @@ const CareQueryWebsite = () => {
           {/* Architecture note */}
           <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #374151' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file designed to be maintained by a named steward. From it, five outputs are generated. The <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the patient leaves the consultation with something in hand: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The governed record changes once; every output reflects the update.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a governed JSON file compiled from public sources, signed off by the Clinical Safety Officer, and designed to be maintained by a named steward as the model scales. From it, five outputs are generated. The <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service actually does. The <strong style={{ color: '#9b2335' }}>Gate Card</strong> confirms administrative prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the patient leaves the consultation with something in hand: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The governed record changes once; every output reflects the update.
             </p>
           </div>
         </div>
@@ -836,7 +836,7 @@ const CareQueryWebsite = () => {
                     If the pilot demonstrates value, the model can be extended to additional services and other ICBs. The information architecture problem is national, not regional.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                    <strong>Why Cheshire and Merseyside first:</strong> C&amp;M ICB is the developer's local footprint, the Health Innovation North West Coast infrastructure is directly accessible, and the MSK pathway data can be verified against primary sources the developer works with daily.
+                    <strong>Why Cheshire and Merseyside first:</strong> C&amp;M ICB is the developer's local footprint, the Health Innovation North West Coast infrastructure is directly accessible, and the MSK pathway data can be verified against publicly available primary sources familiar to the developer through clinical practice.
                   </p>
                 </div>
               )}
@@ -923,7 +923,7 @@ const CareQueryWebsite = () => {
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      The Service Card encodes what each service actually does — referral criteria, catchment, what it explicitly does not accept, operational contacts, and expected waiting times. Designed to be maintained by a named steward on a review cycle; at PoC stage, records are developer-verified and flagged as DRAFT pending service team review. A clinician can open the Service Card, read the governed record, and understand the service before making a referral decision. The question "what does this service take?" is answered before anything is submitted.
+                      The Service Card encodes what each service actually does — referral criteria, catchment, what it explicitly does not accept, operational contacts, and expected waiting times. Designed to be maintained by a named steward on a review cycle as the model scales; at PoC stage, records are compiled from public sources and signed off by the Clinical Safety Officer before any clinician accesses the tool. A clinician can open the Service Card, read the governed record, and understand the service before making a referral decision. The question "what does this service take?" is answered before anything is submitted.
                     </p>
                   </div>
                 </>
@@ -1229,6 +1229,33 @@ const CareQueryWebsite = () => {
               </p>
             </div>
           </div>
+
+          {/* What the pilot is designed to test */}
+          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
+            <h4 className="heading" style={{ fontSize: '0.95rem', color: '#111827', marginBottom: '0.75rem' }}>What the pilot is designed to test</h4>
+            <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400, marginBottom: '0.75rem' }}>
+              The proof of concept has one core question: does giving clinicians accurate, structured pathway information at the point of referral make the consultation and submission easier?
+            </p>
+            <p className="body-text" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: '#374151', fontWeight: 400, marginBottom: '0.5rem' }}>
+              Specifically, the pilot will gather evidence on whether:
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', marginBottom: '0.75rem' }}>
+              {[
+                'Clinicians report that having service criteria available during the consultation makes MSK referral decisions feel more structured and informed',
+                'A&G submissions feel more complete at the point of sending — reducing uncertainty about whether prerequisites have been addressed',
+                'Patients leave the consultation with a clearer understanding of what happens next, regardless of whether a referral is submitted immediately',
+                'The Preparation Card gives patients and clinicians a shared, structured plan when referral criteria are not yet met',
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#2563eb', flexShrink: 0, marginTop: '0.5rem' }} />
+                  <span className="body-text" style={{ fontSize: '0.82rem', color: '#374151', fontWeight: 400, lineHeight: 1.5 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+            <p className="body-text" style={{ fontSize: '0.78rem', lineHeight: 1.6, color: '#6b7280', fontWeight: 400 }}>
+              These outcomes will be captured through qualitative clinician feedback, patient card access rates via privacy-respecting analytics, and per-gate attestation patterns across the pilot period. They are subject to refinement before the pilot opens.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -1265,7 +1292,7 @@ const CareQueryWebsite = () => {
               title: 'How is the data governed and kept accurate?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Each service is designed to have a named steward — a specific person in the receiving service responsible for verifying the record on a defined review cycle. Records are versioned in GitHub. At PoC stage, records are developer-verified and marked DRAFT pending receiving service review. If a record is overdue for review, an amber warning is shown to users — the information remains accessible but is flagged as potentially stale. Stale-but-visible is always preferable to hidden. The steward model is the target architecture; recruiting service stewards is part of the pilot process.
+                  Each service record is compiled from publicly available referral guidance and pathway documents. At proof-of-concept stage, records are reviewed and signed off by the Clinical Safety Officer before any clinician accesses the tool in a pilot context — no record reaches pilot users without CSO approval. Records are marked DRAFT until that sign-off is complete. If a record is overdue for review after publication, an amber warning is shown to users — the information remains accessible but is flagged as potentially stale. Stale-but-visible is always preferable to hidden. The named steward model — where a specific person within each service takes responsibility for ongoing verification — is the target architecture for scaling beyond the pilot.
                 </p>
               ),
             },
