@@ -72,18 +72,23 @@ const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse va
 const PILOT_AUDIENCE_ITEMS = [
   {
     title: 'Pilot Practices',
-    desc: '5–10 GP practices in Cheshire and Merseyside. Open the tool in a browser tab when preparing an MSK referral — no installation, no login, no IT request. The Service Card shows what each service needs. The Gate Card confirms prerequisites before you submit. The patient leaves with a link explaining what happens next. 12 weeks, zero IT burden, and the pilot is designed as a quality improvement initiative — service evaluation classification pending HRA decision tool confirmation before the pilot opens.',
+    desc: '5–10 GP practices in Cheshire and Merseyside. Open the tool in a browser tab when preparing an MSK referral — no installation, no login, no IT request. The Service Card shows what each service needs. The Gate Card confirms prerequisites before you submit. The patient leaves with a link explaining what happens next. Zero IT burden, 12 weeks trial, and the pilot is designed as a quality improvement initiative — service evaluation classification pending HRA decision tool confirmation before the pilot opens.',
     tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
   },
   {
     title: 'Clinical Contributors',
-    desc: 'You know what actually causes referrals to fail — the operational nuance that no published pathway document captures. That knowledge is what a Service Card is built to encode. Contributing takes a single conversation. Your expertise, encoded once, helps every clinician in the area refer more accurately — and is designed as quality improvement activity for your appraisal portfolio — service evaluation classification pending HRA decision tool confirmation.',
+    desc: 'You know your service\'s published referral criteria better than anyone — and you know when the written guidance doesn\'t fully reflect what actually gets a referral accepted. At PoC stage, a Service Card encodes Layer 1 content only: publicly available criteria, accurately represented. Your role is to verify that accuracy — it takes a single conversation. Your expertise, confirmed once, means every clinician in the area is working from correct information — and is designed as quality improvement activity for your appraisal portfolio — service evaluation classification pending HRA decision tool confirmation.',
     tag: 'GPs · FCPs · ACPs · Advanced Practitioners · Physios · Service leads',
   },
   {
     title: 'Service Owners and MSK Leads',
     desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. Steward verification takes about 30 minutes and is designed as service evaluation activity.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
+  },
+  {
+    title: 'Reception and Admin Teams',
+    desc: 'Care Query generates a structured clipboard summary that travels with the referral — no more routing from a vague handwritten note. The patient URL can be read out or texted by reception to explain next steps without pulling a GP out of clinic. No training required, no login, no system access needed.',
+    tag: 'Practice managers · Reception staff · Referral coordinators',
   },
 ];
 
@@ -135,7 +140,22 @@ const SectionDivider = () => <div className="divider" style={{ maxWidth: '1100px
 
 const SiteStyles = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('./fonts/inter-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('./fonts/inter-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
     .care-query-site, .care-query-site * { box-sizing: border-box; margin: 0; padding: 0; }
     .care-query-site { background: #ffffff; font-family: 'Inter', sans-serif; }
     .care-query-site .heading { font-family: 'Inter', sans-serif; font-weight: 700; }
@@ -260,12 +280,14 @@ const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onE
           id="stay-informed-company-name"
           type="text"
           name={STAY_INFORMED_SECOND_HONEYPOT_FIELD}
-          tabIndex="-1"
+          tabIndex={-1}
           autoComplete="off"
           defaultValue=""
         />
       </div>
+      <label htmlFor="stay-informed-email" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>Email address</label>
       <input
+        id="stay-informed-email"
         type="email"
         name="email"
         value={email}
@@ -690,7 +712,7 @@ const CareQueryWebsite = () => {
                     When all Gate Card prerequisites are confirmed, two things happen: a clipboard summary is generated for the A&G submission or direct referral, and a Journey Card URL is produced — a link the clinician can share with the patient. The URL carries the referral date. When the patient opens it, the card calculates how many weeks have passed and renders a phase-appropriate message. No login, no patient data — the date lives in the URL itself, generated entirely client-side with no server submission.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The URL also carries a <strong>confidence signal</strong> — confirming that the clinician verified all administrative prerequisites before submitting. The patient sees not just where they are going but that their referral was prepared correctly. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths.
+                    The URL also carries a <strong>confidence signal</strong> — confirming that the clinician verified all administrative prerequisites before submitting. The patient sees not just where they are going but that their referral was prepared correctly. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths. Where a referral is ready, the Journey Card functions as a structured form of informed consent — the patient understands the service, what to expect, and what it will not do, before they arrive.
                   </p>
                   {/* Phase illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -1048,9 +1070,12 @@ const CareQueryWebsite = () => {
               <Layers size={20} color="#2563eb" />
               <span className="tag tag-blue" style={{ marginBottom: '0' }}>How It Works</span>
             </div>
-            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
+            <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>
               Open it. Use it. Close it.
             </h2>
+            <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.5rem' }}>
+              Care Query intervenes at minute one of the consultation — not at the point of submission.
+            </p>
             <div className="three-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
               {[
                 {
