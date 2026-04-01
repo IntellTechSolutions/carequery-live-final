@@ -82,7 +82,7 @@ const PILOT_AUDIENCE_ITEMS = [
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. Steward verification takes about 30 minutes and is designed as service evaluation activity.',
+    desc: 'An accurate Service Card means referral criteria you control — not buried in an out-of-date document. Referring clinicians see what you actually require before they submit. Steward verification and record ownership is planned for Phase 2 — it will require NHS practice login so access is restricted to verified services, not open to the public. Participation counts as service evaluation activity for appraisal portfolios, and the structured data generated during the pilot can be used as a quality improvement project by the services and stewards involved.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
   },
   {
