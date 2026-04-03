@@ -105,9 +105,19 @@ const ExpandableCard = ({ card, defaultOpen }) => {
   const summaryPaddingLeft = card.icon ? '1.75rem' : 0;
   return (
     <div style={{ borderLeft: `4px solid ${card.borderColor}`, background: '#fff', borderTop: '1px solid #e5e7eb', borderRight: '1px solid #e5e7eb', borderBottom: '1px solid #e5e7eb', borderRadius: '0 8px 8px 0', marginBottom: '1rem' }}>
-      <button
+      <div
+        style={{ width: '100%', padding: '1.25rem 1.75rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}
         onClick={() => setOpen(!open)}
-        style={{ width: '100%', background: 'none', border: 'none', padding: '1.25rem 1.75rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', textAlign: 'left' }}
+        role="button"
+        tabIndex={0}
+        aria-expanded={open}
+        aria-controls={`card-detail-${card.title}`}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setOpen(!open);
+          }
+        }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -124,9 +134,9 @@ const ExpandableCard = ({ card, defaultOpen }) => {
         <span style={{ color: '#2563eb', fontSize: '1.2rem', fontWeight: 300, flexShrink: 0, marginTop: '0.1rem' }}>
           {open ? '−' : '+'}
         </span>
-      </button>
+      </div>
       {open && (
-        <div style={{ padding: '0 1.75rem 1.5rem', borderTop: '1px solid #f3f4f6' }}>
+        <div id={`card-detail-${card.title}`} style={{ padding: '0 1.75rem 1.5rem', borderTop: '1px solid #f3f4f6' }}>
           <div style={{ paddingTop: '1.25rem' }}>
             {card.detail}
           </div>
@@ -145,7 +155,7 @@ const SiteStyles = () => (
       font-style: normal;
       font-weight: 400 700;
       font-display: swap;
-      src: url('./fonts/inter-latin-ext.woff2') format('woff2');
+      src: url('/fonts/inter-latin-ext.woff2') format('woff2');
       unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
     @font-face {
@@ -153,7 +163,7 @@ const SiteStyles = () => (
       font-style: normal;
       font-weight: 400 700;
       font-display: swap;
-      src: url('./fonts/inter-latin.woff2') format('woff2');
+      src: url('/fonts/inter-latin.woff2') format('woff2');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
     .care-query-site, .care-query-site * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -216,7 +226,7 @@ const SiteNavigation = ({ isMenuOpen, activeSection, onToggleMenu, onNavigate })
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-          <img src="./Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
+          <img src="/Logo-Care-Query-1.svg" alt="Care Query" style={{ width: '2rem', height: '2rem', borderRadius: '4px' }} />
           <span style={{ fontSize: '1.4rem', fontWeight: 700, color: BRAND_COLOR, letterSpacing: '-0.01em' }}>Care Query</span>
           <span className="tag tag-poc">PoC</span>
         </div>
@@ -229,8 +239,13 @@ const SiteNavigation = ({ isMenuOpen, activeSection, onToggleMenu, onNavigate })
             </button>
           ))}
         </div>
-        <button onClick={onToggleMenu} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
-          className="mobile-menu-btn">
+        <button
+          onClick={onToggleMenu}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#374151' }}
+          className="mobile-menu-btn"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+        >
           {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
@@ -251,9 +266,15 @@ const SiteNavigation = ({ isMenuOpen, activeSection, onToggleMenu, onNavigate })
 const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onEmailChange, onSubmit }) => {
   if (submitted) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 0' }}>
         <Check size={16} color="#22c55e" />
-        <p className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.85rem' }}>Received — we will be in touch.</p>
+        <p className="body-text" style={{ color: '#059669', fontWeight: 500, fontSize: '0.85rem' }} role="status" aria-live="polite">Email received — we will be in touch.</p>
+        <button
+          onClick={() => window.location.reload()}
+          style={{ marginLeft: '0.5rem', background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', fontSize: '0.85rem', textDecoration: 'underline' }}
+        >
+          Submit another
+        </button>
       </div>
     );
   }
@@ -262,10 +283,6 @@ const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onE
     <form
       name={STAY_INFORMED_FORM_NAME}
       method="POST"
-      action="/"
-      data-netlify="true"
-      data-netlify-recaptcha="true"
-      netlify-honeypot={STAY_INFORMED_HONEYPOT_FIELD}
       onSubmit={onSubmit}
       style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
     >
@@ -300,15 +317,13 @@ const RegisterInterestForm = ({ submitted, email, isSubmitting, submitError, onE
         spellCheck="false"
         className="input-field"
         style={{ flex: 1, minWidth: '160px', padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
+        aria-label="Email address"
       />
-      <div style={{ width: '100%' }}>
-        <div data-netlify-recaptcha="true" />
-      </div>
       <button type="submit" disabled={isSubmitting} className="btn-primary" style={{ padding: '0.55rem 1.25rem', fontSize: '0.82rem', opacity: isSubmitting ? 0.8 : 1 }}>
         {isSubmitting ? 'Submitting...' : 'Register interest'}
       </button>
       {submitError && (
-        <p className="body-text" style={{ width: '100%', color: '#b91c1c', fontWeight: 500, fontSize: '0.82rem', lineHeight: 1.5 }}>
+        <p className="body-text" style={{ width: '100%', color: '#b91c1c', fontWeight: 500, fontSize: '0.82rem', lineHeight: 1.5 }} role="alert" aria-live="polite">
           {submitError}
         </p>
       )}
@@ -362,10 +377,10 @@ const CareQueryWebsite = () => {
     const trimmedEmail = String(formData.get('email') || '').trim();
     const primaryTrapValue = String(formData.get(STAY_INFORMED_HONEYPOT_FIELD) || '').trim();
     const secondaryTrapValue = String(formData.get(STAY_INFORMED_SECOND_HONEYPOT_FIELD) || '').trim();
-    const recaptchaResponse = String(formData.get(STAY_INFORMED_RECAPTCHA_FIELD) || '').trim();
 
     // Quietly ignore likely bot submissions rather than returning a useful signal.
     if (primaryTrapValue || secondaryTrapValue) {
+      setSubmitted(true);
       return;
     }
 
@@ -383,11 +398,6 @@ const CareQueryWebsite = () => {
       return;
     }
 
-    if (!recaptchaResponse) {
-      setSubmitError('Please complete the security check and try again.');
-      return;
-    }
-
     setIsSubmitting(true);
     setSubmitError('');
 
@@ -399,7 +409,6 @@ const CareQueryWebsite = () => {
         email: trimmedEmail,
         [STAY_INFORMED_HONEYPOT_FIELD]: '',
         [STAY_INFORMED_SECOND_HONEYPOT_FIELD]: '',
-        [STAY_INFORMED_RECAPTCHA_FIELD]: recaptchaResponse,
       }).toString(),
     })
       .then((response) => {
@@ -432,7 +441,7 @@ const CareQueryWebsite = () => {
       />
 
       {/* Hero */}
-      <section id="home" style={{ paddingTop: '64px', minHeight: '100vh', display: 'flex', alignItems: 'center', background: 'linear-gradient(160deg, #ffffff 40%, #eff6ff 100%)' }}>
+      <section id="home" style={{ paddingTop: '64px', minHeight: '100vh', display: 'flex', alignItems: 'center', background: 'linear-gradient(160deg, #ffffff 40%, #eff6ff 100%)', scrollMarginTop: '80px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 1.5rem 4rem' }}>
           <div style={{ maxWidth: '700px' }}>
             <div style={{ marginBottom: '1.5rem' }}>
@@ -472,7 +481,7 @@ const CareQueryWebsite = () => {
       <SectionDivider />
 
       {/* What It Does */}
-      <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
+      <section id="what-it-does" style={{ padding: '6rem 1.5rem', background: '#ffffff', scrollMarginTop: '80px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '4rem', alignItems: 'start', marginBottom: '3.5rem' }}>
             <div>
@@ -514,7 +523,7 @@ const CareQueryWebsite = () => {
                   </p>
                   {/* Overview Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.75rem' }}>
                       Illustrative example — Cheshire &amp; Merseyside MSK services
                     </div>
                     {[
@@ -524,12 +533,12 @@ const CareQueryWebsite = () => {
                     ].map((svc, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.65rem 0.85rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '6px', marginBottom: i < 2 ? '0.4rem' : 0 }}>
                         <div>
-                          <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 700, color: '#9ca3af', letterSpacing: '0.07em', textTransform: 'uppercase', marginBottom: '0.15rem' }}>{svc.code}</div>
+                          <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6b7280', letterSpacing: '0.07em', textTransform: 'uppercase', marginBottom: '0.15rem' }}>{svc.code}</div>
                           <div className="body-text" style={{ fontSize: '0.85rem', fontWeight: 600, color: '#111827', marginBottom: '0.1rem' }}>{svc.name}</div>
                           <div className="body-text" style={{ fontSize: '0.72rem', color: '#6b7280', fontWeight: 400 }}>{svc.catchment}</div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.35rem' }}>
-                          <span style={{ fontSize: '0.65rem', fontWeight: 600, background: svc.typeColor, color: svc.typeText, padding: '0.15rem 0.5rem', borderRadius: '9999px' }}>{svc.type}</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 600, background: svc.typeColor, color: svc.typeText, padding: '0.15rem 0.5rem', borderRadius: '9999px' }}>{svc.type}</span>
                           <span className="body-text" style={{ fontSize: '0.72rem', color: OVERVIEW_ACCENT_COLOR, fontWeight: 500 }}>Explore →</span>
                         </div>
                       </div>
@@ -568,7 +577,7 @@ const CareQueryWebsite = () => {
                   {/* Illustrative service card — clean example, no draft markers */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', marginBottom: '1.25rem', overflow: 'hidden' }}>
                     <div style={{ background: '#dbeafe', borderBottom: '1px solid #93c5fd', padding: '0.4rem 1rem' }}>
-                      <span className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1e40af' }}>
+                      <span className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1e40af' }}>
                         Illustrative example — service record content is subject to steward verification before pilot access
                       </span>
                     </div>
@@ -577,13 +586,13 @@ const CareQueryWebsite = () => {
                         <div className="heading" style={{ fontSize: '1rem', color: '#111827', marginBottom: '0.2rem' }}>
                           Warrington &amp; Halton Hospitals — Rheumatology
                         </div>
-                        <div className="body-text" style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 400 }}>
+                        <div className="body-text" style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 400 }}>
                           Code: WHHRHEUM · Steward: Named clinical contact · Review cycle: 90 days
                         </div>
                       </div>
                     </div>
                     <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb' }}>
-                      <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.6rem' }}>
+                      <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.6rem' }}>
                         Referral criteria
                       </div>
                       {[
@@ -606,7 +615,7 @@ const CareQueryWebsite = () => {
                         { label: 'Referral route', value: 'GP referral to WHH Rheumatology; or via MSKCATS after physiotherapy triage' },
                       ].map((item, i) => (
                         <div key={i} style={{ padding: '0.85rem 1.25rem', borderRight: i < 2 ? '1px solid #e5e7eb' : 'none' }}>
-                          <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.3rem' }}>{item.label}</div>
+                          <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.3rem' }}>{item.label}</div>
                           <div className="body-text" style={{ fontSize: '0.8rem', color: '#111827', fontWeight: 400, lineHeight: 1.4 }}>{item.value}</div>
                         </div>
                       ))}
@@ -653,11 +662,11 @@ const CareQueryWebsite = () => {
                   </p>
                   {/* Gate Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.75rem' }}>
                       Illustrative example — WHH Rheumatology (WHHRHEUM) · A&amp;G mandatory
                     </div>
                     <div style={{ background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: '6px', padding: '0.75rem', marginBottom: '0.85rem' }}>
-                      <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#be123c', marginBottom: '0.5rem' }}>
+                      <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#be123c', marginBottom: '0.5rem' }}>
                         Stop and act — do not proceed with A&amp;G referral
                       </div>
                       {[
@@ -716,7 +725,7 @@ const CareQueryWebsite = () => {
                   </p>
                   {/* Phase illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.75rem' }}>
                       Time-aware phases — WHH Rheumatology (14-week wait estimate)
                     </div>
                     <div style={{ background: '#dcfce7', border: '1px solid #86efac', borderLeft: '4px solid #16a34a', borderRadius: '6px', padding: '0.65rem 0.85rem', marginBottom: '0.85rem' }}>
@@ -732,8 +741,8 @@ const CareQueryWebsite = () => {
                     ].map((p, i) => (
                       <div key={i} style={{ borderLeft: `3px solid ${p.border}`, background: p.bg, borderRadius: '4px', padding: '0.6rem 0.85rem', marginBottom: i < 3 ? '0.5rem' : 0 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
-                          <span className="body-text" style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: p.color }}>{p.weeks}</span>
-                          <span className="body-text" style={{ fontSize: '0.6rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: p.color, opacity: 0.7 }}>{p.label}</span>
+                          <span className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: p.color }}>{p.weeks}</span>
+                          <span className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: p.color, opacity: 0.7 }}>{p.label}</span>
                         </div>
                         <div className="heading" style={{ fontSize: '0.82rem', color: p.color, marginBottom: '0.15rem' }}>{p.phase}</div>
                         <span className="body-text" style={{ fontSize: '0.75rem', color: p.color, fontWeight: 400, lineHeight: 1.4 }}>{p.message}</span>
@@ -771,7 +780,7 @@ const CareQueryWebsite = () => {
                   </p>
                   {/* Preparation Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.75rem' }}>
+                    <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.75rem' }}>
                       Illustrative example — Not Yet outcome · WHH Rheumatology
                     </div>
                     <div style={{ background: '#ede9fe', border: '1px solid #c4b5fd', borderRadius: '6px', padding: '0.85rem', marginBottom: '0.85rem' }}>
@@ -789,7 +798,7 @@ const CareQueryWebsite = () => {
                       ))}
                     </div>
                     <div style={{ padding: '0.75rem 0.85rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '6px' }}>
-                      <div className="body-text" style={{ fontSize: '0.65rem', fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: '0.3rem' }}>
+                      <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: '0.3rem' }}>
                         Patient preparation link — shared by the clinician
                       </div>
                       <div className="body-text" style={{ fontSize: '0.8rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>
@@ -835,7 +844,7 @@ const CareQueryWebsite = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
                 {CURRENT_SCOPE_ITEMS.map((item, i) => (
                   <div key={i} style={{ padding: '0.9rem 1rem', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
-                    <div className="body-text" style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
+                    <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#2563eb', marginBottom: '0.35rem' }}>{item.label}</div>
                     <div className="body-text" style={{ fontSize: '0.88rem', color: '#374151', fontWeight: 400, lineHeight: 1.5 }}>{item.value}</div>
                   </div>
                 ))}
@@ -911,7 +920,7 @@ const CareQueryWebsite = () => {
       <SectionDivider />
 
       {/* What Each Output Is Built For */}
-      <section id="solves-failures" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
+      <section id="solves-failures" style={{ padding: '6rem 1.5rem', background: '#ffffff', scrollMarginTop: '80px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ marginBottom: '3.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
@@ -1062,7 +1071,7 @@ const CareQueryWebsite = () => {
       <SectionDivider />
 
       {/* How It Works — Technical Architecture */}
-      <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
+      <section id="how-it-works" style={{ padding: '6rem 1.5rem', background: '#ffffff', scrollMarginTop: '80px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {/* User workflow — 3 steps, mirrors Innovation Record 2.1.2 */}
           <div style={{ marginBottom: '4rem' }}>
@@ -1173,7 +1182,7 @@ const CareQueryWebsite = () => {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
                       <div className="body-text" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827' }}>{item.label}</div>
-                      <span style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', padding: '0.15rem 0.5rem', borderRadius: '9999px', background: item.status === 'Active' || item.status === 'Confirmed' || item.status === 'Registered' ? '#dcfce7' : '#f3f4f6', color: item.status === 'Active' || item.status === 'Confirmed' || item.status === 'Registered' ? '#166534' : '#6b7280' }}>{item.status}</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', padding: '0.15rem 0.5rem', borderRadius: '9999px', background: item.status === 'Active' || item.status === 'Confirmed' || item.status === 'Registered' ? '#dcfce7' : '#f3f4f6', color: item.status === 'Active' || item.status === 'Confirmed' || item.status === 'Registered' ? '#166534' : '#6b7280' }}>{item.status}</span>
                     </div>
                     <div className="body-text" style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>{item.desc}</div>
                   </div>
@@ -1187,7 +1196,7 @@ const CareQueryWebsite = () => {
       <SectionDivider />
 
       {/* Join the Pilot */}
-      <section id="join-the-pilot" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
+      <section id="join-the-pilot" style={{ padding: '6rem 1.5rem', background: '#ffffff', scrollMarginTop: '80px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', marginBottom: '3rem' }}>
             <div style={{ width: '68px', height: '68px', borderRadius: '16px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '0.25rem' }}>
@@ -1203,7 +1212,7 @@ const CareQueryWebsite = () => {
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
                 If you recognise this problem in your own referral pathways — or in the systems you commission or evaluate — a short conversation is enough to start. Contact us directly:{' '}
-                <a href="mailto:clinical@carequery.uk" style={{ color: BRAND_COLOR, fontWeight: 500, textDecoration: 'none' }}>clinical@carequery.uk</a>
+                <a href="mailto:hello@carequery.uk" style={{ color: BRAND_COLOR, fontWeight: 500, textDecoration: 'none' }}>hello@carequery.uk</a>
               </p>
             </div>
           </div>
@@ -1362,7 +1371,7 @@ const CareQueryWebsite = () => {
       <SectionDivider />
 
       {/* Contact */}
-      <section id="contact" style={{ padding: '6rem 1.5rem', background: '#ffffff' }}>
+      <section id="contact" style={{ padding: '6rem 1.5rem', background: '#ffffff', scrollMarginTop: '80px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
             <div>
@@ -1379,9 +1388,9 @@ const CareQueryWebsite = () => {
                     <Mail size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Clinical, Pilot &amp; Partnership Enquiries</div>
-                    <a href="mailto:clinical@carequery.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
-                      clinical@carequery.uk
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.2rem' }}>Clinical, Pilot &amp; Partnership Enquiries</div>
+                    <a href="mailto:hello@carequery.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                      hello@carequery.uk
                     </a>
                   </div>
                 </div>
@@ -1390,7 +1399,7 @@ const CareQueryWebsite = () => {
                     <Mail size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Governance &amp; Company — Intelligent Technology Solutions Ltd</div>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.2rem' }}>Governance &amp; Company — Intelligent Technology Solutions Ltd</div>
                     <a href="mailto:info@intelltechsolutions.co.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
                       info@intelltechsolutions.co.uk
                     </a>
@@ -1401,7 +1410,7 @@ const CareQueryWebsite = () => {
                     <MapPin size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Registered Address</div>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.2rem' }}>Registered Address</div>
                     <div className="body-text" style={{ fontSize: '0.88rem', color: '#4b5563', lineHeight: 1.6, fontWeight: 400 }}>
                       Intelligent Technology Solutions Limited<br />
                       Bartle House, 9 Oxford Court<br />
@@ -1415,7 +1424,7 @@ const CareQueryWebsite = () => {
                     <ExternalLink size={18} color="#2563eb" />
                   </div>
                   <div>
-                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>The Tool</div>
+                    <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '0.2rem' }}>The Tool</div>
                     <a href="https://carequery.app" target="_blank" rel="noopener noreferrer" className="body-text" style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
                       carequery.app
                     </a>
@@ -1425,7 +1434,7 @@ const CareQueryWebsite = () => {
               </div>
             </div>
             <div className="card" style={{ padding: '1.75rem', alignSelf: 'start' }}>
-              <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '1.25rem' }}>
+              <div className="body-text" style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b7280', marginBottom: '1.25rem' }}>
                 About this project
               </div>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
@@ -1446,13 +1455,13 @@ const CareQueryWebsite = () => {
       </section>
 
       {/* Footer */}
-      <footer style={{ background: '#111827', borderTop: '1px solid #1f2937', color: '#9ca3af', padding: '2.5rem 1.5rem' }}>
+      <footer style={{ background: '#111827', borderTop: '1px solid #1f2937', color: '#6b7280', padding: '2.5rem 1.5rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
             <span className="heading" style={{ fontSize: '1.1rem', color: BRAND_COLOR, marginRight: '0.75rem' }}>Care Query</span>
-            <span className="body-text" style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Proof of Concept — Cheshire and Merseyside ICB — 2026</span>
+            <span className="body-text" style={{ fontSize: '0.8rem', color: '#6b7280' }}>Proof of Concept — Cheshire and Merseyside ICB — 2026</span>
           </div>
-          <div className="body-text" style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
+          <div className="body-text" style={{ fontSize: '0.78rem', color: '#6b7280' }}>
             © 2026 Intelligent Technology Solutions Limited · Not a medical device · No patient data · DCB0129 · NICE ESF Tier A
           </div>
         </div>
