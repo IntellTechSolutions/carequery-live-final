@@ -447,11 +447,11 @@ const CareQueryWebsite = () => {
               Every patient leaves the consultation with a plan.
             </p>
             <p className="body-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#4b5563', marginBottom: '1.75rem', fontWeight: 400 }}>
-              <span className="brand">Care Query</span> shows you what each local MSK service actually needs — referral criteria, prerequisites, and entry requirements — in a format you can use during a consultation. Each prerequisite is confirmed individually. When the referral is ready, a formatted summary goes into your A&G submission and the patient gets a plain-English pathway summary. When it's not ready yet, the patient gets a preparation plan showing what remains and what to do next.
+              <span className="brand">Care Query</span> shows you what each local MSK service actually needs — referral criteria, prerequisites, and entry requirements — in a format you can use during a consultation. Each prerequisite is confirmed individually. When all administrative prerequisites are confirmed by the clinician, a clipboard summary is generated ready to paste into your A&G submission and the patient gets a plain-English pathway summary. When it's not ready yet, the patient gets a preparation plan showing what remains and what to do next.
             </p>
             <div style={{ borderLeft: '3px solid #374151', paddingLeft: '1rem', marginBottom: '2rem' }}>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#111827', fontWeight: 400 }}>
-                One governed record per service. Five outputs — from pathway overview to patient handoff. Update the record once, every output reflects the change.
+                One governed record per service. Five outputs — from pathway overview to patient handoff. Updated on a 90-day review cycle. Stale records are flagged to the clinician. Every output reflects the current record.
               </p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
@@ -642,7 +642,7 @@ const CareQueryWebsite = () => {
                 <>
                   <div style={{ background: '#fef9c3', border: '1px solid #fde68a', borderRadius: '6px', padding: '0.65rem 1rem', marginBottom: '1.25rem' }}>
                     <p className="body-text" style={{ fontSize: '0.82rem', color: '#854d0e', fontWeight: 400, lineHeight: 1.5 }}>
-                      Most services expect these fields — use as a memory aid, not a clinical checklist.
+                      Each gate reflects documented administrative prerequisites for this service. Attestation is per gate — the clinician declares how each criterion is confirmed, not that the referral is clinically appropriate.
                     </p>
                   </div>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
@@ -712,7 +712,7 @@ const CareQueryWebsite = () => {
                     When all Gate Card prerequisites are confirmed, two things happen: a clipboard summary is generated for the A&G submission or direct referral, and a Journey Card URL is produced — a link the clinician can share with the patient. The URL carries the referral date. When the patient opens it, the card calculates how many weeks have passed and renders a phase-appropriate message. No login, no patient data — the date lives in the URL itself, generated entirely client-side with no server submission.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The URL also carries a <strong>confidence signal</strong> — confirming that the clinician verified all administrative prerequisites before submitting. The patient sees not just where they are going but that their referral was prepared correctly. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths. Where a referral is ready, the Journey Card functions as a structured form of informed consent — the patient understands the service, what to expect, and what it will not do, before they arrive.
+                    The URL confirms that the clinician completed all administrative prerequisites for this service before submitting. The patient sees not just where they are going but that their referral was prepared correctly. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths. Where a referral is ready, the Journey Card functions as a structured form of informed consent — the patient understands the service, what to expect, and what it will not do, before they arrive.
                   </p>
                   {/* Phase illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -841,7 +841,7 @@ const CareQueryWebsite = () => {
                 ))}
               </div>
               <p className="body-text" style={{ fontSize: '0.78rem', color: '#6b7280', fontWeight: 400, marginBottom: '1rem', lineHeight: 1.5 }}>
-                Data source: Encoded from publicly available referral guidance and verified with service teams where possible.
+                Data source: Encoded from publicly available referral guidance. All records are DRAFT at PoC stage and marked as such. Steward verification is the milestone that changes a record from DRAFT to PUBLISHED.
               </p>
               <button
                 onClick={() => setScopeOpen(!scopeOpen)}
@@ -884,7 +884,7 @@ const CareQueryWebsite = () => {
               Clinicians currently discover what a service requires by sending a referral and reading the return. 52% of MSK referrals are administratively incomplete at triage (Fylde Coast MSK RMC audit) — not because clinicians lack competence, but because pathway criteria are held in commissioning documents and institutional memory, not in a format usable during a consultation. 33% of first orthopaedic outpatient appointments end in single-visit discharge (NHS England, 2019/20) — referrals that reached secondary care without meeting entry criteria. When a referral is not yet ready, patients leave without a structured plan. <span className="brand">Care Query</span> addresses this directly: verified, service-level information at the point of referral, and a patient output regardless of the outcome.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              This is not a new problem. The 2026/27 GP contract (PRN02353) makes it more operationally significant — Advice and Guidance is now mandatory for secondary care planned referrals, the per-request payment is removed, and the administrative cost of returned submissions falls entirely on the practice. But the underlying gap exists regardless of the contract: referral criteria are not visible to referring clinicians at the point of care. The NHS SPoA Technical Guidance mandates that they should be. Care Query provides the mechanism.
+              This is not a new problem. The 2026/27 GP contract (PRN02353) makes it more operationally significant — Advice and Guidance is now mandatory for secondary care planned referrals, the per-request payment is removed, and the administrative cost of returned submissions falls entirely on the practice. From 1 April 2026, Advice &amp; Guidance is mandatory as a prerequisite for planned care referrals. The prerequisite infrastructure — knowing what each service actually requires before submitting — does not yet exist at the point of consultation. Care Query fills that gap. The underlying problem exists regardless of the contract: referral criteria are not visible to referring clinicians at the point of care. The NHS SPoA Technical Guidance mandates that they should be. Care Query provides the mechanism.
             </p>
           </div>
 
@@ -922,7 +922,7 @@ const CareQueryWebsite = () => {
               What it does — and how it stays accurate.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that was not visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these gaps. Each is designed to generate evidence during the 12-week pilot — through usage patterns via privacy-respecting analytics, patient card access rates, and qualitative GP feedback. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
+              The gaps that cause problems are informational: not knowing what a service actually accepts before trying to refer, missing a prerequisite that was not visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these gaps. Each is designed to generate evidence during the 12-week pilot — through usage patterns via privacy-respecting analytics, patient card access rates, and qualitative GP feedback. At PoC stage, no outcome data exists. The pilot is designed to collect it. The evidence referenced in this section is the framework the pilot will generate — not prior proof. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
             </p>
           </div>
 
@@ -993,7 +993,7 @@ const CareQueryWebsite = () => {
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      The Journey Card is time-aware. The URL carries the referral date — when the patient opens it, the card calculates elapsed weeks and renders a phase-appropriate message: reassurance in the early period, guidance as the appointment window approaches, a clear action prompt if the wait exceeds the typical timeline. A confidence signal confirms the clinician verified all prerequisites before submitting. The patient sees that their referral was prepared correctly — which is itself reassuring.
+                      The Journey Card is time-aware. The URL carries the referral date — when the patient opens it, the card calculates elapsed weeks and renders a phase-appropriate message: reassurance in the early period, guidance as the appointment window approaches, a clear action prompt if the wait exceeds the typical timeline. The URL confirms that the clinician completed all administrative prerequisites before submitting. The patient sees that their referral was prepared correctly — which is itself reassuring.
                     </p>
                   </div>
                 </>
@@ -1325,7 +1325,7 @@ const CareQueryWebsite = () => {
               title: 'What evidence standard applies to this tool?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  NICE Evidence Standards Framework Tier A — Standard 15. Pilot evaluation requires a site statement covering: integration into workflow, acceptability to users, no harm identified, and system-level benefit. No minimum sample size is specified. No comparative effectiveness data (Standard 14) is required. Section D early deployment registration via the NHS Innovation Service is an option being explored — if confirmed, it could remove the Standard 15 obligation. The PoC pilot is designed to generate this evidence.
+                  NICE Evidence Standards Framework Tier A — Standard 15. Pilot evaluation requires a site statement covering: integration into workflow, acceptability to users, no harm identified, and system-level benefit. No minimum sample size is specified. No comparative effectiveness data (Standard 14) is required. Care Query is registered with the NHS Innovation Service (INN-2603-0087-6, March 2026). Section D early deployment pathway is under active consideration — if confirmed, it could remove the Standard 15 obligation. The PoC pilot is designed to generate this evidence.
                 </p>
               ),
             },
