@@ -50,7 +50,7 @@ const TECH_ARCHITECTURE_STEPS = [
   {
     step: '01',
     title: 'Governed Data Source',
-    body: 'A single service-records.json file is the source of truth. Each service record contains identity, referral gates, service criteria, and governance metadata. Records are compiled from publicly available sources, marked DRAFT until signed off by the Clinical Safety Officer, and designed to be maintained by a named steward in each receiving service as the model scales beyond the pilot.',
+    body: 'A single service-records.json file is the source-linked record. Each service record contains identity, referral gates, service criteria, and governance metadata. Records are compiled from publicly available sources, marked DRAFT until signed off by the Clinical Safety Officer, and designed to be maintained by a named steward in each receiving service as the model scales beyond the pilot.',
     pills: ['Structured data schema', 'CSO sign-off', 'Steward verification (scaling)'],
   },
   {
@@ -72,7 +72,7 @@ const INFRASTRUCTURE_PILLS = ['Netlify CDN', 'GitHub Actions CI', 'JSON parse va
 const PILOT_AUDIENCE_ITEMS = [
   {
     title: 'Pilot Practices',
-    desc: '5–10 GP practices in Cheshire and Merseyside. Open the tool in a browser tab when preparing an MSK referral — no installation, no login, no IT request. The Service Card shows what each service needs. The Gate Card confirms prerequisites before you submit. The patient leaves with a link explaining what happens next. Zero IT burden, 12 weeks trial, and the pilot is designed as a quality improvement initiative — service evaluation classification pending HRA decision tool confirmation before the pilot opens.',
+    desc: '5–10 GP practices in Cheshire and Merseyside. Open the tool in a browser tab when preparing an MSK referral — no installation, no login, no IT request. The Service Card shows what each service needs. The Gate Card confirms prerequisites before you submit. The patient leaves with a link explaining what happens next. Zero IT burden, 12-week pilot period, and the pilot is designed as a quality improvement initiative — service evaluation classification pending HRA decision tool confirmation before the pilot opens.',
     tag: 'GP Practice Managers · PCN Clinical Directors · FCP leads',
   },
   {
@@ -1203,7 +1203,7 @@ const CareQueryWebsite = () => {
               </p>
               <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginTop: '0.75rem' }}>
                 If you recognise this problem in your own referral pathways — or in the systems you commission or evaluate — a short conversation is enough to start. Contact us directly:{' '}
-                <a href="mailto:hello@carequery.uk" style={{ color: BRAND_COLOR, fontWeight: 500, textDecoration: 'none' }}>hello@carequery.uk</a>
+                <a href="mailto:clinical@carequery.uk" style={{ color: BRAND_COLOR, fontWeight: 500, textDecoration: 'none' }}>clinical@carequery.uk</a>
               </p>
             </div>
           </div>
@@ -1380,8 +1380,8 @@ const CareQueryWebsite = () => {
                   </div>
                   <div>
                     <div className="body-text" style={{ fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#9ca3af', marginBottom: '0.2rem' }}>Clinical, Pilot &amp; Partnership Enquiries</div>
-                    <a href="mailto:hello@carequery.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
-                      hello@carequery.uk
+                    <a href="mailto:clinical@carequery.uk" className="body-text" style={{ color: '#2563eb', fontWeight: 500, fontSize: '0.9rem', textDecoration: 'none' }}>
+                      clinical@carequery.uk
                     </a>
                   </div>
                 </div>
