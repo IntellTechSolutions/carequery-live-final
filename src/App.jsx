@@ -667,7 +667,7 @@ const CareQueryWebsite = () => {
                     </div>
                     <div style={{ background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: '6px', padding: '0.75rem', marginBottom: '0.85rem' }}>
                       <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#be123c', marginBottom: '0.5rem' }}>
-                        Stop and act — do not proceed with A&amp;G referral
+                        Red-flag prompts shown in the tool (illustrative)
                       </div>
                       {[
                         'New onset joint swelling, pain and stiffness with systemic features (fever, weight loss, or fatigue) — consider urgent same-day assessment',
@@ -734,7 +734,7 @@ const CareQueryWebsite = () => {
                       </span>
                     </div>
                     {[
-                      { weeks: 'Weeks 0–2', phase: 'Your Referral Has Been Submitted', message: 'Your referral has been received. There is nothing you need to do at this stage.', bg: '#dcfce7', border: '#16a34a', color: '#166534', label: 'Reassurance' },
+                      { weeks: 'Weeks 0–2', phase: 'Your Referral Has Been Submitted', message: 'Your clinician has submitted your referral. There is nothing you need to do at this stage.', bg: '#dcfce7', border: '#16a34a', color: '#166534', label: 'Reassurance' },
                       { weeks: 'Weeks 3–7', phase: 'You Are Within the Expected Waiting Period', message: 'You are still within the normal waiting window for this service. No action is needed.', bg: '#dcfce7', border: '#16a34a', color: '#166534', label: 'Reassurance' },
                       { weeks: 'Weeks 8–14', phase: 'Your Appointment Should Be Coming Soon', message: 'If you have not been contacted within 14 weeks, contact your GP practice.', bg: '#fef9c3', border: '#ca8a04', color: '#854d0e', label: 'Guidance' },
                       { weeks: 'Week 15+', phase: 'You Have Been Waiting Longer Than Typical', message: 'Contact your GP practice and ask them to check the status of your referral.', bg: '#dbeafe', border: '#2563eb', color: '#1e40af', label: 'Action' },
