@@ -25,7 +25,7 @@ const CURRENT_SCOPE_ITEMS = [
   { label: 'Next milestone', value: 'Pilot with 5–10 GP practices — evaluate whether structured pathway information helps clinicians close MSK consultations with clearer next steps' },
   { label: 'Access', value: 'Browser-based, no installation, no login — clipboard summary ready to paste into your A&G submission, patient URL ready to share' },
   { label: 'Cost to NHS', value: 'Free at point of use during the proof of concept. No capital cost, no IT integration cost, no per-clinician charge.' },
-  { label: 'Build status', value: 'All five outputs are operational in the current build — Overview Card, Service Card, Readiness Card, Journey Card, and Preparation Card. Service records are DRAFT — compiled from published sources and undergoing Clinical Safety Officer review before pilot access is opened.' },
+  { label: 'Build status', value: 'All five outputs are operational in the current build — Overview Card, Service Card, Readiness Card, Journey Card, and Preparation Card. Service records are DRAFT — compiled from published sources and subject to Clinical Safety Officer review before pilot access is opened. CSO appointment is pending.' },
 ];
 
 const CONTEXT_CARDS = [
@@ -50,8 +50,8 @@ const TECH_ARCHITECTURE_STEPS = [
   {
     step: '01',
     title: 'Source-Linked Data',
-    body: 'A single service-records.json file holds each service record — identity, referral prerequisites, service criteria, and record metadata including source links and last-checked dates. Records are compiled from publicly available sources and marked DRAFT until reviewed by the Clinical Safety Officer. The target model for scaling beyond the pilot is named steward maintenance within each receiving service.',
-    pills: ['Structured data schema', 'CSO-maintained', 'Steward maintenance (Phase 2)'],
+    body: 'A single service-records.json file holds each service record — identity, referral prerequisites, service criteria, and record metadata including source links and last-checked dates. Records are compiled from publicly available sources and marked DRAFT pending Clinical Safety Officer review before pilot access. The target model for scaling beyond the pilot is named steward maintenance within each receiving service.',
+    pills: ['Structured data schema', 'CSO review planned (pre-pilot)', 'Steward maintenance (Phase 2)'],
   },
   {
     step: '02',
@@ -82,7 +82,7 @@ const PILOT_AUDIENCE_ITEMS = [
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'An accurate Service Card means your published referral criteria are visible to referring clinicians before they submit — not buried in an out-of-date document. Steward-maintained records and formal record ownership are planned for Phase 2. At PoC stage, records are compiled from public sources and CSO-maintained. Participation counts as service evaluation activity for appraisal portfolios.',
+    desc: 'An accurate Service Card means your published referral criteria are visible to referring clinicians before they submit — not buried in an out-of-date document. Steward-maintained records and formal record ownership are planned for Phase 2. At PoC stage, records are compiled from public sources and subject to CSO review before pilot access. Participation counts as service evaluation activity for appraisal portfolios.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
   },
   {
@@ -528,10 +528,9 @@ const CareQueryWebsite = () => {
                     </div>
                     {[
                       { code: 'WHHRHEUM', name: 'WHH Rheumatology', catchment: 'Warrington and Halton', type: 'A&G mandatory', typeColor: '#fce7ef', typeText: '#7f1d1d' },
-                      { code: 'WINFCP', name: 'Warrington Integrated FCP', catchment: 'Warrington', type: 'Direct referral', typeColor: '#dcfce7', typeText: '#166534' },
                       { code: 'WHHORTHO', name: 'WHH Orthopaedics', catchment: 'Warrington and Halton', type: 'A&G mandatory', typeColor: '#fce7ef', typeText: '#7f1d1d' },
                     ].map((svc, i) => (
-                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.65rem 0.85rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '6px', marginBottom: i < 2 ? '0.4rem' : 0 }}>
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.65rem 0.85rem', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '6px', marginBottom: i < 1 ? '0.4rem' : 0 }}>
                         <div>
                           <div className="body-text" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6b7280', letterSpacing: '0.07em', textTransform: 'uppercase', marginBottom: '0.15rem' }}>{svc.code}</div>
                           <div className="body-text" style={{ fontSize: '0.85rem', fontWeight: 600, color: '#111827', marginBottom: '0.1rem' }}>{svc.name}</div>
@@ -571,14 +570,14 @@ const CareQueryWebsite = () => {
                     The Service Card is a structured record of what each NHS MSK service publicly states it does — referral criteria, catchment, required investigations, typical waiting times, operational contacts, and what the service states it does not accept based on published criteria. It is the starting point for any consultation involving that service: before a clinician checks prerequisites, they need to know whether this service is the right destination.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    Every field in a Service Card is <strong>Layer 1</strong>: sourced from publicly available documents — NHS commissioning policies, ICB referral guidance, and published clinical criteria. Records are compiled by the developer and reviewed by the Clinical Safety Officer under active DCB0129 governance before any clinician accesses the tool in a pilot context. Where published sources are incomplete or operational detail is not publicly available, this is noted on the record. <strong>Layer 2</strong> (operational intelligence contributed by named service stewards) is planned for Phase 2 and is not available at PoC stage. The target architecture for scaling beyond the pilot is named steward maintenance within each receiving service.
+                    Every field in a Service Card is <strong>Layer 1</strong>: sourced from publicly available documents — NHS commissioning policies, ICB referral guidance, and published clinical criteria. Records are compiled by the developer and subject to Clinical Safety Officer review under the DCB0129 governance framework before any clinician accesses the tool in a pilot context. CSO appointment is being finalised before pilot launch. Where published sources are incomplete or operational detail is not publicly available, this is noted on the record. <strong>Layer 2</strong> (operational intelligence contributed by named service stewards) is planned for Phase 2 and is not available at PoC stage. The target architecture for scaling beyond the pilot is named steward maintenance within each receiving service.
                   </p>
 
                   {/* Illustrative service card — clean example, no draft markers */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', marginBottom: '1.25rem', overflow: 'hidden' }}>
                     <div style={{ background: '#dbeafe', borderBottom: '1px solid #93c5fd', padding: '0.4rem 1rem' }}>
                       <span className="body-text" style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1e40af' }}>
-                        Illustrative example — service record content is based on published sources and subject to CSO review before pilot access
+                        Illustrative example — service record content is based on published sources and subject to CSO review (appointment pending) before pilot access
                       </span>
                     </div>
                     <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -632,7 +631,7 @@ const CareQueryWebsite = () => {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    {['Underlying Service Record', 'Layer 1 (PoC) · Layer 2 (Phase 2)', 'CSO-maintained (PoC)', 'Stale warning system', 'Primary exploration surface'].map(t => (
+                    {['Underlying Service Record', 'Layer 1 (PoC) · Layer 2 (Phase 2)', 'CSO review planned (pre-pilot)', 'Stale warning system', 'Primary exploration surface'].map(t => (
                       <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
@@ -824,7 +823,7 @@ const CareQueryWebsite = () => {
           {/* Architecture note */}
           <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f3f4f6', borderRadius: '8px', borderLeft: '4px solid #374151' }}>
             <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#374151', fontWeight: 400 }}>
-              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a source-linked JSON file compiled from published sources, reviewed by the Clinical Safety Officer, and designed for named steward maintenance as the model scales. From it, five outputs are generated. The <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service publicly states it does. The <strong style={{ color: '#9b2335' }}>Readiness Card</strong> helps the clinician record prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the clinician can share something with the patient: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The record changes once; every output reflects the update.
+              Each service is described in a single <strong style={{ color: '#374151' }}>Underlying Service Record</strong> — a source-linked JSON file compiled from published sources, subject to Clinical Safety Officer review before pilot launch, and designed for named steward maintenance as the model scales. From it, five outputs are generated. The <strong style={{ color: OVERVIEW_ACCENT_COLOR }}>Overview Card</strong> is the entry point. The <strong style={{ color: '#ca8a04' }}>Service Card</strong> is the primary exploration surface — what the service publicly states it does. The <strong style={{ color: '#9b2335' }}>Readiness Card</strong> helps the clinician record prerequisites per patient. In either outcome — all gates confirmed or any outstanding — the clinician can share something with the patient: a <strong style={{ color: '#16a34a' }}>Journey Card</strong> URL or a <strong style={{ color: '#4f46e5' }}>Preparation Card</strong> URL. The record changes once; every output reflects the update.
             </p>
           </div>
         </div>
@@ -1171,9 +1170,9 @@ const CareQueryWebsite = () => {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
-                { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'Active', desc: 'Clinical Safety Officer formally assigned. Adverse event monitoring protocol and hazard log are being finalised before pilot launch.' },
+                { icon: <Shield size={18} color="#2563eb" />, label: 'DCB0129 — Clinical Safety', status: 'In progress', desc: 'DCB0129 adopted as the clinical risk governance framework. Clinical Safety Officer appointment is pending. Adverse event monitoring protocol and hazard log to be completed before pilot launch.' },
                 { icon: <Shield size={18} color="#2563eb" />, label: 'MHRA — Medical Devices', status: 'Confirmed', desc: 'Confirmed not a medical device. Deterministic display of static, source-linked pathway information. No AI, no patient data input, no clinical recommendation output. No MHRA registration required.' },
-                { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 (a core DTAC component) is active. Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
+                { icon: <FileText size={18} color="#2563eb" />, label: 'DTAC — Digital Technology Assessment Criteria', status: 'In progress', desc: 'Acknowledged as applicable. DCB0129 adopted as clinical risk framework (CSO appointment pending). Full DTAC submission planned prior to any NHS deployment beyond the PoC pilot.' },
                 { icon: <FileText size={18} color="#2563eb" />, label: 'NICE Evidence Standards Framework — Tier A', status: 'Developer-assessed', desc: 'Self-classified as a Tier A system service — administrative information display only. Does not generate clinical recommendations or make clinical judgments. Standard 14 (RCT evidence) does not apply. Standard 15 requires pilot site statement only. Classification will be formally recorded in the DCB0129 hazard log before pilot launch.' },
                 { icon: <GitBranch size={18} color="#2563eb" />, label: 'NHS Innovation Service', status: 'Registered', desc: 'Registered March 2026 (INN-2603-0087-6). Tier A classification, DCB0129 status, and pilot evidence pathway documented. Support requested: HIN NW Coast, Tier A confirmation, Standard 15 design, commissioning pathway.' },
               ].map((item, i) => (
@@ -1326,7 +1325,7 @@ const CareQueryWebsite = () => {
               title: 'How is the data governed and kept accurate?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  Each service record is compiled from publicly available referral guidance and pathway documents. At proof-of-concept stage, records are reviewed by the Clinical Safety Officer before any clinician accesses the tool in a pilot context — no record reaches pilot users without CSO review. Records are marked DRAFT until that review is complete. If a record is overdue for review after publication, an amber warning is shown to users — the information remains accessible but is flagged as potentially stale. Stale-but-visible is always preferable to hidden. The named steward model — where a specific person within each service takes responsibility for ongoing review — is the target architecture for scaling beyond the pilot.
+                  Each service record is compiled from publicly available referral guidance and pathway documents. At proof-of-concept stage, records will be reviewed before any clinician accesses the tool in a pilot context — no record will reach pilot users without prior safety review. Clinical Safety Officer appointment is being finalised before pilot launch. Records are marked DRAFT until that review is complete. If a record is overdue for review after publication, an amber warning is shown to users — the information remains accessible but is flagged as potentially stale. Stale-but-visible is always preferable to hidden. The named steward model — where a specific person within each service takes responsibility for ongoing review — is the target architecture for scaling beyond the pilot.
                 </p>
               ),
             },
@@ -1441,7 +1440,7 @@ const CareQueryWebsite = () => {
                 <span className="brand">Care Query</span> is built by a practising NHS physiotherapist and First Contact Practitioner — someone who works in this pathway every day and built the tool because they needed it. Developed through Intelligent Technology Solutions Limited, a clinician-led social enterprise operating entirely independently of any NHS employer.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
-                All development is conducted in personal time, on personal infrastructure, using publicly available service information only. No NHS patient data is collected, stored, or processed at any stage. DCB0129 clinical safety standard is active, with Clinical Safety Officer formally assigned. Registered with the NHS Innovation Service (INN-2603-0087-6, March 2026).
+                All development is conducted in personal time, on personal infrastructure, using publicly available service information only. No NHS patient data is collected, stored, or processed at any stage. DCB0129 adopted as the clinical risk governance framework; Clinical Safety Officer appointment pending before pilot launch. Registered with the NHS Innovation Service (INN-2603-0087-6, March 2026).
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
                 <span className="brand">Care Query</span> is an independent innovation developed in line with NHS digital standards. It is not endorsed by, affiliated with, or developed on behalf of any NHS organisation.
