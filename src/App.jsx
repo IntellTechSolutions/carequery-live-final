@@ -31,12 +31,12 @@ const CURRENT_SCOPE_ITEMS = [
 const CONTEXT_CARDS = [
   {
     title: 'The Information Is Not Where Clinicians Need It',
-    body: 'Pathway criteria are held in commissioning documents, institutional memory, and the heads of experienced clinicians — not in a format usable during a 10-minute consultation. When the clinician who knew the local pathway moves on, that knowledge leaves with them. Across one regional MSK triage audit, 52% of referrals were administratively incomplete — not because clinicians lack competence, but because the information is not accessible at the point of care.',
+    body: 'Pathway criteria are held in commissioning documents, institutional memory, and the heads of experienced clinicians — not in a format usable during a 10-minute consultation. When the clinician who knew the local pathway moves on, that knowledge leaves with them. Across one regional MSK triage audit, 52% of referrals were administratively incomplete — not because clinicians lack competence, but because the information is not accessible at the point of care. National frameworks already define what good looks like. What is missing is local execution infrastructure — a way to translate published standards into the workflow of a pressured consultation.',
     accent: '#9b2335',
   },
   {
     title: 'The NHS Mandates Visibility — But Provides No Tool',
-    body: 'NHS England\'s SPoA Technical Guidance requires referral criteria to be "visible to referrers." The 2026/27 GP contract makes Advice and Guidance mandatory for secondary care planned referrals. But no national tool makes service-level criteria accessible at the point of consultation. Care Query fills that gap — the same source-linked record, available to every clinician, every time.',
+    body: 'NHS England\'s SPoA Technical Guidance requires referral criteria to be "visible to referrers." The 2026/27 GP contract makes Advice and Guidance mandatory for secondary care planned referrals. National guidance sets the standard. But no national tool makes local, service-level criteria accessible at the point of consultation — and no tool exists to help primary care prepare a submission before it leaves the room. Most A&G infrastructure is built around specialist responses. Care Query sits on the requestor side: structured pathway information, source-linked, available to every clinician, every consultation.',
     accent: '#ca8a04',
   },
   {
@@ -82,7 +82,7 @@ const PILOT_AUDIENCE_ITEMS = [
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'An accurate Service Card means your published referral criteria are visible to referring clinicians before they submit — not buried in an out-of-date document. Steward-maintained records and formal record ownership are planned for Phase 2. At PoC stage, records are compiled from public sources and subject to CSO review before pilot access. Participation counts as service evaluation activity for appraisal portfolios.',
+    desc: 'Care Query is a direct answer to a problem MSK services currently have no structured solution for: how do you communicate your published referral prerequisites to primary care at the point of consultation? An accurate Service Card means your criteria are visible to referring clinicians before they submit — not buried in a commissioning document or held in the institutional memory of one experienced GP. You are not being asked to endorse a novel product. You are helping make an existing GIRFT improvement expectation — that community MSK services collaborate with primary care to optimise referrals — operationally visible. Steward-maintained records and formal record ownership are planned for Phase 2. At PoC stage, records are compiled from public sources and subject to CSO review before pilot access.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
   },
   {
