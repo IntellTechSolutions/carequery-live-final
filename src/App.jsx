@@ -41,7 +41,7 @@ const CONTEXT_CARDS = [
   },
   {
     title: 'The Consultation Ends With a Plan',
-    body: 'When a referral is ready, the clinician can share a plain-English pathway summary with the patient. When prerequisites are outstanding, the patient receives a preparation plan showing what remains and what to do next. Either way, the consultation can end with something in the patient\'s hand — not a vague instruction to "come back when you\'ve had the scan."',
+    body: 'When a referral is ready, the clinician can share a plain-English pathway summary with the patient. When prerequisites are outstanding, the patient receives a preparation plan: what remains outstanding, what they can do now, when to expect to hear more, and when to seek help sooner. Either way, the consultation ends with something in the patient\'s hand — not a vague instruction to "come back when you\'ve had the scan." The plan is designed to work for patients who cannot access digital resources — it can be printed, read out, or shared by the practice team. Not Yet is an active plan, not an ending.',
     accent: '#2563eb',
   },
 ];
@@ -82,13 +82,8 @@ const PILOT_AUDIENCE_ITEMS = [
   },
   {
     title: 'Service Owners and MSK Leads',
-    desc: 'Care Query is a direct answer to a problem MSK services currently have no structured solution for: how do you communicate your published referral prerequisites to primary care at the point of consultation? An accurate Service Card means your criteria are visible to referring clinicians before they submit — not buried in a commissioning document or held in the institutional memory of one experienced GP. You are not being asked to endorse a novel product. You are helping make an existing GIRFT improvement expectation — that community MSK services collaborate with primary care to optimise referrals — operationally visible. Steward-maintained records and formal record ownership are planned for Phase 2. At PoC stage, records are compiled from public sources and subject to CSO review before pilot access.',
+    desc: 'Care Query is a direct answer to a problem MSK services currently have no structured solution for: how do you communicate your published referral prerequisites to primary care at the point of consultation? An accurate Service Card means your criteria are visible to referring clinicians before they submit. You are not being asked to endorse a novel product. You are helping make an existing GIRFT improvement expectation — that community MSK services collaborate with primary care to optimise referrals — operationally visible.',
     tag: 'Service managers · Clinical leads · MSK CATS · Rheumatology · Orthopaedics · Pain',
-  },
-  {
-    title: 'Reception and Admin Teams',
-    desc: 'Care Query can generate a structured clipboard summary for the clinician to include with a referral. The patient URL can be read out or texted by reception to explain next steps without pulling a GP out of clinic. No training required, no login, no system access needed.',
-    tag: 'Practice managers · Reception staff · Referral coordinators',
   },
 ];
 
@@ -801,7 +796,7 @@ const CareQueryWebsite = () => {
                         Patient preparation link — shared by the clinician
                       </div>
                       <div className="body-text" style={{ fontSize: '0.8rem', color: '#4b5563', lineHeight: 1.5, fontWeight: 400 }}>
-                        Patient opens the URL and sees: what their clinician is working through, what they can do now, and when to expect to hear more from the practice. A preparation phase view — not a waiting view.
+                        Patient opens the URL and sees: what their clinician is working through, what they can do now, and when to expect to hear more from the practice. The plan includes what to do if symptoms change before the next review. Where digital access is difficult, the practice team can print the page or share it by phone — the preparation plan is not digital-only. A preparation phase view, not a waiting view.
                       </div>
                     </div>
                   </div>
@@ -1099,7 +1094,7 @@ const CareQueryWebsite = () => {
                 {
                   step: '03',
                   title: 'Clipboard summary or preparation plan',
-                  body: 'All prerequisites recorded as met — a formatted summary is ready to paste into your A&G submission and a patient pathway URL is ready to share. Any prerequisites outstanding — a preparation plan can be generated for the patient instead. Either way, the patient can leave with something.',
+                  body: 'All prerequisites recorded as met — a formatted summary is ready to paste into your A&G submission and a patient pathway URL is ready to share. Any prerequisites outstanding — a preparation plan can be generated for the patient instead. Either way, the patient can leave with something. The patient URL can also be texted or read out by reception — no training, no login, no system access needed.',
                 },
               ].map((item, i) => (
                 <div key={i} className="card" style={{ padding: '1.75rem' }}>
