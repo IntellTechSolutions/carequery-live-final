@@ -50,7 +50,7 @@ const TECH_ARCHITECTURE_STEPS = [
   {
     step: '01',
     title: 'Source-Linked Data',
-    body: 'A single service-records.json file holds each service record — identity, referral prerequisites, service criteria, and record metadata including source links and last-checked dates. Records are compiled from publicly available sources and marked DRAFT pending Clinical Safety Officer review before pilot access. The target model for scaling beyond the pilot is named steward maintenance within each receiving service.',
+    body: 'A single service-records.json file holds each service record — identity, referral prerequisites, service criteria, and record metadata including source links and last-checked dates. Records are compiled from publicly available sources and marked DRAFT pending Clinical Safety Officer review before pilot access. The target model for scaling beyond the pilot is named steward maintenance within each receiving service. Each card shows its source, last-checked date, and provisional status where relevant. That transparency is part of the safety model: Care Query does not claim to verify local pathways; it makes the basis and currency of each administrative record visible to the clinician.',
     pills: ['Structured data schema', 'CSO review planned (pre-pilot)', 'Steward maintenance (Phase 2)'],
   },
   {
@@ -708,14 +708,14 @@ const CareQueryWebsite = () => {
               tagLabel: 'Ready path — patient-facing · shared by the referring clinician',
               borderColor: '#16a34a',
               defaultOpen: false,
-              summary: 'Time-aware patient summary — a link the clinician can share. Phase-appropriate messages that update as weeks pass — reassurance early, guidance later, a clear action prompt when the wait becomes overdue.',
+              summary: 'A plain-language summary of where the patient is being directed, what may happen next, and what they can bring or prepare. Phase-appropriate messages update as weeks pass — reassurance early, guidance later, a clear action prompt if the wait becomes overdue.',
               detail: (
                 <>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1rem' }}>
                     When the clinician has recorded all Readiness Card prerequisites as met, a clipboard summary can be generated for the submission and a Journey Card URL is produced — a link the clinician can share with the patient. The clinician shares a URL. When the patient opens it, the card calculates elapsed weeks and shows a phase-appropriate message. No login, no patient data — the date lives in the URL itself, generated entirely client-side with no server submission.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The patient sees where they are going and that a structured process was used before the referral was submitted. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail, no escape paths. Where a referral is ready, the Journey Card gives the patient a plain-English summary of the service, what to expect, and what it will not do.
+                    The patient sees where they are being directed, what may happen at their first contact, and what they can bring or prepare. The Journey Card includes waiting phase guidance — what the patient can do in the meantime and who to contact if symptoms change before their appointment. Waiting times and booking are handled by NHS services, not Care Query. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail.
                   </p>
                   {/* Phase illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -1345,6 +1345,14 @@ const CareQueryWebsite = () => {
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
                   Four pilot evaluation deliverables: (1) Standard 15 pilot site statement — synthesising the evidence streams above: integration confirmed, acceptable to users, no harm, system benefit evidenced; (2) patient card access rate via Plausible Analytics (Journey and Preparation Card page views — a proxy for patient reach, not a confirmed delivery measure); (3) qualitative GP feedback on consultation impact (post-pilot survey); (4) qualitative patient feedback on card usefulness. A&G return rate comparison is the strongest outcome evidence if obtainable from the ICB, but is external to the tool. Acceptance rate comparison is Phase 2 evidence, not a PoC requirement.
+                </p>
+              ),
+            },
+            {
+              title: 'Is Care Query an A&G tool?',
+              detail: (
+                <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
+                  No. <span className="brand">Care Query</span> is a pre-submission administrative tool. It helps clinicians view source-linked local prerequisites and organise what is already evidenced before they submit a referral or A&G request through existing NHS channels. It does not submit referrals, generate A&G requests, or communicate with receiving services. The referral or A&G request is made by the clinician through e-RS or their clinical system, as usual.
                 </p>
               ),
             },
