@@ -1020,7 +1020,7 @@ const CareQueryWebsite = () => {
                   <div>
                     <div className="body-text" style={{ fontSize: '0.85rem', color: '#2563eb', fontWeight: 500, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Care Query</div>
                     <p className="body-text" style={{ fontSize: '0.9rem', color: '#374151', fontWeight: 400, lineHeight: 1.6 }}>
-                      When any gate is marked not yet met, a Preparation Card can be generated. The clinician gets a structured summary of what is outstanding. The patient can receive a URL with their preparation phase view — showing what their clinician is working through, what they can do now, and when to expect to hear more from the practice. The patient is part of the plan from the first consultation. This is the majority outcome — and it is a first-class one.
+                      When any gate is marked not yet met, a Preparation Card can be generated. The clinician gets a structured summary of what is outstanding. The patient can receive a URL with their preparation phase view — showing what their clinician is working through, what they can do now, and when to expect to hear more from the practice. The patient is part of the plan from the first consultation. In practice, many consultations reach this point — and it is a first-class outcome.
                     </p>
                   </div>
                 </>
