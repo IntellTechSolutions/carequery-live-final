@@ -770,7 +770,7 @@ const CareQueryWebsite = () => {
                     Not every referral is ready to be submitted today. An imaging result not yet back, a course of conservative management still in progress, a catchment question needing clarification. When any gate is marked "not yet met," the Readiness Card generates a Preparation Card rather than a submission summary. The clinician gets a structured view of what is outstanding. The patient gets a URL they can open.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    This is likely the majority outcome. Most patients presenting for MSK assessment for the first time have something outstanding before a specialist referral is appropriate — an investigation to complete, a period of treatment to work through, information to gather. The Preparation Card positions this as an informed next step, not a refusal. The patient sees what their clinician is working through, what they can do in the meantime, and when to expect to hear more. They leave the consultation with something in hand.
+                    In practice, many patients presenting for MSK assessment for the first time will have something outstanding before a specialist referral is appropriate — an investigation to complete, a period of treatment to work through, information to gather. The Preparation Card positions this as an informed next step, not a refusal. The patient sees what their clinician is working through, what they can do in the meantime, and when to expect to hear more. They leave the consultation with something in hand.
                   </p>
                   {/* Preparation Card illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -801,7 +801,7 @@ const CareQueryWebsite = () => {
                     </div>
                   </div>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The Preparation Card is a first-class outcome — not a fallback. The patient is part of the plan from the first consultation. The clinician has a structured record of what is outstanding. And when the outstanding items are resolved, the clinician returns to the Readiness Card and completes the referral.
+                    The Preparation Card is a first-class outcome — not a fallback. The patient is part of the plan from the first consultation. The patient leaves with a structured object to carry into the next interaction — not a vague memory of a conversation. The clinician has a structured record of what is outstanding. And when the outstanding items are resolved, the clinician returns to the Readiness Card and completes the referral.
                   </p>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {['Not Yet → structured plan', 'Patient URL generated', 'Preparation phase view', 'Informed next step', 'No backend required', 'First-class outcome'].map(t => (
@@ -884,10 +884,10 @@ const CareQueryWebsite = () => {
               Pathway information where clinicians need it.
             </h2>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '0.75rem' }}>
-              Clinicians currently discover what a service requires by sending a referral and reading the return. Across one regional MSK triage audit, 52% of referrals were administratively incomplete at triage (Fylde Coast MSK RMC audit) — not because clinicians lack competence, but because pathway criteria are held in commissioning documents and institutional memory, not in a format usable during a consultation. 33% of first orthopaedic outpatient appointments end in single-visit discharge (NHS England, 2019/20) — a signal that not all referrals result in ongoing specialist care. When a referral is not yet ready, patients leave without a structured plan. <span className="brand">Care Query</span> addresses this directly: structured, source-linked pathway information at the point of consultation, and a patient output regardless of the outcome.
+              Clinicians currently discover what a service requires by sending a referral and reading the return. Across one regional MSK triage audit, 52% of referrals were administratively incomplete at triage (Fylde Coast MSK RMC audit) — not because clinicians lack competence, but because pathway criteria are held in commissioning documents and institutional memory, not in a format usable during a consultation. When a referral is not yet ready, patients leave without a structured plan. <span className="brand">Care Query</span> addresses this directly: structured, source-linked pathway information at the point of consultation, and a patient output regardless of the outcome.
             </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-              This is not a new problem. The 2026/27 GP contract (PRN02353) makes it more operationally significant — Advice and Guidance is now mandatory for secondary care planned referrals, the per-request payment is removed, and the administrative cost of returned submissions falls entirely on the practice. From 1 April 2026, Advice &amp; Guidance is mandatory as a prerequisite for planned care referrals. The prerequisite infrastructure — knowing what each service requires before submitting — does not yet exist at the point of consultation. Care Query fills that gap. The underlying problem exists regardless of the contract: referral criteria are not visible to referring clinicians at the point of care. The NHS SPoA Technical Guidance mandates that they should be. Care Query provides the mechanism.
+              This is not a new problem. The 2026/27 GP contract (PRN02353) makes it more operationally significant — Advice and Guidance is now mandatory for secondary care planned referrals from 1 April 2026, the per-request payment is removed, and the administrative cost of returned submissions falls entirely on the practice. The prerequisite infrastructure — knowing what each service requires before submitting — does not yet exist at the point of consultation. Care Query fills that gap. The underlying problem exists regardless of the contract: referral criteria are not visible to referring clinicians at the point of care. The NHS SPoA Technical Guidance mandates that they should be. Care Query provides the mechanism.
             </p>
           </div>
 
@@ -919,7 +919,7 @@ const CareQueryWebsite = () => {
           <div style={{ marginBottom: '3.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
               <Target size={20} color="#2563eb" />
-              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Clinical Evidence</span>
+              <span className="tag tag-blue" style={{ marginBottom: '0' }}>Problem · Solution</span>
             </div>
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
               What it does — and how it stays accurate.
@@ -1336,7 +1336,7 @@ const CareQueryWebsite = () => {
               title: 'Why does no existing NHS tool already do this?',
               detail: (
                 <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                  NHS England built the monitoring infrastructure (Model Health System), the referral pipe (e-RS), and the waiting list analytics (Federated Data Platform). The SPoA Technical Guidance requires referral criteria to be visible to referrers — but no tool makes service-level criteria accessible at the point of submission. e-RS templates are specialty-level, not service-level. The Directory of Services answers where — not what the service needs. Neither has an attestation mechanism. Neither generates a patient-facing output. <span className="brand">Care Query</span> provides what the guidance describes but the infrastructure does not yet deliver.
+                  NHS England built the monitoring infrastructure (Model Health System), the referral pipe (e-RS), and the waiting list analytics (Federated Data Platform). The SPoA Technical Guidance requires referral criteria to be visible to referrers — but no tool makes service-level criteria accessible at the point of submission. Service-level referral criteria are routinely held in commissioning documents, FutureNHS workspaces, and local pathway PDFs that require institutional knowledge or platform registration to navigate — none of which is accessible during a 10-minute consultation. e-RS templates are specialty-level, not service-level. The Directory of Services answers where — not what the service needs. Neither has an attestation mechanism. Neither generates a patient-facing output. <span className="brand">Care Query</span> provides what the guidance describes but the infrastructure does not yet deliver.
                 </p>
               ),
             },
@@ -1374,7 +1374,7 @@ const CareQueryWebsite = () => {
                 Get in touch
               </h2>
               <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '2rem' }}>
-                Whether you are a clinician with a question about a specific pathway, a practice manager interested in the pilot, or an ICB colleague exploring the approach — email is the best place to start.
+                Whether you are a clinician with a question about a specific pathway, a practice manager interested in the pilot, an MSK service lead interested in how your referral criteria are represented, or an ICB colleague exploring the approach — email is the best place to start.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
@@ -1441,7 +1441,7 @@ const CareQueryWebsite = () => {
                 <span className="brand">Care Query</span> is an independent innovation developed in line with NHS digital standards. It is not endorsed by, affiliated with, or developed on behalf of any NHS organisation.
               </p>
               <p className="body-text" style={{ fontSize: '0.88rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
-                The project exists to test whether structured pathway information — the same source-linked record, available to every clinician, every consultation — helps close consultations with clearer next steps and ensures patients can leave with a plan, whether their referral is ready today or not.
+                Care Query helps clinicians organise local referral prerequisites before an MSK referral or A&G request is submitted. It supports clearer conversations, source-linked pathway information, and patient-facing next steps when referral is not yet ready — whether that means a submission goes today or the patient leaves with a preparation plan.
               </p>
             </div>
           </div>
