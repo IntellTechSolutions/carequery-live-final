@@ -715,7 +715,7 @@ const CareQueryWebsite = () => {
                     When the clinician has recorded all Readiness Card prerequisites as met, a clipboard summary can be generated for the submission and a Journey Card URL is produced — a link the clinician can share with the patient. The clinician shares a URL. When the patient opens it, the card calculates elapsed weeks and shows a phase-appropriate message. No login, no patient data — the date lives in the URL itself, generated entirely client-side with no server submission.
                   </p>
                   <p className="body-text" style={{ fontSize: '0.9rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400, marginBottom: '1.25rem' }}>
-                    The patient sees where they are being directed, what may happen at their first contact, and what they can bring or prepare. The Journey Card includes waiting phase guidance — what the patient can do in the meantime and who to contact if symptoms change before their appointment. Waiting times and booking are handled by NHS services, not Care Query. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail.
+                    The patient sees where they are being directed, what may happen at their first contact, and what they can bring or prepare. Waiting times and booking are handled by NHS services, not Care Query. If the patient has questions before their appointment, the card directs them to their GP practice. The Journey Card opens in an isolated patient view: no navigation to clinician-facing content, no administrative detail.
                   </p>
                   {/* Phase illustration */}
                   <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.25rem' }}>
@@ -730,8 +730,8 @@ const CareQueryWebsite = () => {
                     {[
                       { weeks: 'Weeks 0–2', phase: 'Your Referral Has Been Submitted', message: 'Your clinician has submitted your referral. There is nothing you need to do at this stage.', bg: '#dcfce7', border: '#16a34a', color: '#166534', label: 'Reassurance' },
                       { weeks: 'Weeks 3–7', phase: 'You Are Within the Expected Waiting Period', message: 'You are still within the normal waiting window for this service. No action is needed.', bg: '#dcfce7', border: '#16a34a', color: '#166534', label: 'Reassurance' },
-                      { weeks: 'Weeks 8–14', phase: 'Your Appointment Should Be Coming Soon', message: 'If you have not been contacted within 14 weeks, contact your GP practice.', bg: '#fef9c3', border: '#ca8a04', color: '#854d0e', label: 'Guidance' },
-                      { weeks: 'Week 15+', phase: 'You Have Been Waiting Longer Than Typical', message: 'Contact your GP practice and ask them to check the status of your referral.', bg: '#dbeafe', border: '#2563eb', color: '#1e40af', label: 'Action' },
+                      { weeks: 'Weeks 8–14', phase: 'Within Expected Contact Window', message: 'Still within the expected contact window for this service.', bg: '#fef9c3', border: '#ca8a04', color: '#854d0e', label: 'Status' },
+                      { weeks: 'Week 15+', phase: 'Outside Typical Waiting Window', message: 'Outside the typical waiting window — the clinician can follow up on the patient\'s behalf.', bg: '#dbeafe', border: '#2563eb', color: '#1e40af', label: 'Status' },
                     ].map((p, i) => (
                       <div key={i} style={{ borderLeft: `3px solid ${p.border}`, background: p.bg, borderRadius: '4px', padding: '0.6rem 0.85rem', marginBottom: i < 3 ? '0.5rem' : 0 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
@@ -744,7 +744,7 @@ const CareQueryWebsite = () => {
                     ))}
                     <div style={{ marginTop: '0.75rem', padding: '0.5rem 0.75rem', background: '#f3f4f6', borderRadius: '6px' }}>
                       <span className="body-text" style={{ fontSize: '0.72rem', color: '#6b7280', fontWeight: 400 }}>
-                        Colour discipline: red is reserved for emergencies only. Overdue uses blue (action prompt), not alarm.
+                        Design illustration only. Time-based patient messaging was removed from the live patient-facing output per the Care Query Trust Manifesto — waiting time display is not shown to patients in the current build. Colour discipline: red is reserved for emergencies only.
                       </span>
                     </div>
                   </div>
@@ -924,6 +924,9 @@ const CareQueryWebsite = () => {
             <h2 className="heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.2, color: '#111827', marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>
               What it does — and how it stays accurate.
             </h2>
+            <p className="body-text" style={{ fontSize: '1rem', lineHeight: 1.7, color: '#111827', fontWeight: 500, marginBottom: '0.75rem' }}>
+              Care Query makes local MSK service requirements visible at the point of referral preparation.
+            </p>
             <p className="body-text" style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#4b5563', fontWeight: 400 }}>
               The gaps that cause problems are informational: not knowing what a service requires before trying to refer, missing a prerequisite that was not visible, or a patient leaving the consultation without a clear next step. Each <span className="brand">Care Query</span> output addresses one of these gaps. Each is designed to generate evidence during the 12-week pilot — through usage patterns via privacy-respecting analytics, patient card access rates, and qualitative GP feedback. At PoC stage, no outcome data exists. The pilot is designed to collect it. The evidence referenced in this section is the framework the pilot will generate — not prior proof. A&G return rate change, the strongest outcome measure, requires ICB or practice-level data and is external to the tool.
             </p>
